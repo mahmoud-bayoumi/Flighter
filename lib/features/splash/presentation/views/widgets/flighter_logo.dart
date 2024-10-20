@@ -17,7 +17,11 @@ class FlighterLogo extends StatelessWidget {
             return SlideTransition(
               position: planeAnimation,
               child: Center(
-                child: Image.asset('assets/images/logo.png'),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 210.w,
+                  height: 210.h,
+                ),
               ),
             );
           },
@@ -31,7 +35,7 @@ class FlighterLogo extends StatelessWidget {
                 'Flighter',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 30.sp,
+                  fontSize: 45.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),

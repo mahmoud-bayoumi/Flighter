@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     initSlidingAnimation();
 
-    navigateToHomeView();
+    // navigateToHomeView();
   }
 
   @override
