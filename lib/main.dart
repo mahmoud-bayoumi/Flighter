@@ -1,4 +1,4 @@
-import 'package:flighter/features/splash/presentation/views/splash_view.dart';
+import 'package:flighter/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,12 +15,12 @@ class MyApp extends StatelessWidget {
       designSize: const Size(414, 930),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
+      builder: (context, child) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Poppins-Regular',
         ),
-        home: const SplashView(),
+        routerConfig: AppRouter.router,
       ),
     );
   }

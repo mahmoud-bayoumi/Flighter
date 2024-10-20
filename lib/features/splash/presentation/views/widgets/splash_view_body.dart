@@ -1,8 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -24,7 +26,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     initSlidingAnimation();
 
-    // navigateToHomeView();
+    navigateToHomeView();
   }
 
   @override
@@ -88,7 +90,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        // GoRouter.of(context).push(AppRouter.kHomeView);
+        GoRouter.of(context).push(AppRouter.kHomeView);
       },
     );
   }
