@@ -1,4 +1,5 @@
 import 'package:flighter/core/utils/assets_data.dart';
+import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,11 +35,7 @@ class FlighterLogo extends StatelessWidget {
               position: flighterAnimation,
               child: Text(
                 'Flighter',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 45.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Styles.textStyle50,
               ),
             );
           },

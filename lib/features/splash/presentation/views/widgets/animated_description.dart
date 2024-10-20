@@ -1,5 +1,5 @@
+import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatedDescription extends StatelessWidget {
   const AnimatedDescription({
@@ -18,10 +18,7 @@ class AnimatedDescription extends StatelessWidget {
           child: Text(
             'Fly Smarter, Travel Better Book Now!',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25.sp,
-            ),
+            style: Styles.textStyle25.copyWith(color: Colors.white),
           ),
         );
       },
