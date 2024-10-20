@@ -1,3 +1,4 @@
+import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,17 +15,7 @@ class SplashViewBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          Center(
-            child: Image.asset('assets/images/logo.png'),
-          ),
-          Text(
-            'Flighter',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          const FlighterLogo(),
           const Spacer(
             flex: 1,
           ),
