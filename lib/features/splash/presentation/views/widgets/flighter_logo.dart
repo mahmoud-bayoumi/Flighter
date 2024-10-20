@@ -1,3 +1,4 @@
+import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +19,7 @@ class FlighterLogo extends StatelessWidget {
               position: planeAnimation,
               child: Center(
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  AssetsData.kLogo,
                   width: 210.w,
                   height: 210.h,
                 ),
