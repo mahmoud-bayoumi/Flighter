@@ -1,9 +1,27 @@
+import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SplashViewBody extends StatelessWidget {
+class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
+
+  @override
+  State<SplashViewBody> createState() => _SplashViewBodyState();
+}
+
+class _SplashViewBodyState extends State<SplashViewBody>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<Offset> planeAnimation;
+  late Animation<Offset> flighterAnimation;
+  late Animation<Offset> descriptionAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    initSlidingAnimation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,23 +33,44 @@ class SplashViewBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          const FlighterLogo(),
+          FlighterLogo(
+            planeAnimation: planeAnimation,
+            flighterAnimation: flighterAnimation,
+          ),
           const Spacer(
             flex: 1,
           ),
-          Text(
-            'Fly Smarter, Travel Better Book Now!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25.sp,
-            ),
-          ),
+          AnimatedDescription(descriptionAnimation: descriptionAnimation),
           SizedBox(
             height: 20.h,
           )
         ],
       ),
     );
+  }
+
+  void initSlidingAnimation() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    );
+
+    planeAnimation = Tween<Offset>(
+      begin: const Offset(-5, 10),
+      end: Offset.zero,
+    ).animate(animationController);
+
+    flighterAnimation = Tween<Offset>(
+      begin: const Offset(10, 0),
+      end: Offset.zero,
+    ).animate(animationController);
+
+    descriptionAnimation = Tween<Offset>(
+      begin: const Offset(0, 4),
+      end: Offset.zero,
+    ).animate(animationController);
+
+    // start animation
+    animationController.forward();
   }
 }
