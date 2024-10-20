@@ -26,7 +26,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     initSlidingAnimation();
 
-    navigateToHomeView();
+    //navigateToHomeView();
   }
 
   @override
@@ -38,8 +38,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -18,7 +18,8 @@ class AnimatedDescription extends StatelessWidget {
           child: Text(
             'Fly Smarter, Travel Better Book Now!',
             textAlign: TextAlign.center,
-            style: Styles.textStyle25.copyWith(color: Colors.white),
+            style: Styles.textStyle25
+                .copyWith(color: Colors.white.withOpacity(.9)),
           ),
         );
       },
