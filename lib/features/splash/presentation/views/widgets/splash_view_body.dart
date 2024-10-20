@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashViewBody extends StatelessWidget {
   const SplashViewBody({super.key});
@@ -16,27 +17,27 @@ class SplashViewBody extends StatelessWidget {
           Center(
             child: Image.asset('assets/images/logo.png'),
           ),
-          const Text(
+          Text(
             'Flighter',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 30,
+              fontSize: 30.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
           const Spacer(
             flex: 1,
           ),
-          const Text(
+          Text(
             'Fly Smarter, Travel Better Book Now!',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 25,
+              fontSize: 25.sp,
             ),
           ),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: 20.h,
           )
         ],
       ),
