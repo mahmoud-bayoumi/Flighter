@@ -40,6 +40,7 @@ class ForgotPasswordViewBody extends StatelessWidget {
               height: 80.h,
             ),
             CustomButton(
+              height: 65,
               text: 'Send',
               onPressed: () =>
                   GoRouter.of(context).push(AppRouter.kCheckYourEmailView),
