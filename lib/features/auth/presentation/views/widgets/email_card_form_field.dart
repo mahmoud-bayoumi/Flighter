@@ -13,6 +13,9 @@ class EmailCardFormField extends StatelessWidget {
       elevation: 15,
       child: TextFormField(
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 20,
+          ),
           border: customOutlineInputBorder(),
           prefixIcon: Icon(
             Icons.email,
