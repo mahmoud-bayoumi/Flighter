@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-        onPressed: onPressed,
+        onPressed: onPressed ?? () {},
         color: kPrimaryColor,
         minWidth: MediaQuery.sizeOf(context).width,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
