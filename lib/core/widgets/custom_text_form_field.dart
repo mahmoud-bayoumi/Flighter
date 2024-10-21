@@ -1,4 +1,6 @@
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/custom_outline_input_border.dart';
+import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +13,10 @@ class CustomTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(text),
+        Text(
+          text,
+          style: Styles.textStyle16.copyWith(color: kGreyColor),
+        ),
         SizedBox(
           height: 10.h,
         ),
@@ -29,6 +34,4 @@ class CustomTextFormField extends StatelessWidget {
       ],
     );
   }
-
-  
 }

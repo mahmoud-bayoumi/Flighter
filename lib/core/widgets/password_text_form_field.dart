@@ -1,4 +1,6 @@
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/custom_outline_input_border.dart';
+import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +20,10 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.text),
+        Text(
+          widget.text,
+          style: Styles.textStyle16.copyWith(color: kGreyColor),
+        ),
         SizedBox(
           height: 10.h,
         ),
