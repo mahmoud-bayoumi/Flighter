@@ -6,6 +6,9 @@ import 'package:flighter/features/auth/presentation/views/widgets/auth_text_butt
 import 'package:flighter/features/auth/presentation/views/widgets/code_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../../core/utils/app_router.dart';
 
 class CheckYourEmailBody extends StatelessWidget {
   const CheckYourEmailBody({
@@ -58,7 +61,7 @@ class CheckYourEmailBody extends StatelessWidget {
             ),
             CustomButton(
               text: 'Verify Code',
-              onPressed: () {},
+              onPressed: () => GoRouter.of(context).pushReplacement(AppRouter.kSetNewPasswordView),
               height: 73,
             ),
             SizedBox(
