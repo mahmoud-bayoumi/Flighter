@@ -40,4 +40,8 @@ abstract class Styles {
     fontWeight: FontWeight.w900,
     color: Colors.white,
   );
+  static final textStyle35 = TextStyle(
+    fontSize: 35.sp,
+    fontWeight: FontWeight.w600,
+  );
 }

@@ -16,7 +16,7 @@ class ForgotPassword extends StatelessWidget {
         style: const ButtonStyle(
           splashFactory: NoSplash.splashFactory,
         ),
-        onPressed: () {},
+        onPressed: onPressed , 
         child: Text(
           'Forgot Password?',
           style: Styles.textStyle17,
