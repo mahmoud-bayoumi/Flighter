@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class Styles {
   static final textStyle15 = TextStyle(
-    fontSize: 15.sp,
+    fontSize: 17.sp,
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
