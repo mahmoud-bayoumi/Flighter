@@ -1,6 +1,6 @@
-
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:flighter/features/auth/presentation/views/widgets/password_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,6 +27,10 @@ class SignInViewBody extends StatelessWidget {
           ),
           const CustomTextFormField(
               text: 'Email', hintText: 'ex:jon.smith@gmail.com'),
+          SizedBox(
+            height: 20.h,
+          ),
+          const PasswordTextFormField(text: 'Password', hintText: '••••••••'),
         ],
       ),
     );
