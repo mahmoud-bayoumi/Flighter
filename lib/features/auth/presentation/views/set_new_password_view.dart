@@ -14,4 +14,3 @@ class SetNewPasswordView extends StatelessWidget {
     );
   }
 }
-

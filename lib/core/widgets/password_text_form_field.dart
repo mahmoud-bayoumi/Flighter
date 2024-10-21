@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PasswordTextFormField extends StatefulWidget {
-  const PasswordTextFormField(
-      {super.key, required this.text, required this.hintText});
-  final String text, hintText;
+  const PasswordTextFormField({super.key, required this.text});
+  final String text, hintText = '••••••••';
 
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();

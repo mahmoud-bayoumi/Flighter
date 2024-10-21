@@ -41,12 +41,15 @@ class SignUpViewBody extends StatelessWidget {
             SizedBox(
               height: 14.h,
             ),
-            const PasswordTextFormField(text: 'Password', hintText: '••••••••'),
+            const PasswordTextFormField(
+              text: 'Password',
+            ),
             SizedBox(
               height: 14.h,
             ),
             const PasswordTextFormField(
-                text: 'Confirm Password', hintText: '••••••••'),
+              text: 'Confirm Password',
+            ),
             SizedBox(
               height: 20.h,
             ),

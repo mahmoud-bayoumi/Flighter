@@ -1,8 +1,8 @@
 import 'package:flighter/features/auth/presentation/views/check_your_email_view.dart';
 import 'package:flighter/features/auth/presentation/views/forgot_password_view.dart';
+import 'package:flighter/features/auth/presentation/views/set_new_password_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_in_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_up_view.dart';
-import 'package:flighter/features/auth/presentation/views/widgets/set_new_password_view_body.dart';
 import 'package:flighter/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -38,7 +38,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kSetNewPasswordView,
-        builder: (context, state) => const SetNewPasswordBody(),
+        builder: (context, state) => const SetNewPasswordView(),
       ),
       /*    GoRoute(
         path: kHomeView,
