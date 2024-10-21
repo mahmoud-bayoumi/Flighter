@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
@@ -23,10 +22,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
   @override
   void initState() {
     super.initState();
-
     initSlidingAnimation();
-
-    //navigateToHomeView();
+    navigateToAuthView();
   }
 
   @override
@@ -86,11 +83,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
     animationController.forward();
   }
 
-  void navigateToHomeView() {
+  void navigateToAuthView() {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        GoRouter.of(context).push(AppRouter.kHomeView);
+        GoRouter.of(context).push(AppRouter.kSignInView);
       },
     );
   }
