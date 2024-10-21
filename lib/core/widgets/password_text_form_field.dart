@@ -29,6 +29,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         Container(
           color: const Color(0xffF4EFEF),
           child: TextFormField(
+            style: Styles.textStyle18,
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 icon: Icon(

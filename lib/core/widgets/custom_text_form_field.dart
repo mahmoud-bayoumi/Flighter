@@ -23,7 +23,13 @@ class CustomTextFormField extends StatelessWidget {
         Container(
           color: const Color(0xffF4EFEF),
           child: TextFormField(
+            style: Styles.textStyle18,
             decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(
+                left: 20,
+                top: 20,
+                bottom: 20,
+              ),
               hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey.withOpacity(.8)),
               border: customOutlineInputBorder(),

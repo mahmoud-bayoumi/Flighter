@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
 
-class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({
-    super.key,
-    this.onPressed
-  });
- final void Function()? onPressed; 
+class ForgotPasswordTextButton extends StatelessWidget {
+  const ForgotPasswordTextButton({super.key, this.onPressed});
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -16,7 +13,7 @@ class ForgotPassword extends StatelessWidget {
         style: const ButtonStyle(
           splashFactory: NoSplash.splashFactory,
         ),
-        onPressed: onPressed , 
+        onPressed: onPressed,
         child: Text(
           'Forgot Password?',
           style: Styles.textStyle17,
