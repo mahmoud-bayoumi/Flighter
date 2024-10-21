@@ -1,3 +1,4 @@
+import 'package:flighter/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_in_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flighter/features/splash/presentation/views/splash_view.dart';
@@ -7,6 +8,7 @@ abstract class AppRouter {
   static const String kHomeView = '/HomeView';
   static const String kSignInView = '/SignInView';
   static const String kSignUpView = '/SignUpView';
+  static const String kForgotPasswordView = '/ForgotPassword';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -21,6 +23,10 @@ abstract class AppRouter {
       GoRoute(
         path: kSignUpView,
         builder: (context, state) => const SignUpView(),
+      ),
+      GoRoute(
+        path: kForgotPasswordView,
+        builder: (context, state) => const ForgotPasswordView(),
       ),
       /*    GoRoute(
         path: kHomeView,

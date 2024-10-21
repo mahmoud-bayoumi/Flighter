@@ -47,7 +47,10 @@ class SignInViewBody extends StatelessWidget {
               height: 20.h,
             ),
             const PasswordTextFormField(text: 'Password', hintText: '••••••••'),
-            const ForgotPassword(),
+            ForgotPassword(
+              onPressed: () =>
+                  GoRouter.of(context).push(AppRouter.kForgotPasswordView),
+            ),
             SizedBox(
               height: 12.h,
             ),

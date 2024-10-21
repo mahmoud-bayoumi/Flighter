@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
@@ -87,7 +89,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        GoRouter.of(context).push(AppRouter.kSignInView);
+        GoRouter.of(context).pushReplacement(AppRouter.kSignInView);
       },
     );
   }
