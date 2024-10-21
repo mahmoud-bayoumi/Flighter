@@ -6,8 +6,9 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
+    return Scaffold(
+      appBar: AppBar(),
+      body: const SafeArea(
         child: SignUpViewBody(),
       ),
     );

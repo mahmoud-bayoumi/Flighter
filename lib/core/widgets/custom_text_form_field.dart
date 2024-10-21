@@ -25,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
           child: TextFormField(
             decoration: InputDecoration(
               hintText: hintText,
+              hintStyle: TextStyle(color: Colors.grey.withOpacity(.8)),
               border: customOutlineInputBorder(),
               enabledBorder: customOutlineInputBorder(),
               focusedBorder: customOutlineInputBorder(),

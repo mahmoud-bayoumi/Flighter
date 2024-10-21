@@ -1,3 +1,4 @@
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
@@ -50,11 +51,16 @@ class SignInViewBody extends StatelessWidget {
             SizedBox(
               height: 12.h,
             ),
-            const CustomButton(),
+            const CustomButton(
+              text: 'SIGN IN',
+            ),
             SizedBox(
               height: 20.h,
             ),
-            const Text('or sign in with'),
+            Text(
+              'or sign in with',
+              style: Styles.textStyle16.copyWith(color: kGreyColor),
+            ),
             SizedBox(
               height: 20.h,
             ),

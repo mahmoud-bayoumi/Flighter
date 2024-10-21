@@ -32,8 +32,10 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           child: TextFormField(
             decoration: InputDecoration(
               suffixIcon: IconButton(
-                icon:
-                    Icon(hiddenText ? Icons.visibility : Icons.visibility_off),
+                icon: Icon(
+                  hiddenText ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.grey.withOpacity(.8),
+                ),
                 onPressed: () {
                   setState(() {
                     hiddenText = !hiddenText;
@@ -41,6 +43,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
                 },
               ),
               hintText: widget.hintText,
+              hintStyle: TextStyle(color: Colors.grey.withOpacity(.8)),
               border: customOutlineInputBorder(),
               enabledBorder: customOutlineInputBorder(),
               focusedBorder: customOutlineInputBorder(),
