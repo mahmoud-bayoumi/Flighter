@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-OutlineInputBorder customOutlineInputBorder() {
-    return OutlineInputBorder(
-      borderSide: const BorderSide(
-        color: Colors.white,
-      ),
-      borderRadius: BorderRadius.circular(8),
-    );
-  }
+OutlineInputBorder customOutlineInputBorder({Color? color = Colors.white}) {
+  return OutlineInputBorder(
+    borderSide: BorderSide(
+      color: color!,
+    ),
+    borderRadius: BorderRadius.circular(8),
+  );
+}
