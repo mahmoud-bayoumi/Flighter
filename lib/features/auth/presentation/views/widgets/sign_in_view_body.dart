@@ -1,11 +1,11 @@
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/core/widgets/custom_text_form_field.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/forgot_password.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/assets_data.dart';
-import '../../../../../core/widgets/custom_auth_button.dart';
 
 class SignInViewBody extends StatelessWidget {
   const SignInViewBody({super.key});
@@ -33,7 +33,7 @@ class SignInViewBody extends StatelessWidget {
           ),
           const PasswordTextFormField(text: 'Password', hintText: '••••••••'),
           const ForgotPassword(),
-          const CustomAuthButton()
+          const CustomButton(),
         ],
       ),
     );

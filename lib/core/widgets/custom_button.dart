@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants.dart';
 import '../utils/styles.dart';
 
-class CustomAuthButton extends StatelessWidget {
-  const CustomAuthButton({
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     super.key,
   });
 
