@@ -1,4 +1,3 @@
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
@@ -61,8 +60,9 @@ class CheckYourEmailBody extends StatelessWidget {
             ),
             CustomButton(
               text: 'Verify Code',
-              onPressed: () => GoRouter.of(context).pushReplacement(AppRouter.kSetNewPasswordView),
-              height: 73,
+              onPressed: () => GoRouter.of(context)
+                  .pushReplacement(AppRouter.kSetNewPasswordView),
+              height: 65,
             ),
             SizedBox(
               height: 30.h,
