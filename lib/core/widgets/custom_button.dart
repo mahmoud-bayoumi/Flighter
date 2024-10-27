@@ -5,7 +5,7 @@ import '../utils/styles.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton(
-      {super.key, required this.text, this.onPressed, this.height = 55});
+      {super.key, required this.text, this.onPressed, this.height = 60});
   final String text;
   final void Function()? onPressed;
   final int? height;
