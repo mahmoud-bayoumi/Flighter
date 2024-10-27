@@ -31,6 +31,11 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           child: TextFormField(
             style: Styles.textStyle18,
             decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(
+                left: 20,
+                top: 20,
+                bottom: 20,
+              ),
               suffixIcon: IconButton(
                 icon: Icon(
                   hiddenText ? Icons.visibility : Icons.visibility_off,
