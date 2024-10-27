@@ -13,6 +13,12 @@ class CodeFormField extends StatelessWidget {
       width: 80.h,
       height: 80.h,
       child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '';
+          }
+          return null;
+        },
         style: Styles.textStyle25,
         textAlign: TextAlign.center,
         maxLength: 1,

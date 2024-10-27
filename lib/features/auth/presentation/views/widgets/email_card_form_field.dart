@@ -12,6 +12,12 @@ class EmailCardFormField extends StatelessWidget {
     return Card(
       elevation: 15,
       child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'This Field is Required';
+          }
+          return null;
+        },
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
             vertical: 20,

@@ -23,6 +23,12 @@ class CustomTextFormField extends StatelessWidget {
         Container(
           color: const Color(0xffF4EFEF),
           child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'This Field is Required';
+              }
+              return null;
+            },
             style: Styles.textStyle18,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(
