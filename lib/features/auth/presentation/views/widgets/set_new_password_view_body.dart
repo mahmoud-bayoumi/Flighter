@@ -1,3 +1,4 @@
+import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class SetNewPasswordBody extends StatefulWidget {
 }
 
 class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
-  bool disable = true; 
+  bool disable = true;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -39,7 +40,6 @@ class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
             ),
             const PasswordTextFormField(
               text: 'Password',
-              
             ),
             SizedBox(
               height: 25.h,
@@ -50,7 +50,11 @@ class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
             ),
             CustomButton(
               text: 'Update Password',
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  successDialog(context);
+                });
+              },
               height: 73,
             ),
             SizedBox(
