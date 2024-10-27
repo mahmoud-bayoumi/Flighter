@@ -9,8 +9,17 @@ class EmailCardFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 15,
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(.198),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(1, 2),
+          )
+        ],
+      ),
       child: TextFormField(
         validator: (value) {
           if (value == null || value.isEmpty) {
