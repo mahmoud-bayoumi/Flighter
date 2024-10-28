@@ -66,7 +66,9 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               CustomButton(
                 text: 'SIGN IN',
                 onPressed: () {
-                  if (key.currentState!.validate()) {}
+                  if (key.currentState!.validate()) {
+                    GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
+                  }
                 },
               ),
               SizedBox(
