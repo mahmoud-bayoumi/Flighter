@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class Styles {
+  static final textStyle14 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
   static final textStyle15 = TextStyle(
-    fontSize: 17.sp,
+    fontSize: 15.sp,
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
@@ -34,6 +39,11 @@ abstract class Styles {
   static final textStyle27 = TextStyle(
     fontSize: 27.sp,
     fontWeight: FontWeight.w600,
+  );
+  static final textStyle45 = TextStyle(
+    fontSize: 45.sp,
+    fontWeight: FontWeight.w900,
+    color: Colors.white,
   );
   static final textStyle50 = TextStyle(
     fontSize: 50.sp,

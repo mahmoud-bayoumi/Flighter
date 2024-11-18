@@ -1,6 +1,6 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/features/booking_history/presentation/views/bookings_view.dart';
-import 'package:flighter/features/home/presentation/views/home_view.dart';
+import 'package:flighter/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:flighter/features/offers/presentation/views/offers_view.dart';
 import 'package:flighter/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class BottomNavigationBarView extends StatefulWidget {
 class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
   int currentIndex = 0;
   List<Widget> screens = [
-    const HomeView(),
+    const HomeViewBody(),
     const BookingsView(),
     const OffersView(),
     const ProfileView(),

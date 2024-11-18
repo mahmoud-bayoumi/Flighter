@@ -5,6 +5,6 @@ OutlineInputBorder customOutlineInputBorder({Color? color = Colors.white}) {
     borderSide: BorderSide(
       color: color!,
     ),
-    borderRadius: BorderRadius.circular(10),
+    borderRadius: BorderRadius.circular(6),
   );
 }
