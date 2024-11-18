@@ -50,7 +50,7 @@ class _SearchContainerState extends State<SearchContainer> {
                         oneWay = false;
                       });
                     },
-                    oneWay: oneWay,
+                    oneWay: !oneWay,
                   ),
                 ],
               ),
@@ -85,6 +85,13 @@ class _SearchContainerState extends State<SearchContainer> {
             SizedBox(
               height: 20.h,
             ),
+            /* 
+               DateWidget(oneWay : oneWay), 
+            -> DateWidget Contains a row and we will handle it like trip type button
+
+                    ,
+              ],
+            ), */
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
