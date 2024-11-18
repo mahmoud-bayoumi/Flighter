@@ -6,11 +6,18 @@ import 'package:flighter/features/home/presentation/views/widgets/trip_type_butt
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SearchContainer extends StatelessWidget {
-  SearchContainer({
+class SearchContainer extends StatefulWidget {
+  const SearchContainer({
     super.key,
   });
+
+  @override
+  State<SearchContainer> createState() => _SearchContainerState();
+}
+
+class _SearchContainerState extends State<SearchContainer> {
   final GlobalKey _formKey = GlobalKey<FormState>();
+  bool oneWay = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -19,19 +26,37 @@ class SearchContainer extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: Column(
           children: [
+            SizedBox(
+              height: 10.h,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TripTypeButton(
                     tripTypeName: 'One Way',
+                    onTap: () {
+                      setState(() {
+                        oneWay = true;
+                      });
+                    },
+                    oneWay: oneWay,
                   ),
                   TripTypeButton(
                     tripTypeName: 'Round Trip',
+                    onTap: () {
+                      setState(() {
+                        oneWay = false;
+                      });
+                    },
+                    oneWay: oneWay,
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 10.h,
             ),
             Stack(children: [
               Column(

@@ -65,15 +65,15 @@ class HomeViewBody extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: MediaQuery.sizeOf(context).height * .75,
-            left: MediaQuery.sizeOf(context).width * .02,
+            top: MediaQuery.sizeOf(context).height * .77,
+            left: MediaQuery.sizeOf(context).width * .04,
             child: Text(
               'Hot Deals',
               style: Styles.textStyle35.copyWith(color: kPrimaryColor),
             ),
           ),
           Positioned.fill(
-            top: MediaQuery.sizeOf(context).height * .82,
+            top: MediaQuery.sizeOf(context).height * .84,
             left: MediaQuery.sizeOf(context).width * .02,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
