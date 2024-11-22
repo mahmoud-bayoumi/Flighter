@@ -11,7 +11,7 @@ class FromToCountry extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-          top: 90.h,
+          top: 70.h,
           left: 30.w,
           child: Image(
             width: 340.w,
@@ -19,21 +19,21 @@ class FromToCountry extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 105.h,
+          top: 85.h,
           left: 30.w,
           child: CircleAvatarCountry(
             county: from,
           ),
         ),
         Positioned(
-          top: 105.h,
+          top: 85.h,
           left: MediaQuery.sizeOf(context).width - 90,
           child: CircleAvatarCountry(
             county: to,
           ),
         ),
         Positioned(
-          top: 70.h,
+          top: 50.h,
           left: 180.w,
           child: const Image(
             image: AssetImage(AssetsData.kPlane),
