@@ -90,7 +90,6 @@ class _SearchContainerState extends State<SearchContainer> {
             /* 
                DateWidget(oneWay : oneWay), 
             -> DateWidget Contains a row and we will handle it like trip type button
-
                     ,
               ],
             ), */
