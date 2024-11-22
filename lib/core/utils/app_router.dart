@@ -17,7 +17,7 @@ abstract class AppRouter {
   static const String kSetNewPasswordView = '/SetNewPassword';
 
   static const String kNavigation = '/NavigationHome';
-  static const String kSearchViewBody = '/SearchViewBody';
+  static const String kSearchFlightView = '/SearchViewBody';
 
   static final router = GoRouter(
     routes: [
@@ -51,7 +51,7 @@ abstract class AppRouter {
         builder: (context, state) => const BottomNavigationBarView(),
       ),
       GoRoute(
-        path: kSearchViewBody,
+        path: kSearchFlightView,
         builder: (context, state) => const SearchFlightView(),
       ),
       /*    GoRoute(

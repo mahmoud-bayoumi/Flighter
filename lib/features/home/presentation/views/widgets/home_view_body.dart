@@ -61,7 +61,7 @@ class HomeViewBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.white,
               ),
-              child: SearchContainer(),
+              child: const SearchContainer(),
             ),
           ),
           Positioned(
