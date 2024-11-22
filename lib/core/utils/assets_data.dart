@@ -6,4 +6,6 @@ abstract class AssetsData {
   static const kSpecialDiscount = 'assets/images/special_discount.png';
   static const kEasyBooking = 'assets/images/easy_booking.png';
   static const kSwapArrowsImage = 'assets/images/swap_arrows.png';
+  static const kDistance = 'assets/images/Distance.png';
+  static const kPlane = 'assets/images/plane.png';
 }
