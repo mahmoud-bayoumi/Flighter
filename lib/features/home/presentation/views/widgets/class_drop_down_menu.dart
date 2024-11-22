@@ -1,6 +1,8 @@
-
+import 'package:flighter/core/utils/functions/custom_outline_input_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../constants.dart';
 
 class ClassDropDownMenu extends StatefulWidget {
   const ClassDropDownMenu({super.key});
@@ -16,20 +18,41 @@ class _ClassDropDownMenuState extends State<ClassDropDownMenu> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 190.w,
-      child: DropdownMenu<String>(
-        leadingIcon: const Icon(Icons.flight_class),
-        label: const Text('Class'),
-        initialSelection: list.first,
-        onSelected: (String? value) {
-          setState(() {
-            dropdownValue = value!;
-          });
-        },
-        dropdownMenuEntries:
-            list.map<DropdownMenuEntry<String>>((String value) {
-          return DropdownMenuEntry<String>(value: value, label: value);
-        }).toList(),
+      width: 185.w,
+      child: Theme(
+        data: Theme.of(context).copyWith(
+            inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: customOutlineInputBorder(color: kPrimaryColor),
+          focusedBorder: customOutlineInputBorder(color: kPrimaryColor),
+          border: customOutlineInputBorder(color: kPrimaryColor),
+        )),
+        child: DropdownMenu<String>(
+          textStyle: const TextStyle(color: kPrimaryColor),
+          leadingIcon: const Icon(
+            Icons.flight_class,
+            color: kPrimaryColor,
+          ),
+          label: const Text(
+            'Class',
+            style: TextStyle(color: kPrimaryColor),
+          ),
+          initialSelection: list.first,
+          menuStyle: const MenuStyle(
+            backgroundColor: WidgetStatePropertyAll(Colors.white),
+          ),
+          onSelected: (String? value) {
+            setState(() {
+              dropdownValue = value!;
+            });
+          },
+          dropdownMenuEntries:
+              list.map<DropdownMenuEntry<String>>((String value) {
+            return DropdownMenuEntry<String>(
+              value: value,
+              label: value,
+            );
+          }).toList(),
+        ),
       ),
     );
   }

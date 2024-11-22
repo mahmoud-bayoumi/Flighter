@@ -1,6 +1,8 @@
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/home/presentation/views/widgets/class_drop_down_menu.dart';
+import 'package:flighter/features/home/presentation/views/widgets/custom_date_picker_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_text_form_field.dart';
 import 'package:flighter/features/home/presentation/views/widgets/traveler_form_field.dart';
 import 'package:flighter/features/home/presentation/views/widgets/trip_type_button.dart';
@@ -79,20 +81,26 @@ class _SearchContainerState extends State<SearchContainer> {
               Positioned(
                   left: MediaQuery.sizeOf(context).width * 0.8,
                   top: MediaQuery.sizeOf(context).height * 0.068,
-                  child: Icon(
-                    Icons.swap_vertical_circle,
-                    size: 50.w,
+                  child: Image.asset(
+                    AssetsData.kSwapArrowsImage,
                   )),
             ]),
             SizedBox(
               height: 20.h,
             ),
+
             /* 
                DateWidget(oneWay : oneWay), 
             -> DateWidget Contains a row and we will handle it like trip type button
                     ,
               ],
             ), */
+            CustomDatePickerRow(
+              oneWay: oneWay,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
