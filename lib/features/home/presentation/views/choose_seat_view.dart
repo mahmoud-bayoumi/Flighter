@@ -1,4 +1,5 @@
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/features/home/presentation/views/widgets/choose_seat_widgets/choose_seat_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,6 +22,7 @@ class ChooseSeatView extends StatelessWidget {
           style: Styles.textStyle24,
         ),
       ),
+      body: const ChooseSeatViewBody(),
     );
   }
 }
