@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/features/home/presentation/views/widgets/hot_deals_list_view.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,11 +61,11 @@ class HomeViewBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.white,
               ),
-              child: SearchContainer(),
+              child: const SearchContainer(),
             ),
           ),
           Positioned(
-            top: MediaQuery.sizeOf(context).height * .77,
+            top: MediaQuery.sizeOf(context).height * .86,
             left: MediaQuery.sizeOf(context).width * .04,
             child: Text(
               'Hot Deals',
@@ -73,32 +73,24 @@ class HomeViewBody extends StatelessWidget {
             ),
           ),
           Positioned.fill(
-            top: MediaQuery.sizeOf(context).height * .84,
+            top: MediaQuery.sizeOf(context).height * 0.92,
             left: MediaQuery.sizeOf(context).width * .02,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                //      return Image.asset(AssetsData.kLogo);
-                return SizedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: CachedNetworkImage(
-                          imageUrl:
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBZUcYsjSRCrK_Xk6z-RG2bqvK6i-kd8oICw&s'),
-                    ),
-                  ),
-                );
-              },
-            ),
-          )
+            child: const HotDealsListView(),
+          ),
         ],
       ),
     );
   }
 }
+
+ /*
+         CachedNetworkImage(
+                  imageUrl:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBZUcYsjSRCrK_Xk6z-RG2bqvK6i-kd8oICw&s'),
+            )
+            */
+
+ 
 /*  SizedBox(
                   height: 100.h,
                   child: ListView.builder(
