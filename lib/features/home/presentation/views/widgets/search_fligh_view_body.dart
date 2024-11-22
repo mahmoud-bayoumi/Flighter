@@ -1,8 +1,7 @@
 import 'package:flighter/constants.dart';
-import 'package:flighter/features/home/presentation/views/widgets/card_data.dart';
+import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
 import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchFligthViewBody extends StatelessWidget {
   const SearchFligthViewBody({super.key});
@@ -20,38 +19,12 @@ class SearchFligthViewBody extends StatelessWidget {
           from: 'CHE',
           to: 'BLR',
         ),
-        Positioned(
-          top: 190.h,
-          left: 10.w,
-          child: const CardData(
-            text: '26/May/2023',
-            icon: Icons.date_range,
-          ),
+        const DataOfFlights(
+          firstDate: '26/May/2023',
+          secondDate: '23/May/2023',
+          number: '1 passenger',
+          type: 'First Class',
         ),
-        Positioned(
-          top: 190.h,
-          left: 220.w,
-          child: const CardData(
-            text: '23/May/2023',
-            icon: Icons.date_range,
-          ),
-        ),
-        Positioned(
-          top: 250.h,
-          left: 10.w,
-          child: const CardData(
-            text: 'First Class',
-            icon: Icons.date_range,
-          ),
-        ),
-        Positioned(
-          top: 250.h,
-          left: 250.w,
-          child: const CardData(
-            text: '26/May/2023',
-            icon: Icons.date_range,
-          ),
-        )
       ],
     );
   }
