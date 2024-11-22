@@ -8,5 +8,5 @@ abstract class AssetsData {
   static const kSwapArrowsImage = 'assets/images/swap_arrows.png';
   static const kDistance = 'assets/images/Distance.png';
   static const kPlane = 'assets/images/plane.png';
-   static const vip = ' ' ;
+
 }
