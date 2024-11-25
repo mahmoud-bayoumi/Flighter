@@ -1,4 +1,3 @@
-
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +19,28 @@ class UserProfileDetails extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.1), // Shadow color
               blurRadius: 30.w, // Spread of the shadow
-              offset: const Offset(0, 4),
+              offset: const Offset(-10, 6),
             )
           ]),
-          child: CircleAvatar(
-            radius: MediaQuery.sizeOf(context).width * .07,
-            child: ClipOval(
-                child: Image.asset(
-              AssetsData.kProfileDefaultImage,
-            )),
-          ),
+          child: Stack(children: [
+            SizedBox(
+              width: MediaQuery.sizeOf(context).width * .19,
+            ),
+            CircleAvatar(
+              radius: MediaQuery.sizeOf(context).width * .075,
+              child: ClipOval(
+                  child: Image.asset(
+                AssetsData.kProfileDefaultImage,
+              )),
+            ),
+            Positioned(
+                height: MediaQuery.sizeOf(context).width * .25,
+                width: MediaQuery.sizeOf(context).width * .285,
+                child: const Icon(Icons.remove_circle))
+          ]),
         ),
         SizedBox(
-          width: 10.w,
+          width: 5.w,
         ),
         Text(
           'John Smith',
