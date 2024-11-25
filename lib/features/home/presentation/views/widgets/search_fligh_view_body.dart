@@ -1,4 +1,5 @@
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
 import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';
 import 'package:flighter/features/home/presentation/views/widgets/ticket_widget.dart';
@@ -18,11 +19,7 @@ class SearchFligthViewBody extends StatelessWidget {
             (flightNumber * 180.h), // Example: Adjust based on ticket size
         child: Stack(
           children: [
-            Container(
-              color: kPrimaryColor,
-              width: MediaQuery.sizeOf(context).width,
-              height: MediaQuery.sizeOf(context).height * .4,
-            ),
+            const PrimaryContainer(),
             const FromToCountry(
               from: 'CHE',
               to: 'BLR',

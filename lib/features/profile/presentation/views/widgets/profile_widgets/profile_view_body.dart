@@ -4,7 +4,7 @@ import 'package:flighter/features/profile/presentation/views/widgets/profile_wid
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'profile_primary_container.dart';
+import '../../../../../../core/widgets/primary_container.dart';
 import 'profile_text_title.dart';
 import 'text_profile_button.dart';
 
@@ -20,7 +20,7 @@ class ProfileViewBody extends StatelessWidget {
           SizedBox(
             height: MediaQuery.sizeOf(context).height,
           ),
-          const ProfilePrimaryContainer(),
+          const PrimaryContainer(),
           Positioned(
             left: MediaQuery.sizeOf(context).width * .01,
             top: MediaQuery.sizeOf(context).height * 0.05,
