@@ -1,0 +1,65 @@
+import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/styles.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class Seat extends StatefulWidget {
+  final bool isReseved;
+  final String seatName;
+  const Seat({super.key, this.isReseved = false, required this.seatName});
+
+  @override
+  State<Seat> createState() => _SeatState();
+}
+
+class _SeatState extends State<Seat> {
+  Color color = kUnSelectedSeatColor;
+  Color textColor = Colors.black;
+  bool isSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    return widget.isReseved
+        ? Container(
+            height: 45.w,
+            width: 40.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              color: kGreyColor,
+            ),
+            child: Center(
+              child: Text(
+                widget.seatName,
+                style: Styles.textStyle18.copyWith(color: Colors.white),
+              ),
+            ))
+        : GestureDetector(
+            onTap: () {
+              setState(() {
+                if (!isSelected) {
+                  isSelected = !isSelected;
+                  color = kPrimaryColor;
+                  textColor = Colors.white;
+                } else {
+                  isSelected = !isSelected;
+                  color = kUnSelectedSeatColor;
+                  textColor = Colors.black;
+                }
+              });
+            },
+            child: Container(
+              height: 45.w,
+              width: 40.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: color,
+              ),
+              child: Center(
+                child: Text(
+                  widget.seatName,
+                  style: Styles.textStyle18.copyWith(color: textColor),
+                ),
+              ),
+            ),
+          );
+  }
+}
