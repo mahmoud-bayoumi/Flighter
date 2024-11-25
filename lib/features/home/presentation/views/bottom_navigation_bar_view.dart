@@ -1,7 +1,7 @@
 import 'package:flighter/constants.dart';
-import 'package:flighter/features/views/bookings_view.dart';
 import 'package:flighter/features/home/presentation/views/widgets/home_view_body.dart';
-import 'package:flighter/features/offers/presentation/views/offers_view.dart';
+
+import 'package:flighter/features/offers/presentation/views/offers_view_body.dart';
 import 'package:flighter/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +17,8 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
   int currentIndex = 0;
   List<Widget> screens = [
     const HomeViewBody(),
-    const BookingsView(),
-    const OffersView(),
+    const OffersViewBody(),
+    const OffersViewBody(),
     const ProfileView(),
   ];
   @override

@@ -1,7 +1,7 @@
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
 import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';
-import 'package:flighter/features/home/presentation/views/widgets/ticket_widget.dart';
+import 'package:flighter/features/home/presentation/views/widgets/tickets_list_view_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,17 +33,7 @@ class SearchFligthViewBody extends StatelessWidget {
               top: 380.h,
               right: 1.w,
               left: 2.w,
-              child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: flightNumber,
-                itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    child: TicketWidget(),
-                  );
-                },
-              ),
+              child: TicketsListViewBuilder(flightNumber: flightNumber),
             ),
           ],
         ),
