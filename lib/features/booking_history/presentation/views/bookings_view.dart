@@ -1,3 +1,4 @@
+import 'package:flighter/features/booking_history/presentation/views/widgets/bookings_view_body.dart';
 import 'package:flutter/material.dart';
 
 class BookingsView extends StatelessWidget {
@@ -5,8 +6,8 @@ class BookingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
+    return const Scaffold(
+      body: BookingsViewBody(),
     );
   }
 }
