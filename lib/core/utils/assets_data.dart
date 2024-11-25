@@ -10,4 +10,6 @@ abstract class AssetsData {
   static const kPlane = 'assets/images/plane.png';
   static const kTicket = 'assets/images/ticket.png';
   static const kLine = 'assets/images/Line.png';
+  static const kBluePlane = 'assets/images/blue_plane.png';
+  static const kProfileDefaultImage = 'assets/images/default_profile.jpg';
 }
