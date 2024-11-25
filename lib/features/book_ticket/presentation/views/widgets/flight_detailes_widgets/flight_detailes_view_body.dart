@@ -1,5 +1,6 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/custom_small_button.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/row_flight_detailes.dart';
@@ -17,11 +18,7 @@ class FlightDetailesViewBody extends StatelessWidget {
         SizedBox(
           height: MediaQuery.sizeOf(context).height,
         ),
-        Container(
-          color: kPrimaryColor,
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height * .4,
-        ),
+        const PrimaryContainer(),
         Positioned(
           left: 4.w,
           right: 4.w,

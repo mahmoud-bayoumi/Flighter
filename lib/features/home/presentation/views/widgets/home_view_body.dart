@@ -1,6 +1,7 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/views/widgets/hot_deals_list_view.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_container.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,7 @@ class HomeViewBody extends StatelessWidget {
           SizedBox(
             height: MediaQuery.sizeOf(context).height,
           ),
-          Container(
-            color: kPrimaryColor,
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).height * .4,
-          ),
+          const PrimaryContainer(),
           Padding(
             padding: EdgeInsets.only(top: 45.h, left: 10.w),
             child: Text(

@@ -1,8 +1,8 @@
 import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePrimaryContainer extends StatelessWidget {
-  const ProfilePrimaryContainer({
+class PrimaryContainer extends StatelessWidget {
+  const PrimaryContainer({
     super.key,
   });
 
@@ -12,7 +12,8 @@ class ProfilePrimaryContainer extends StatelessWidget {
       decoration: const BoxDecoration(
           color: kPrimaryColor,
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(6), bottomRight: Radius.circular(6))),
+              bottomLeft: Radius.circular(12),
+              bottomRight: Radius.circular(12))),
       width: MediaQuery.sizeOf(context).width,
       height: MediaQuery.sizeOf(context).height * .4,
     );
