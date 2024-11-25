@@ -15,6 +15,7 @@ class TicketWidget extends StatelessWidget {
         GoRouter.of(context).push(AppRouter.kChooseSeat);
       },
       child: Card(
+        color: Colors.white,
         elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
