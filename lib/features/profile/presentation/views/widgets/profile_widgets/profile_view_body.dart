@@ -3,7 +3,9 @@ import 'package:flighter/features/profile/presentation/views/widgets/profile_wid
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/user_profile_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/widgets/primary_container.dart';
 import 'profile_text_title.dart';
 import 'text_profile_button.dart';
@@ -51,8 +53,11 @@ class ProfileViewBody extends StatelessWidget {
                     const TextProfileButton(
                       buttonText: 'Edit Profile',
                     ),
-                    const TextProfileButton(
+                    TextProfileButton(
                       buttonText: 'Change password',
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kChangePassword);
+                      },
                     ),
                     const TextProfileButton(
                       buttonText: 'Add a payment method',
