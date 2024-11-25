@@ -8,14 +8,12 @@ import '../../../home/presentation/views/widgets/hot_deals_list_view.dart';
 
 class OffersViewBody extends StatelessWidget {
   const OffersViewBody({super.key});
-  final int flightNumbers =
-      7; // used for build the  veritcal tickets list view ( all tickets)
+  final int flightNumber = 7;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: SizedBox(
-        height: MediaQuery.sizeOf(context).height + (flightNumbers * 180.h),
         child: Stack(
           children: [
             SizedBox(
@@ -39,13 +37,12 @@ class OffersViewBody extends StatelessWidget {
                 child: const HotDealsListView(), // Hot deals widget
               ),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: MediaQuery.sizeOf(context).height * 0.29,
+            Padding(
+              padding: EdgeInsets.only(top: 270.h),
               child: SizedBox(
-                  width: MediaQuery.sizeOf(context).width, //
-                  child: TicketsListViewBuilder(flightNumber: flightNumbers)),
+                  height: MediaQuery.sizeOf(context).height +
+                      (flightNumber * 200.h),
+                  child: TicketsListViewBuilder(flightNumber: flightNumber)),
             ),
           ],
         ),
