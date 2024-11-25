@@ -9,4 +9,5 @@ abstract class AssetsData {
   static const kDistance = 'assets/images/Distance.png';
   static const kPlane = 'assets/images/plane.png';
   static const kTicket = 'assets/images/ticket.png';
+  static const kLine = 'assets/images/Line.png';
 }

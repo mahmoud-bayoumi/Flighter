@@ -1,8 +1,5 @@
 import 'package:flighter/constants.dart';
-import 'package:flighter/core/widgets/custom_button.dart';
-import 'package:flighter/features/home/presentation/views/widgets/choose_seat_widgets/custom_seat_row.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'selection_status_row.dart';
 
