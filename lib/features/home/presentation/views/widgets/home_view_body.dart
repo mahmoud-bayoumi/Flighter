@@ -24,9 +24,9 @@ class HomeViewBody extends StatelessWidget {
             height: MediaQuery.sizeOf(context).height * .4,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 35.h, left: 10.w),
+            padding: EdgeInsets.only(top: 45.h, left: 10.w),
             child: Text(
-              'Hello, Yasser',
+              'Hello, John',
               style: Styles.textStyle24.copyWith(color: Colors.white),
             ),
           ),
