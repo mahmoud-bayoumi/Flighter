@@ -1,5 +1,10 @@
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/widgets/custom_button.dart';
+import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/custom_seat_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import 'selection_status_row.dart';
 
@@ -51,7 +56,9 @@ class ChooseSeatViewBody extends StatelessWidget {
               child: CustomButton(
                 text: 'Confirm',
                 height: 90.h,
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                },
               ),
             ),
             SizedBox(

@@ -1,4 +1,4 @@
-import 'package:flighter/features/book_ticket/presentation/views/choose_seat_widgets/seat.dart';
+import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/seat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -3,6 +3,7 @@ import 'package:flighter/features/auth/presentation/views/forgot_password_view.d
 import 'package:flighter/features/auth/presentation/views/set_new_password_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_in_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_up_view.dart';
+import 'package:flighter/features/book_ticket/presentation/views/flight_detailes_view.dart';
 import 'package:flighter/features/home/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:flighter/features/book_ticket/presentation/views/choose_seat_view.dart';
 import 'package:flighter/features/home/presentation/views/search_flight_view.dart';
@@ -19,7 +20,9 @@ abstract class AppRouter {
 
   static const String kNavigation = '/NavigationHome';
   static const String kSearchFlightView = '/SearchViewBody';
-  static const String kChooseSeat = '/ChooseSeat' ; 
+  static const String kChooseSeat = '/ChooseSeat';
+
+  static const String kFlightDetailes = '/FlightDetailes';
 
   static final router = GoRouter(
     routes: [
@@ -59,6 +62,10 @@ abstract class AppRouter {
       GoRoute(
         path: kChooseSeat,
         builder: (context, state) => const ChooseSeatView(),
+      ),
+      GoRoute(
+        path: kFlightDetailes,
+        builder: (context, state) => const FlightDetailesView(),
       ),
 
       /*    GoRoute(
