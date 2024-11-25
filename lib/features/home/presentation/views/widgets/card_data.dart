@@ -26,7 +26,10 @@ class CardData extends StatelessWidget {
             icon,
             size: 25.sp,
           ),
-          title: Text(text),
+          title: Text(
+            text,
+            style: Styles.textStyle16,
+          ),
         ),
       ),
     );

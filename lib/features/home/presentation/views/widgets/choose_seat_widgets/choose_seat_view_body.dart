@@ -1,6 +1,9 @@
 import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/widgets/custom_button.dart';
+import 'custom_seat_row.dart';
 import 'selection_status_row.dart';
 
 class ChooseSeatViewBody extends StatelessWidget {
