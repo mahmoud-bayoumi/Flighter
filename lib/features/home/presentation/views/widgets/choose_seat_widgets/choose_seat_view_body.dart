@@ -8,7 +8,6 @@ class ChooseSeatViewBody extends StatelessWidget {
     return const Column(
       children: [
         Row(),
-    
       ],
     );
   }
