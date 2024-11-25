@@ -4,7 +4,7 @@ import 'package:flighter/features/auth/presentation/views/set_new_password_view.
 import 'package:flighter/features/auth/presentation/views/sign_in_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flighter/features/home/presentation/views/bottom_navigation_bar_view.dart';
-import 'package:flighter/features/home/presentation/views/choose_seat_view.dart';
+import 'package:flighter/features/book_ticket/presentation/views/choose_seat_view.dart';
 import 'package:flighter/features/home/presentation/views/search_flight_view.dart';
 import 'package:flighter/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
