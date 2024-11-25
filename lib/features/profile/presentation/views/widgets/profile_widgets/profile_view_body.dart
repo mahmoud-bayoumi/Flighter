@@ -1,6 +1,6 @@
-import 'package:flighter/features/profile/presentation/views/widgets/profile_divider.dart';
-import 'package:flighter/features/profile/presentation/views/widgets/profile_view_list_tile.dart';
-import 'package:flighter/features/profile/presentation/views/widgets/user_profile_details.dart';
+import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_divider.dart';
+import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_view_list_tile.dart';
+import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/user_profile_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
