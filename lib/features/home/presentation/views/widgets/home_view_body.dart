@@ -15,7 +15,7 @@ class HomeViewBody extends StatelessWidget {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Stack(
-        children: [
+        children: [   
           SizedBox(
             height: MediaQuery.sizeOf(context).height,
           ),
