@@ -1,3 +1,4 @@
+import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,6 +30,12 @@ class _UnabledTextFieldState extends State<UnabledTextField> {
         controller: controller,
         enabled: false,
         decoration: InputDecoration(
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: kGreyColor.withOpacity(.5),
+            ),
+            borderRadius: BorderRadius.circular(12),
+          ),
           prefixIcon: Icon(widget.icon),
           label: const Text('Date'),
           border: OutlineInputBorder(
