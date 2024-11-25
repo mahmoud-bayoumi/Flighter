@@ -1,4 +1,7 @@
+import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'selection_status_row.dart';
 
 class ChooseSeatViewBody extends StatelessWidget {
   const ChooseSeatViewBody({super.key});
@@ -8,6 +11,7 @@ class ChooseSeatViewBody extends StatelessWidget {
     return const Column(
       children: [
         Row(),
+    
       ],
     );
   }
