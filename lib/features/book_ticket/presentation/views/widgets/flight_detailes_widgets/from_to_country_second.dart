@@ -22,14 +22,16 @@ class FromToCountrySecond extends StatelessWidget {
           top: 85.h,
           left: 30.w,
           child: CircleAvatarCountry(
-            county: from, light: true,
+            county: from,
+            light: true,
           ),
         ),
         Positioned(
-          top: 85.h,
-          left: MediaQuery.sizeOf(context).width - 90,
+          top: 90.h,
+          left: MediaQuery.sizeOf(context).width - 95,
           child: CircleAvatarCountry(
-            county: to, light: true,
+            county: to,
+            light: true,
           ),
         ),
         Positioned(

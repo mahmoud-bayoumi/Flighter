@@ -17,9 +17,8 @@ class TicketWidget extends StatelessWidget {
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(24), // Adjust the radius as needed
-          side: const BorderSide(color: kPrimaryColor), // Border color
+          borderRadius: BorderRadius.circular(24),
+          side: const BorderSide(color: kPrimaryColor),
         ),
         child: Column(
           children: [

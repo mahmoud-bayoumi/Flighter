@@ -27,10 +27,9 @@ class FlightDetailesViewBody extends StatelessWidget {
           right: 4.w,
           top: MediaQuery.sizeOf(context).height * .06,
           child: Card(
+            color: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(24), // Adjust the radius as needed
-              // Border color
+              borderRadius: BorderRadius.circular(24),
             ),
             elevation: 3,
             child: SizedBox(
