@@ -13,7 +13,8 @@ class BookingsViewBody extends StatelessWidget {
       children: [
         const PrimaryContainer(),
         Positioned(
-          top: 20.h,
+          left: MediaQuery.sizeOf(context).width * .01,
+          top: MediaQuery.sizeOf(context).height * 0.05,
           child: const BookingListTile(),
         ),
         Padding(
