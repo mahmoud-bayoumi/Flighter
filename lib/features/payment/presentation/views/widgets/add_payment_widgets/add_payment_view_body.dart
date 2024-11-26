@@ -1,4 +1,3 @@
-import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/custom_small_button.dart';
 import 'package:flighter/features/payment/presentation/views/widgets/payment_widgets/card_number_text_form.dart';
@@ -7,10 +6,9 @@ import 'package:flighter/features/payment/presentation/views/widgets/payment_wid
 import 'package:flighter/features/payment/presentation/views/widgets/payment_widgets/types_of_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
-class PaymentViewBody extends StatelessWidget {
-  const PaymentViewBody({super.key});
+class AddPaymentViewBody extends StatelessWidget {
+  const AddPaymentViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +45,11 @@ class PaymentViewBody extends StatelessWidget {
               blue: true,
               onPressed: () {
                 paymentDoneDialog(context);
-                Future.delayed(const Duration(seconds: 2), () {
-                  // ignore: use_build_context_synchronously
-                  GoRouter.of(context).push(AppRouter.kBoardingPass);
-                });
               },
             ),
             SizedBox(
               height: 20.h,
             ),
-            CustomSmallButton(
-              minWidth: .7,
-              text: 'Cancel',
-              blue: false,
-              onPressed: () {
-                GoRouter.of(context).pop();
-              },
-            )
           ],
         ),
       ),
