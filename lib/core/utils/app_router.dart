@@ -8,6 +8,7 @@ import 'package:flighter/features/cancel_your_ticket/presentation/views/cancel_y
 import 'package:flighter/features/home/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:flighter/features/book_ticket/presentation/views/choose_seat_view.dart';
 import 'package:flighter/features/home/presentation/views/search_flight_view.dart';
+import 'package:flighter/features/payment/presentation/views/add_payment_view.dart';
 import 'package:flighter/features/payment/presentation/views/boarding_pass_view.dart';
 import 'package:flighter/features/payment/presentation/views/payment_view.dart';
 import 'package:flighter/features/profile/presentation/views/about_us_view.dart';
@@ -34,6 +35,7 @@ abstract class AppRouter {
   static const String kEditProfileView = '/EditProfileView';
   static const String kPayment = '/Payment';
   static const String kBoardingPass = '/BoardingPass';
+  static const String kAddPayment = '/AddPayment';
 
   static const String kAboutUs = '/AboutUs';
   static const String kPrivacyAndPolicy = '/PrivacyAndPolicy';
@@ -101,20 +103,6 @@ abstract class AppRouter {
         builder: (context, state) => const CancelYourTicketView(),
       ),
 
-      GoRoute(
-        path: kAboutUs,
-        builder: (context, state) => const AboutUsView(),
-      ),
-      GoRoute(
-        path: kPrivacyAndPolicy,
-        builder: (context, state) => const PrivacyAndPolicy(),
-      )
-
-      /*    GoRoute(
-        path: kHomeView,
-        builder: (context, state) => Container(),
-      ), 
-  */
     ],
   );
 }

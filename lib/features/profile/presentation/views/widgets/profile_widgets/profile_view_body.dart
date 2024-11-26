@@ -62,8 +62,11 @@ class ProfileViewBody extends StatelessWidget {
                         GoRouter.of(context).push(AppRouter.kChangePassword);
                       },
                     ),
-                    const TextProfileButton(
+                    TextProfileButton(
                       buttonText: 'Add a payment method',
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kAddPayment);
+                      },
                     ),
                     const TextProfileButton(
                       buttonText: 'Dark mode',
