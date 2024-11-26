@@ -11,10 +11,13 @@ import 'package:flighter/features/home/presentation/views/search_flight_view.dar
 import 'package:flighter/features/payment/presentation/views/add_payment_view.dart';
 import 'package:flighter/features/payment/presentation/views/boarding_pass_view.dart';
 import 'package:flighter/features/payment/presentation/views/payment_view.dart';
+import 'package:flighter/features/profile/presentation/views/about_us_view.dart';
 import 'package:flighter/features/profile/presentation/views/change_password.dart';
 import 'package:flighter/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flighter/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../features/profile/presentation/views/privacy_and_policy.dart';
 
 abstract class AppRouter {
   static const String kHomeView = '/HomeView';
@@ -34,6 +37,8 @@ abstract class AppRouter {
   static const String kBoardingPass = '/BoardingPass';
   static const String kAddPayment = '/AddPayment';
 
+  static const String kAboutUs = '/AboutUs';
+  static const String kPrivacyAndPolicy = '/PrivacyAndPolicy';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -97,10 +102,7 @@ abstract class AppRouter {
         path: kCancelYourTicket,
         builder: (context, state) => const CancelYourTicketView(),
       ),
-      GoRoute(
-        path: kAddPayment,
-        builder: (context, state) => const AddPaymentView(),
-      ),
+
     ],
   );
 }
