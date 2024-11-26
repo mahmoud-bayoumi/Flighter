@@ -11,6 +11,7 @@ class PaymentView extends StatelessWidget {
         title: const Text('Payment'),
         centerTitle: true,
       ),
+      backgroundColor: Colors.white,
       body: const PaymentViewBody(),
     );
   }

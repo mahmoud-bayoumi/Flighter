@@ -11,6 +11,7 @@ class BoardingPassView extends StatelessWidget {
         title: const Text('Boarding Pass'),
         centerTitle: true,
       ),
+      backgroundColor: Colors.white,
       body: const BoardingPassViewBody(),
     );
   }

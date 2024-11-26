@@ -28,10 +28,9 @@ abstract class AppRouter {
   static const String kChooseSeat = '/ChooseSeat';
   static const String kCancelYourTicket = '/CancelYourTicket';
   static const String kFlightDetailes = '/FlightDetailes';
-
+  static const String kEditProfileView = '/EditProfileView';
   static const String kPayment = '/Payment';
   static const String kBoardingPass = '/BoardingPass';
-
 
   static final router = GoRouter(
     routes: [
@@ -81,13 +80,20 @@ abstract class AppRouter {
         builder: (context, state) => const ChangePassword(),
       ),
       GoRoute(
-
         path: kPayment,
         builder: (context, state) => const PaymentView(),
       ),
       GoRoute(
         path: kBoardingPass,
         builder: (context, state) => const BoardingPassView(),
+      ),
+      GoRoute(
+        path: kEditProfileView,
+        builder: (context, state) => const EditProfileView(),
+      ),
+      GoRoute(
+        path: kCancelYourTicket,
+        builder: (context, state) => const CancelYourTicketView(),
       ),
 
       /*    GoRoute(
