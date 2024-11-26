@@ -38,7 +38,7 @@ class OffersViewBody extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 270.h),
+              padding: EdgeInsets.only(top: 280.h),
               child: SizedBox(
                   height: MediaQuery.sizeOf(context).height +
                       (flightNumber * 200.h),

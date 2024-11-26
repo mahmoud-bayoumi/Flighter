@@ -13,6 +13,7 @@ class TravelerFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 185.w,
+      height: 57.h,
       child: TextFormField(
         keyboardType: TextInputType.number,
         autocorrect: true,

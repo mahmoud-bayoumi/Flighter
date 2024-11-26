@@ -27,6 +27,7 @@ class _ClassDropDownMenuState extends State<ClassDropDownMenu> {
           border: customOutlineInputBorder(color: kPrimaryColor),
         )),
         child: DropdownMenu<String>(
+          width: 185.w,
           textStyle: const TextStyle(color: kPrimaryColor),
           leadingIcon: const Icon(
             Icons.flight_class,
