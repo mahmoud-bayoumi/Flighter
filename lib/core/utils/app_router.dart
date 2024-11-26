@@ -4,12 +4,14 @@ import 'package:flighter/features/auth/presentation/views/set_new_password_view.
 import 'package:flighter/features/auth/presentation/views/sign_in_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flighter/features/book_ticket/presentation/views/flight_detailes_view.dart';
+import 'package:flighter/features/cancel_your_ticket/presentation/views/cancel_your_ticket_view.dart';
 import 'package:flighter/features/home/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:flighter/features/book_ticket/presentation/views/choose_seat_view.dart';
 import 'package:flighter/features/home/presentation/views/search_flight_view.dart';
 import 'package:flighter/features/payment/presentation/views/boarding_pass_view.dart';
 import 'package:flighter/features/payment/presentation/views/payment_view.dart';
 import 'package:flighter/features/profile/presentation/views/change_password.dart';
+import 'package:flighter/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flighter/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,8 +26,9 @@ abstract class AppRouter {
   static const String kNavigation = '/NavigationHome';
   static const String kSearchFlightView = '/SearchViewBody';
   static const String kChooseSeat = '/ChooseSeat';
-
+  static const String kCancelYourTicket = '/CancelYourTicket';
   static const String kFlightDetailes = '/FlightDetailes';
+  static const String kEditProfileView = '/EditProfileView';
   static const String kPayment = '/Payment';
   static const String kBoardingPass = '/BoardingPass';
 
@@ -84,6 +87,15 @@ abstract class AppRouter {
         path: kBoardingPass,
         builder: (context, state) => const BoardingPassView(),
       ),
+      GoRoute(
+        path: kEditProfileView,
+        builder: (context, state) => const EditProfileView(),
+      ),
+      GoRoute(
+        path: kCancelYourTicket,
+        builder: (context, state) => const CancelYourTicketView(),
+      ),
+
       /*    GoRoute(
         path: kHomeView,
         builder: (context, state) => Container(),

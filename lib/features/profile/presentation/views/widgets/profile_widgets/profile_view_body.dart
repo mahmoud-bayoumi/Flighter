@@ -50,8 +50,11 @@ class ProfileViewBody extends StatelessWidget {
                     const ProfileTextTitle(
                       profileTitle: 'Account Settings',
                     ),
-                    const TextProfileButton(
+                    TextProfileButton(
                       buttonText: 'Edit Profile',
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kEditProfileView);
+                      },
                     ),
                     TextProfileButton(
                       buttonText: 'Change password',
