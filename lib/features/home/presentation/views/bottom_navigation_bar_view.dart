@@ -6,21 +6,27 @@ import 'package:flighter/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationBarView extends StatefulWidget {
-  const BottomNavigationBarView({super.key});
-
+  const BottomNavigationBarView({super.key, this.intialIndex = 0});
+  final int intialIndex;
   @override
   State<BottomNavigationBarView> createState() =>
       _BottomNavigationBarViewState();
 }
 
 class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
-  int currentIndex = 0;
+  late int currentIndex;
   List<Widget> screens = [
     const HomeViewBody(),
     const BookingsViewBody(),
     const OffersViewBody(),
     const ProfileView(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.intialIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
