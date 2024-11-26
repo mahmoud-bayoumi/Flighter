@@ -1,10 +1,10 @@
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/edit_profile_widgets/edit_profile_view_body.dart';
+import 'widgets/cancel_your_ticket_view_body.dart';
 
-class EditProfileView extends StatelessWidget {
-  const EditProfileView({super.key});
+class CancelYourTicketView extends StatelessWidget {
+  const CancelYourTicketView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +12,12 @@ class EditProfileView extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'Edit Profile',
+            'Cancel Your Ticket ',
             style: Styles.textStyle24,
           ),
         ),
-        body: const SafeArea(child: EditProfileViewBody()));
+        body: const SafeArea(
+          child: CancelYourTicketViewBody(),
+        ));
   }
 }

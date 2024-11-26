@@ -7,12 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../constants.dart';
 import '../../../../../../core/widgets/custom_button.dart';
 
-
 class ChangePasswordBody extends StatefulWidget {
   const ChangePasswordBody({super.key});
 
   @override
-  State<ChangePasswordBody> createState() =>   _ChangePasswordBodyState();
+  State<ChangePasswordBody> createState() => _ChangePasswordBodyState();
 }
 
 class _ChangePasswordBodyState extends State<ChangePasswordBody> {
@@ -27,10 +26,6 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
           key: key,
           child: Column(
             children: [
-              Text(
-                'Set a new password ',
-                style: Styles.textStyle35,
-              ),
               SizedBox(
                 height: 20.h,
               ),
@@ -42,9 +37,10 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
               SizedBox(
                 height: 40.h,
               ),
-               const PasswordTextFormField(
+              const PasswordTextFormField(
                 text: 'Old Password',
-              ),  SizedBox(
+              ),
+              SizedBox(
                 height: 25.h,
               ),
               const PasswordTextFormField(

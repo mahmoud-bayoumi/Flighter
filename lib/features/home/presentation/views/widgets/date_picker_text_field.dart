@@ -19,7 +19,11 @@ class _DatePickerTextFieldState extends State<DatePickerTextField> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) return 'Required';
+          return null;
+        },
         controller: _dateController,
         onTap: () {
           _selectDate(context);
