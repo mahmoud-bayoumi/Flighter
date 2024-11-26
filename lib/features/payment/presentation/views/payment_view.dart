@@ -1,4 +1,4 @@
-import 'package:flighter/features/payment/presentation/views/widgets/payment_view_body.dart';
+import 'package:flighter/features/payment/presentation/views/widgets/payment_widgets/payment_view_body.dart';
 import 'package:flutter/material.dart';
 
 class PaymentView extends StatelessWidget {

@@ -1,10 +1,10 @@
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/custom_small_button.dart';
-import 'package:flighter/features/payment/presentation/views/widgets/card_number_text_form.dart';
-import 'package:flighter/features/payment/presentation/views/widgets/expire_date_text_form.dart';
-import 'package:flighter/features/payment/presentation/views/widgets/title_with_text_form.dart';
-import 'package:flighter/features/payment/presentation/views/widgets/types_of_payment.dart';
+import 'package:flighter/features/payment/presentation/views/widgets/payment_widgets/card_number_text_form.dart';
+import 'package:flighter/features/payment/presentation/views/widgets/payment_widgets/expire_date_text_form.dart';
+import 'package:flighter/features/payment/presentation/views/widgets/payment_widgets/title_with_text_form.dart';
+import 'package:flighter/features/payment/presentation/views/widgets/payment_widgets/types_of_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
