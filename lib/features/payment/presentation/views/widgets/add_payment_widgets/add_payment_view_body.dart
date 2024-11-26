@@ -41,10 +41,11 @@ class AddPaymentViewBody extends StatelessWidget {
             ),
             CustomSmallButton(
               minWidth: .7,
-              text: 'Confirm',
+              text: 'Add',
               blue: true,
               onPressed: () {
-                paymentDoneDialog(context);
+                addPaymentDoneDialog(context);
+                //GoRouter.of(context).pop();
               },
             ),
             SizedBox(

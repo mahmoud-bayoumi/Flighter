@@ -50,6 +50,26 @@ AwesomeDialog paymentDoneDialog(BuildContext context) {
   )..show();
 }
 
+AwesomeDialog addPaymentDoneDialog(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.success,
+    animType: AnimType.scale,
+    title: 'Successful',
+    desc: 'Payment done successfully.',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: kPrimaryColor,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    btnOkOnPress: () {
+      Navigator.pop(context);
+    },
+    padding: const EdgeInsets.all(10),
+  )..show();
+}
+
 AwesomeDialog errorDialog(BuildContext context) {
   return AwesomeDialog(
     context: context,
