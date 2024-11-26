@@ -69,7 +69,7 @@ class ProfileViewBody extends StatelessWidget {
                       },
                     ),
                     const TextProfileButton(
-                      buttonText: 'Dark mode',
+                      buttonText: 'Delete Account',
                     ),
                     const ProfileDivider(),
                     const ProfileTextTitle(

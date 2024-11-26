@@ -68,7 +68,7 @@ class FlightDataCard extends StatelessWidget {
             ),
             Positioned(
               top: 360.h,
-              left: 30.w,
+              left: 55.w,
               child: const RowFlightDetailes(),
             ),
             Positioned(
@@ -86,7 +86,7 @@ class FlightDataCard extends StatelessWidget {
             ),
             Positioned(
               top: 500.h,
-              left: 40.w,
+              left: 75.w,
               child: Text(
                 '230222-BE143',
                 style: Styles.textStyle45.copyWith(color: Colors.black),
@@ -94,13 +94,13 @@ class FlightDataCard extends StatelessWidget {
             ),
             Positioned(
               top: 580.h,
-              left: 50.w,
+              left: 75.w,
               child: CancelTicketText(
                 authDesc: 'Cancel ticket if possible?',
                 authButtonName: 'Click Here',
                 canCancel: true,
                 onPressed: () {
-                  GoRouter.of(context).push(AppRouter.kCancelYourTicket); 
+                  GoRouter.of(context).push(AppRouter.kCancelYourTicket);
                 },
               ),
             ),

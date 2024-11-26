@@ -88,13 +88,6 @@ class _SearchContainerState extends State<SearchContainer> {
             SizedBox(
               height: 20.h,
             ),
-
-            /* 
-               DateWidget(oneWay : oneWay), 
-            -> DateWidget Contains a row and we will handle it like trip type button
-                    ,
-              ],
-            ), */
             CustomDatePickerRow(
               oneWay: oneWay,
             ),
