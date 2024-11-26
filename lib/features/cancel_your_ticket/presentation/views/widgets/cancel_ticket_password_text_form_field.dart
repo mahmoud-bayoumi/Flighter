@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../constants.dart';
 import '../../../../../core/utils/functions/custom_outline_input_border.dart';
 import '../../../../../core/utils/styles.dart';
@@ -11,10 +9,12 @@ class CancelPasswordTextFormField extends StatefulWidget {
   final String text, hintText = '••••••••';
 
   @override
-  State<CancelPasswordTextFormField> createState() => _CancelPasswordTextFormFieldState();
+  State<CancelPasswordTextFormField> createState() =>
+      _CancelPasswordTextFormFieldState();
 }
 
-class _CancelPasswordTextFormFieldState extends State<CancelPasswordTextFormField> {
+class _CancelPasswordTextFormFieldState
+    extends State<CancelPasswordTextFormField> {
   bool hiddenText = true;
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,6 @@ class _CancelPasswordTextFormFieldState extends State<CancelPasswordTextFormFiel
           height: 25.h,
         ),
         TextFormField(
-          
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'This Field is Required';
@@ -38,7 +37,6 @@ class _CancelPasswordTextFormFieldState extends State<CancelPasswordTextFormFiel
           },
           style: Styles.textStyle18,
           decoration: InputDecoration(
-            
             contentPadding: const EdgeInsets.only(
               left: 20,
               top: 15,
