@@ -4,6 +4,7 @@ import 'package:flighter/core/widgets/custom_small_button.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/row_flight_detailes.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/unabled_text_field.dart';
+import 'package:flighter/features/home/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:flighter/features/payment/presentation/views/widgets/boarding_pass_widgets/name_with_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,7 +75,18 @@ class BoardingPassViewBody extends StatelessWidget {
             text: 'Confirm',
             blue: true,
             minWidth: .7,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const BottomNavigationBarView(
+                      intialIndex: 1,
+                    );
+                  },
+                ),
+              );
+            },
           ),
           SizedBox(
             height: 10.h,
@@ -88,7 +100,18 @@ class BoardingPassViewBody extends StatelessWidget {
               style: Styles.textStyle22
                   .copyWith(color: kPrimaryColor, fontWeight: FontWeight.bold),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const BottomNavigationBarView(
+                      intialIndex: 0,
+                    );
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),
