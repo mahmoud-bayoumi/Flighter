@@ -8,16 +8,18 @@ class CustomSmallButton extends StatelessWidget {
     required this.text,
     required this.blue,
     this.onPressed,
+    this.minWidth = .42,
   });
   final String text;
   final bool blue;
   final void Function()? onPressed;
+  final double? minWidth;
   @override
   Widget build(BuildContext context) {
     return blue
         ? MaterialButton(
             color: kPrimaryColor,
-            minWidth: MediaQuery.sizeOf(context).width * .42,
+            minWidth: MediaQuery.sizeOf(context).width * minWidth!,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             height: 50,
@@ -30,7 +32,7 @@ class CustomSmallButton extends StatelessWidget {
           )
         : MaterialButton(
             color: Colors.white,
-            minWidth: MediaQuery.sizeOf(context).width * .42,
+            minWidth: MediaQuery.sizeOf(context).width * minWidth!,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
               side: const BorderSide(color: kPrimaryColor),
