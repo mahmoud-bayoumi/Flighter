@@ -1,8 +1,10 @@
+import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
-import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/custom_small_button.dart';
+import 'package:flighter/core/widgets/custom_small_button.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/flight_detailes_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class FlightDetailesViewBody extends StatelessWidget {
   const FlightDetailesViewBody({super.key});
@@ -25,7 +27,9 @@ class FlightDetailesViewBody extends StatelessWidget {
           top: 730.h,
           left: 25.w,
           child: CustomSmallButton(
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
             text: 'Cancel',
             blue: false,
           ),
@@ -34,7 +38,9 @@ class FlightDetailesViewBody extends StatelessWidget {
           top: 730.h,
           left: 210.w,
           child: CustomSmallButton(
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.kPayment);
+            },
             text: 'Continue',
             blue: true,
           ),
