@@ -12,4 +12,7 @@ abstract class AssetsData {
   static const kLine = 'assets/images/Line.png';
   static const kBluePlane = 'assets/images/blue_plane.png';
   static const kProfileDefaultImage = 'assets/images/default_profile.jpg';
+  static const kMasterCard = 'assets/images/Mastercard.png';
+  static const kVisa = 'assets/images/Visa.png';
+  static const kPayPal = 'assets/images/Paypal.png';
 }

@@ -1,6 +1,6 @@
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
-import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/custom_small_button.dart';
+import 'package:flighter/core/widgets/custom_small_button.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/flight_detailes_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
