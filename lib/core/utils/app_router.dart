@@ -102,13 +102,6 @@ abstract class AppRouter {
         path: kCancelYourTicket,
         builder: (context, state) => const CancelYourTicketView(),
       ),
-<<<<<<<<< Temporary merge branch 1
-      GoRoute(
-        path: kAddPayment,
-        builder: (context, state) => const AddPaymentView(),
-      ),
-=========
-
       GoRoute(
         path: kAboutUs,
         builder: (context, state) => const AboutUsView(),
@@ -123,7 +116,12 @@ abstract class AppRouter {
         builder: (context, state) => Container(),
       ), 
   */
->>>>>>>>> Temporary merge branch 2
+
+      ,
+      GoRoute(
+        path: kAddPayment,
+        builder: (context, state) => const AddPaymentView(),
+      ),
     ],
   );
 }
