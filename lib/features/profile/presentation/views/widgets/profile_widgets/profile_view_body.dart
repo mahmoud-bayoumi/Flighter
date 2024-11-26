@@ -72,11 +72,15 @@ class ProfileViewBody extends StatelessWidget {
                     const ProfileTextTitle(
                       profileTitle: 'More',
                     ),
-                    const TextProfileButton(
+                    TextProfileButton(
                       buttonText: 'About us',
+                      onTap: () =>
+                          GoRouter.of(context).push(AppRouter.kAboutUs),
                     ),
-                    const TextProfileButton(
+                    TextProfileButton(
                       buttonText: 'Privacy policy',
+                      onTap: () => GoRouter.of(context)
+                          .push(AppRouter.kPrivacyAndPolicy),
                     ),
                     SizedBox(
                       height: 100.h,
