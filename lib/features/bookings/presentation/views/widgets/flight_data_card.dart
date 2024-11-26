@@ -6,6 +6,9 @@ import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_
 import 'package:flighter/features/bookings/presentation/views/widgets/cancel_ticket_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../../core/utils/app_router.dart';
 
 class FlightDataCard extends StatelessWidget {
   const FlightDataCard({super.key});
@@ -92,10 +95,13 @@ class FlightDataCard extends StatelessWidget {
             Positioned(
               top: 580.h,
               left: 50.w,
-              child: const CancelTicketText(
+              child: CancelTicketText(
                 authDesc: 'Cancel ticket if possible?',
                 authButtonName: 'Click Here',
                 canCancel: true,
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.kCancelYourTicket); 
+                },
               ),
             ),
           ],
