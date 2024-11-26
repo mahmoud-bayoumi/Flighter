@@ -102,7 +102,26 @@ abstract class AppRouter {
         path: kCancelYourTicket,
         builder: (context, state) => const CancelYourTicketView(),
       ),
+      GoRoute(
+        path: kAboutUs,
+        builder: (context, state) => const AboutUsView(),
+      ),
+      GoRoute(
+        path: kPrivacyAndPolicy,
+        builder: (context, state) => const PrivacyAndPolicy(),
+      )
 
+      /*    GoRoute(
+        path: kHomeView,
+        builder: (context, state) => Container(),
+      ), 
+  */
+
+      ,
+      GoRoute(
+        path: kAddPayment,
+        builder: (context, state) => const AddPaymentView(),
+      ),
     ],
   );
 }
