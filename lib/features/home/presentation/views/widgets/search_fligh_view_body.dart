@@ -1,7 +1,7 @@
-
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
 import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';
+import 'package:flighter/features/home/presentation/views/widgets/sorting_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/tickets_list_view_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SearchFligthViewBody extends StatelessWidget {
   const SearchFligthViewBody({super.key});
   final int flightNumber = 100;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -31,7 +32,11 @@ class SearchFligthViewBody extends StatelessWidget {
               type: 'First Class',
             ),
             Padding(
-                padding: EdgeInsets.only(top: 370.h),
+              padding: EdgeInsets.only(top: 385.h, left: 15.w),
+              child: const SortingRow(),
+            ),
+            Padding(
+                padding: EdgeInsets.only(top: 430.h),
                 child: TicketsListViewBuilder(flightNumber: flightNumber)),
           ],
         ),
