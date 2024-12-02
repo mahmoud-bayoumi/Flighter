@@ -1,16 +1,23 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/widgets/custom_button.dart';
+import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/business_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../core/widgets/custom_button.dart';
-import '../../choose_seat_widgets/custom_seat_row.dart';
 import 'selection_status_row.dart';
 
 class ChooseSeatViewBody extends StatelessWidget {
   const ChooseSeatViewBody({super.key});
-  final List<String> resevedSeats = const ['5A', '5B', '5C', '5D', '1A'];
+  final List<String> businessResevedSeats = const [
+    '4A',
+    '4B',
+    '4C',
+    '4D',
+    '1A'
+  ];
+  final List<String> economyResevedSeats = const ['5G', '5H', '5F', '5E', '1E'];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -32,24 +39,13 @@ class ChooseSeatViewBody extends StatelessWidget {
                 ),
               ],
             ),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 7,
-              itemBuilder: (context, index) {
-                return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 25.h),
-                    child: CustomSeatsRow(
-                      seatNo: index + 1,
-                      seatAReceived: resevedSeats.contains('${index + 1}A'),
-                      seatBReceived: resevedSeats.contains('${index + 1}B'),
-                      seatCReceived: resevedSeats.contains('${index + 1}C'),
-                      seatDReceived: resevedSeats.contains('${index + 1}D'),
-                    ));
-              },
-            ),
             SizedBox(
               height: 30.h,
+            ),
+            // EconomyListView(resevedSeats: economyResevedSeats),
+            BusinessListVIew(resevedSeats: businessResevedSeats),
+            SizedBox(
+              height: 60.h,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),

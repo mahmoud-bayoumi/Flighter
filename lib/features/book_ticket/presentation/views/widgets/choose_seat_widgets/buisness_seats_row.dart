@@ -1,18 +1,24 @@
-import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/seat.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomSeatsRow extends StatelessWidget {
-  final int seatNo;
-  final bool seatAReceived, seatBReceived, seatCReceived, seatDReceived;
-  const CustomSeatsRow({
+import 'seat.dart';
+
+class BusinessRow extends StatelessWidget {
+  const BusinessRow({
     super.key,
     required this.seatNo,
-    this.seatAReceived = false,
-    this.seatBReceived = false,
-    this.seatCReceived = false,
-    this.seatDReceived = false,
+    required this.seatAReceived,
+    required this.seatBReceived,
+    required this.seatCReceived,
+    required this.seatDReceived,
   });
+
+  final int seatNo;
+  final bool seatAReceived;
+  final bool seatBReceived;
+  final bool seatCReceived;
+  final bool seatDReceived;
 
   @override
   Widget build(BuildContext context) {

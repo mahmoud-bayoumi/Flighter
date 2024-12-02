@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_router.dart';
+import '../../../../../core/utils/functions/generate_ticket_pdf.dart';
 
 class FlightDataCard extends StatelessWidget {
   const FlightDataCard({super.key});
@@ -26,6 +27,47 @@ class FlightDataCard extends StatelessWidget {
         height: MediaQuery.sizeOf(context).height * 0.7,
         child: Stack(
           children: [
+            Positioned(
+                top: 10.h,
+                left: MediaQuery.sizeOf(context).width * 0.829,
+                child: IconButton(
+                    onPressed: () async {
+                      const String bookingDate = 'Saturday, December 3, 2022';
+                      const String guestName = 'Miss Stephanie Celine Linden';
+                      const String from = 'New York';
+                      const String to = 'London';
+                      const String airline = 'ACME Airlines';
+                      const String flightNumber = '230222-BE143';
+                      const String gate = '22';
+                      const String departureDate = '7 June 06:25 AM';
+                      const String arrivalDate = '7 June 09:30 AM';
+                      const String duration = '03:05';
+                      const String bookingStatus = 'Confirmed';
+                      const String seatClass = 'Economy Class';
+                      const String baggageAllowance = '8 KG';
+                      const String seatNumber = '2B';
+                      await generateTicketPDF(
+                        bookingDate: bookingDate,
+                        guestName: guestName,
+                        from: from,
+                        to: to,
+                        airline: airline,
+                        flightNumber: flightNumber,
+                        gate: gate,
+                        departureDate: departureDate,
+                        arrivalDate: arrivalDate,
+                        bookingStatus: bookingStatus,
+                        duration: duration,
+                        seatClass: seatClass,
+                        baggageAllowance: baggageAllowance,
+                        seatNumber: seatNumber,
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.download,
+                      color: kPrimaryColor,
+                      size: 30,
+                    ))),
             const FromToCountrySecond(from: "CHE", to: "BLG"),
             Positioned(
               top: 220.h,

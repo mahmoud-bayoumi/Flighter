@@ -21,6 +21,8 @@ class SearchContainer extends StatefulWidget {
 
 class _SearchContainerState extends State<SearchContainer> {
   final GlobalKey _formKey = GlobalKey<FormState>();
+  final TextEditingController firstController = TextEditingController();
+  final TextEditingController secondController = TextEditingController();
   bool oneWay = false;
   @override
   Widget build(BuildContext context) {
@@ -65,24 +67,37 @@ class _SearchContainerState extends State<SearchContainer> {
             Stack(children: [
               Column(
                 children: [
-                  const SearchTextFormField(
+                  SearchTextFormField(
                     text: 'From (Location)',
                     iconData: Icons.flight_takeoff,
+                    forFrom: true,
+                    controller: firstController,
                   ),
                   SizedBox(
                     height: 22.h,
                   ),
-                  const SearchTextFormField(
+                  SearchTextFormField(
                     text: 'To (Destination)',
                     iconData: Icons.flight_land,
+                    forFrom: false,
+                    controller: secondController,
                   ),
                 ],
               ),
               Positioned(
                   left: MediaQuery.sizeOf(context).width * 0.8,
                   top: MediaQuery.sizeOf(context).height * 0.068,
-                  child: Image.asset(
-                    AssetsData.kSwapArrowsImage,
+                  child: GestureDetector(
+                    onTap: () {
+                      String temp = firstController.text;
+                      setState(() {
+                        firstController.text = secondController.text;
+                        secondController.text = temp;
+                      });
+                    },
+                    child: Image.asset(
+                      AssetsData.kSwapArrowsImage,
+                    ),
                   )),
             ]),
             SizedBox(

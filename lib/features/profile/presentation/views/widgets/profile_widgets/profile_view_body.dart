@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/utils/app_router.dart';
 import '../../../../../../core/widgets/primary_container.dart';
+import 'logout_button.dart';
 import 'profile_text_title.dart';
 import 'text_profile_button.dart';
 
@@ -27,6 +28,11 @@ class ProfileViewBody extends StatelessWidget {
             left: MediaQuery.sizeOf(context).width * .01,
             top: MediaQuery.sizeOf(context).height * 0.05,
             child: const ProfileViewListTile(),
+          ),
+          Positioned(
+            left: MediaQuery.sizeOf(context).width * .85,
+            top: MediaQuery.sizeOf(context).height * 0.05,
+            child: const LogoutButton(),
           ),
           Positioned(
             left: MediaQuery.sizeOf(context).width * 0.02,
