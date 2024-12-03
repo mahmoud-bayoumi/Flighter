@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:flighter/core/utils/api_service.dart';
+import 'package:flighter/core/utils/service_locator.dart';
 import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo_impl.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sign_in_cubit.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/sign_in_view_body.dart';
@@ -14,11 +13,7 @@ class SignInView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: BlocProvider(
-        create: (context) => SignInCubit(SignInRepoImpl(
-            apiService: ApiService(Dio(BaseOptions(
-          connectTimeout: const Duration(seconds: 10), // 10 seconds
-          receiveTimeout: const Duration(seconds: 10), // 10 seconds
-        ))))),
+        create: (context) => SignInCubit(getIt.get<SignInRepoImpl>()),
         child: const SignInViewBody(),
       )),
     );
