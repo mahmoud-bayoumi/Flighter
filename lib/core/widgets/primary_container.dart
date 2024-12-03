@@ -2,9 +2,10 @@ import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryContainer extends StatelessWidget {
-  final double height ;  
+  final double height;
   const PrimaryContainer({
-    super.key,  this.height =  .4,
+    super.key,
+    this.height = .4,
   });
 
   @override

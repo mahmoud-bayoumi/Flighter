@@ -21,4 +21,3 @@ class ProfileTextTitle extends StatelessWidget {
     );
   }
 }
-

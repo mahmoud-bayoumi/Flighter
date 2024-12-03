@@ -36,7 +36,8 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       //  final imageTemporary = File(image.path);
-      final imagePermanent = await saveImagePermanently(image.path); // this one it will be send to the backend endpoint
+      final imagePermanent = await saveImagePermanently(
+          image.path); // this one it will be send to the backend endpoint
       setState(() {
         this.image = imagePermanent;
       });

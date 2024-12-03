@@ -1,4 +1,3 @@
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
