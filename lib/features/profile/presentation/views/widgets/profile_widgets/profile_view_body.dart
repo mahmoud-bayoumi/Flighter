@@ -1,3 +1,4 @@
+import 'package:flighter/constants.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_divider.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_view_list_tile.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/user_profile_details.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/secure_storage.dart';
 import '../../../../../../core/widgets/primary_container.dart';
 import 'logout_button.dart';
 import 'profile_text_title.dart';
@@ -14,6 +16,8 @@ import 'text_profile_button.dart';
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
 
+  final SecureStorageService _secureStorageService =
+      const SecureStorageService();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -32,7 +36,12 @@ class ProfileViewBody extends StatelessWidget {
           Positioned(
             left: MediaQuery.sizeOf(context).width * .85,
             top: MediaQuery.sizeOf(context).height * 0.05,
-            child: const LogoutButton(),
+            child: LogoutButton(
+              onPressed: () async {
+                await _secureStorageService.deleteToken(tokenKey);
+                GoRouter.of(context).pushReplacement('/');
+              },
+            ),
           ),
           Positioned(
             left: MediaQuery.sizeOf(context).width * 0.02,

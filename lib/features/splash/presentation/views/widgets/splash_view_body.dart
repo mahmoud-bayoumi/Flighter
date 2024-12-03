@@ -1,11 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../core/utils/secure_storage.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -20,7 +23,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   late Animation<Offset> planeAnimation;
   late Animation<Offset> flighterAnimation;
   late Animation<Offset> descriptionAnimation;
-
+  final SecureStorageService _secureStorageService = SecureStorageService();
   @override
   void initState() {
     super.initState();
@@ -88,8 +91,10 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void navigateToAuthView() {
     Future.delayed(
       const Duration(seconds: 2),
-      () {
-        GoRouter.of(context).pushReplacement(AppRouter.kSignInView);
+      () async {
+        await _secureStorageService.getToken(tokenKey) != null 
+            ? GoRouter.of(context).pushReplacement(AppRouter.kNavigation )  
+            : GoRouter.of(context).pushReplacement(AppRouter.kSignInView);
       },
     );
   }

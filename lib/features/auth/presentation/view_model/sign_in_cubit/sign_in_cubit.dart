@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/failure.dart';
+import 'package:flighter/core/utils/secure_storage.dart';
 import 'package:flighter/features/auth/data/models/sign_in_model.dart';
 import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sign_in_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit(this.signInRepo) : super(SignInInitial());
@@ -15,9 +16,10 @@ class SignInCubit extends Cubit<SignInState> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final SecureStorageService secureStorageService =
+      const SecureStorageService();
   bool isLoading = false;
   Future<void> signInUser() async {
-    const FlutterSecureStorage secureStorage = FlutterSecureStorage();
     isLoading = true;
 
     emit(SignInLoading());
@@ -25,10 +27,8 @@ class SignInCubit extends Cubit<SignInState> {
     log('Pass : ${passwordController.text}');
     Either<Failure, SignInModel> response;
     try {
-      log('Response : ${signInRepo.signIn(email: emailController.text, password: passwordController.text).toString()}');
       response = await signInRepo.signIn(
           email: emailController.text, password: passwordController.text);
-      log(response.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -39,7 +39,7 @@ class SignInCubit extends Cubit<SignInState> {
       },
       (r) async {
         isLoading = false;
-        await secureStorage.write(key: 'auth_token', value: r.token ?? '');
+        await secureStorageService.saveToken(tokenKey, r.token!); //default
         emit(SignInSuccess());
       },
     );

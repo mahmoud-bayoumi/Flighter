@@ -17,7 +17,6 @@ class SignInRepoImpl implements SignInRepo {
     try {
       var data = await apiService.post(
           endPoint: 'login', data: {'email': email, 'password': password});
-
       return right(SignInModel.fromJson(data));
     } on DioException catch (e) {
       log('DioException: ${e.message}');
