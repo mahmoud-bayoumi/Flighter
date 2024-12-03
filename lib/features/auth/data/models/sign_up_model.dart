@@ -1,10 +1,10 @@
 class SignUpModel {
-  String message;
-
+  String? message;
+  SignUpError? error;
   SignUpModel({required this.message});
 
   factory SignUpModel.fromJson(json) {
-    return SignUpModel(message: json['message']);
+    return SignUpModel(message: json['message'] ?? SignUpError.fromJson(json));
   }
 }
 
