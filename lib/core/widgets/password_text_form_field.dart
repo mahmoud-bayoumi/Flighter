@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PasswordTextFormField extends StatefulWidget {
-  const PasswordTextFormField({super.key, required this.text});
+  final TextEditingController? controller;
+  const PasswordTextFormField({super.key, required this.text, this.controller});
   final String text, hintText = '••••••••';
 
   @override
@@ -34,6 +35,9 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
                 return 'This Field is Required';
               }
               return null;
+            },
+            onChanged: (value) {
+              widget.controller!.text = value;
             },
             style: Styles.textStyle18,
             decoration: InputDecoration(

@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final TextEditingController? textEditingController;
+
   const CustomTextFormField(
-      {super.key, required this.text, required this.hintText});
+      {super.key,
+      required this.text,
+      required this.hintText,
+      this.textEditingController});
   final String text, hintText;
   @override
   Widget build(BuildContext context) {
@@ -28,6 +33,9 @@ class CustomTextFormField extends StatelessWidget {
                 return 'This Field is Required';
               }
               return null;
+            },
+            onChanged: (value) {
+              textEditingController!.text = value;
             },
             style: Styles.textStyle18,
             decoration: InputDecoration(

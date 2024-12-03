@@ -1,4 +1,3 @@
-
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
 import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';

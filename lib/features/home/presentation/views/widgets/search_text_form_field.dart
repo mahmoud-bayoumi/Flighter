@@ -13,7 +13,8 @@ class SearchTextFormField extends StatefulWidget {
     super.key,
     required this.iconData,
     required this.text,
-    required this.forFrom, required this.controller,
+    required this.forFrom,
+    required this.controller,
   });
 
   @override
@@ -144,7 +145,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
               ),
               ListTile(
                 onTap: () {
-                 widget.controller.text = 'Alexandria';
+                  widget.controller.text = 'Alexandria';
                   Navigator.pop(context);
                 },
                 leading: const Icon(
@@ -166,7 +167,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
               ),
               ListTile(
                 onTap: () {
-                 widget. controller.text = 'Aswan';
+                  widget.controller.text = 'Aswan';
                   Navigator.pop(context);
                 },
                 leading: const Icon(
@@ -188,7 +189,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
               ),
               ListTile(
                 onTap: () {
-                 widget. controller.text = 'Beni Suef';
+                  widget.controller.text = 'Beni Suef';
                   Navigator.pop(context);
                 },
                 leading: const Icon(

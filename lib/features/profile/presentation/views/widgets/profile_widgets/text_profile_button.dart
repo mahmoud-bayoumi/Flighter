@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextProfileButton extends StatelessWidget {
   final String buttonText;
-  final void Function()? onTap; 
+  final void Function()? onTap;
   const TextProfileButton({
     super.key,
-    required this.buttonText, this.onTap,
+    required this.buttonText,
+    this.onTap,
   });
 
   @override

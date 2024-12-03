@@ -11,15 +11,15 @@ class ProfileViewListTile extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * .5,
       child: ListTile(
-          leading: const Icon(
-            Icons.person_2_outlined,
-            color: Colors.white,
-          ),
-          title: Text(
-            'Profile',
-            style: Styles.textStyle25.copyWith(color: Colors.white),
-          ),
+        leading: const Icon(
+          Icons.person_2_outlined,
+          color: Colors.white,
         ),
+        title: Text(
+          'Profile',
+          style: Styles.textStyle25.copyWith(color: Colors.white),
+        ),
+      ),
     );
   }
 }

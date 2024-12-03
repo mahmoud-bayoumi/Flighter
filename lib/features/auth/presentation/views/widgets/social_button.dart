@@ -5,7 +5,7 @@ import '../../../../../constants.dart';
 class SocialButton extends StatelessWidget {
   const SocialButton({super.key, this.onPressed, required this.imagePath});
   final void Function()? onPressed;
-  final String imagePath; 
+  final String imagePath;
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
