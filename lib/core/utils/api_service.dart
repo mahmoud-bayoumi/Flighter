@@ -9,21 +9,21 @@ class ApiService {
 
   Future<Map<String, dynamic>> post(
       {required String endPoint, required data}) async {
+    Response response;
     try {
-      var response = await _dio.post('$baseUrl$endPoint',
+      response = await _dio.post('$baseUrl$endPoint',
           data: data,
           options: Options(headers: {
             'Content-Type': 'application/json',
           }));
-      try {
-        log("Login Success: $response");
-      } catch (e) {
-        log("Error Message: ${response.data}");
-      }
       return response.data;
-    } catch (e) {
+    } on DioException catch (e) {
       log("Request Error: $e");
+      return e.response!.data;
+    } catch (e) {
+      log("General Error in post : $e");
+      return {};
     }
-    return {};
   }
 }
+//'Authorization' : 'Bearer $token'

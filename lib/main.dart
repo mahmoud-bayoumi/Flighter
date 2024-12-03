@@ -1,5 +1,6 @@
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => MaterialApp.router(
+        builder: EasyLoading.init(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Poppins-Regular',
