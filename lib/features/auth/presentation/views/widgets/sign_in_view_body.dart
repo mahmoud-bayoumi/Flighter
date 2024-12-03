@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/core/widgets/custom_text_form_field.dart';
@@ -12,6 +13,7 @@ import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/social_auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/assets_data.dart';
@@ -30,11 +32,16 @@ class _SignInViewBodyState extends State<SignInViewBody> {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInSuccess) {
+          EasyLoading.dismiss();
           log('SignIn Succes');
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else if (state is SignInFailure) {
+          EasyLoading.dismiss();
+          errorDialog(context, state.errMessage);
           log('SignIn Failure');
         } else if (state is SignInLoading) {
+          EasyLoading.show(status: 'loading...');
+
           log('SignIn Loading');
         }
       },
@@ -87,7 +94,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                       ? CustomButton(
                           text: 'SIGN IN',
                           onPressed: () {
-                             cubitData.vaildateUserInput(); // call logic cubit
+                            cubitData.vaildateUserInput(); // call logic cubit
                           },
                         )
                       : const CircularProgressIndicator(

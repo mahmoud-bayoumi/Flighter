@@ -70,13 +70,13 @@ AwesomeDialog addPaymentDoneDialog(BuildContext context) {
   )..show();
 }
 
-AwesomeDialog errorDialog(BuildContext context) {
+AwesomeDialog errorDialog(BuildContext context , String errMessage) {
   return AwesomeDialog(
     context: context,
     dialogType: DialogType.noHeader,
     animType: AnimType.scale,
     title: 'Error',
-    desc: '',
+    desc: errMessage,
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: Colors.red,
     titleTextStyle: Styles.textStyle24,

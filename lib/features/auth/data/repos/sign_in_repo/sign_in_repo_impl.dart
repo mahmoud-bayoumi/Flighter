@@ -17,10 +17,14 @@ class SignInRepoImpl implements SignInRepo {
     try {
       var data = await apiService.post(
           endPoint: 'login', data: {'email': email, 'password': password});
+          
+      if (data['message'] == "Email or Password is incorrect!") {
+        log('DioException: ${data['message']}');
+        return left(Failure(data['message']));
+      }
       return right(SignInModel.fromJson(data));
     } on DioException catch (e) {
-      log('DioException: ${e.message}');
-      return left(Failure(e.message ?? 'Unknown error'));
+      return left(Failure(e.response!.data['message']));
     } catch (e) {
       log('General exception: $e');
       return left(Failure(e.toString()));
