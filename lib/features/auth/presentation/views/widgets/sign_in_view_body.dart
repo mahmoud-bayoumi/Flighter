@@ -87,10 +87,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                       ? CustomButton(
                           text: 'SIGN IN',
                           onPressed: () {
-                            if (cubitData.formKey.currentState!.validate()) {
-                              BlocProvider.of<SignInCubit>(context)
-                                  .signInUser();
-                            }
+                             cubitData.vaildateUserInput(); // call logic cubit
                           },
                         )
                       : const CircularProgressIndicator(
