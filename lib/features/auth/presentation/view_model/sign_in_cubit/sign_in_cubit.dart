@@ -10,6 +10,8 @@ import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sig
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../constants.dart';
+
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit(this.signInRepo) : super(SignInInitial());
   final SignInRepo signInRepo;
@@ -40,6 +42,8 @@ class SignInCubit extends Cubit<SignInState> {
       (r) async {
         isLoading = false;
         await secureStorageService.saveToken(tokenKey, r.token!); //default
+        await secureStorageService.saveToken(
+            refreshTokenKey, r.refreshTokenExpiration!);
         emit(SignInSuccess());
       },
     );

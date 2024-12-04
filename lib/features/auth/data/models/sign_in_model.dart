@@ -3,7 +3,7 @@ class SignInModel {
   String? email;
   RoleModel roles;
   String? token;
-  DateTime? refreshTokenExpiration;
+  String? refreshTokenExpiration;
 
   SignInModel({
     this.userName,
@@ -20,7 +20,7 @@ class SignInModel {
         token: json['token'] as String?,
         refreshTokenExpiration: json['refreshTokenExpiration'] == null
             ? null
-            : DateTime.parse(json['refreshTokenExpiration'] as String),
+            : json['refreshTokenExpiration'] as String,
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,7 +28,7 @@ class SignInModel {
         'email': email,
         'roles': roles,
         'token': token,
-        'refreshTokenExpiration': refreshTokenExpiration?.toIso8601String(),
+        'refreshTokenExpiration': refreshTokenExpiration?.toString(),
       };
 }
 
