@@ -53,8 +53,6 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
                 text: 'Send',
                 onPressed: () {
                   if (key.currentState!.validate()) {
-                    // navigate must be here
-                  } else {
                     GoRouter.of(context).push(AppRouter.kCheckYourEmailView);
                   }
                 },
