@@ -1,14 +1,19 @@
 part of 'send_reset_password_code_cubit_cubit.dart';
 
-
 sealed class SendResetPasswordCodeCubitState {}
 
-final class SendResetPasswordCodeCubitInitial extends SendResetPasswordCodeCubitState {}
-final class SendResetPasswordCodeCubitSent extends SendResetPasswordCodeCubitState {}
-final class SendResetPasswordCodeCubitFailure extends SendResetPasswordCodeCubitState {
-  final String errMessage ;
+final class SendResetPasswordCodeCubitInitial
+    extends SendResetPasswordCodeCubitState {}
 
-  SendResetPasswordCodeCubitFailure({required this.errMessage}); 
+final class SendResetPasswordCodeCubitSent
+    extends SendResetPasswordCodeCubitState {}
 
+final class SendResetPasswordCodeCubitFailure
+    extends SendResetPasswordCodeCubitState {
+  final String errMessage;
+
+  SendResetPasswordCodeCubitFailure({required this.errMessage});
 }
-final class SendResetPasswordCodeCubitLoading extends SendResetPasswordCodeCubitState {}
+
+final class SendResetPasswordCodeCubitLoading
+    extends SendResetPasswordCodeCubitState {}

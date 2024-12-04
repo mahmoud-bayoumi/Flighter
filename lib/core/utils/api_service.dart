@@ -24,5 +24,25 @@ class ApiService {
       return {};
     }
   }
+
+  Future<Map<String, dynamic>> put(
+      {required String endPoint, required String token, required data}) async {
+    Response response;
+    try {
+      response = await _dio.put('$baseUrl$endPoint',
+          data: data,
+          options: Options(headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token'
+          }));
+      return response.data;
+    } on DioException catch (e) {
+      log("In Put Request Error: $e");
+      return e.response!.data;
+    } catch (e) {
+      log("In Put General Error in post : $e");
+      return {};
+    }
+  }
 }
 //'Authorization' : 'Bearer $token'

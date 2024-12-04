@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class EmailCardFormField extends StatelessWidget {
   const EmailCardFormField({
-    super.key, required this.controller,
+    super.key,
+    required this.controller,
   });
-  final TextEditingController controller ;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
