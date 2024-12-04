@@ -22,8 +22,6 @@ class SignUpViewBody extends StatefulWidget {
 }
 
 class _SignUpViewBodyState extends State<SignUpViewBody> {
-  final key = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     var cubitData = context.read<SignUpCubit>();
@@ -89,12 +87,16 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  CustomButton(
-                    text: 'SIGN UP',
-                    onPressed: () {
-                      cubitData.validateUser();
-                    },
-                  ),
+                  state is SignUpLoading
+                      ? const CircularProgressIndicator(
+                          color: kPrimaryColor,
+                        )
+                      : CustomButton(
+                          text: 'SIGN UP',
+                          onPressed: () {
+                            cubitData.validateUser();
+                          },
+                        ),
                   SizedBox(
                     height: 20.h,
                   ),
