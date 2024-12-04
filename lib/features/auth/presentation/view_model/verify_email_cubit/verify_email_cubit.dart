@@ -35,6 +35,8 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
       },
       (r) async {
         await secureStorageService.saveToken(tokenKey, r.token!);
+        await secureStorageService.saveToken(
+            refreshTokenKey, r.refreshTokenExpiration!);
         emit(VerifyEmailSuccess());
       },
     );

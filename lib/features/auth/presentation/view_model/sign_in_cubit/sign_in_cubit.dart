@@ -10,8 +10,6 @@ import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sig
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../constants.dart';
-
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit(this.signInRepo) : super(SignInInitial());
   final SignInRepo signInRepo;

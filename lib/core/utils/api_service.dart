@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/secure_storage.dart';
 
 class ApiService {
@@ -11,7 +12,7 @@ class ApiService {
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
         // Attach the token to the request before sending
-        String? accessToken = await _secureStorageService.getToken('accessToken');
+        String? accessToken = await _secureStorageService.getToken(tokenKey);
         if (accessToken != null) {
           options.headers['Authorization'] = 'Bearer $accessToken';
         }
@@ -21,13 +22,13 @@ class ApiService {
         if (error.response?.statusCode == 401) {  // Token expired or invalid
           log("Access token expired. Attempting to refresh token...");
           
-          String? refreshToken = await _secureStorageService.getToken('refreshToken');
+          String? refreshToken = await _secureStorageService.getToken(refreshTokenKey);
           if (refreshToken != null) {
             // Call the refresh endpoint
             final refreshResponse = await _refreshToken(refreshToken);
             if (refreshResponse != null && refreshResponse['token'] != null) {
               // Save the new token and retry the original request
-              await _secureStorageService.saveToken('accessToken', refreshResponse['token']);
+              await _secureStorageService.saveToken(tokenKey, refreshResponse['token']);
               
               // Create new request options from the original failed request
               var options = error.response!.requestOptions;
@@ -62,7 +63,7 @@ class ApiService {
     try {
       // Call the refresh token endpoint
       final response = await _dio.get(
-        '$baseUrl/refresh-token',  // Adjust endpoint to match your actual refresh endpoint
+        '$baseUrl/refreshToken',  // Adjust endpoint to match your actual refresh endpoint
         queryParameters: {'refreshToken': refreshToken},
       );
       return response.data;  // Assuming the response contains the new token
@@ -81,7 +82,7 @@ class ApiService {
         options: Options(headers: {'Content-Type': 'application/json'}),
       );
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log("Request Error: $e");
       return e.response?.data ?? {};
     } catch (e) {
@@ -102,7 +103,7 @@ class ApiService {
         }),
       );
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log("In Put Request Error: $e");
       return e.response?.data ?? {};
     } catch (e) {
