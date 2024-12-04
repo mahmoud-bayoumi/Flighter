@@ -59,7 +59,7 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                     height: 20.h,
                   ),
                   Text(
-                    'We sent a reset link to ${widget.email} enter 4 digit code that mentioned in the email',
+                    'We sent a verify code to ${widget.email} enter 4 digit code that mentioned in the email',
                     style: Styles.textStyle16
                         .copyWith(color: kGreyColor.withOpacity(0.6)),
                   ),
