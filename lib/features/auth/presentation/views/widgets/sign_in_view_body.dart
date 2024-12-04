@@ -41,7 +41,6 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           log('SignIn Failure');
         } else if (state is SignInLoading) {
           EasyLoading.show(status: 'loading...');
-
           log('SignIn Loading');
         }
       },
