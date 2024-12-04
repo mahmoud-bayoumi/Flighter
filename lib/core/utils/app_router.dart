@@ -61,9 +61,9 @@ abstract class AppRouter {
       GoRoute(
         path: kCheckYourEmailView,
         builder: (context, state) {
-        final email = state.extra as String;
-        return CheckYourEmailView(email: email);
-      },
+          final email = state.extra as String;
+          return CheckYourEmailView(email: email);
+        },
       ),
       GoRoute(
         path: kSetNewPasswordView,

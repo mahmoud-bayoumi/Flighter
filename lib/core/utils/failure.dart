@@ -3,8 +3,10 @@ import 'package:dio/dio.dart';
 class Failure {
   final String errMessage;
   Failure(this.errMessage);
-  factory Failure.formJson(DioException dioError) {
-    if (dioError.type == DioExceptionType.connectionTimeout) {
+  factory Failure.formJson(dynamic dioError) {
+    if (dioError is String) {
+      return Failure(dioError);
+    } else if (dioError.type == DioExceptionType.connectionTimeout) {
       return Failure('Connection Timeout');
     } else if (dioError.type == DioExceptionType.sendTimeout) {
       return Failure('Send Timeout');

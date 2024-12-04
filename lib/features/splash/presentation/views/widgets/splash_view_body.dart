@@ -92,8 +92,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () async {
-        await _secureStorageService.getToken(tokenKey) != null 
-            ? GoRouter.of(context).pushReplacement(AppRouter.kNavigation )  
+        await _secureStorageService.getToken(tokenKey) != null
+            ? GoRouter.of(context).pushReplacement(AppRouter.kNavigation)
             : GoRouter.of(context).pushReplacement(AppRouter.kSignInView);
       },
     );
