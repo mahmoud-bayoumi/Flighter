@@ -23,7 +23,6 @@ class DeleteAccountViewBody extends StatelessWidget {
           EasyLoading.dismiss();
           log('DeleteAccount Success');
           storage.delete(key: tokenKey);
-          storage.delete(key: refreshTokenKey);
           deleteDoneDialog(context);
         } else if (state is DeleteAccountLoading) {
           log('DeleteAccount Loading');
