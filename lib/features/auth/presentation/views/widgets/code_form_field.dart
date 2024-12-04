@@ -6,14 +6,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CodeFormField extends StatelessWidget {
-  const CodeFormField({super.key});
-
+  const CodeFormField({super.key, this.controller});
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 80.h,
       height: 110.h,
       child: TextFormField(
+        controller: controller,
         onChanged: (value) {
           if (value.length == 1) FocusScope.of(context).nextFocus();
         },

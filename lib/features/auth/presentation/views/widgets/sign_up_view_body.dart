@@ -29,7 +29,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
       listener: (context, state) {
         if (state is SignUpSuccess) {
           EasyLoading.dismiss();
-          GoRouter.of(context).push(AppRouter.kCheckYourEmailView);
+          GoRouter.of(context).push(AppRouter.kCheckYourEmailView,
+              extra: cubitData.emailController.text);
         } else if (state is SignUpFailure) {
           EasyLoading.dismiss();
           errorDialog(context, state.errMsg);
