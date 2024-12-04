@@ -83,8 +83,11 @@ class ProfileViewBody extends StatelessWidget {
                         GoRouter.of(context).push(AppRouter.kAddPayment);
                       },
                     ),
-                    const TextProfileButton(
+                    TextProfileButton(
                       buttonText: 'Delete Account',
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kDeleteAccount);
+                      },
                     ),
                     const ProfileDivider(),
                     const ProfileTextTitle(

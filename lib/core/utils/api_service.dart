@@ -44,5 +44,32 @@ class ApiService {
       return {};
     }
   }
+
+  Future<Map<String, dynamic>> delete({
+    required String endPoint,
+    required data,
+    required String token,
+  }) async {
+    Response response;
+    try {
+      response = await _dio.delete(
+        '$baseUrl$endPoint',
+        data: data,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      return response.data;
+    } on DioException catch (e) {
+      log("DELETE Request Error: $e");
+      return e.response?.data ?? {};
+    } catch (e) {
+      log("General Error in DELETE: $e");
+      return {};
+    }
+  }
 }
 //'Authorization' : 'Bearer $token'

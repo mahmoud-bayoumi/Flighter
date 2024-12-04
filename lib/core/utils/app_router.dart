@@ -13,6 +13,7 @@ import 'package:flighter/features/payment/presentation/views/boarding_pass_view.
 import 'package:flighter/features/payment/presentation/views/payment_view.dart';
 import 'package:flighter/features/profile/presentation/views/about_us_view.dart';
 import 'package:flighter/features/profile/presentation/views/change_password.dart';
+import 'package:flighter/features/profile/presentation/views/delete_account_view.dart';
 import 'package:flighter/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flighter/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -39,6 +40,8 @@ abstract class AppRouter {
 
   static const String kAboutUs = '/AboutUs';
   static const String kPrivacyAndPolicy = '/PrivacyAndPolicy';
+
+  static const String kDeleteAccount = '/DeleteAccount';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -124,6 +127,11 @@ abstract class AppRouter {
       GoRoute(
         path: kAddPayment,
         builder: (context, state) => const AddPaymentView(),
+      ),
+
+      GoRoute(
+        path: kDeleteAccount,
+        builder: (context, state) => const DeleteAccountView(),
       ),
     ],
   );
