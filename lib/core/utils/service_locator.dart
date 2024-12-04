@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flighter/features/auth/data/repos/send_reset_pass_code_repo/send_reset_pass_code_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/sign_up_repo/sign_up_repo_impl.dart';
 import 'package:get_it/get_it.dart';
@@ -13,4 +14,6 @@ void setupServerLocator() {
 
   getIt.registerSingleton<SignUpRepoImpl>(
       SignUpRepoImpl(apiService: getIt.get<ApiService>()));
+  getIt.registerSingleton<SendResetPassCodeRepoImpl>(
+      SendResetPassCodeRepoImpl(apiService: getIt.get<ApiService>()));
 }

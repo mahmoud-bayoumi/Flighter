@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class EmailCardFormField extends StatelessWidget {
   const EmailCardFormField({
-    super.key,
+    super.key, required this.controller,
   });
-
+  final TextEditingController controller ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,6 +21,7 @@ class EmailCardFormField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        controller: controller,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'This Field is Required';
