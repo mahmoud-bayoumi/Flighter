@@ -94,3 +94,26 @@ AwesomeDialog errorDialog(BuildContext context, String errMessage) {
     ),
   )..show();
 }
+
+AwesomeDialog deleteDoneDialog(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Successful',
+    desc: 'Account deleted successfully.',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: kPrimaryColor,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Ok',
+      onPressed: () {
+        GoRouter.of(context).pushReplacement('/');
+      },
+    ),
+  )..show();
+}
