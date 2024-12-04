@@ -17,7 +17,7 @@ class SignInRepoImpl implements SignInRepo {
     try {
       var data = await apiService.post(
           endPoint: 'login', data: {'email': email, 'password': password});
-          
+
       if (data['message'] == "Email or Password is incorrect!") {
         log('DioException: ${data['message']}');
         return left(Failure(data['message']));

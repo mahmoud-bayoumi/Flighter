@@ -31,9 +31,29 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           color: const Color(0xffF4EFEF),
           child: TextFormField(
             validator: (value) {
+              String patternLowercase = r'(?=.*[a-z])';
+              String patternUppercase = r'(?=.*[A-Z])';
+              String patternDigit = r'(?=.*\d)';
+              String patternSpecialChar = r'(?=.*[!@#$%^&*(),.?":{}|<>])';
               if (value == null || value.isEmpty) {
                 return 'This Field is Required';
               }
+              if (!RegExp(patternLowercase).hasMatch(value)) {
+                return 'Password must contain at least one lowercase letter';
+              }
+              // Check for uppercase letter
+              if (!RegExp(patternUppercase).hasMatch(value)) {
+                return 'Password must contain at least one uppercase letter';
+              }
+              // Check for a digit
+              if (!RegExp(patternDigit).hasMatch(value)) {
+                return 'Password must contain at least one number';
+              }
+              // Check for a special character
+              if (!RegExp(patternSpecialChar).hasMatch(value)) {
+                return 'Password must contain at least one special character';
+              }
+
               return null;
             },
             onChanged: (value) {

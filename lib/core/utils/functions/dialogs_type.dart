@@ -3,6 +3,7 @@ import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 AwesomeDialog successDialog(BuildContext context) {
   return AwesomeDialog(
@@ -10,7 +11,7 @@ AwesomeDialog successDialog(BuildContext context) {
     dialogType: DialogType.noHeader,
     animType: AnimType.scale,
     title: 'Successful',
-    desc: 'Your password has been changed. Click Continue to login',
+    desc: 'Your password has been changed. Click Continue.',
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: kPrimaryColor,
     titleTextStyle: Styles.textStyle24,
@@ -22,6 +23,7 @@ AwesomeDialog successDialog(BuildContext context) {
       text: 'Continue',
       onPressed: () {
         Navigator.pop(context);
+        GoRouter.of(context).pop();
       },
     ),
   )..show();
@@ -70,7 +72,7 @@ AwesomeDialog addPaymentDoneDialog(BuildContext context) {
   )..show();
 }
 
-AwesomeDialog errorDialog(BuildContext context , String errMessage) {
+AwesomeDialog errorDialog(BuildContext context, String errMessage) {
   return AwesomeDialog(
     context: context,
     dialogType: DialogType.noHeader,

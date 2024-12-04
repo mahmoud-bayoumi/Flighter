@@ -12,7 +12,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   final TextEditingController confirmPasswordController =
       TextEditingController();
-final SignUpRepoImpl signUpRepoImpl;
+  final SignUpRepoImpl signUpRepoImpl;
   validateUser() {
     if (formKey.currentState!.validate()) {
       signUpUser();
@@ -20,7 +20,6 @@ final SignUpRepoImpl signUpRepoImpl;
   }
 
   Future<void> signUpUser() async {
-    
     emit(SignUpLoading());
     var data = await signUpRepoImpl.signUp(
         name: nameController.text,
