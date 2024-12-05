@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/failure.dart';
-import 'package:flighter/features/auth/data/models/verify_email_model.dart';
+import 'package:flighter/features/auth/data/models/verify_model/verify_model.dart';
 import 'package:flighter/features/auth/data/repos/verify_email_repo/verify_email_repo_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +21,7 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
   final TextEditingController code4 = TextEditingController();
   final SecureStorageService secureStorageService =
       const SecureStorageService();
-  late Either<Failure, VerifyEmailModel> data;
+  late Either<Failure, VerifyModel> data;
 
   Future<void> verifyEmail() async {
     emit(VerifyEmailLoading());
@@ -34,7 +34,7 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
         emit(VerifyEmailFailure(errMsg: l.errMessage));
       },
       (r) async {
-        await secureStorageService.saveToken(tokenKey, r.token!);
+        await secureStorageService.saveToken(tokenKey, r.message!.token!);
         emit(VerifyEmailSuccess());
       },
     );

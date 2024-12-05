@@ -1,10 +1,9 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/api_service.dart';
 import 'package:flighter/core/utils/failure.dart';
-import 'package:flighter/features/auth/data/models/verify_email_model.dart';
+import 'package:flighter/features/auth/data/models/verify_model/verify_model.dart';
 import 'package:flighter/features/auth/data/repos/verify_email_repo/verify_email_repo.dart';
 
 class VerifyEmailRepoImpl implements VerifyEmailRepo {
@@ -13,7 +12,7 @@ class VerifyEmailRepoImpl implements VerifyEmailRepo {
   VerifyEmailRepoImpl({required ApiService apiService})
       : _apiService = apiService;
   @override
-  Future<Either<Failure, VerifyEmailModel>> verifyEmail(
+  Future<Either<Failure, VerifyModel>> verifyEmail(
       {required String email, required String code}) async {
     try {
       var response = await _apiService.post(
@@ -27,8 +26,16 @@ class VerifyEmailRepoImpl implements VerifyEmailRepo {
       if (response['message'] == 'Invalid or expired verification request.') {
         return left(Failure('Invalid or expired verification request.'));
       }
+
+      if (response['message'] == 'Incorrect verification code.') {
+        return left(Failure('Incorrect verification code.'));
+      }
+      if (response['message'] is Map) {
+        return right(VerifyModel.fromJson(response));
+      } else {
+        return left(Failure('Incorrect verification code.'));
+      }
       // success request
-      return right(VerifyEmailModel.fromJson(response));
     } on DioException catch (e) {
       final errorMessage =
           e.response?.data['message'] ?? 'An unknown error occurred.';
