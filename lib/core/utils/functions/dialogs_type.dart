@@ -5,7 +5,7 @@ import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-AwesomeDialog successDialog(BuildContext context) {
+AwesomeDialog successDialog(BuildContext context, bool navgToSplash) {
   return AwesomeDialog(
     context: context,
     dialogType: DialogType.noHeader,
@@ -23,7 +23,11 @@ AwesomeDialog successDialog(BuildContext context) {
       text: 'Continue',
       onPressed: () {
         Navigator.pop(context);
-        GoRouter.of(context).pop();
+        if (navgToSplash) {
+          GoRouter.of(context).pushReplacement('/');
+        } else {
+          GoRouter.of(context).pop();
+        }
       },
     ),
   )..show();
@@ -90,6 +94,7 @@ AwesomeDialog errorDialog(BuildContext context, String errMessage) {
       text: 'Continue',
       onPressed: () {
         Navigator.pop(context);
+        GoRouter.of(context).pop();
       },
     ),
   )..show();

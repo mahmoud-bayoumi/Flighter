@@ -1,4 +1,5 @@
 import 'package:flighter/features/auth/presentation/views/check_your_email_view.dart';
+import 'package:flighter/features/auth/presentation/views/check_your_email_view_for_forget_pass.dart';
 import 'package:flighter/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:flighter/features/auth/presentation/views/set_new_password_view.dart';
 import 'package:flighter/features/auth/presentation/views/sign_in_view.dart';
@@ -37,7 +38,7 @@ abstract class AppRouter {
   static const String kPayment = '/Payment';
   static const String kBoardingPass = '/BoardingPass';
   static const String kAddPayment = '/AddPayment';
-
+  static const String kCheckYourEmailViewForForgetPass = '/CheckYourEmailForForgetPass'; 
   static const String kAboutUs = '/AboutUs';
   static const String kPrivacyAndPolicy = '/PrivacyAndPolicy';
 
@@ -66,6 +67,13 @@ abstract class AppRouter {
         builder: (context, state) {
           final email = state.extra as String;
           return CheckYourEmailView(email: email);
+        },
+      ),
+      GoRoute(
+        path: kCheckYourEmailViewForForgetPass,
+        builder: (context, state) {
+          final email = state.extra as String;
+          return CheckYourEmailForForgetPassView(email: email);
         },
       ),
       GoRoute(
