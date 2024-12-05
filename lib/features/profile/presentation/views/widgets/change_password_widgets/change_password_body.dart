@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../../constants.dart';
 import '../../../../../../core/widgets/custom_button.dart';
 
@@ -35,7 +36,7 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
         } else if (state is ChangePasswordSuccess) {
           EasyLoading.dismiss();
           log('ChangePassword Success');
-          successDialog(context);
+          successDialog(context, false);
         }
       },
       builder: (context, state) {

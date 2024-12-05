@@ -1,8 +1,8 @@
-import 'package:flighter/features/auth/data/repos/send_reset_pass_code_repo/send_reset_pass_code_repo.dart';
+import 'package:flighter/features/auth/data/repos/reset_password_repos/send_reset_pass_code_repo/send_reset_pass_code_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/models/send_reset_password_model.dart';
+import '../../../../data/models/send_reset_password_model.dart';
 
 part 'send_reset_password_code_cubit_state.dart';
 
