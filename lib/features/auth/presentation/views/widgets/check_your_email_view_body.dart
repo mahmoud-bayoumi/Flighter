@@ -3,10 +3,8 @@ import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
-import 'package:flighter/core/utils/functions/show_snack_bar.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
-import 'package:flighter/features/auth/presentation/view_model/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flighter/features/auth/presentation/view_model/verify_email_cubit/verify_email_cubit.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/verification_code_row.dart';
@@ -16,30 +14,21 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/user_data_class.dart';
-
 class CheckYourEmailBody extends StatefulWidget {
   const CheckYourEmailBody({
     super.key,
-    required this.user,
+    required this.email,
   });
-
-  final UserData user;
+  final String email;
   @override
   State<CheckYourEmailBody> createState() => _CheckYourEmailBodyState();
 }
 
 class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
   @override
-  void initState() {
-    var cubitData = context.read<VerifyEmailCubit>();
-    cubitData.email = widget.user.email;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var cubitData = context.read<VerifyEmailCubit>();
+    cubitData.email = widget.email;
     return BlocConsumer<VerifyEmailCubit, VerifyEmailState>(
       listener: (context, state) {
         if (state is VerifyEmailSuccess) {
@@ -70,7 +59,7 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                     height: 20.h,
                   ),
                   Text(
-                    'We sent a verify code to ${widget.user.email} enter 4 digit code that mentioned in the email',
+                    'We sent a verify code to ${widget.email} enter 4 digit code that mentioned in the email',
                     style: Styles.textStyle16
                         .copyWith(color: kGreyColor.withOpacity(0.6)),
                   ),
@@ -95,17 +84,9 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                   SizedBox(
                     height: 30.h,
                   ),
-                  AuthTextButton(
-                    authDesc: 'Haven’t got the code yet?',
-                    authButtonName: 'Resend code',
-                    onPressed: () {
-                      var resendCodeCubit = context.read<SignUpCubit>();
-                      assignDataToResendCodeCubit(resendCodeCubit);
-                      log('${widget.user.email} , ${widget.user.name} , ${widget.user.password} , ${widget.user.confirmPassword}');
-                      resendCodeCubit.signUpUser();
-                      showSnackBar(context, message: 'Cheack your email.');
-                    },
-                  )
+                  const AuthTextButton(
+                      authDesc: 'Haven’t got the email yet?',
+                      authButtonName: 'Resend email')
                 ],
               ),
             ),
@@ -113,13 +94,5 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
         );
       },
     );
-  }
-
-  void assignDataToResendCodeCubit(SignUpCubit resendCodeCubit) {
-    resendCodeCubit.emailController.text = widget.user.email;
-    resendCodeCubit.nameController.text = widget.user.name;
-    resendCodeCubit.passwordController.text = widget.user.password;
-    resendCodeCubit.confirmPasswordController.text =
-        widget.user.confirmPassword;
   }
 }

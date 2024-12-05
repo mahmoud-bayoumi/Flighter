@@ -25,12 +25,22 @@ class SignUpRepoImpl implements SignUpRepo {
         "password": password,
         "confirmPassword": confirmPassword,
       });
+
+      if (response['message'] == "Invalid or expired verification request.") {
+        log('DioException: ${response['message']}');
+        return left(Failure(response['message']));
+      }
       // Handle generic message error
       if (response['message'] == "Email is already registered!") {
         log('DioException: ${response['message']}');
         return left(Failure(response['message']));
       }
-
+      if (response['message'] ==
+          "Password is not strong enough: Passwords must be at least 6 characters.") {
+        log('DioException: ${response['message']}');
+        return left(Failure(response['message']));
+      }
+     
       // Check for specific error messages
       if (response['errors'] != null) {
         // Handle invalid email error

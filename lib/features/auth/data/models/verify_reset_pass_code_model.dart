@@ -5,7 +5,6 @@ class VerifyResetPassCodeModel {
 
   factory VerifyResetPassCodeModel.fromJson(json) {
     return VerifyResetPassCodeModel(
-        message: json['message']
-        , error: json['error']);
+        message: json['message'], error: json['error']);
   }
 }
