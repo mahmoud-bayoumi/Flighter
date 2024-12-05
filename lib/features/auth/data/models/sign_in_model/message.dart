@@ -39,3 +39,11 @@ class Message {
         'refreshTokenExpiration': refreshTokenExpiration?.toIso8601String(),
       };
 }
+
+class RoleModel {
+  String role;
+  RoleModel({required this.role});
+  factory RoleModel.fromJson(jsonData) {
+    return RoleModel(role: jsonData[0]);
+  }
+}
