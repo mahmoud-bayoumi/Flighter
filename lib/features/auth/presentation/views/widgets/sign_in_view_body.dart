@@ -11,6 +11,7 @@ import 'package:flighter/features/auth/presentation/views/widgets/auth_text_butt
 import 'package:flighter/features/auth/presentation/views/widgets/forgot_password_text_button.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/social_auth_buttons.dart';
+import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -93,7 +94,11 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                       ? CustomButton(
                           text: 'SIGN IN',
                           onPressed: () {
-                            cubitData.vaildateUserInput(); // call logic cubit
+                            var getProfilePhotoCubit =
+                                context.read<GetProfilePhotoCubit>();
+                            getProfilePhotoCubit.getProfilePhoto();
+                            cubitData.vaildateUserInput();
+                            // call logic cubit
                           },
                         )
                       : const CircularProgressIndicator(
