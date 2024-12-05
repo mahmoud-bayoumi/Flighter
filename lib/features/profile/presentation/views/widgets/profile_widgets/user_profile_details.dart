@@ -5,9 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserProfileDetails extends StatelessWidget {
   const UserProfileDetails({
-    super.key,
+    super.key, required this.userName,
   });
-
+  final String userName;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -43,7 +43,7 @@ class UserProfileDetails extends StatelessWidget {
           width: 5.w,
         ),
         Text(
-          'John Smith',
+          userName,
           style: Styles.textStyle18
               .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
         ),

@@ -5,29 +5,33 @@ import 'package:dio/dio.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/api_service.dart';
 import 'package:flighter/core/utils/failure.dart';
+import 'package:flighter/features/profile/data/models/get_profile_data_model.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_data/get_profile_data_repo.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class GetProfileDataRepoImpl implements GetProfileDataRepo {
   final ApiService _apiService;
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
-
+  final String endPoint = 'get-user-profile';
   GetProfileDataRepoImpl({required ApiService apiService})
       : _apiService = apiService;
   @override
-  Future<Either<Failure, dynamic>> getProfileData() async {
-    String token = (await _storage.read(key: tokenKey))!;
-
+  Future<Either<Failure, ProfileDataModel>> getProfileData() async {
     try {
-      var response =
-          _apiService.get(endPoint: 'get-user-profile', token: token);
+      final token = await _storage.read(key: tokenKey);
+
+      var response = await _apiService.get(endPoint: endPoint, token: token!);
+
       log('response is ${response.toString()}');
-      return right(response.toString());
+
+      return right(ProfileDataModel.fromJson(response));
     } on DioException catch (e) {
       log('Dio Exception response is ${e.response!.data.toString()}');
-      return left(Failure(e.response!.data['message']));
+
+      return left(Failure(e.response!.data));
     } catch (e) {
       log('General Exception response is ${e.toString()}');
+
       return left(Failure(e.toString()));
     }
   }

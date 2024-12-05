@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/views/widgets/hot_deals_list_view.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_container.dart';
+import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -12,6 +16,11 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var getData = context.read<GetProfileDataCubit>();
+    getData.getProfile();
+    String userName = getData.profileData!.name!;
+    log(getData.profileData!.name!);
+    
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Stack(
@@ -23,7 +32,7 @@ class HomeViewBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 45.h, left: 10.w),
             child: Text(
-              'Hello, John',
+              'Hello, $userName',
               style: Styles.textStyle24.copyWith(color: Colors.white),
             ),
           ),
