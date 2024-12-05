@@ -13,6 +13,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../../core/utils/user_data_class.dart';
 
 class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});
@@ -22,15 +23,25 @@ class SignUpViewBody extends StatefulWidget {
 }
 
 class _SignUpViewBodyState extends State<SignUpViewBody> {
+  late UserData user;
+  @override
   @override
   Widget build(BuildContext context) {
     var cubitData = context.read<SignUpCubit>();
     return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
+          user = UserData(
+            name: cubitData.nameController.text,
+            email: cubitData.emailController.text,
+            password: cubitData.passwordController.text,
+            confirmPassword: cubitData.confirmPasswordController.text,
+          );
           EasyLoading.dismiss();
-          GoRouter.of(context).push(AppRouter.kCheckYourEmailView,
-              extra: cubitData.emailController.text);
+          GoRouter.of(context).push(
+            AppRouter.kCheckYourEmailView,
+            extra: user,
+          );
         } else if (state is SignUpFailure) {
           EasyLoading.dismiss();
           errorDialog(context, state.errMsg);
@@ -129,3 +140,4 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     );
   }
 }
+
