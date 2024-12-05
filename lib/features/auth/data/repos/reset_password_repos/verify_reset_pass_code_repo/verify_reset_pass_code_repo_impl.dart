@@ -17,11 +17,11 @@ class VerifyResetPassCodeRepoImpl implements VerifyResetPassCodeRepo {
     try {
       var response = await apiService
           .post(endPoint: endPoint, data: {'email': email, 'code': code});
-     if(response['error'] == 'Invalid or expired reset password code.'){
+      if (response['error'] == 'Invalid or expired reset password code.') {
         return left(Failure.formJson(response['error']));
-     }
-     
-       return right(VerifyResetPassCodeModel.fromJson(response));
+      }
+
+      return right(VerifyResetPassCodeModel.fromJson(response));
     } on DioException catch (e) {
       log('Dio Excep : ${e.response!.data}');
       return left(Failure.formJson(e));

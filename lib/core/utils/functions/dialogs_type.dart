@@ -94,7 +94,7 @@ AwesomeDialog errorDialog(BuildContext context, String errMessage) {
       text: 'Continue',
       onPressed: () {
         Navigator.pop(context);
-        GoRouter.of(context).pop();
+        // GoRouter.of(context).pop();
       },
     ),
   )..show();

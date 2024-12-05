@@ -4,11 +4,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/core/utils/secure_storage.dart';
-import 'package:flighter/features/auth/data/models/sign_in_model.dart';
 import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sign_in_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../data/models/sign_in_model/sign_in_model.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   SignInCubit(this.signInRepo) : super(SignInInitial());
@@ -35,12 +36,14 @@ class SignInCubit extends Cubit<SignInState> {
     return response.fold(
       (l) {
         isLoading = false;
+
         emit(SignInFailure(errMessage: l.errMessage));
       },
       (r) async {
         isLoading = false;
-        await secureStorageService.saveToken(tokenKey, r.token!); //default
-       
+        await secureStorageService.saveToken(
+            tokenKey, r.message!.token!); //default
+
         emit(SignInSuccess());
       },
     );

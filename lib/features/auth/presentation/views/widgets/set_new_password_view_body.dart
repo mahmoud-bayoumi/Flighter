@@ -36,8 +36,7 @@ class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
         } else if (state is ResetPasswordSuccess) {
           EasyLoading.dismiss();
           log('SendReset Success');
-          successDialog(context , true);
-     //     GoRouter.of(context).pushReplacement('/');
+          successDialog(context, true);
         }
       },
       builder: (context, state) {

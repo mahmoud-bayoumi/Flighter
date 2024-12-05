@@ -1,11 +1,10 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/api_service.dart';
 import 'package:flighter/core/utils/failure.dart';
-import 'package:flighter/features/auth/data/models/sign_in_model.dart';
 import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo.dart';
+import '../../models/sign_in_model/sign_in_model.dart';
 
 class SignInRepoImpl implements SignInRepo {
   final ApiService apiService;
@@ -22,6 +21,7 @@ class SignInRepoImpl implements SignInRepo {
         log('DioException: ${data['message']}');
         return left(Failure(data['message']));
       }
+      log(data.toString());
       return right(SignInModel.fromJson(data));
     } on DioException catch (e) {
       return left(Failure(e.response!.data['message']));

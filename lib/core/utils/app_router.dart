@@ -38,7 +38,8 @@ abstract class AppRouter {
   static const String kPayment = '/Payment';
   static const String kBoardingPass = '/BoardingPass';
   static const String kAddPayment = '/AddPayment';
-  static const String kCheckYourEmailViewForForgetPass = '/CheckYourEmailForForgetPass'; 
+  static const String kCheckYourEmailViewForForgetPass =
+      '/CheckYourEmailForForgetPass';
   static const String kAboutUs = '/AboutUs';
   static const String kPrivacyAndPolicy = '/PrivacyAndPolicy';
 
