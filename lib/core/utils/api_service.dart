@@ -1,14 +1,32 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:flighter/core/utils/secure_storage.dart';
-
 class ApiService {
   final Dio _dio;
   final String baseUrl = "http://hmy.runasp.net/api/Account/";
-  final SecureStorageService _secureStorageService =
-      const SecureStorageService();
+
 
   ApiService(this._dio);
+
+  Future<Map<String, dynamic>> get(
+      {required String endPoint, required data , required String token}) async {
+    try {
+      final response = await _dio.get(
+        '$baseUrl$endPoint',
+        data: data,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+      return response.data;
+    } on DioException catch (e) {
+      log("Request Error: $e");
+      return e.response?.data ?? {};
+    } catch (e) {
+      log("General Error in post: $e");
+      return {};
+    }
+  }
 
   // POST request method
   Future<Map<String, dynamic>> post(
