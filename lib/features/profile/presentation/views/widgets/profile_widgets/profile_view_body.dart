@@ -39,7 +39,6 @@ class ProfileViewBody extends StatelessWidget {
             child: LogoutButton(
               onPressed: () async {
                 await _secureStorageService.deleteToken(tokenKey);
-                await _secureStorageService.deleteToken(refreshTokenKey);
                 GoRouter.of(context).pushReplacement('/');
               },
             ),
