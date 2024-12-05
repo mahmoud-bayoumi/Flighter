@@ -93,11 +93,12 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   cubitData.isLoading == false
                       ? CustomButton(
                           text: 'SIGN IN',
-                          onPressed: () {
-                            var getProfilePhotoCubit =
-                                context.read<GetProfilePhotoCubit>();
-                            getProfilePhotoCubit.getProfilePhoto();
+                          onPressed: () async {
+                             var getProfilePhotoCubit =
+                                 context.read<GetProfilePhotoCubit>();
+                                 getProfilePhotoCubit.getProfilePhoto();
                             cubitData.vaildateUserInput();
+                            
                             // call logic cubit
                           },
                         )
