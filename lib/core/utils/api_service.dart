@@ -5,33 +5,39 @@ import 'package:flighter/core/utils/secure_storage.dart';
 class ApiService {
   final Dio _dio;
   final String baseUrl = "http://hmy.runasp.net/api/Account/";
-  final SecureStorageService _secureStorageService = const SecureStorageService();
+  final SecureStorageService _secureStorageService =
+      const SecureStorageService();
 
   ApiService(this._dio) {
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
         // Attach the token to the request before sending
-        String? accessToken = await _secureStorageService.getToken('accessToken');
+        String? accessToken =
+            await _secureStorageService.getToken('accessToken');
         if (accessToken != null) {
           options.headers['Authorization'] = 'Bearer $accessToken';
         }
         return handler.next(options);
       },
-      onError: ( error, handler) async {
-        if (error.response?.statusCode == 401) {  // Token expired or invalid
+      onError: (error, handler) async {
+        if (error.response?.statusCode == 401) {
+          // Token expired or invalid
           log("Access token expired. Attempting to refresh token...");
-          
-          String? refreshToken = await _secureStorageService.getToken('refreshToken');
+
+          String? refreshToken =
+              await _secureStorageService.getToken('refreshToken');
           if (refreshToken != null) {
             // Call the refresh endpoint
             final refreshResponse = await _refreshToken(refreshToken);
             if (refreshResponse != null && refreshResponse['token'] != null) {
               // Save the new token and retry the original request
-              await _secureStorageService.saveToken('accessToken', refreshResponse['token']);
-              
+              await _secureStorageService.saveToken(
+                  'accessToken', refreshResponse['token']);
+
               // Create new request options from the original failed request
               var options = error.response!.requestOptions;
-              options.headers['Authorization'] = 'Bearer ${refreshResponse['token']}';
+              options.headers['Authorization'] =
+                  'Bearer ${refreshResponse['token']}';
 
               // Use the same method and path, but with the updated token
               final response = await _dio.request(
@@ -45,9 +51,10 @@ class ApiService {
                   responseType: options.responseType,
                 ),
               );
-              
+
               // Return the new response after retrying the original request
-              return handler.resolve(response); // Resolving with the new response
+              return handler
+                  .resolve(response); // Resolving with the new response
             }
           }
         }
@@ -62,18 +69,19 @@ class ApiService {
     try {
       // Call the refresh token endpoint
       final response = await _dio.get(
-        '$baseUrl/refresh-token',  // Adjust endpoint to match your actual refresh endpoint
+        '$baseUrl/refresh-token', // Adjust endpoint to match your actual refresh endpoint
         queryParameters: {'refreshToken': refreshToken},
       );
-      return response.data;  // Assuming the response contains the new token
+      return response.data; // Assuming the response contains the new token
     } on DioException catch (e) {
       log("Error refreshing token: ${e.response?.data}");
-      return null;  // Handle failure
+      return null; // Handle failure
     }
   }
 
   // POST request method
-  Future<Map<String, dynamic>> post({required String endPoint, required data}) async {
+  Future<Map<String, dynamic>> post(
+      {required String endPoint, required data}) async {
     try {
       final response = await _dio.post(
         '$baseUrl$endPoint',
@@ -81,7 +89,7 @@ class ApiService {
         options: Options(headers: {'Content-Type': 'application/json'}),
       );
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log("Request Error: $e");
       return e.response?.data ?? {};
     } catch (e) {
@@ -91,7 +99,8 @@ class ApiService {
   }
 
   // PUT request method
-  Future<Map<String, dynamic>> put({required String endPoint, required String token, required data}) async {
+  Future<Map<String, dynamic>> put(
+      {required String endPoint, required String token, required data}) async {
     try {
       final response = await _dio.put(
         '$baseUrl$endPoint',
@@ -102,7 +111,7 @@ class ApiService {
         }),
       );
       return response.data;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log("In Put Request Error: $e");
       return e.response?.data ?? {};
     } catch (e) {
@@ -110,6 +119,8 @@ class ApiService {
       return {};
     }
   }
+
+// Delete request method
   Future<Map<String, dynamic>> delete({
     required String endPoint,
     required data,
