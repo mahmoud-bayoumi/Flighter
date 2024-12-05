@@ -1,22 +1,28 @@
-class SignInModel {
+class Message {
+  dynamic message;
+  bool? isAuthenticated;
   String? userName;
   String? email;
-  RoleModel roles;
+  List<dynamic>? roles;
   String? token;
   DateTime? refreshTokenExpiration;
 
-  SignInModel({
+  Message({
+    this.message,
+    this.isAuthenticated,
     this.userName,
     this.email,
-    required this.roles,
+    this.roles,
     this.token,
     this.refreshTokenExpiration,
   });
 
-  factory SignInModel.fromJson(Map<String, dynamic> json) => SignInModel(
+  factory Message.fromJson(Map<String, dynamic> json) => Message(
+        message: json['message'] as dynamic,
+        isAuthenticated: json['isAuthenticated'] as bool?,
         userName: json['userName'] as String?,
         email: json['email'] as String?,
-        roles: RoleModel.fromJson(json['roles']),
+        roles: json['roles'] as List<dynamic>?,
         token: json['token'] as String?,
         refreshTokenExpiration: json['refreshTokenExpiration'] == null
             ? null
@@ -24,18 +30,12 @@ class SignInModel {
       );
 
   Map<String, dynamic> toJson() => {
+        'message': message,
+        'isAuthenticated': isAuthenticated,
         'userName': userName,
         'email': email,
         'roles': roles,
         'token': token,
         'refreshTokenExpiration': refreshTokenExpiration?.toIso8601String(),
       };
-}
-
-class RoleModel {
-  String role;
-  RoleModel({required this.role});
-  factory RoleModel.fromJson(jsonData) {
-    return RoleModel(role: jsonData[0]);
-  }
 }

@@ -9,15 +9,14 @@ class ChangePasswordModel {
   String? error;
   String? message;
 
-  ChangePasswordModel({
-    this.type,
-    this.title,
-    this.status,
-    this.errors,
-    this.traceId,
-    this.error, 
-    this.message
-  });
+  ChangePasswordModel(
+      {this.type,
+      this.title,
+      this.status,
+      this.errors,
+      this.traceId,
+      this.error,
+      this.message});
 
   factory ChangePasswordModel.fromJson(Map<String, dynamic> json) {
     return ChangePasswordModel(
@@ -28,8 +27,8 @@ class ChangePasswordModel {
           ? null
           : Errors.fromJson(json['errors'] as Map<String, dynamic>),
       traceId: json['traceId'] as String?,
-       error: json['error'] as String?,
-        message: json['message'] as String?,
+      error: json['error'] as String?,
+      message: json['message'] as String?,
     );
   }
 

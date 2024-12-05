@@ -22,9 +22,9 @@ class VerifyEmailRepoImpl implements VerifyEmailRepo {
           "verificationCode": code,
         },
       );
-
-      if (response['message'] == 'Invalid or expired verification request.') {
-        return left(Failure('Invalid or expired verification request.'));
+      log(response.toString());
+      if (response['message'] == 'Incorrect verification code.') {
+        return left(Failure('Incorrect verification code.'));
       }
 
       if (response['message'] == 'Incorrect verification code.') {
@@ -37,13 +37,16 @@ class VerifyEmailRepoImpl implements VerifyEmailRepo {
       }
       // success request
     } on DioException catch (e) {
+      if (e.response!.statusCode == 500) {
+        return left(Failure('Server Error'));
+      }
       final errorMessage =
           e.response?.data['message'] ?? 'An unknown error occurred.';
       log('DioException: $errorMessage');
       return left(Failure(errorMessage));
     } catch (e) {
       log('General exception: ${e.toString()}');
-      return left(Failure('An unexpected error occurred.'));
+      return left(Failure('An unexpected error occurred.Try again later!'));
     }
   }
 }

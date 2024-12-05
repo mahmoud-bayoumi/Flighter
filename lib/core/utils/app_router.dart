@@ -1,4 +1,3 @@
-import 'package:flighter/core/utils/user_data_class.dart';
 import 'package:flighter/features/auth/presentation/views/check_your_email_view.dart';
 import 'package:flighter/features/auth/presentation/views/check_your_email_view_for_forget_pass.dart';
 import 'package:flighter/features/auth/presentation/views/forgot_password_view.dart';
@@ -67,10 +66,8 @@ abstract class AppRouter {
       GoRoute(
         path: kCheckYourEmailView,
         builder: (context, state) {
-          final user = state.extra as UserData;
-          return CheckYourEmailView(
-            user: user,
-          );
+          final email = state.extra as String;
+          return CheckYourEmailView(email: email);
         },
       ),
       GoRoute(
