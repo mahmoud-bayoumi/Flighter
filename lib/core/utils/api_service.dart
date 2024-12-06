@@ -97,7 +97,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> delete({
     required String endPoint,
-     data,
+    data,
     required String token,
   }) async {
     Response response;
@@ -118,6 +118,28 @@ class ApiService {
       return e.response?.data ?? {};
     } catch (e) {
       log("General Error in DELETE: $e");
+      return {};
+    }
+  }
+
+  // PUT request method
+  Future<Map<String, dynamic>> putProfile(
+      {required String endPoint, required String token, required data}) async {
+    try {
+      final response = await _dio.put(
+        '$baseUrl$endPoint',
+        data: data,
+        options: Options(headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+      return response.data;
+    } on DioException catch (e) {
+      log("In Put Request Error: $e");
+      return e.response?.data ?? {};
+    } catch (e) {
+      log("In Put General Error in post: $e");
       return {};
     }
   }
