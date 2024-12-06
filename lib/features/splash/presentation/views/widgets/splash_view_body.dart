@@ -23,7 +23,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
   late Animation<Offset> planeAnimation;
   late Animation<Offset> flighterAnimation;
   late Animation<Offset> descriptionAnimation;
-  final SecureStorageService _secureStorageService = SecureStorageService();
+  final SecureStorageService _secureStorageService =
+      const SecureStorageService();
   @override
   void initState() {
     super.initState();

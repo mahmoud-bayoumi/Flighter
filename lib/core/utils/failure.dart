@@ -28,11 +28,12 @@ class Failure {
         statusCode == 401 ||
         statusCode == 403) {
       return Failure(response['message']);
-    } else if (statusCode == 404)
+    } else if (statusCode == 404) {
       return Failure(response['error']);
-    else if (statusCode == 500)
+    } else if (statusCode == 500) {
       return Failure('Server Error. Try again later!');
-    else
+    } else {
       return Failure('Oops there was an error. try again later!');
+    }
   }
 }
