@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/utils/functions/capitalize_word.dart';
+
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
 
@@ -32,7 +34,7 @@ class HomeViewBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 45.h, left: 10.w),
             child: Text(
-              'Hello, $userName',
+              'Hello, ${capitalizeFirstLetter(userName)}',
               style: Styles.textStyle24.copyWith(color: Colors.white),
             ),
           ),
