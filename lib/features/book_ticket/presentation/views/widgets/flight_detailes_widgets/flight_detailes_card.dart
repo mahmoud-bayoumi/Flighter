@@ -24,12 +24,13 @@ class FlightDetailesCard extends StatelessWidget {
             height: MediaQuery.sizeOf(context).height * .67,
             child: Stack(
               children: [
-                const FromToCountrySecond(from: "CHE", to: "BLG"),
+                const FromToCountrySecond(from: "CAI", to: "ALX"),
                 Positioned(
                   top: 220.h,
                   left: 25.w,
                   child: const UnabledTextField(
-                    text: '06/07/2023',
+                    textTitle: 'Date',
+                    text: '18/12/2024',
                     icon: Icons.access_time,
                   ),
                 ),
@@ -37,6 +38,7 @@ class FlightDetailesCard extends StatelessWidget {
                   top: 220.h,
                   left: 210.w,
                   child: const UnabledTextField(
+                    textTitle: 'Time',
                     text: '9:30 AM',
                     icon: Icons.access_time,
                   ),

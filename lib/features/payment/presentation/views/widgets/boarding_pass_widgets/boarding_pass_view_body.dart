@@ -30,8 +30,12 @@ class BoardingPassViewBody extends StatelessWidget {
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              UnabledTextField(text: '06/07/2023', icon: Icons.access_time),
-              UnabledTextField(text: '9:30 AM', icon: Icons.access_time),
+              UnabledTextField(
+                  textTitle: 'Date',
+                  text: '18/12/2024',
+                  icon: Icons.access_time),
+              UnabledTextField(
+                  textTitle: 'Time', text: '9:30 AM', icon: Icons.access_time),
             ],
           ),
           SizedBox(

@@ -32,48 +32,50 @@ class FlightDataCard extends StatelessWidget {
                 left: MediaQuery.sizeOf(context).width * 0.829,
                 child: IconButton(
                     onPressed: () async {
-                      const String bookingDate = 'Saturday, December 3, 2022';
-                      const String guestName = 'Miss Stephanie Celine Linden';
-                      const String from = 'New York';
-                      const String to = 'London';
-                      const String airline = 'ACME Airlines';
+                      const String bookingDate = 'Saturday, December 18, 2024';
+                      const String guestName = 'Yasser Bayoumi';
+                      const String from = 'Cairo';
+                      const String to = 'Alexanderia';
+                      const String airline = 'Cario Airlines';
                       const String flightNumber = '230222-BE143';
                       const String gate = '22';
-                      const String departureDate = '7 June 06:25 AM';
-                      const String arrivalDate = '7 June 09:30 AM';
-                      const String duration = '03:05';
+                      const String departureDate = '18 Dec 08:30 AM';
+                      const String arrivalDate = '18 Dec 09:30 AM';
+                      const String duration = '00:45';
                       const String bookingStatus = 'Confirmed';
-                      const String seatClass = 'Economy Class';
+                      const String seatClass = 'Buisness Class';
                       const String baggageAllowance = '8 KG';
                       const String seatNumber = '2B';
+                      const String totalCost = '2500 EGP';
                       await generateTicketPDF(
-                        bookingDate: bookingDate,
-                        guestName: guestName,
-                        from: from,
-                        to: to,
-                        airline: airline,
-                        flightNumber: flightNumber,
-                        gate: gate,
-                        departureDate: departureDate,
-                        arrivalDate: arrivalDate,
-                        bookingStatus: bookingStatus,
-                        duration: duration,
-                        seatClass: seatClass,
-                        baggageAllowance: baggageAllowance,
-                        seatNumber: seatNumber,
-                      );
+                          bookingDate: bookingDate,
+                          guestName: guestName,
+                          from: from,
+                          to: to,
+                          airline: airline,
+                          flightNumber: flightNumber,
+                          gate: gate,
+                          departureDate: departureDate,
+                          arrivalDate: arrivalDate,
+                          bookingStatus: bookingStatus,
+                          duration: duration,
+                          seatClass: seatClass,
+                          baggageAllowance: baggageAllowance,
+                          seatNumber: seatNumber,
+                          totalCost: totalCost);
                     },
                     icon: const Icon(
                       Icons.download,
                       color: kPrimaryColor,
                       size: 30,
                     ))),
-            const FromToCountrySecond(from: "CHE", to: "BLG"),
+            const FromToCountrySecond(from: "CAI", to: "ALX"),
             Positioned(
               top: 220.h,
               left: 25.w,
               child: const UnabledTextField(
-                text: '06/07/2023',
+                textTitle: 'Date',
+                text: '18/12/2024',
                 icon: Icons.access_time,
               ),
             ),
@@ -81,6 +83,7 @@ class FlightDataCard extends StatelessWidget {
               top: 220.h,
               left: 210.w,
               child: const UnabledTextField(
+                textTitle: 'Time',
                 text: '9:30 AM',
                 icon: Icons.access_time,
               ),

@@ -34,6 +34,8 @@ class _EditProfileDatePickerState extends State<EditProfileDatePicker> {
           child: TextFormField(
             onSaved: (newValue) {
               widget.dateController.text = newValue?.substring(0, 10) ?? '';
+              widget.dateController.text =
+                  widget.dateController.text.substring(0, 10);
             },
             validator: (value) {
               if (value == null || value.isEmpty) return 'Required';

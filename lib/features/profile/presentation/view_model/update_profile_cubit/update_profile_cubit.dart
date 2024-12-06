@@ -38,4 +38,10 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       },
     );
   }
+
+  @override
+  Future<void> close() {
+    emit(UpdateProfileInitial());
+    return super.close(); // Always call the super.close() method
+  }
 }

@@ -20,6 +20,7 @@ Future<void> generateTicketPDF({
   required String seatClass,
   required String baggageAllowance,
   required String seatNumber,
+  required String totalCost 
 }) async {
   final pdf = pw.Document();
   final img = await rootBundle.load(AssetsData.kLogo);
@@ -95,6 +96,8 @@ Future<void> generateTicketPDF({
               pw.Text('Seat Number  :  $seatNumber',
                   style: pw.TextStyle(fontSize: 18.sp)),
               pw.SizedBox(height: 10.h),
+               pw.Text('Total Cost  :  $totalCost',
+                  style: pw.TextStyle(fontSize: 18.sp)),
               pw.Align(
                   child: pw.Column(children: [
                     pw.Text('Thanks for booking using Flighter!',
