@@ -33,7 +33,7 @@ class _EditProfileDatePickerState extends State<EditProfileDatePicker> {
           width: widget.width,
           child: TextFormField(
             onSaved: (newValue) {
-              widget.dateController.text = newValue ?? '';
+              widget.dateController.text = newValue?.substring(0, 10) ?? '';
             },
             validator: (value) {
               if (value == null || value.isEmpty) return 'Required';
@@ -56,7 +56,7 @@ class _EditProfileDatePickerState extends State<EditProfileDatePicker> {
     );
   }
 
-  Future<void> _selectDate(dynamic context) async {
+  Future<void> _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -84,7 +84,9 @@ class _EditProfileDatePickerState extends State<EditProfileDatePicker> {
 
     if (picked != null) {
       setState(() {
-        widget.dateController.text = picked.toString().split(" ")[0];
+        // Format the date as "YYYY-MM-DD"
+        widget.dateController.text =
+            "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
       });
     }
   }

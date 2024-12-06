@@ -1,7 +1,7 @@
 import 'dart:developer';
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/custom_outline_input_border.dart';
+import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
@@ -23,7 +23,8 @@ class EditProfileViewBody extends StatelessWidget {
     var updateCubit = context.read<UpdateProfileCubit>();
 
     updateCubit.name.text = cubitData.profileData!.name!;
-    updateCubit.dateOfBirth.text = cubitData.profileData!.dateOfBirth ?? '';
+    updateCubit.dateOfBirth.text =
+        cubitData.profileData!.dateOfBirth?.substring(0, 10) ?? '';
     updateCubit.country.text = cubitData.profileData!.country ?? 'Egypt';
 
     return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
@@ -92,6 +93,7 @@ class EditProfileViewBody extends StatelessWidget {
                           log('name:${updateCubit.name.text} , date:${updateCubit.dateOfBirth.text} , country:${updateCubit.country.text} , image:${updateCubit.imageFile.toString()}');
                           updateCubit.updateProfile();
                           cubitData.getProfile();
+                          changeSaveDialog(context);
                         },
                       ),
                     )

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -7,6 +6,7 @@ import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/views/widgets/hot_deals_list_view.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_container.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
+import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,8 +19,8 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var getData = context.read<GetProfileDataCubit>();
     getData.getProfile();
-    String userName = getData.profileData!.name!;
-    log('USER NAME : ${getData.profileData!.name!}');
+    var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
+    getProfilePhotoCubit.getProfilePhoto();
 
     return BlocBuilder<GetProfileDataCubit, GetProfileDataState>(
       builder: (context, state) {
@@ -33,6 +33,7 @@ class HomeViewBody extends StatelessWidget {
         } else if (state is GetProfileDataFailure) {
           return const FailurePageWidget();
         } else {
+          final userName = getData.profileData?.name ?? 'Guest';
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Stack(

@@ -30,8 +30,8 @@ class ImageWidget extends StatelessWidget {
             : ClipOval(
                 child: Image.file(
                   image!,
-                  width: 160.w,
-                  height: 160.h,
+                  width: 150.w,
+                  height: 150.h,
                   fit: BoxFit.cover,
                 ),
               ),
