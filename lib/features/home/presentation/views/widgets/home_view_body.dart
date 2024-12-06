@@ -19,8 +19,8 @@ class HomeViewBody extends StatelessWidget {
     var getData = context.read<GetProfileDataCubit>();
     getData.getProfile();
     String userName = getData.profileData!.name!;
-    log(getData.profileData!.name!);
-    
+    log('USER NAME : ${getData.profileData!.name!}');
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Stack(
