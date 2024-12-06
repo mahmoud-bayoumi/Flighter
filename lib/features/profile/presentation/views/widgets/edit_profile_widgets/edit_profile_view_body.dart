@@ -16,7 +16,6 @@ import 'country_auto_complete_drop_down.dart';
 
 class EditProfileViewBody extends StatelessWidget {
   const EditProfileViewBody({super.key});
-
   @override
   Widget build(BuildContext context) {
     var cubitData = context.read<GetProfileDataCubit>();
