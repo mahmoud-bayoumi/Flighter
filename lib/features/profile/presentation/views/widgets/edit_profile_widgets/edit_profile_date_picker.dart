@@ -6,16 +6,15 @@ import '../../../../../../core/utils/functions/custom_outline_input_border.dart'
 import '../../../../../../core/utils/styles.dart';
 
 class EditProfileDatePicker extends StatefulWidget {
-  const EditProfileDatePicker({super.key, required this.width});
-
+  const EditProfileDatePicker(
+      {super.key, required this.width, required this.dateController});
+  final TextEditingController dateController;
   final double width;
   @override
   State<EditProfileDatePicker> createState() => _EditProfileDatePickerState();
 }
 
 class _EditProfileDatePickerState extends State<EditProfileDatePicker> {
-  final TextEditingController _dateController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,11 +32,14 @@ class _EditProfileDatePickerState extends State<EditProfileDatePicker> {
         SizedBox(
           width: widget.width,
           child: TextFormField(
+            onSaved: (newValue) {
+              widget.dateController.text = newValue ?? '';
+            },
             validator: (value) {
               if (value == null || value.isEmpty) return 'Required';
               return null;
             },
-            controller: _dateController,
+            controller: widget.dateController,
             onTap: () {
               _selectDate(context);
             },
@@ -82,7 +84,7 @@ class _EditProfileDatePickerState extends State<EditProfileDatePicker> {
 
     if (picked != null) {
       setState(() {
-        _dateController.text = picked.toString().split(" ")[0];
+        widget.dateController.text = picked.toString().split(" ")[0];
       });
     }
   }

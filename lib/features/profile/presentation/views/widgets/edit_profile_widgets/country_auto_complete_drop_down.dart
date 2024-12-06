@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/utils/functions/custom_outline_input_border.dart';
 import '../../../../../../core/utils/styles.dart';
 
@@ -204,8 +202,9 @@ class CountryAutocompleteDropdown extends StatelessWidget {
     "Zimbabwe",
   ];
 
-  const CountryAutocompleteDropdown({super.key});
-
+  const CountryAutocompleteDropdown(
+      {super.key, required this.countryController});
+  final TextEditingController countryController;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -234,12 +233,12 @@ class CountryAutocompleteDropdown extends StatelessWidget {
           onSelected: (String selection) {
             log('Selected: $selection');
           },
-          fieldViewBuilder: (BuildContext context,
-              TextEditingController textEditingController,
-              FocusNode focusNode,
-              VoidCallback onFieldSubmitted) {
+          fieldViewBuilder: (context, controler, focusNode, onFieldSubmitted) {
             return TextFormField(
-              controller: textEditingController,
+              onSaved: (newValue) {
+                countryController.text = newValue ?? 'Egypt';
+              },
+              controller: countryController,
               focusNode: focusNode,
               decoration: InputDecoration(
                 hintText: 'Enter your country here',
@@ -253,10 +252,4 @@ class CountryAutocompleteDropdown extends StatelessWidget {
       ],
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: CountryAutocompleteDropdown(),
-  ));
 }
