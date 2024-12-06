@@ -33,6 +33,30 @@ AwesomeDialog successDialog(BuildContext context, bool navgToSplash) {
   )..show();
 }
 
+AwesomeDialog changeSaveDialog(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Successful',
+    desc: 'Your data has been changed. Click Continue.',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: kPrimaryColor,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context);
+        GoRouter.of(context).pop();
+      },
+    ),
+  )..show();
+}
+
 AwesomeDialog deleteProfilePhotoSuccess(BuildContext context) {
   return AwesomeDialog(
     context: context,
@@ -51,7 +75,6 @@ AwesomeDialog deleteProfilePhotoSuccess(BuildContext context) {
       text: 'Continue',
       onPressed: () {
         Navigator.pop(context);
-
       },
     ),
   )..show();

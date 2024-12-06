@@ -9,6 +9,7 @@ class GetProfileDataCubit extends Cubit<GetProfileDataState> {
   GetProfileDataCubit(this._getProfileDataRepoImpl)
       : super(GetProfileDataInitial());
   final GetProfileDataRepoImpl _getProfileDataRepoImpl;
+
   ProfileDataModel? profileData;
 
   Future<void> getProfile() async {

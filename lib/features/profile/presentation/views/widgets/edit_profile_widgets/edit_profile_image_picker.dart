@@ -30,22 +30,21 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
   Widget build(BuildContext context) {
     return ImageWidget(
       image: image,
-      onTap: (source) => pickImage(context ,  source),
+      onTap: (source) => pickImage(context, source),
     );
   }
 
-  Future pickImage(BuildContext context, ImageSource source) async{
+  Future pickImage(BuildContext context, ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
       //  final imageTemporary = File(image.path);
       final imagePermanent = await saveImagePermanently(
           image.path); // this one it will be send to the backend endpoint
-            context.read<UpdateProfileCubit>().imageFile = imagePermanent; 
+      context.read<UpdateProfileCubit>().imageFile = imagePermanent;
       setState(() {
         this.image = imagePermanent;
       });
-  
     } on PlatformException catch (e) {
       log('Failed to pick iamge : $e');
     }
