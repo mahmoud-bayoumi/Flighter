@@ -11,7 +11,7 @@ class ProfileViewListTile extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * .5,
       child: ListTile(
-        leading: const Icon(
+        leading:  const Icon(
           Icons.person_2_outlined,
           color: Colors.white,
         ),

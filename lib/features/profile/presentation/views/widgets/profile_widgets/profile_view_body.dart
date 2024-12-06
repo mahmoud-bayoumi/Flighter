@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flighter/constants.dart';
+import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_divider.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_view_list_tile.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/user_profile_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,6 +43,8 @@ class ProfileViewBody extends StatelessWidget {
             child: LogoutButton(
               onPressed: () async {
                 await _secureStorageService.deleteToken(tokenKey);
+                var cubitData = context.read<GetProfilePhotoCubit>();
+                cubitData.clearProfilePhoto();
                 GoRouter.of(context).pushReplacement('/');
               },
             ),

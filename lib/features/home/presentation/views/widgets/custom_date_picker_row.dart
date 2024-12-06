@@ -11,6 +11,7 @@ class CustomDatePickerRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return oneWay
         ? DatePickerTextField(
+             isStartDate: true ,
             width: MediaQuery.sizeOf(context).width,
             text: 'Start Date',
           )
@@ -18,11 +19,13 @@ class CustomDatePickerRow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DatePickerTextField(
+                isStartDate: true ,
                 width: 185.w,
                 text: 'Start Date',
               ),
               !oneWay
                   ? DatePickerTextField(
+                       isStartDate: false ,
                       width: 185.w,
                       text: 'End Date',
                     )
