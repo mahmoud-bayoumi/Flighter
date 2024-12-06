@@ -1,10 +1,10 @@
 import 'package:flighter/core/utils/assets_data.dart';
+import 'package:flighter/core/utils/functions/capitalize_word.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 
 class UserProfileDetails extends StatelessWidget {
@@ -17,6 +17,7 @@ class UserProfileDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubitData = context.read<GetProfilePhotoCubit>();
     var cubitData2 = context.read<GetProfileDataCubit>();
+    String name = capitalizeFirstLetter(cubitData2.profileData!.name!);
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * .91,
       child: Row(children: [
@@ -29,28 +30,31 @@ class UserProfileDetails extends StatelessWidget {
               offset: const Offset(-10, 6),
             )
           ]),
-          child: Stack(children: [
-            SizedBox(
-              width: MediaQuery.sizeOf(context).width * .19,
-            ),
-            CircleAvatar(
-              radius: MediaQuery.sizeOf(context).width * .075,
-              child: BlocBuilder<GetProfilePhotoCubit, GetProfilePhotoState>(
-                builder: (context, state) {
-                  return ClipOval(
-                      child: cubitData.hasImage
-                          ? Image.memory(cubitData.imageBits!)
-                          : Image.asset(
-                              AssetsData.kProfileDefaultImage,
-                            ));
-                },
+          child: Stack(
+            children: [
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * .19,
               ),
-            ),
-            Positioned(
+              CircleAvatar(
+                radius: MediaQuery.sizeOf(context).width * .075,
+                child: BlocBuilder<GetProfilePhotoCubit, GetProfilePhotoState>(
+                  builder: (context, state) {
+                    return ClipOval(
+                        child: cubitData.hasImage
+                            ? Image.memory(cubitData.imageBits!)
+                            : Image.asset(
+                                AssetsData.kProfileDefaultImage,
+                              ));
+                  },
+                ),
+              ),
+              Positioned(
                 height: MediaQuery.sizeOf(context).width * .25,
                 width: MediaQuery.sizeOf(context).width * .285,
-                child: const Icon(Icons.remove_circle))
-          ]),
+                child: const Icon(Icons.remove_circle),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           width: 5.w,
@@ -58,7 +62,7 @@ class UserProfileDetails extends StatelessWidget {
         BlocBuilder<GetProfileDataCubit, GetProfileDataState>(
           builder: (context, state) {
             return Text(
-              cubitData2.profileData!.name!,
+              name,
               style: Styles.textStyle18
                   .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
             );
