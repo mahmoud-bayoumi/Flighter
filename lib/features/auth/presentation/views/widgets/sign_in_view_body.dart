@@ -37,7 +37,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           log('SignIn Succes');
           var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
           getProfilePhotoCubit.getProfilePhoto();
-     
+
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else if (state is SignInFailure) {
           EasyLoading.dismiss();
