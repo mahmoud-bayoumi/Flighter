@@ -3,7 +3,6 @@ import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 
 class UserProfileDetails extends StatelessWidget {
