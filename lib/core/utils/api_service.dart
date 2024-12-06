@@ -97,7 +97,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> delete({
     required String endPoint,
-    required data,
+     data,
     required String token,
   }) async {
     Response response;
