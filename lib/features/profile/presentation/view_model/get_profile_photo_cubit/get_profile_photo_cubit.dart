@@ -40,4 +40,10 @@ class GetProfilePhotoCubit extends Cubit<GetProfilePhotoState> {
     // emit(GetProfilePhotoInitial());  // Optionally, emit an initial state
     log('Profile photo cleared from memory');
   }
+
+  @override
+  Future<void> close() {
+    emit(GetProfilePhotoInitial());
+    return super.close(); // Always call the super.close() method
+  }
 }

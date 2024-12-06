@@ -1,3 +1,4 @@
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/functions/capitalize_word.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -57,17 +58,21 @@ class UserProfileDetails extends StatelessWidget {
                     child:
                         BlocBuilder<GetProfilePhotoCubit, GetProfilePhotoState>(
                       builder: (context, state) {
-                        return ClipOval(
-                            child: cubitData.hasImage
-                                ? Image.memory(
-                                    cubitData.imageBits!,
-                                    fit: BoxFit.fill,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                  )
-                                : Image.asset(
-                                    AssetsData.kProfileDefaultImage,
-                                  ));
+                        return state is GetProfilePhotoLoading
+                            ? const CircularProgressIndicator(
+                                color: kPrimaryColor,
+                              )
+                            : ClipOval(
+                                child: cubitData.hasImage
+                                    ? Image.memory(
+                                        cubitData.imageBits!,
+                                        fit: BoxFit.fill,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                      )
+                                    : Image.asset(
+                                        AssetsData.kProfileDefaultImage,
+                                      ));
                       },
                     ),
                   ),

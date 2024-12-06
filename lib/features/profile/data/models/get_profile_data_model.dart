@@ -8,7 +8,7 @@ class ProfileDataModel {
   factory ProfileDataModel.fromJson(json) {
     return ProfileDataModel(
       name: json['name'],
-      dateOfBirth: json['dateOfBirth'],
+      dateOfBirth: json['dateOfBirth']?.toString().substring(0, 10),
       country: json['country'],
     );
   }

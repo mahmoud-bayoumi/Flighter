@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/custom_outline_input_border.dart';
-import 'package:flighter/core/utils/functions/dialogs_type.dart';
+
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
@@ -11,7 +11,9 @@ import 'package:flighter/features/profile/presentation/views/widgets/edit_profil
 import 'package:flighter/features/profile/presentation/views/widgets/edit_profile_widgets/edit_profile_image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../../core/utils/functions/dialogs_type.dart';
 import 'country_auto_complete_drop_down.dart';
 
 class EditProfileViewBody extends StatelessWidget {
@@ -32,6 +34,8 @@ class EditProfileViewBody extends StatelessWidget {
         if (state is UpdateProfileSuccess) {
           var getProfilePhoto = context.read<GetProfilePhotoCubit>();
           getProfilePhoto.getProfilePhoto();
+          var getProfileData = context.read<GetProfileDataCubit>();
+          getProfileData.getProfile();
         }
       },
       builder: (context, state) {
@@ -89,10 +93,20 @@ class EditProfileViewBody extends StatelessWidget {
                       width: 300.w,
                       child: CustomButton(
                         text: 'Save Changes',
-                        onPressed: () {
+                        onPressed: () async {
                           log('name:${updateCubit.name.text} , date:${updateCubit.dateOfBirth.text} , country:${updateCubit.country.text} , image:${updateCubit.imageFile.toString()}');
                           updateCubit.updateProfile();
+
+                          context
+                              .read<GetProfilePhotoCubit>()
+                              .getProfilePhoto();
                           cubitData.getProfile();
+
+                          EasyLoading.show(status: 'Loading...');
+                          await Future.delayed(
+                              const Duration(milliseconds: 1950));
+                          EasyLoading.dismiss();
+                          // ignore: use_build_context_synchronously
                           changeSaveDialog(context);
                         },
                       ),

@@ -33,7 +33,7 @@ class RowFlightDetailes extends StatelessWidget {
         ),
         FlightColumnText(
           text: 'Class',
-          ans: "Economy",
+          ans: "Business",
         ),
       ],
     );

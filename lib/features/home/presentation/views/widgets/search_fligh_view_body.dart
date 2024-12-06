@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchFligthViewBody extends StatelessWidget {
   const SearchFligthViewBody({super.key});
-  final int flightNumber = 100;
+  final int flightNumber = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,14 @@ class SearchFligthViewBody extends StatelessWidget {
           children: [
             const PrimaryContainer(),
             const FromToCountry(
-              from: 'CHE',
-              to: 'BLR',
+              from: 'CAI',
+              to: 'ALX',
             ),
             const DataOfFlights(
-              firstDate: '26/May/2023',
-              secondDate: '23/May/2023',
+              firstDate: '18/Dec/2024',
+              secondDate: '20/Dec/2024',
               number: '1 passenger',
-              type: 'First Class',
+              type: 'Business',
             ),
             Padding(
               padding: EdgeInsets.only(top: 385.h, left: 15.w),

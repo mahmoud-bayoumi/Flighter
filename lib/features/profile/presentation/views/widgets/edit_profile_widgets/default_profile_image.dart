@@ -19,18 +19,27 @@ class DefualtProfileImage extends StatelessWidget {
         builder: (context, state) {
           return CircleAvatar(
             radius: MediaQuery.sizeOf(context).width * .15,
-            child: ClipOval(
-                child: cubitData.hasImage && state is GetProfilePhotoSuccess
-                    ? Image.memory(cubitData.imageBits!)
-                    : Image.asset(
-                        AssetsData.kProfileDefaultImage,
-                      )),
+            child: state is GetProfilePhotoLoading
+                ? const CircularProgressIndicator(
+                    color: kPrimaryColor,
+                  )
+                : ClipOval(
+                    child: cubitData.hasImage && state is GetProfilePhotoSuccess
+                        ? Image.memory(
+                            cubitData.imageBits!,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            AssetsData.kProfileDefaultImage,
+                          )),
           );
         },
       ),
       Positioned(
         left: 92.w,
-        top: 110.h,
+        top: 105.h,
         child: const Icon(
           Icons.add_a_photo,
           color: kPrimaryColor,

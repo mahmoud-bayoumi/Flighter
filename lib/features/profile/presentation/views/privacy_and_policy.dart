@@ -48,7 +48,7 @@ class PrivacyAndPolicy extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Text(
-                '- Personal Information: When you create an account or book a flight, we may collect details such as your name, email address, phone number, and payment information.\n'
+                '- Personal Information: When you create an account or book a flight, we may collect details such as your name, email address, and payment information.\n'
                 '- Usage Data: We may collect information about how you interact with the app, such as features used, pages visited, and the time spent on the app.\n'
                 '- Device Information: We may collect data about the device you use to access Flighter, including the device model, operating system, and unique device identifiers.',
                 style: TextStyle(
@@ -152,7 +152,7 @@ class PrivacyAndPolicy extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Text(
-                'If you have any questions or concerns about our Privacy Policy, please contact us at support@flighter.com.',
+                'If you have any questions or concerns about our Privacy Policy, please contact us at flighter924@gmail.com.',
                 style: TextStyle(
                   fontSize: 16,
                   height: 1.5,

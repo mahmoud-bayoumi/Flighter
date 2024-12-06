@@ -8,16 +8,33 @@ class TicketsListViewBuilder extends StatelessWidget {
   });
 
   final int flightNumber;
+  final List<String> timeList = const [
+    '08:30 AM',
+    '09:15 AM',
+    '10:00 AM',
+    '10:45 AM',
+    '11:30 AM',
+    '12:15 PM',
+  ];
 
   @override
   Widget build(BuildContext context) {
+    bool firstTime = true;
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: flightNumber,
       itemBuilder: (context, index) {
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 8),
-          child: TicketWidget(),
+        if (firstTime) {
+          firstTime = false;
+        } else {
+          index += 1;
+        }
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: TicketWidget(
+            startTime: timeList[index],
+            endTime: timeList[index + 1],
+          ),
         );
       },
     );

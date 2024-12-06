@@ -6,10 +6,11 @@ class UnabledTextField extends StatefulWidget {
   const UnabledTextField({
     super.key,
     required this.text,
-    required this.icon,
+    required this.icon, required this.textTitle,
   });
   final String text;
   final IconData icon;
+  final String textTitle;
   @override
   State<UnabledTextField> createState() => _UnabledTextFieldState();
 }
@@ -37,7 +38,7 @@ class _UnabledTextFieldState extends State<UnabledTextField> {
             borderRadius: BorderRadius.circular(12),
           ),
           prefixIcon: Icon(widget.icon),
-          label: const Text('Date'),
+          label:  Text(widget.textTitle),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
           ),
