@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,7 +89,6 @@ class CountryAutocompleteDropdown extends StatelessWidget {
     "Iran",
     "Iraq",
     "Ireland",
-    "Israel",
     "Italy",
     "Jamaica",
     "Japan",
@@ -231,7 +232,7 @@ class CountryAutocompleteDropdown extends StatelessWidget {
             });
           },
           onSelected: (String selection) {
-            print('Selected: $selection');
+            log('Selected: $selection');
           },
           fieldViewBuilder: (BuildContext context,
               TextEditingController textEditingController,

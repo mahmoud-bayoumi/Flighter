@@ -35,6 +35,9 @@ class _SignInViewBodyState extends State<SignInViewBody> {
         if (state is SignInSuccess) {
           EasyLoading.dismiss();
           log('SignIn Succes');
+          var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
+          getProfilePhotoCubit.getProfilePhoto();
+     
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else if (state is SignInFailure) {
           EasyLoading.dismiss();
@@ -93,12 +96,11 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   cubitData.isLoading == false
                       ? CustomButton(
                           text: 'SIGN IN',
-                          onPressed: () async {
-                             var getProfilePhotoCubit =
-                                 context.read<GetProfilePhotoCubit>();
-                                 getProfilePhotoCubit.getProfilePhoto();
+                          onPressed: () {
+                            var getProfilePhotoCubit =
+                                context.read<GetProfilePhotoCubit>();
+                            getProfilePhotoCubit.getProfilePhoto();
                             cubitData.vaildateUserInput();
-                            
                             // call logic cubit
                           },
                         )
