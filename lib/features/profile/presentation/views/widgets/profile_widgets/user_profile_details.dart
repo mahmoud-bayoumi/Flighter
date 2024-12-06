@@ -39,7 +39,7 @@ class UserProfileDetails extends StatelessWidget {
                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
               } else if (state is DeleteProfilePhotoLoading) {
-                EasyLoading.show(status: 'Loading...'); 
+                EasyLoading.show(status: 'Loading...');
               } else if (state is DeleteProfilePhotoSuccess) {
                 EasyLoading.dismiss();
                 deleteProfilePhotoSuccess(context);
@@ -59,7 +59,12 @@ class UserProfileDetails extends StatelessWidget {
                       builder: (context, state) {
                         return ClipOval(
                             child: cubitData.hasImage
-                                ? Image.memory(cubitData.imageBits!)
+                                ? Image.memory(
+                                    cubitData.imageBits!,
+                                    fit: BoxFit.fill,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                  )
                                 : Image.asset(
                                     AssetsData.kProfileDefaultImage,
                                   ));
