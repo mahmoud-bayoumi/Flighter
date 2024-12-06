@@ -10,9 +10,8 @@ import '../../../view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart
 class UserProfileDetails extends StatelessWidget {
   const UserProfileDetails({
     super.key,
-    required this.userName,
   });
-  final String userName;
+
   @override
   Widget build(BuildContext context) {
     var cubitData = context.read<GetProfilePhotoCubit>();
