@@ -97,8 +97,10 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                       ? CustomButton(
                           text: 'SIGN IN',
                           onPressed: () {
+                            var getProfilePhotoCubit =
+                                context.read<GetProfilePhotoCubit>();
+                            getProfilePhotoCubit.getProfilePhoto();
                             cubitData.vaildateUserInput();
-
                             // call logic cubit
                           },
                         )

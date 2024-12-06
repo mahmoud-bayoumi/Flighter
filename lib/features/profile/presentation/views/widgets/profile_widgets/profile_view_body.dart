@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_divider.dart';
@@ -9,10 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/functions/capitalize_word.dart';
 import '../../../../../../core/utils/secure_storage.dart';
 import '../../../../../../core/widgets/primary_container.dart';
+import '../../../view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'logout_button.dart';
 import 'profile_text_title.dart';
 import 'text_profile_button.dart';
@@ -24,6 +23,11 @@ class ProfileViewBody extends StatelessWidget {
       const SecureStorageService();
   @override
   Widget build(BuildContext context) {
+    var getData = context.read<GetProfileDataCubit>();
+    getData.getProfile();
+    String userName = getData.profileData!.name!;
+    userName = capitalizeEachWord(userName);
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Stack(
@@ -63,7 +67,9 @@ class ProfileViewBody extends StatelessWidget {
                     SizedBox(
                       height: 30.h,
                     ),
-                    const UserProfileDetails(),
+                    UserProfileDetails(
+                      userName: userName,
+                    ),
                     SizedBox(
                       height: 20.h,
                     ),
