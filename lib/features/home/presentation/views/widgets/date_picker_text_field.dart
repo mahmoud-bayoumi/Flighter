@@ -21,7 +21,6 @@ class _DatePickerTextFieldState extends State<DatePickerTextField> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     DateTime defaultStartDate = DateTime.now();
     DateTime defaultEndDate = defaultStartDate.add(const Duration(days: 3));
