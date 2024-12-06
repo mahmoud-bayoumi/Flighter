@@ -5,6 +5,7 @@ import 'package:flighter/core/utils/functions/custom_outline_input_border.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
+import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flighter/features/profile/presentation/view_model/update_profile_cubit/update_profile_cubit.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/edit_profile_widgets/edit_profile_date_picker.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/edit_profile_widgets/edit_profile_image_picker.dart';
@@ -19,14 +20,19 @@ class EditProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubitData = context.read<GetProfileDataCubit>();
-
     var updateCubit = context.read<UpdateProfileCubit>();
 
     updateCubit.name.text = cubitData.profileData!.name!;
     updateCubit.dateOfBirth.text = cubitData.profileData!.dateOfBirth ?? '';
     updateCubit.country.text = cubitData.profileData!.country ?? 'Egypt';
 
-    return BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
+    return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
+      listener: (context, state) {
+        if (state is UpdateProfileSuccess) {
+          var getProfilePhoto = context.read<GetProfilePhotoCubit>();
+          getProfilePhoto.getProfilePhoto();
+        }
+      },
       builder: (context, state) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),

@@ -42,24 +42,4 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       },
     );
   }
-
-  Future pickImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
-      //  final imageTemporary = File(image.path);
-      imageFile = File(image.path);
-      final imagePermanent = await saveImagePermanently(
-          image.path); // this one it will be send to the backend endpoint
-    } on PlatformException catch (e) {
-      log('Failed to pick iamge : $e');
-    }
-  }
-
-  Future<File> saveImagePermanently(String imagePath) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final name = basename(imagePath);
-    final image = File('${directory.path}/$name');
-    return File(imagePath).copy(image.path);
-  }
 }
