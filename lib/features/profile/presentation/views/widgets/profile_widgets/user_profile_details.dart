@@ -1,7 +1,10 @@
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 
 class UserProfileDetails extends StatelessWidget {
   const UserProfileDetails({
@@ -10,6 +13,7 @@ class UserProfileDetails extends StatelessWidget {
   final String userName;
   @override
   Widget build(BuildContext context) {
+    var cubitData = context.read<GetProfilePhotoCubit>();
     return SizedBox(
       width: MediaQuery.sizeOf(context).width * .91,
       child: Row(children: [
@@ -43,7 +47,7 @@ class UserProfileDetails extends StatelessWidget {
           width: 5.w,
         ),
         Text(
-          userName,
+          'John Smith',
           style: Styles.textStyle18
               .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
         ),

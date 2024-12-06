@@ -27,6 +27,33 @@ class ApiService {
     }
   }
 
+  Future<dynamic> getRequestForImage(
+      {required String endPoint, required String token}) async {
+    try {
+      final response = await _dio.get(
+        '$baseUrl$endPoint',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+          responseType: ResponseType.bytes,
+        ),
+      );
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        return 'No profile photo available.';
+      }
+    } on DioException catch (e) {
+      log("Request Error: $e");
+      return e.response?.data ?? 'UnExpected Error';
+    } catch (e) {
+      log("General Error in post: $e");
+      return 'UnExpected Error';
+    }
+  }
+
   // POST request method
   Future<Map<String, dynamic>> post(
       {required String endPoint, required data}) async {

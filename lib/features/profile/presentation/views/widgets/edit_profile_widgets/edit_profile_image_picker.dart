@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +43,7 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
         this.image = imagePermanent;
       });
     } on PlatformException catch (e) {
-      print('Failed to pick iamge : $e');
+      log('Failed to pick iamge : $e');
     }
   }
 
