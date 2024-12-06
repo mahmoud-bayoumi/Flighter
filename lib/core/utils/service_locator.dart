@@ -9,6 +9,7 @@ import 'package:flighter/features/profile/data/repos/delete_account_repo/delete_
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo_impl.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/profile/data/repos/change_password_repo/change_password_repo_impl.dart';
+import '../../features/profile/data/repos/delete_profile_photo_repo/delete_profile_photo_repo_impl.dart';
 import '../../features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
 import 'api_service.dart';
 
@@ -45,4 +46,7 @@ void setupServerLocator() {
 
   getIt.registerSingleton<GetProfileDataRepoImpl>(
       GetProfileDataRepoImpl(apiService: getIt.get<ApiService>()));
+
+  getIt.registerSingleton<DeleteProfilePhotoRepoImpl>(
+      DeleteProfilePhotoRepoImpl(apiService: getIt.get<ApiService>()));
 }
