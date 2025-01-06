@@ -6,7 +6,6 @@ import 'package:flighter/core/widgets/custom_text_form_field.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
-import 'package:flighter/features/auth/presentation/views/widgets/social_auth_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -99,18 +98,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                           },
                         ),
                   SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    'or sign up with',
-                    style: Styles.textStyle16.copyWith(color: kGreyColor),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  const SocialAuthButtons(),
-                  SizedBox(
-                    height: 15.h,
+                    height: 40.h,
                   ),
                   AuthTextButton(
                     authDesc: 'Have an account?',
