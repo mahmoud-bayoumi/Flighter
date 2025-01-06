@@ -21,7 +21,7 @@ class VerifyResetPassCodeCubit extends Cubit<VerifyResetPassCodeState> {
     emit(VerifyResetPassCodeLoading());
     log('Verify loading');
     var response = await verifyResetPassCodeRepo.verifyResetPassCode(
-        email: email,
+        email: email.trim(),
         code: '${code1.text}${code2.text}${code3.text}${code4.text}');
 
     response.fold(

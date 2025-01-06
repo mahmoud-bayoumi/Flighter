@@ -22,9 +22,9 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     log('Loading update profile');
     var data = await _updateProfileRepoImpl.updateProfile(
       profilePhoto: imageFile,
-      name: name.text,
-      dateOfBirth: dateOfBirth.text,
-      country: country.text,
+      name: name.text.trim(),
+      dateOfBirth: dateOfBirth.text.trim(),
+      country: country.text.trim(),
     );
 
     data.fold(

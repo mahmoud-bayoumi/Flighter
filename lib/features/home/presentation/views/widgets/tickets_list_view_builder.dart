@@ -15,6 +15,8 @@ class TicketsListViewBuilder extends StatelessWidget {
     '10:45 AM',
     '11:30 AM',
     '12:15 PM',
+    '01:00 PM',
+    '01:45 PM',
   ];
 
   @override
@@ -27,13 +29,13 @@ class TicketsListViewBuilder extends StatelessWidget {
         if (firstTime) {
           firstTime = false;
         } else {
-          index += 1;
+          index;
         }
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: TicketWidget(
             startTime: timeList[index],
-            endTime: timeList[index + 1],
+            endTime: timeList[(index + 1) % 8],
           ),
         );
       },

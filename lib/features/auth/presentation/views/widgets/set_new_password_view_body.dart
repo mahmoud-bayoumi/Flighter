@@ -11,8 +11,8 @@ import '../../../../../constants.dart';
 import '../../../../../core/widgets/custom_button.dart';
 
 class SetNewPasswordBody extends StatefulWidget {
-  const SetNewPasswordBody({super.key});
-
+  const SetNewPasswordBody({super.key, required this.email});
+  final String email;
   @override
   State<SetNewPasswordBody> createState() => _SetNewPasswordBodyState();
 }
@@ -22,7 +22,7 @@ class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
   Widget build(BuildContext context) {
     var cubitData = context.read<ResetPasswordCubit>();
     return BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is ResetPasswordLoading) {
           EasyLoading.show(status: 'loading...');
           log('sendReset lodaing');
@@ -75,6 +75,7 @@ class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
                   CustomButton(
                     text: 'Update Password',
                     onPressed: () {
+                      cubitData.emailController.text = widget.email;
                       cubitData.vaildateUserInput();
                     },
                     height: 73,

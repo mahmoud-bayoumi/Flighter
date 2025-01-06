@@ -20,7 +20,7 @@ class SendResetPasswordCodeCubit
     emit(SendResetPasswordCodeCubitLoading());
 
     var response = await sendResetPasswordCodeRepo.sendResetPassCode(
-        email: emailController.text);
+        email: emailController.text.trim());
     response.fold(
       (failure) {
         isLoading = false;

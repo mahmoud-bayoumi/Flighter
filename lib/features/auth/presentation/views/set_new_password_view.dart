@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetNewPasswordView extends StatelessWidget {
-  const SetNewPasswordView({super.key});
-
+  const SetNewPasswordView({super.key, required this.email});
+  final String email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +16,7 @@ class SetNewPasswordView extends StatelessWidget {
         child: BlocProvider(
           create: (context) =>
               ResetPasswordCubit(getIt.get<ResetPasswordRepoImpl>()),
-          child: const SetNewPasswordBody(),
+          child:  SetNewPasswordBody(email: email,),
         ),
       ),
     );

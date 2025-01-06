@@ -78,9 +78,13 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: kSetNewPasswordView,
-        builder: (context, state) => const SetNewPasswordView(),
-      ),
+          path: kSetNewPasswordView,
+          builder: (context, state) {
+            final email = state.extra as String;
+            return SetNewPasswordView(
+              email: email,
+            );
+          }),
       GoRoute(
         path: kNavigation,
         builder: (context, state) => const BottomNavigationBarView(),

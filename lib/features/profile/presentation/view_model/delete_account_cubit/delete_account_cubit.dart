@@ -14,7 +14,7 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState> {
   Future<void> deleteAccount() async {
     emit(DeleteAccountLoading());
     var data =
-        await _deleteAccountRepoImpl.deleteAccount(password: password.text);
+        await _deleteAccountRepoImpl.deleteAccount(password: password.text.trim());
 
     data.fold(
       (error) {

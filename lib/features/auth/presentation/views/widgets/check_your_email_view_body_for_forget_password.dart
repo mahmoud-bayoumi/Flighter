@@ -46,7 +46,8 @@ class _CheckYourEmailBodyForForgetPassState
         if (state is VerifyResetPassCodeSuccess) {
           EasyLoading.dismiss();
           log('Verify Success');
-          GoRouter.of(context).push(AppRouter.kSetNewPasswordView);
+          GoRouter.of(context)
+              .push(AppRouter.kSetNewPasswordView, extra: widget.email);
         } else if (state is VerifyResetPassCodeFailure) {
           log('Verify Failure');
           EasyLoading.dismiss();

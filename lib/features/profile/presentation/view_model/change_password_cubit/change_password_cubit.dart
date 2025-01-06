@@ -15,9 +15,9 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   Future<void> changePassword() async {
     emit(ChangePasswordLoading());
     var response = await changePasswordRepo.changePassword(
-        oldPassword: oldPassword.text,
-        newPassword: newPassword.text,
-        confirmNewPassword: confirmNewPassword.text);
+        oldPassword: oldPassword.text.trim(),
+        newPassword: newPassword.text.trim(),
+        confirmNewPassword: confirmNewPassword.text.trim());
     response.fold((failure) {
       emit(ChangePasswordFailure(errMessage: failure.errMessage));
     }, (response) {

@@ -10,6 +10,7 @@ part 'reset_password_state.dart';
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   final ResetPasswordRepo resetPasswordRepo;
   final formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmNewPasswordController =
       TextEditingController();
@@ -18,6 +19,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     emit(ResetPasswordLoading());
     log('Reset Loading');
     var response = await resetPasswordRepo.resetPassword(
+        email: emailController.text,
         newPassword: newPasswordController.text,
         confirmNewPassword: confirmNewPasswordController.text);
     return response.fold(
