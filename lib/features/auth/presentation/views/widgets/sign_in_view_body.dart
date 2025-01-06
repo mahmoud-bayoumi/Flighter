@@ -78,7 +78,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   CustomTextFormField(
                       textEditingController: cubitData.emailController,
                       text: 'Email',
-                      hintText: 'jon.smith@gmail.com'),
+                      hintText: 'ex:jon_smith@gmail.com'),
                   SizedBox(
                     height: 20.h,
                   ),

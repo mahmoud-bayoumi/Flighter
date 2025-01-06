@@ -123,7 +123,7 @@ AwesomeDialog addPaymentDoneDialog(BuildContext context) {
     dialogType: DialogType.success,
     animType: AnimType.scale,
     title: 'Successful',
-    desc: 'Payment done successfully.',
+    desc: 'Payment added successfully.',
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: kPrimaryColor,
     titleTextStyle: Styles.textStyle24,

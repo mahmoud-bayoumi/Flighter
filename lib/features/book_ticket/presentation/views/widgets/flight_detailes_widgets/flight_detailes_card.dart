@@ -45,7 +45,7 @@ class FlightDetailesCard extends StatelessWidget {
                 ),
                 Positioned(
                   top: 310.h,
-                  left: 25.w,
+                  left: MediaQuery.sizeOf(context).width * .065,
                   child: SizedBox(
                     width: MediaQuery.sizeOf(context).width,
                     child: Divider(
@@ -58,12 +58,12 @@ class FlightDetailesCard extends StatelessWidget {
                 ),
                 Positioned(
                   top: 350.h,
-                  left: 30.w,
+                  left: MediaQuery.sizeOf(context).width * .15,
                   child: const RowFlightDetailes(),
                 ),
                 Positioned(
                   top: 450.h,
-                  left: 25.w,
+                  left: MediaQuery.sizeOf(context).width * .065,
                   child: SizedBox(
                     width: MediaQuery.sizeOf(context).width,
                     child: Divider(
@@ -76,7 +76,7 @@ class FlightDetailesCard extends StatelessWidget {
                 ),
                 Positioned(
                   top: 500.h,
-                  left: 40.w,
+                  left: MediaQuery.sizeOf(context).width * .17,
                   child: Text(
                     '230222-BE143',
                     style: Styles.textStyle45.copyWith(color: Colors.black),

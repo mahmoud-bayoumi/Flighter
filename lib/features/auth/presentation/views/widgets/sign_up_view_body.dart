@@ -67,7 +67,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   ),
                   CustomTextFormField(
                     text: 'Email',
-                    hintText: 'ex: jon.smith@email.com',
+                    hintText: 'ex:jon_smith@email.com',
                     textEditingController: cubitData.emailController,
                   ),
                   SizedBox(

@@ -14,6 +14,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/utils/functions/show_snack_bar.dart';
+
 class CheckYourEmailBody extends StatefulWidget {
   const CheckYourEmailBody({
     super.key,
@@ -84,9 +86,17 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                   SizedBox(
                     height: 30.h,
                   ),
-                  const AuthTextButton(
-                      authDesc: 'Haven’t got the email yet?',
-                      authButtonName: 'Resend email')
+                  AuthTextButton(
+                    authDesc: 'Haven’t got the email yet?',
+                    authButtonName: 'Resend email',
+                    onPressed: () {
+                      showSnackBar(
+                        context,
+                        message:
+                            'Check your email. We sent your verification code again!',
+                      );
+                    },
+                  )
                 ],
               ),
             ),

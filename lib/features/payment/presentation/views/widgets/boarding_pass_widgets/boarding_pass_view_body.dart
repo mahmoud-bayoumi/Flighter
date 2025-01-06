@@ -20,7 +20,7 @@ class BoardingPassViewBody extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 60),
             child: NamewithDivider(
-              name: 'Yasser Osama',
+              name: 'Jon Smith',
             ),
           ),
           SizedBox(
@@ -52,7 +52,7 @@ class BoardingPassViewBody extends StatelessWidget {
             height: 20.h,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 40.w, right: 20.w),
+            padding: EdgeInsets.only(left: 60.w, right: 20.w),
             child: const RowFlightDetailes(),
           ),
           SizedBox(

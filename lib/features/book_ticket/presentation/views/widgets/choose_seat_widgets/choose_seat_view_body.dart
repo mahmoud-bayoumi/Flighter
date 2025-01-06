@@ -51,7 +51,7 @@ class ChooseSeatViewBody extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 25.w),
               child: CustomButton(
                 text: 'Confirm',
-                height: 90.h,
+                height: 70.h,
                 onPressed: () {
                   GoRouter.of(context).push(AppRouter.kFlightDetailes);
                 },
