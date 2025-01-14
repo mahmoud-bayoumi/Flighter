@@ -238,7 +238,7 @@ class CountryAutocompleteDropdown extends StatelessWidget {
           },
           fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
             return TextFormField(
-              controller: controller,
+              controller: countryController,
               focusNode: focusNode,
               decoration: InputDecoration(
                 hintText: 'Enter your country',
