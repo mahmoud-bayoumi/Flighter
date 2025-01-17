@@ -101,7 +101,7 @@ class UserProfileDetails extends StatelessWidget {
               width: MediaQuery.sizeOf(context).width * 0.5,
               child: Text(
                 overflow: TextOverflow.ellipsis,
-                name,
+                name.split(' ')[0],
                 style: Styles.textStyle18
                     .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
               ),
