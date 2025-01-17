@@ -10,7 +10,6 @@ import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sig
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/forgot_password_text_button.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
-import 'package:flighter/features/auth/presentation/views/widgets/social_auth_buttons.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +43,13 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           errorDialog(context, state.errMessage);
           log('SignIn Failure');
         } else if (state is SignInLoading) {
+            EasyLoading.instance
+            ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+            ..loadingStyle = EasyLoadingStyle.dark
+            ..maskType = EasyLoadingMaskType
+                .black // Prevents clicks by adding a modal barrier
+            ..dismissOnTap =
+                false; // Optional: Prevents dismissing the loader on tap
           EasyLoading.show(status: 'loading...');
           log('SignIn Loading');
         }
@@ -79,7 +85,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   CustomTextFormField(
                       textEditingController: cubitData.emailController,
                       text: 'Email',
-                      hintText: 'jon.smith@gmail.com'),
+                      hintText: 'ex:jon_smith@gmail.com'),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -91,34 +97,20 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                         .push(AppRouter.kForgotPasswordView),
                   ),
                   SizedBox(
-                    height: 12.h,
+                    height: 20.h,
                   ),
                   cubitData.isLoading == false
                       ? CustomButton(
                           text: 'SIGN IN',
-                          onPressed: () {
+                          onPressed:  () {
                             cubitData.vaildateUserInput();
-                           
-
-                            // call logic cubit
                           },
                         )
                       : const CircularProgressIndicator(
                           color: kPrimaryColor,
                         ),
                   SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    'or sign in with',
-                    style: Styles.textStyle16.copyWith(color: kGreyColor),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  const SocialAuthButtons(),
-                  SizedBox(
-                    height: 15.h,
+                    height: 40.h,
                   ),
                   AuthTextButton(
                     authDesc: 'Dont\' have an account?',

@@ -5,5 +5,5 @@ import '../../../../../profile/data/models/change_password_model.dart';
 
 abstract class ResetPasswordRepo {
   Future<Either<Failure, ChangePasswordModel>> resetPassword(
-      {required String newPassword, required String confirmNewPassword});
+      {required String email , required String newPassword, required String confirmNewPassword});
 }

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../../core/utils/functions/custom_outline_input_border.dart';
 import '../../../../../../core/utils/styles.dart';
 
@@ -202,23 +203,24 @@ class CountryAutocompleteDropdown extends StatelessWidget {
     "Zimbabwe",
   ];
 
-  const CountryAutocompleteDropdown(
-      {super.key, required this.countryController});
   final TextEditingController countryController;
+
+  const CountryAutocompleteDropdown({
+    super.key,
+    required this.countryController,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Country/Region',
-            style: Styles.textStyle20,
-          ),
+        Text(
+          'Country/Region',
+          style: Styles.textStyle20,
         ),
-        SizedBox(
-          height: 20.h,
-        ),
+        SizedBox(height: 20.h),
+        // Autocomplete Field
         Autocomplete<String>(
           optionsBuilder: (TextEditingValue textEditingValue) {
             if (textEditingValue.text.isEmpty) {
@@ -231,17 +233,15 @@ class CountryAutocompleteDropdown extends StatelessWidget {
             });
           },
           onSelected: (String selection) {
+            countryController.text = selection;
             log('Selected: $selection');
           },
-          fieldViewBuilder: (context, controler, focusNode, onFieldSubmitted) {
+          fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
             return TextFormField(
-              onSaved: (newValue) {
-                countryController.text = newValue ?? 'Egypt';
-              },
               controller: countryController,
               focusNode: focusNode,
               decoration: InputDecoration(
-                hintText: 'Enter your country here',
+                hintText: 'Enter your country',
                 border: customOutlineInputBorder(color: kPrimaryColor),
                 enabledBorder: customOutlineInputBorder(color: kPrimaryColor),
                 focusedBorder: customOutlineInputBorder(color: kPrimaryColor),
@@ -249,6 +249,8 @@ class CountryAutocompleteDropdown extends StatelessWidget {
             );
           },
         ),
+        const SizedBox(height: 10),
+        // Dropdown Menu
       ],
     );
   }

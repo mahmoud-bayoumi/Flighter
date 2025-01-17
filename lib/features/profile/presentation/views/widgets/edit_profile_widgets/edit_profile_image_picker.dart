@@ -44,6 +44,7 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
           image.path); // this one it will be send to the backend endpoint
 
       context.read<UpdateProfileCubit>().imageFile = imagePermanent;
+
       setState(() {
         this.image = imagePermanent;
       });

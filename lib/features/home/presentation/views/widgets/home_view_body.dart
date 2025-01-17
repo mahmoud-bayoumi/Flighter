@@ -44,9 +44,13 @@ class HomeViewBody extends StatelessWidget {
                 const PrimaryContainer(),
                 Padding(
                   padding: EdgeInsets.only(top: 45.h, left: 10.w),
-                  child: Text(
-                    'Hello, ${capitalizeFirstLetter(userName)}',
-                    style: Styles.textStyle24.copyWith(color: Colors.white),
+                  child: SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.5,
+                    child: Text(
+                      overflow: TextOverflow.ellipsis, 
+                      'Hello, ${capitalizeFirstLetter(userName.split(' ')[0])}',
+                      style: Styles.textStyle24.copyWith(color: Colors.white),
+                    ),
                   ),
                 ),
                 Positioned(

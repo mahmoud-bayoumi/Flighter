@@ -97,10 +97,14 @@ class UserProfileDetails extends StatelessWidget {
         ),
         BlocBuilder<GetProfileDataCubit, GetProfileDataState>(
           builder: (context, state) {
-            return Text(
-              name,
-              style: Styles.textStyle18
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+            return SizedBox(
+              width: MediaQuery.sizeOf(context).width * 0.5,
+              child: Text(
+                overflow: TextOverflow.ellipsis,
+                name.split(' ')[0],
+                style: Styles.textStyle18
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
             );
           },
         ),

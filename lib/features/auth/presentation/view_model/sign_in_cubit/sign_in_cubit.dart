@@ -29,7 +29,7 @@ class SignInCubit extends Cubit<SignInState> {
     Either<Failure, SignInModel> response;
     try {
       response = await signInRepo.signIn(
-          email: emailController.text, password: passwordController.text);
+          email: emailController.text.trim(), password: passwordController.text.trim());
     } catch (e) {
       throw Exception(e.toString());
     }

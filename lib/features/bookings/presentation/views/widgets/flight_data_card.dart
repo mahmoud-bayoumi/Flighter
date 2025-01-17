@@ -33,7 +33,7 @@ class FlightDataCard extends StatelessWidget {
                 child: IconButton(
                     onPressed: () async {
                       const String bookingDate = 'Saturday, December 18, 2024';
-                      const String guestName = 'Yasser Bayoumi';
+                      const String guestName = 'Jon Smith';
                       const String from = 'Cairo';
                       const String to = 'Alexanderia';
                       const String airline = 'Cario Airlines';

@@ -8,6 +8,7 @@ class EmailCardFormField extends StatelessWidget {
     required this.controller,
   });
   final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,6 +27,10 @@ class EmailCardFormField extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'This Field is Required';
+          }
+          if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+              .hasMatch(value)) {
+            return 'Invalid email format';
           }
           return null;
         },

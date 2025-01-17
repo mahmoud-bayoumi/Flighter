@@ -22,10 +22,10 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> signUpUser() async {
     emit(SignUpLoading());
     var data = await signUpRepoImpl.signUp(
-        name: nameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-        confirmPassword: confirmPasswordController.text);
+        name: nameController.text.trim(),
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+        confirmPassword: confirmPasswordController.text.trim());
 
     data.fold(
       (error) {

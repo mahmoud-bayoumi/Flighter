@@ -5,32 +5,46 @@ import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-AwesomeDialog successDialog(BuildContext context, bool navgToSplash) {
-  return AwesomeDialog(
+void successDialog(BuildContext context, bool navgToSplash) {
+  showDialog(
     context: context,
-    dialogType: DialogType.noHeader,
-    animType: AnimType.scale,
-    title: 'Successful',
-    desc: 'Your password has been changed. Click Continue.',
-    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
-    btnOkColor: kPrimaryColor,
-    titleTextStyle: Styles.textStyle24,
-    descTextStyle: Styles.textStyle16.copyWith(
-      color: kGreyColor,
-    ),
-    padding: const EdgeInsets.all(10),
-    btnOk: CustomButton(
-      text: 'Continue',
-      onPressed: () {
-        Navigator.pop(context);
-        if (navgToSplash) {
-          GoRouter.of(context).pushReplacement('/');
-        } else {
-          GoRouter.of(context).pop();
-        }
-      },
-    ),
-  )..show();
+    barrierDismissible: false, // Prevent outside tap dismissal
+    builder: (BuildContext context) {
+      return WillPopScope(
+        onWillPop: () async {
+          // Prevent dismissal via the back button
+          return false;
+        },
+        child: AlertDialog(
+          title: Text(
+            'Successful',
+            textAlign: TextAlign.center,
+            style: Styles.textStyle24,
+          ),
+          content: Text(
+            'Your password has been changed. Click Continue.',
+            textAlign: TextAlign.center,
+            style: Styles.textStyle16.copyWith(
+              color: kGreyColor,
+            ),
+          ),
+          actions: [
+            CustomButton(
+              text: 'Continue',
+              onPressed: () {
+                Navigator.pop(context);
+                if (navgToSplash) {
+                  GoRouter.of(context).pushReplacement('/');
+                } else {
+                  GoRouter.of(context).pop();
+                }
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
 
 AwesomeDialog changeSaveDialog(BuildContext context) {
@@ -109,7 +123,7 @@ AwesomeDialog addPaymentDoneDialog(BuildContext context) {
     dialogType: DialogType.success,
     animType: AnimType.scale,
     title: 'Successful',
-    desc: 'Payment done successfully.',
+    desc: 'Payment added successfully.',
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: kPrimaryColor,
     titleTextStyle: Styles.textStyle24,
