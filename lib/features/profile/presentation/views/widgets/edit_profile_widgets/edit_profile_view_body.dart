@@ -62,7 +62,6 @@ class EditProfileViewBody extends StatelessWidget {
                       onSaved: (newValue) {
                         updateCubit.name.text = newValue!;
                       },
-                     
                       controller: updateCubit.name,
                       decoration: InputDecoration(
                         hintText: 'Enter your name here',

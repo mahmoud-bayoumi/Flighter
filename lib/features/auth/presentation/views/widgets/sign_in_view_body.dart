@@ -43,6 +43,13 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           errorDialog(context, state.errMessage);
           log('SignIn Failure');
         } else if (state is SignInLoading) {
+            EasyLoading.instance
+            ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+            ..loadingStyle = EasyLoadingStyle.dark
+            ..maskType = EasyLoadingMaskType
+                .black // Prevents clicks by adding a modal barrier
+            ..dismissOnTap =
+                false; // Optional: Prevents dismissing the loader on tap
           EasyLoading.show(status: 'loading...');
           log('SignIn Loading');
         }
@@ -95,7 +102,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   cubitData.isLoading == false
                       ? CustomButton(
                           text: 'SIGN IN',
-                          onPressed: () {
+                          onPressed:  () {
                             cubitData.vaildateUserInput();
                           },
                         )

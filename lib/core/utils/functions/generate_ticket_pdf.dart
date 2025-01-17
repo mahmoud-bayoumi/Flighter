@@ -31,7 +31,7 @@ Future<void> generateTicketPDF({
   final egyImage =
       pw.MemoryImage(egyImageBytes); // assets/images/flyEmeraites.png
   pdf.addPage(
-    pw.Page(
+    pw.Page( 
       build: (pw.Context context) {
         return pw.Container(
           child: pw.Column(
