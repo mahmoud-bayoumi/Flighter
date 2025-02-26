@@ -28,8 +28,9 @@ class SignInViewBody extends StatefulWidget {
   State<SignInViewBody> createState() => _SignInViewBodyState();
 }
 
+bool isConnectedToInternet = true;
+
 class _SignInViewBodyState extends State<SignInViewBody> {
-  bool isConnectedToInternet = false;
   StreamSubscription? _internetConnectionStreamSubscription;
   @override
   void initState() {
