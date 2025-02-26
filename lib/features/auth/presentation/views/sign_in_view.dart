@@ -17,14 +17,13 @@ class SignInView extends StatefulWidget {
 }
 
 class _SignInViewState extends State<SignInView> {
-   StreamSubscription? _internetConnectionStreamSubscription;
+  StreamSubscription? _internetConnectionStreamSubscription;
   @override
   void initState() {
     super.initState();
     _internetConnectionStreamSubscription =
         InternetConnection().onStatusChange.listen(
       (event) {
-   
         switch (event) {
           case InternetStatus.connected:
             setState(() {
@@ -51,14 +50,18 @@ class _SignInViewState extends State<SignInView> {
     _internetConnectionStreamSubscription?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    return isConnectedToInternet ?  Scaffold(
-      body: SafeArea(
-          child: BlocProvider(
-        create: (context) => SignInCubit(getIt.get<SignInRepoImpl>()),
-        child: const SignInViewBody(),
-      )),
-    ) : NoInternetConnectionView();
+    return isConnectedToInternet
+        ? Scaffold(
+            body: SafeArea(
+              child: BlocProvider(
+                create: (context) => SignInCubit(getIt.get<SignInRepoImpl>()),
+                child: const SignInViewBody(),
+              ),
+            ),
+          )
+        : const NoInternetConnectionView();
   }
 }
