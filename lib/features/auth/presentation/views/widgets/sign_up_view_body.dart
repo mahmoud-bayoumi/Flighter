@@ -9,6 +9,7 @@ import 'package:flighter/core/widgets/no_internet_connection_view.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
+import 'package:flighter/features/auth/presentation/views/widgets/sign_in_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -25,11 +26,10 @@ class SignUpViewBody extends StatefulWidget {
 }
 
 class _SignUpViewBodyState extends State<SignUpViewBody> {
-  bool isConnectedToInternet = false;
   StreamSubscription? _internetConnectionStreamSubscription;
-
   @override
   void initState() {
+    super.initState();
     _internetConnectionStreamSubscription =
         InternetConnection().onStatusChange.listen(
       (event) {
@@ -44,7 +44,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             setState(() {
               isConnectedToInternet = false;
             });
-
             break;
           default:
             setState(() {
@@ -54,7 +53,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
         }
       },
     );
-    super.initState();
   }
 
   @override
