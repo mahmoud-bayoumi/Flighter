@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
@@ -16,7 +17,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import '../../../../../core/utils/assets_data.dart';
+import '../../../../../core/widgets/no_internet_connection_view.dart';
 
 class SignInViewBody extends StatefulWidget {
   const SignInViewBody({super.key});
@@ -26,107 +29,146 @@ class SignInViewBody extends StatefulWidget {
 }
 
 class _SignInViewBodyState extends State<SignInViewBody> {
+  bool isConnectedToInternet = false;
+  StreamSubscription? _internetConnectionStreamSubscription;
+  @override
+  void initState() {
+    super.initState();
+    _internetConnectionStreamSubscription =
+        InternetConnection().onStatusChange.listen(
+      (event) {
+        log(event.toString());
+        switch (event) {
+          case InternetStatus.connected:
+            setState(() {
+              isConnectedToInternet = true;
+            });
+            break;
+          case InternetStatus.disconnected:
+            setState(() {
+              isConnectedToInternet = false;
+            });
+
+            break;
+          default:
+            setState(() {
+              isConnectedToInternet = false;
+            });
+            break;
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _internetConnectionStreamSubscription?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var cubitData = context.read<SignInCubit>();
-    return BlocConsumer<SignInCubit, SignInState>(
-      listener: (context, state) {
-        if (state is SignInSuccess) {
-          EasyLoading.dismiss();
-          log('SignIn Succes');
-          var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
-          getProfilePhotoCubit.getProfilePhoto();
+    return isConnectedToInternet
+        ? BlocConsumer<SignInCubit, SignInState>(
+            listener: (context, state) {
+              if (state is SignInSuccess) {
+                EasyLoading.dismiss();
+                log('SignIn Succes');
+                var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
+                getProfilePhotoCubit.getProfilePhoto();
 
-          GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
-        } else if (state is SignInFailure) {
-          EasyLoading.dismiss();
-          errorDialog(context, state.errMessage);
-          log('SignIn Failure');
-        } else if (state is SignInLoading) {
-            EasyLoading.instance
-            ..indicatorType = EasyLoadingIndicatorType.fadingCircle
-            ..loadingStyle = EasyLoadingStyle.dark
-            ..maskType = EasyLoadingMaskType
-                .black // Prevents clicks by adding a modal barrier
-            ..dismissOnTap =
-                false; // Optional: Prevents dismissing the loader on tap
-          EasyLoading.show(status: 'loading...');
-          log('SignIn Loading');
-        }
-      },
-      builder: (context, state) {
-        return SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Form(
-              key: cubitData.formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Image.asset(
-                    AssetsData.kLogo,
-                    width: 160.w,
-                    height: 160.h,
-                  ),
-                  SizedBox(
-                    height: 25.h,
-                  ),
-                  Text(
-                    'Sign in your account',
-                    style: Styles.textStyle35,
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  CustomTextFormField(
-                      textEditingController: cubitData.emailController,
-                      text: 'Email',
-                      hintText: 'ex:jon_smith@gmail.com'),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  PasswordTextFormField(
-                      controller: cubitData.passwordController,
-                      text: 'Password'),
-                  ForgotPasswordTextButton(
-                    onPressed: () => GoRouter.of(context)
-                        .push(AppRouter.kForgotPasswordView),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  cubitData.isLoading == false
-                      ? CustomButton(
-                          text: 'SIGN IN',
-                          onPressed:  () {
-                            cubitData.vaildateUserInput();
-                          },
-                        )
-                      : const CircularProgressIndicator(
-                          color: kPrimaryColor,
+                GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
+              } else if (state is SignInFailure) {
+                EasyLoading.dismiss();
+                errorDialog(context, state.errMessage);
+                log('SignIn Failure');
+              } else if (state is SignInLoading) {
+                EasyLoading.instance
+                  ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+                  ..loadingStyle = EasyLoadingStyle.dark
+                  ..maskType = EasyLoadingMaskType
+                      .black // Prevents clicks by adding a modal barrier
+                  ..dismissOnTap =
+                      false; // Optional: Prevents dismissing the loader on tap
+                EasyLoading.show(status: 'loading...');
+                log('SignIn Loading');
+              }
+            },
+            builder: (context, state) {
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Form(
+                    key: cubitData.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 40.h,
                         ),
-                  SizedBox(
-                    height: 40.h,
+                        Image.asset(
+                          AssetsData.kLogo,
+                          width: 160.w,
+                          height: 160.h,
+                        ),
+                        SizedBox(
+                          height: 25.h,
+                        ),
+                        Text(
+                          'Sign in your account',
+                          style: Styles.textStyle35,
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        CustomTextFormField(
+                            textEditingController: cubitData.emailController,
+                            text: 'Email',
+                            hintText: 'ex:jon_smith@gmail.com'),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        PasswordTextFormField(
+                            controller: cubitData.passwordController,
+                            text: 'Password'),
+                        ForgotPasswordTextButton(
+                          onPressed: () => GoRouter.of(context)
+                              .push(AppRouter.kForgotPasswordView),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        cubitData.isLoading == false
+                            ? CustomButton(
+                                text: 'SIGN IN',
+                                onPressed: () {
+                                  cubitData.vaildateUserInput();
+                                },
+                              )
+                            : const CircularProgressIndicator(
+                                color: kPrimaryColor,
+                              ),
+                        SizedBox(
+                          height: 40.h,
+                        ),
+                        AuthTextButton(
+                          authDesc: 'Dont\' have an account?',
+                          authButtonName: 'SIGN UP',
+                          onPressed: () =>
+                              GoRouter.of(context).push(AppRouter.kSignUpView),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                      ],
+                    ),
                   ),
-                  AuthTextButton(
-                    authDesc: 'Dont\' have an account?',
-                    authButtonName: 'SIGN UP',
-                    onPressed: () =>
-                        GoRouter.of(context).push(AppRouter.kSignUpView),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
+                ),
+              );
+            },
+          )
+        : const NoInternetConnectionView();
   }
 }
