@@ -27,7 +27,7 @@ class SignInRepoImpl implements SignInRepo {
       return left(Failure(e.response!.data['message']));
     } catch (e) {
       log('General exception: $e');
-      return left(Failure(e.toString()));
+      return left(Failure('Server Error'));
     }
   }
 }
