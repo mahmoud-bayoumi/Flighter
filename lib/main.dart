@@ -1,4 +1,5 @@
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo_impl.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
@@ -32,6 +33,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 GetProfileDataCubit(getIt.get<GetProfileDataRepoImpl>()),
+          ),
+          BlocProvider(
+            create: (context) => ConnectivityCubit(),
           ),
         ],
         child: MaterialApp.router(
