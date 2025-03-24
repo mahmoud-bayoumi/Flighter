@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-
 import '../../../view_model/update_profile_cubit/update_profile_cubit.dart';
 import 'image_widget.dart';
 
@@ -42,7 +42,7 @@ class _EditProfileImagePickerState extends State<EditProfileImagePicker> {
 
       final imagePermanent = await saveImagePermanently(
           image.path); // this one it will be send to the backend endpoint
-      // ignore: use_build_context_synchronously
+
       context.read<UpdateProfileCubit>().imageFile = imagePermanent;
 
       setState(() {
