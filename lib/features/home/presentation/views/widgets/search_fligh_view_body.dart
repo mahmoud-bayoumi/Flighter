@@ -6,10 +6,6 @@ import 'package:flighter/features/home/presentation/views/widgets/tickets_list_v
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../constants.dart';
-import '../../../../../core/utils/functions/custom_outline_input_border.dart';
-import '../../../../../core/utils/styles.dart';
-
 class SearchFligthViewBody extends StatelessWidget {
   const SearchFligthViewBody({super.key});
   final int flightNumber = 4;
@@ -48,4 +44,3 @@ class SearchFligthViewBody extends StatelessWidget {
     );
   }
 }
-
