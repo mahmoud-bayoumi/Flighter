@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flighter/constants.dart';
@@ -24,8 +23,8 @@ class SignInCubit extends Cubit<SignInState> {
     isLoading = true;
 
     emit(SignInLoading());
-    log('Email : ${emailController.text}');
-    log('Pass : ${passwordController.text}');
+    //log('Email : ${emailController.text}');
+   // log('Pass : ${passwordController.text}');
     Either<Failure, SignInModel> response;
     try {
       response = await signInRepo.signIn(
