@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -156,6 +157,54 @@ AwesomeDialog errorDialog(BuildContext context, String errMessage) {
       onPressed: () {
         Navigator.pop(context);
         // GoRouter.of(context).pop();
+      },
+    ),
+  )..show();
+}
+
+AwesomeDialog errorPaymentDialog(BuildContext context, String errMessage) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Warning',
+    desc: errMessage,
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: Colors.red,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context);
+        // GoRouter.of(context).pop();
+      },
+    ),
+  )..show();
+}
+
+AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Congrats!!',
+    desc: errMessage,
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: Colors.red,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context);
+        GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
       },
     ),
   )..show();

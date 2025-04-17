@@ -17,7 +17,7 @@ class GetProfilePhotoCubit extends Cubit<GetProfilePhotoState> {
     emit(GetProfilePhotoLoading());
     log('ProfilePhoto Loading');
     var response = await getProfilePhotoRepo.getUserProfilePhoto();
-    log('Response type: ${response.runtimeType}');
+//    log('Response type: ${response.runtimeType}');
     return response.fold(
       (l) {
         imageBits = null;
