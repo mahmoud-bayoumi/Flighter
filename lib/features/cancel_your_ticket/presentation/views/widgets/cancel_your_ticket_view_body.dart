@@ -5,7 +5,6 @@ import 'package:flighter/features/cancel_your_ticket/presentation/views/widgets/
 import 'package:flighter/features/cancel_your_ticket/presentation/views/widgets/card_holder_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../payment/presentation/views/widgets/payment_widgets/types_of_payment.dart';
 import 'cancel_ticket_card_number_text_form_field.dart';
 import 'cancel_ticket_email_text_form_field.dart';
 import 'cvv_and_expire_date_row_form_field.dart';
@@ -62,7 +61,6 @@ class CancelYourTicketViewBody extends StatelessWidget {
             SizedBox(
               height: 25.h,
             ),
-            const TypesOfPayments(),
             SizedBox(
               height: 50.h,
             ),

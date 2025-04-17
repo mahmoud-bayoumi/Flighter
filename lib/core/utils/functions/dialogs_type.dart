@@ -11,6 +11,7 @@ void successDialog(BuildContext context, bool navgToSplash) {
     context: context,
     barrierDismissible: false, // Prevent outside tap dismissal
     builder: (BuildContext context) {
+      // ignore: deprecated_member_use
       return WillPopScope(
         onWillPop: () async {
           // Prevent dismissal via the back button
@@ -217,6 +218,29 @@ AwesomeDialog deleteDoneDialog(BuildContext context) {
     animType: AnimType.scale,
     title: 'Successful',
     desc: 'Account deleted successfully.',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: kPrimaryColor,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Ok',
+      onPressed: () {
+        GoRouter.of(context).pushReplacement('/');
+      },
+    ),
+  )..show();
+}
+
+AwesomeDialog refundDoneDialog(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Refund Success',
+    desc: 'Your ticket refunded successfully.',
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: kPrimaryColor,
     titleTextStyle: Styles.textStyle24,
