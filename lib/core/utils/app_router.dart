@@ -9,9 +9,7 @@ import 'package:flighter/features/cancel_your_ticket/presentation/views/cancel_y
 import 'package:flighter/features/home/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:flighter/features/book_ticket/presentation/views/choose_seat_view.dart';
 import 'package:flighter/features/home/presentation/views/search_flight_view.dart';
-import 'package:flighter/features/payment/presentation/views/add_payment_view.dart';
 import 'package:flighter/features/payment/presentation/views/boarding_pass_view.dart';
-import 'package:flighter/features/payment/presentation/views/payment_view.dart';
 import 'package:flighter/features/profile/presentation/views/about_us_view.dart';
 import 'package:flighter/features/profile/presentation/views/change_password.dart';
 import 'package:flighter/features/profile/presentation/views/delete_account_view.dart';
@@ -112,10 +110,7 @@ abstract class AppRouter {
         path: kChangePassword,
         builder: (context, state) => const ChangePassword(),
       ),
-      GoRoute(
-        path: kPayment,
-        builder: (context, state) => const PaymentView(),
-      ),
+    
       GoRoute(
         path: kBoardingPass,
         builder: (context, state) => const BoardingPassView(),
@@ -136,19 +131,7 @@ abstract class AppRouter {
         path: kPrivacyAndPolicy,
         builder: (context, state) => const PrivacyAndPolicy(),
       )
-
-      /*    GoRoute(
-        path: kHomeView,
-        builder: (context, state) => Container(),
-      ), 
-  */
-
       ,
-      GoRoute(
-        path: kAddPayment,
-        builder: (context, state) => const AddPaymentView(),
-      ),
-
       GoRoute(
         path: kDeleteAccount,
         builder: (context, state) => const DeleteAccountView(),

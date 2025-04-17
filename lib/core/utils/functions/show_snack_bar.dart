@@ -13,3 +13,4 @@ void showSnackBar(BuildContext context, {required String message}) {
         style: Styles.textStyle16,
       )));
 }
+

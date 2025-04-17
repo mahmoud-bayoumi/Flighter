@@ -9,7 +9,9 @@ import 'package:flighter/features/bookings/presentation/views/widgets/cancel_tic
 import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/utils/functions/dialogs_type.dart';
 import '../../../../../core/utils/functions/generate_ticket_pdf.dart';
+import '../../../../../core/utils/functions/show_confirmation_dialog.dart';
 
 class FlightDataCard extends StatelessWidget {
   const FlightDataCard({super.key});
@@ -145,14 +147,22 @@ class FlightDataCard extends StatelessWidget {
                 authButtonName: 'Click Here',
                 canCancel: true,
                 onPressed: () async {
-                  bool refunded = await PaymentManager.refundPayment(
-                      PaymentManager.paymentIntentId,
-                      amount: PaymentManager.netAmount);
-                  if (refunded) {
-                    log('Refundedddddddddddddddddddddddddddddddddddddddddddddd Done');
-                  } else {
-                    log('Refundedddddddddddddddddddddddddddddddddddddddddddddd XXXXX');
-                  }
+                  showConfirmationDialog(
+                    context,
+                    () async {
+                      bool refunded = await PaymentManager.refundPayment(
+                          PaymentManager.paymentIntentId,
+                          amount: PaymentManager.netAmount);
+                      if (refunded) {
+                        refundDoneDialog(context);
+                        log('Refundedddddddddddddddddddddddddddddddddddddddddddddd Done');
+                      } else {
+                        // After Refund the ticket will be deleted.
+                        log('Refundedddddddddddddddddddddddddddddddddddddddddddddd XXXXX');
+                      }
+                    },
+                  );
+
                   //   GoRouter.of(context).push(AppRouter.kCancelYourTicket); <-----------------------
                 },
               ),
