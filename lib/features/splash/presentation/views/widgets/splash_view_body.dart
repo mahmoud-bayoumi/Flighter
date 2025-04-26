@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/secure_storage.dart';
+import '../../../../home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -97,6 +98,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
       () async {
         if (await _secureStorageService.getToken(tokenKey) != null) {
           BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+
+          BlocProvider.of<AirlinesCubit>(context).getAirlines();
+
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else {
           GoRouter.of(context).pushReplacement(AppRouter.kSignInView);

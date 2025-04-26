@@ -1,9 +1,11 @@
 import 'package:flighter/core/widgets/primary_container.dart';
+import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
 import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';
 import 'package:flighter/features/home/presentation/views/widgets/sorting_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/tickets_list_view_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchFligthViewBody extends StatelessWidget {
@@ -33,7 +35,20 @@ class SearchFligthViewBody extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(top: 385.h, left: 15.w),
-              child: const SortingRow(),
+              child: SortingRow(
+                airlines: BlocProvider.of<AirlinesCubit>(context).airlines,
+                airlineNames: BlocProvider.of<AirlinesCubit>(context)
+                    .airlines
+                    .map((airline) => airline.companyName!)
+                    .toList(),
+                stringBoolMap: {
+                  for (var item in BlocProvider.of<AirlinesCubit>(context)
+                      .airlines
+                      .map((airline) => airline.companyName!)
+                      .toList())
+                    item: false
+                },
+              ),
             ),
             Padding(
                 padding: EdgeInsets.only(top: 430.h),

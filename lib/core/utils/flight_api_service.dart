@@ -25,6 +25,25 @@ class FlightApiService {
       return {};
     }
   }
+   Future<List<dynamic>> getListOfMap(
+      {required String endPoint, required String token}) async {
+    try {
+      final response = await _dio.get(
+        '$baseUrl$endPoint',
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        }),
+      );
+      return response.data;
+    } on DioException catch (e) {
+      log("Request Error: $e");
+      return e.response?.data ?? [];
+    } catch (e) {
+      log("General Error in post: $e");
+      return [];
+    }
+  }
 
 
   // POST request method
@@ -94,7 +113,6 @@ class FlightApiService {
       return {};
     }
   }
-
 }
 
 //'Authorization' : 'Bearer $token'
