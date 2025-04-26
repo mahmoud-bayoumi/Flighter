@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flighter/features/home/data/models/airline.dart';
 import 'package:flighter/features/home/presentation/views/widgets/sort_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,8 +9,12 @@ import '../../../../../constants.dart';
 import '../../../../../core/utils/styles.dart';
 
 class SortingRow extends StatefulWidget {
+  final List<Airline> airlines;
+  final List<String> airlineNames;
+  final Map<String, bool> stringBoolMap;
   const SortingRow({
     super.key,
+    required this.airlines, required this.airlineNames, required this.stringBoolMap,
   });
 
   @override
@@ -17,12 +22,6 @@ class SortingRow extends StatefulWidget {
 }
 
 class _SortingRowState extends State<SortingRow> {
-  final Map<String, bool> _airlines = {
-    'Egyptair': false,
-    'Fly Emirates': false,
-    'Kuwait Airways': false,
-    'Qatar Airways': false,
-  };
   bool isBest = false;
 
   bool isCheapest = false;
@@ -45,6 +44,7 @@ class _SortingRowState extends State<SortingRow> {
 
   @override
   Widget build(BuildContext context) {
+   
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
@@ -113,8 +113,8 @@ class _SortingRowState extends State<SortingRow> {
                   isAirlines = true;
                 });
 
-                showFiltersModal(context, _airlines);
-                log('Airlines: $_airlines');
+                showFiltersModal(context, widget.stringBoolMap);
+                log('Airlines: ${widget.stringBoolMap}');
               },
             ),
             SizedBox(

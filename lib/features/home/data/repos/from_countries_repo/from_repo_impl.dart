@@ -26,4 +26,4 @@ class FromRepoImpl implements FromRepo {
       return left(Failure(e.toString()));
     }
   }
-} 
+}

@@ -1,6 +1,8 @@
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/core/utils/stripe_keys.dart';
+import 'package:flighter/features/home/data/repos/airlines_repo/airlines_repo_impl.dart';
+import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
             create: (context) => FromCountriesCubit(getIt.get<FromRepoImpl>()),
           ),
           BlocProvider(
-            create: (context) => FromCountriesCubit(getIt.get<FromRepoImpl>()),
+            create: (context) => AirlinesCubit(getIt.get<AirlinesRepoImpl>()),
           ),
           BlocProvider(
             create: (context) => ToCountriesCubit(getIt.get<ToRepoImpl>()),
