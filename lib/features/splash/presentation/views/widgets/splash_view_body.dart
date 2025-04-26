@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
@@ -8,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../../core/utils/secure_storage.dart';
 import '../../../../home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
+import '../../../../home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -98,9 +97,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
       () async {
         if (await _secureStorageService.getToken(tokenKey) != null) {
           BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
-
-          BlocProvider.of<AirlinesCubit>(context).getAirlines();
-
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else {
           GoRouter.of(context).pushReplacement(AppRouter.kSignInView);

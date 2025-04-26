@@ -31,8 +31,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
     super.initState();
     filteredSuggestions =
         widget.countrySuggestions; // Initially show all suggestions
-    widget.controller.text =
-        widget.forFrom ? widget.countrySuggestions[0] : 'Cairo';
+    widget.controller.text = widget.countrySuggestions[0];
   }
 
   @override
