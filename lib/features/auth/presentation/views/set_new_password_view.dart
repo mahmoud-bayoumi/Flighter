@@ -16,7 +16,9 @@ class SetNewPasswordView extends StatelessWidget {
         child: BlocProvider(
           create: (context) =>
               ResetPasswordCubit(getIt.get<ResetPasswordRepoImpl>()),
-          child:  SetNewPasswordBody(email: email,),
+          child: SetNewPasswordBody(
+            email: email,
+          ),
         ),
       ),
     );

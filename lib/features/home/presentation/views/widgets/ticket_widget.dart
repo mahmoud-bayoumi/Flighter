@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class TicketWidget extends StatelessWidget {
-  const TicketWidget({super.key, required this.startTime, required this.endTime});
-  final String startTime , endTime ; 
+  const TicketWidget(
+      {super.key, required this.startTime, required this.endTime});
+  final String startTime, endTime;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,7 +66,7 @@ class TicketWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                         endTime,
+                          endTime,
                           style: Styles.textStyle18.copyWith(
                             fontWeight: FontWeight.bold,
                             color: kPrimaryColor,

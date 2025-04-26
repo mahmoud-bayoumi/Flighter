@@ -15,10 +15,12 @@ class ResetPasswordRepoImpl implements ResetPasswordRepo {
   ResetPasswordRepoImpl({required this.apiService});
   @override
   Future<Either<Failure, ChangePasswordModel>> resetPassword(
-      { required String email , required String newPassword, required String confirmNewPassword}) async {
+      {required String email,
+      required String newPassword,
+      required String confirmNewPassword}) async {
     try {
       var response = await apiService.post(endPoint: endPoint, data: {
-        "email" : email , 
+        "email": email,
         "newPassword": newPassword,
         "confirmPassword": confirmNewPassword
       });

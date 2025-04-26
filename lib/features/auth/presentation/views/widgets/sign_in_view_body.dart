@@ -1,4 +1,3 @@
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
@@ -53,7 +52,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
             listener: (context, state) {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
-             //   log('SignIn Succes');
+                //   log('SignIn Succes');
                 var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
                 getProfilePhotoCubit.getProfilePhoto();
 
@@ -61,7 +60,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               } else if (state is SignInFailure) {
                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
-             //   log('SignIn Failure');
+                //   log('SignIn Failure');
               } else if (state is SignInLoading) {
                 EasyLoading.instance
                   ..indicatorType = EasyLoadingIndicatorType.fadingCircle
@@ -71,7 +70,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   ..dismissOnTap =
                       false; // Optional: Prevents dismissing the loader on tap
                 EasyLoading.show(status: 'loading...');
-          //      log('SignIn Loading');
+                //      log('SignIn Loading');
               }
             },
             builder: (context, state) {

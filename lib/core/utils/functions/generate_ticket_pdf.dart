@@ -5,23 +5,22 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-Future<void> generateTicketPDF({
-  required String bookingDate,
-  required String guestName,
-  required String from,
-  required String to,
-  required String airline,
-  required String flightNumber,
-  required String gate,
-  required String departureDate,
-  required String arrivalDate,
-  required String duration,
-  required String bookingStatus,
-  required String seatClass,
-  required String baggageAllowance,
-  required String seatNumber,
-  required String totalCost 
-}) async {
+Future<void> generateTicketPDF(
+    {required String bookingDate,
+    required String guestName,
+    required String from,
+    required String to,
+    required String airline,
+    required String flightNumber,
+    required String gate,
+    required String departureDate,
+    required String arrivalDate,
+    required String duration,
+    required String bookingStatus,
+    required String seatClass,
+    required String baggageAllowance,
+    required String seatNumber,
+    required String totalCost}) async {
   final pdf = pw.Document();
   final img = await rootBundle.load(AssetsData.kLogo);
   final imageBytes = img.buffer.asUint8List();
@@ -31,7 +30,7 @@ Future<void> generateTicketPDF({
   final egyImage =
       pw.MemoryImage(egyImageBytes); // assets/images/flyEmeraites.png
   pdf.addPage(
-    pw.Page( 
+    pw.Page(
       build: (pw.Context context) {
         return pw.Container(
           child: pw.Column(
@@ -96,7 +95,7 @@ Future<void> generateTicketPDF({
               pw.Text('Seat Number  :  $seatNumber',
                   style: pw.TextStyle(fontSize: 18.sp)),
               pw.SizedBox(height: 10.h),
-               pw.Text('Total Cost  :  $totalCost',
+              pw.Text('Total Cost  :  $totalCost',
                   style: pw.TextStyle(fontSize: 18.sp)),
               pw.Align(
                   child: pw.Column(children: [

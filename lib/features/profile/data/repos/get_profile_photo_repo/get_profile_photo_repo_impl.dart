@@ -23,12 +23,12 @@ class GetProfilePhotoRepoImpl implements GetProfilePhotoRepo {
       final token = await _secureStorage.read(key: tokenKey);
       var response = await apiService.getRequestForImage(
           endPoint: endPoint, token: token ?? '');
-     // log('Response in get profile photo : $response');
+      // log('Response in get profile photo : $response');
 
       // If the response is a List<int> (could be image or error message), attempt to decode
       if (response is List<int>) {
         String decodedResponse = String.fromCharCodes(response);
-     //   log('Decoded response: $decodedResponse');
+        //   log('Decoded response: $decodedResponse');
 
         try {
           // Try to decode the response as JSON
