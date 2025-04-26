@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 
-class ApiService {
+class FlightApiService {
   final Dio _dio;
   final String baseUrl = "http://hmy.runasp.net/Flight/";
-  ApiService(this._dio);
+  FlightApiService(this._dio);
 
   Future<Map<String, dynamic>> get(
       {required String endPoint, required String token}) async {
