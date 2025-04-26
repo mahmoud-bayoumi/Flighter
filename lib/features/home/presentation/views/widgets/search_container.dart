@@ -1,12 +1,14 @@
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
+import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import 'package:flighter/features/home/presentation/views/widgets/class_drop_down_menu.dart';
 import 'package:flighter/features/home/presentation/views/widgets/custom_date_picker_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_text_form_field.dart';
 import 'package:flighter/features/home/presentation/views/widgets/traveler_drop_down_menu.dart';
 import 'package:flighter/features/home/presentation/views/widgets/trip_type_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -72,6 +74,9 @@ class _SearchContainerState extends State<SearchContainer> {
                     iconData: Icons.flight_takeoff,
                     forFrom: true,
                     controller: firstController,
+                    countrySuggestions:
+                        BlocProvider.of<FromCountriesCubit>(context)
+                            .fromCountries,
                   ),
                   SizedBox(
                     height: 22.h,
@@ -81,6 +86,7 @@ class _SearchContainerState extends State<SearchContainer> {
                     iconData: Icons.flight_land,
                     forFrom: false,
                     controller: secondController,
+                    countrySuggestions: const [],
                   ),
                 ],
               ),
