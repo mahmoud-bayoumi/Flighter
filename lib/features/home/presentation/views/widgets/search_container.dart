@@ -4,7 +4,7 @@ import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/home/presentation/views/widgets/class_drop_down_menu.dart';
 import 'package:flighter/features/home/presentation/views/widgets/custom_date_picker_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_text_form_field.dart';
-import 'package:flighter/features/home/presentation/views/widgets/traveler_form_field.dart';
+import 'package:flighter/features/home/presentation/views/widgets/traveler_drop_down_menu.dart';
 import 'package:flighter/features/home/presentation/views/widgets/trip_type_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +20,9 @@ class SearchContainer extends StatefulWidget {
 }
 
 class _SearchContainerState extends State<SearchContainer> {
-  final GlobalKey _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController firstController = TextEditingController();
+  final TextEditingController secondController = TextEditingController();
   bool oneWay = false;
   @override
   Widget build(BuildContext context) {
@@ -65,36 +67,45 @@ class _SearchContainerState extends State<SearchContainer> {
             Stack(children: [
               Column(
                 children: [
-                  const SearchTextFormField(
+                  SearchTextFormField(
                     text: 'From (Location)',
                     iconData: Icons.flight_takeoff,
+                    forFrom: true,
+                    controller: firstController,
                   ),
                   SizedBox(
                     height: 22.h,
                   ),
-                  const SearchTextFormField(
+                  SearchTextFormField(
                     text: 'To (Destination)',
                     iconData: Icons.flight_land,
+                    forFrom: false,
+                    controller: secondController,
                   ),
                 ],
               ),
               Positioned(
-                  left: MediaQuery.sizeOf(context).width * 0.8,
-                  top: MediaQuery.sizeOf(context).height * 0.068,
-                  child: Image.asset(
-                    AssetsData.kSwapArrowsImage,
+                  left: MediaQuery.sizeOf(context).width * 0.78,
+                  top: MediaQuery.sizeOf(context).height * 0.070,
+                  child: GestureDetector(
+                    onTap: () {
+                      String temp = firstController.text;
+                      setState(() {
+                        firstController.text = secondController.text;
+                        secondController.text = temp;
+                      });
+                    },
+                    child: Image.asset(
+                      AssetsData.kSwapArrowsImage,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
                   )),
             ]),
             SizedBox(
               height: 20.h,
             ),
-
-            /* 
-               DateWidget(oneWay : oneWay), 
-            -> DateWidget Contains a row and we will handle it like trip type button
-                    ,
-              ],
-            ), */
             CustomDatePickerRow(
               oneWay: oneWay,
             ),
@@ -104,7 +115,7 @@ class _SearchContainerState extends State<SearchContainer> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TravelerFormField(),
+                TravelerDropDownMenu(),
                 ClassDropDownMenu(),
               ],
             ),
@@ -114,7 +125,9 @@ class _SearchContainerState extends State<SearchContainer> {
             CustomButton(
               text: 'Search Flight',
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kSearchFlightView);
+                if (_formKey.currentState!.validate()) {
+                  GoRouter.of(context).push(AppRouter.kSearchFlightView);
+                }
               },
             ),
           ],

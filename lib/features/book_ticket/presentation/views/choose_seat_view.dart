@@ -1,5 +1,5 @@
 import 'package:flighter/core/utils/styles.dart';
-import 'package:flighter/features/book_ticket/presentation/views/choose_seat_widgets/choose_seat_view_body.dart';
+import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/choose_seat_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

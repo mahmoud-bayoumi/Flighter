@@ -23,6 +23,7 @@ class FromToCountry extends StatelessWidget {
           left: 30.w,
           child: CircleAvatarCountry(
             county: from,
+            light: false,
           ),
         ),
         Positioned(
@@ -30,6 +31,7 @@ class FromToCountry extends StatelessWidget {
           left: MediaQuery.sizeOf(context).width - 90,
           child: CircleAvatarCountry(
             county: to,
+            light: false,
           ),
         ),
         Positioned(

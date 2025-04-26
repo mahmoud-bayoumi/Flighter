@@ -1,4 +1,3 @@
-
 import 'package:flighter/features/auth/presentation/views/widgets/social_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

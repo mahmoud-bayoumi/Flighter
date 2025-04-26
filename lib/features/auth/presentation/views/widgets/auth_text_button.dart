@@ -6,10 +6,12 @@ import '../../../../../core/utils/styles.dart';
 class AuthTextButton extends StatelessWidget {
   const AuthTextButton({
     super.key,
-    this.onPressed, required this.authDesc, required this.authButtonName,
+    this.onPressed,
+    required this.authDesc,
+    required this.authButtonName,
   });
   final void Function()? onPressed;
-  final String authDesc , authButtonName; 
+  final String authDesc, authButtonName;
   @override
   Widget build(BuildContext context) {
     return Row(
