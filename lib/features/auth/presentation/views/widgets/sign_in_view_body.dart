@@ -63,11 +63,9 @@ class _SignInViewBodyState extends State<SignInViewBody> {
 
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
 
-
                 // upload data to countries if success
                 var getToCountriesCubit = context.read<ToCountriesCubit>();
                 getToCountriesCubit.getToCountries();
-
 
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is SignInFailure) {
