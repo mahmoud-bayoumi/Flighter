@@ -1,12 +1,9 @@
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/core/utils/stripe_keys.dart';
-
 import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
-
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
-
 import 'package:flighter/features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo_impl.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
@@ -48,14 +45,14 @@ class MyApp extends StatelessWidget {
             create: (context) => ConnectivityCubit(),
           ),
           BlocProvider(
-
-            create: (context) =>
-                FromCountriesCubit(getIt.get<FromRepoImpl>()),
+            create: (context) => FromCountriesCubit(getIt.get<FromRepoImpl>()),
           ),
-
+          BlocProvider(
+            create: (context) => FromCountriesCubit(getIt.get<FromRepoImpl>()),
+          ),
+          BlocProvider(
             create: (context) => ToCountriesCubit(getIt.get<ToRepoImpl>()),
-          )
-
+          ),
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

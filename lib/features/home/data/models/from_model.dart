@@ -1,6 +1,5 @@
 class FromModel {
   bool? success;
-
   List<dynamic> data;
   dynamic message;
 
@@ -9,16 +8,6 @@ class FromModel {
   factory FromModel.fromJson(Map<String, dynamic> json) => FromModel(
         success: json['success'] as bool?,
         data: json['data'] as List<dynamic>,
-
-  List<String>? data;
-  dynamic message;
-
-  FromModel({this.success, this.data, this.message});
-
-  factory FromModel.fromJson(Map<String, dynamic> json) => FromModel(
-        success: json['success'] as bool?,
-        data: json['data'] as List<String>?,
-
         message: json['message'] as dynamic,
       );
 

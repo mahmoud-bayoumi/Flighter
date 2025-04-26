@@ -18,11 +18,12 @@ class ToCountriesCubit extends Cubit<ToCountriesCubitDartState> {
 
     data.fold(
       (error) {
+        log(error.errMessage);
         emit(ToCountriesFailure(errorMessage: error.errMessage));
       },
       (response) {
         toModel = response;
-        log(response.toString());
+        log(response.data.toString());
         emit(ToCountriestSuccess());
       },
     );

@@ -12,6 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
+
 class SearchContainer extends StatefulWidget {
   const SearchContainer({
     super.key,
@@ -86,7 +88,8 @@ class _SearchContainerState extends State<SearchContainer> {
                     iconData: Icons.flight_land,
                     forFrom: false,
                     controller: secondController,
-                    countrySuggestions: const [],
+                    countrySuggestions:
+                        context.read<ToCountriesCubit>().toModel!.data,
                   ),
                 ],
               ),
