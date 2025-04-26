@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
-import 'package:flighter/core/utils/api_service.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/features/home/data/models/class_type/from_model.dart';
 import 'package:flighter/features/home/data/repos/from_countries_repo/from_repo.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../../constants.dart';
+import '../../../../../core/utils/flight_api_service.dart';
 
 class FromRepoImpl implements FromRepo {
-  final ApiService apiService;
+  final FlightApiService apiService;
   final String endPoint = 'from';
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   FromRepoImpl({required this.apiService});
