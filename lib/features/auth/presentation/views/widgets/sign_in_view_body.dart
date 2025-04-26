@@ -12,6 +12,7 @@ import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sig
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/forgot_password_text_button.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
+import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                 //   log('SignIn Succes');
                 var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
                 getProfilePhotoCubit.getProfilePhoto();
-
+                BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is SignInFailure) {
                 EasyLoading.dismiss();

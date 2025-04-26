@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
-import 'package:flighter/features/home/data/models/class_type/from_model.dart';
+import 'package:flighter/features/home/data/models/from_model.dart';
 import 'package:flighter/features/home/data/repos/from_countries_repo/from_repo.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 

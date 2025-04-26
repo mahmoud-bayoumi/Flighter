@@ -15,6 +15,7 @@ import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_cub
 import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_state.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/no_internet_connect.dart';
+import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 
 class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});
@@ -42,6 +43,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             listener: (context, state) {
               if (state is SignUpSuccess) {
                 EasyLoading.dismiss();
+                BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
                 GoRouter.of(context).push(AppRouter.kCheckYourEmailView,
                     extra: cubitData.emailController.text);
               } else if (state is SignUpFailure) {

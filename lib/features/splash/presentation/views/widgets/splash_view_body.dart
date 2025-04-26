@@ -5,10 +5,12 @@ import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/secure_storage.dart';
+import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -93,9 +95,12 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () async {
-        await _secureStorageService.getToken(tokenKey) != null
-            ? GoRouter.of(context).pushReplacement(AppRouter.kNavigation)
-            : GoRouter.of(context).pushReplacement(AppRouter.kSignInView);
+        if (await _secureStorageService.getToken(tokenKey) != null) {
+          BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+          GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
+        } else {
+          GoRouter.of(context).pushReplacement(AppRouter.kSignInView);
+        }
       },
     );
   }
