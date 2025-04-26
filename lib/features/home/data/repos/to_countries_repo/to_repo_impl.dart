@@ -1,24 +1,24 @@
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
-import 'package:flighter/features/home/data/models/from_model.dart';
-import 'package:flighter/features/home/data/repos/from_countries_repo/from_repo.dart';
+import 'package:flighter/core/utils/flight_api_service.dart';
+import 'package:flighter/features/home/data/models/to_model.dart';
+import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../../constants.dart';
-import '../../../../../core/utils/flight_api_service.dart';
 
-class FromRepoImpl implements FromRepo {
+class ToRepoImpl implements ToRepo {
   final FlightApiService apiService;
-  final String endPoint = 'from';
+  final String endPoint = 'to';
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-  FromRepoImpl({required this.apiService});
+  ToRepoImpl({required this.apiService});
   @override
-  Future<Either<Failure, FromModel>> getFromCountries() async {
+  Future<Either<Failure, ToModel>> getToCountries() async {
     try {
       String token = (await _secureStorage.read(key: tokenKey))!;
       var response = await apiService.get(endPoint: endPoint, token: token);
       if (response['success']) {
-        return right(FromModel.fromJson(response));
+        return right(ToModel.fromJson(response));
       } else {
         return left(Failure(response['message']));
       }
@@ -26,4 +26,4 @@ class FromRepoImpl implements FromRepo {
       return left(Failure(e.toString()));
     }
   }
-} 
+}
