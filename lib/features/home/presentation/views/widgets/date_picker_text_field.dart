@@ -5,9 +5,13 @@ import '../../../../../core/utils/functions/custom_outline_input_border.dart';
 
 class DatePickerTextField extends StatefulWidget {
   const DatePickerTextField(
-      {super.key, required this.text, required this.width});
+      {super.key,
+      required this.text,
+      required this.width,
+      required this.isStartDate});
   final String text;
   final double width;
+  final bool isStartDate;
   @override
   State<DatePickerTextField> createState() => _DatePickerTextFieldState();
 }
@@ -16,10 +20,29 @@ class _DatePickerTextFieldState extends State<DatePickerTextField> {
   final TextEditingController _dateController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    DateTime defaultStartDate = DateTime.now();
+    DateTime defaultEndDate = defaultStartDate.add(const Duration(days: 3));
+    String formattedDate =
+        "${defaultStartDate.year}-${defaultStartDate.month.toString().padLeft(2, '0')}-${defaultStartDate.day.toString().padLeft(2, '0')}";
+    String endFormattedDate =
+        "${defaultEndDate.year}-${defaultEndDate.month.toString().padLeft(2, '0')}-${defaultEndDate.day.toString().padLeft(2, '0')}";
+
+    // Set the formatted date to the controller
+    _dateController.text =
+        widget.isStartDate ? formattedDate : endFormattedDate;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
-      child: TextField(
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) return 'Required';
+          return null;
+        },
         controller: _dateController,
         onTap: () {
           _selectDate(context);
