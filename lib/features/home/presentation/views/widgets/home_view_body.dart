@@ -47,7 +47,7 @@ class HomeViewBody extends StatelessWidget {
                   child: SizedBox(
                     width: MediaQuery.sizeOf(context).width * 0.5,
                     child: Text(
-                      overflow: TextOverflow.ellipsis, 
+                      overflow: TextOverflow.ellipsis,
                       'Hello, ${capitalizeFirstLetter(userName.split(' ')[0])}',
                       style: Styles.textStyle24.copyWith(color: Colors.white),
                     ),

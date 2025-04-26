@@ -14,7 +14,7 @@ import 'core/utils/service_locator.dart';
 
 void main() {
   setupServerLocator();
-  Stripe.publishableKey = StripeKeys.publishableKey; 
+  Stripe.publishableKey = StripeKeys.publishableKey;
   runApp(const MyApp());
 }
 

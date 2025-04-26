@@ -4,5 +4,5 @@ import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
 
 abstract class GetProfilePhotoRepo {
-  Future<Either<Failure,  Uint8List>> getUserProfilePhoto();
+  Future<Either<Failure, Uint8List>> getUserProfilePhoto();
 }

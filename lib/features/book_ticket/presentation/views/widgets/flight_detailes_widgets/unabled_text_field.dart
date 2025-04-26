@@ -6,7 +6,8 @@ class UnabledTextField extends StatefulWidget {
   const UnabledTextField({
     super.key,
     required this.text,
-    required this.icon, required this.textTitle,
+    required this.icon,
+    required this.textTitle,
   });
   final String text;
   final IconData icon;
@@ -38,7 +39,7 @@ class _UnabledTextFieldState extends State<UnabledTextField> {
             borderRadius: BorderRadius.circular(12),
           ),
           prefixIcon: Icon(widget.icon),
-          label:  Text(widget.textTitle),
+          label: Text(widget.textTitle),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
           ),

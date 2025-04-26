@@ -40,7 +40,7 @@ class SignUpRepoImpl implements SignUpRepo {
         log('DioException: ${response['message']}');
         return left(Failure(response['message']));
       }
-     
+
       // Check for specific error messages
       if (response['errors'] != null) {
         // Handle invalid email error

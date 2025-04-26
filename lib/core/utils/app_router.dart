@@ -110,7 +110,7 @@ abstract class AppRouter {
         path: kChangePassword,
         builder: (context, state) => const ChangePassword(),
       ),
-    
+
       GoRoute(
         path: kBoardingPass,
         builder: (context, state) => const BoardingPassView(),
@@ -130,8 +130,7 @@ abstract class AppRouter {
       GoRoute(
         path: kPrivacyAndPolicy,
         builder: (context, state) => const PrivacyAndPolicy(),
-      )
-      ,
+      ),
       GoRoute(
         path: kDeleteAccount,
         builder: (context, state) => const DeleteAccountView(),

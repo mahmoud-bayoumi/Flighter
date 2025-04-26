@@ -11,5 +11,5 @@ final class GetProfilePhotoSuccess extends GetProfilePhotoState {}
 final class GetProfilePhotoFailure extends GetProfilePhotoState {
   final String errMessage;
 
-  GetProfilePhotoFailure({required this.errMessage}); 
+  GetProfilePhotoFailure({required this.errMessage});
 }
