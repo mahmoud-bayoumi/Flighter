@@ -37,6 +37,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: true,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'This field is required';
