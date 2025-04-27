@@ -1,14 +1,16 @@
 import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../core/utils/functions/custom_outline_input_border.dart';
 
 class DatePickerTextField extends StatefulWidget {
+  final TextEditingController dateController;
+
   const DatePickerTextField(
       {super.key,
       required this.text,
       required this.width,
-      required this.isStartDate});
+      required this.isStartDate,
+      required this.dateController});
   final String text;
   final double width;
   final bool isStartDate;
@@ -17,8 +19,7 @@ class DatePickerTextField extends StatefulWidget {
 }
 
 class _DatePickerTextFieldState extends State<DatePickerTextField> {
-  final TextEditingController _dateController = TextEditingController();
-
+  late String formattedDate, endFormattedDate;
   @override
   void initState() {
     super.initState();
@@ -30,8 +31,8 @@ class _DatePickerTextFieldState extends State<DatePickerTextField> {
         "${defaultEndDate.year}-${defaultEndDate.month.toString().padLeft(2, '0')}-${defaultEndDate.day.toString().padLeft(2, '0')}";
 
     // Set the formatted date to the controller
-    _dateController.text =
-        widget.isStartDate ? formattedDate : endFormattedDate;
+    /* widget.dateController.text =
+        widget.isStartDate ? formattedDate : endFormattedDate;*/
   }
 
   @override
@@ -43,7 +44,7 @@ class _DatePickerTextFieldState extends State<DatePickerTextField> {
           if (value == null || value.isEmpty) return 'Required';
           return null;
         },
-        controller: _dateController,
+        controller: widget.dateController,
         onTap: () {
           _selectDate(context);
         },
@@ -90,10 +91,10 @@ class _DatePickerTextFieldState extends State<DatePickerTextField> {
         );
       },
     );
-
+    if (!mounted) return;
     if (picked != null) {
       setState(() {
-        _dateController.text = picked.toString().split(" ")[0];
+        widget.dateController.text = picked.toString().split(" ")[0];
       });
     }
   }

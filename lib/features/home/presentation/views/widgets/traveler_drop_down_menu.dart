@@ -1,6 +1,7 @@
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../constants.dart';
 import '../../../../../core/utils/functions/custom_outline_input_border.dart';
 
@@ -17,6 +18,8 @@ class _TravelerDropDownMenuState extends State<TravelerDropDownMenu> {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<SearchCubit>(context).numbersTravelerController.text =
+        dropdownValue;
     return SizedBox(
       width: 185.w,
       child: Theme(
@@ -44,6 +47,9 @@ class _TravelerDropDownMenuState extends State<TravelerDropDownMenu> {
           onSelected: (String? value) {
             setState(() {
               dropdownValue = value!;
+              BlocProvider.of<SearchCubit>(context)
+                  .numbersTravelerController
+                  .text = dropdownValue;
             });
           },
           dropdownMenuEntries:

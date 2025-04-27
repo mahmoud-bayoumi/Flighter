@@ -7,8 +7,8 @@ abstract class SearchRepo {
     required String from,
     required String to,
     required String startDate,
-    int noOfTravelers = 1,
     required int classTypeId,
+    int noOfTravelers = 1,
     int flightTypeId = 1,
   });
   Future<Either<Failure, SearchModel>> getRoundSearchData({

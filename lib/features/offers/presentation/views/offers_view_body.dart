@@ -38,12 +38,13 @@ class OffersViewBody extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 280.h),
-              child: SizedBox(
+                padding: EdgeInsets.only(top: 280.h),
+                child: const Text('delete the comments on the list')
+                /*SizedBox(
                   height: MediaQuery.sizeOf(context).height +
                       (flightNumber * 200.h),
-                  child: TicketsListViewBuilder(flightNumber: flightNumber)),
-            ),
+                  child: TicketsListViewBuilder()),*/
+                ),
           ],
         ),
       ),

@@ -1,5 +1,8 @@
+import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
+import 'package:flighter/core/widgets/failure_page_widget.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
 import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
 import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';
 import 'package:flighter/features/home/presentation/views/widgets/sorting_row.dart';
@@ -8,9 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../view_model/search_cubit/search_cubit.dart';
+
 class SearchFligthViewBody extends StatelessWidget {
   const SearchFligthViewBody({super.key});
-  final int flightNumber = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +23,45 @@ class SearchFligthViewBody extends StatelessWidget {
       child: SizedBox(
         // Dynamically calculate the total height for the content
         height: MediaQuery.sizeOf(context).height +
-            (flightNumber * 200.h), // Example: Adjust based on ticket size
+            (BlocProvider.of<SearchCubit>(context).searchModel.data!.length *
+                200.h), // Example: Adjust based on ticket size
         child: Stack(
           children: [
             const PrimaryContainer(),
-            const FromToCountry(
-              from: 'CAI',
-              to: 'ALX',
+            FromToCountry(
+              from: capitalizeFirstThreeLetters(
+                      BlocProvider.of<SearchCubit>(context)
+                          .searchModel
+                          .data![0]
+                          .from!) ??
+                  'CT1',
+              to: capitalizeFirstThreeLetters(
+                      BlocProvider.of<SearchCubit>(context)
+                          .searchModel
+                          .data![0]
+                          .to!) ??
+                  "CT2",
             ),
-            const DataOfFlights(
-              firstDate: '18/Dec/2024',
-              secondDate: '20/Dec/2024',
-              number: '1 passenger',
-              type: 'Business',
+            DataOfFlights(
+              firstDate: BlocProvider.of<SearchCubit>(context)
+                      .searchModel
+                      .data![0]
+                      .departureDate ??
+                  '18/Dec/2024',
+              secondDate: BlocProvider.of<SearchCubit>(context)
+                      .searchModel
+                      .data![0]
+                      .arrivalDate ??
+                  '--/--/--',
+              number:
+                  '${BlocProvider.of<SearchCubit>(context).numbersTravelerController.text} Passenger' ??
+                      '1 Passenger',
+              type: BlocProvider.of<SearchCubit>(context)
+                          .classTypeIdController
+                          .text ==
+                      '1'
+                  ? 'Business'
+                  : 'Economy',
             ),
             Padding(
               padding: EdgeInsets.only(top: 385.h, left: 15.w),
@@ -52,7 +82,7 @@ class SearchFligthViewBody extends StatelessWidget {
             ),
             Padding(
                 padding: EdgeInsets.only(top: 430.h),
-                child: TicketsListViewBuilder(flightNumber: flightNumber)),
+                child: const TicketsListViewBuilder()),
           ],
         ),
       ),

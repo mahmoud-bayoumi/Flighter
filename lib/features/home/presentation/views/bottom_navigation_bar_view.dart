@@ -37,85 +37,82 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
-      child: Scaffold(
-        body: IndexedStack(
-          index: currentIndex,
-          children: screens,
-        ),
-        bottomNavigationBar: BlocBuilder<ConnectivityCubit, ConnectivityState>(
-          builder: (context, state) {
-            if (state is ConnectivityFailure) {
-              return const Center(
-                child: NoInternetConnectionView(),
-              );
-            } else if (state is ConnectivityLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(12),
-                  topLeft: Radius.circular(12),
+    return Scaffold(
+      body: IndexedStack(
+        index: currentIndex,
+        children: screens,
+      ),
+      bottomNavigationBar: BlocBuilder<ConnectivityCubit, ConnectivityState>(
+        builder: (context, state) {
+          if (state is ConnectivityFailure) {
+            return const Center(
+              child: NoInternetConnectionView(),
+            );
+          } else if (state is ConnectivityLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(12),
+                topLeft: Radius.circular(12),
+              ),
+              child: Container(
+                padding: const EdgeInsets.only(
+                  bottom: 5,
+                  top: 5,
                 ),
-                child: Container(
-                  padding: const EdgeInsets.only(
-                    bottom: 5,
-                    top: 5,
-                  ),
-                  color: kPrimaryColor,
-                  child: BottomNavigationBar(
-                    onTap: (value) {
-                      setState(() {
-                        currentIndex = value;
-                      });
-                    },
-                    selectedIconTheme: const IconThemeData(size: 32),
-                    unselectedIconTheme: const IconThemeData(size: 28),
-                    currentIndex: currentIndex,
-                    showUnselectedLabels: true,
-                    selectedItemColor: Colors.white,
-                    unselectedItemColor: Colors.white.withOpacity(.65),
-                    type: BottomNavigationBarType.shifting,
-                    elevation: 0,
-                    items: const [
-                      BottomNavigationBarItem(
-                        backgroundColor: kPrimaryColor,
-                        icon: Icon(
-                          Icons.home_outlined,
-                        ),
-                        label: 'Home',
+                color: kPrimaryColor,
+                child: BottomNavigationBar(
+                  onTap: (value) {
+                    setState(() {
+                      currentIndex = value;
+                    });
+                  },
+                  selectedIconTheme: const IconThemeData(size: 32),
+                  unselectedIconTheme: const IconThemeData(size: 28),
+                  currentIndex: currentIndex,
+                  showUnselectedLabels: true,
+                  selectedItemColor: Colors.white,
+                  unselectedItemColor: Colors.white.withOpacity(.65),
+                  type: BottomNavigationBarType.shifting,
+                  elevation: 0,
+                  items: const [
+                    BottomNavigationBarItem(
+                      backgroundColor: kPrimaryColor,
+                      icon: Icon(
+                        Icons.home_outlined,
                       ),
-                      BottomNavigationBarItem(
-                        backgroundColor: kPrimaryColor,
-                        icon: Icon(
-                          Icons.event_note_outlined,
-                        ),
-                        label: 'Bookings',
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      backgroundColor: kPrimaryColor,
+                      icon: Icon(
+                        Icons.event_note_outlined,
                       ),
-                      BottomNavigationBarItem(
-                        backgroundColor: kPrimaryColor,
-                        icon: Icon(
-                          Icons.celebration_outlined,
-                        ),
-                        label: 'Offers',
+                      label: 'Bookings',
+                    ),
+                    BottomNavigationBarItem(
+                      backgroundColor: kPrimaryColor,
+                      icon: Icon(
+                        Icons.celebration_outlined,
                       ),
-                      BottomNavigationBarItem(
-                        backgroundColor: kPrimaryColor,
-                        icon: Icon(
-                          Icons.person,
-                        ),
-                        label: 'Profile',
+                      label: 'Offers',
+                    ),
+                    BottomNavigationBarItem(
+                      backgroundColor: kPrimaryColor,
+                      icon: Icon(
+                        Icons.person,
                       ),
-                    ],
-                  ),
+                      label: 'Profile',
+                    ),
+                  ],
                 ),
-              );
-            }
-          },
-        ),
+              ),
+            );
+          }
+        },
       ),
     );
   }

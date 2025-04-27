@@ -17,6 +17,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'core/utils/service_locator.dart';
 import 'features/home/data/repos/from_countries_repo/from_repo_impl.dart';
+import 'features/home/data/repos/search_repo/search_repo_impl.dart';
+import 'features/home/presentation/view_model/search_cubit/search_cubit.dart';
 
 void main() {
   setupServerLocator();
@@ -55,6 +57,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => ToCountriesCubit(getIt.get<ToRepoImpl>()),
           ),
+          BlocProvider(
+            create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
+          )
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

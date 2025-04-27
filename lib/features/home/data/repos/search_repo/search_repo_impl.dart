@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
@@ -21,14 +23,12 @@ class SearchRepoImpl implements SearchRepo {
       int flightTypeId = 1}) async {
     try {
       var response = await _flightApiService.post(endPoint: endPoint, data: {
-        {
-          "from": from,
-          "to": to,
-          "startDate": startDate,
-          "noOfTravelers": noOfTravelers,
-          "classTypeId": classTypeId,
-          "flightTypeId": flightTypeId
-        }
+        "from": from,
+        "to": to,
+        "startDate": startDate,
+        "noOfTravelers": noOfTravelers,
+        "classTypeId": classTypeId,
+        "flightTypeId": flightTypeId
       });
       if (response['success']) {
         return right(SearchModel.fromJson(response));
@@ -51,15 +51,13 @@ class SearchRepoImpl implements SearchRepo {
       int flightTypeId = 2}) async {
     try {
       var response = await _flightApiService.post(endPoint: endPoint, data: {
-        {
-          "from": from,
-          "to": to,
-          "startDate": startDate,
-          "endDate": endDate,
-          "noOfTravelers": noOfTravelers,
-          "classTypeId": classTypeId,
-          "flightTypeId": flightTypeId
-        }
+        "from": from,
+        "to": to,
+        "startDate": startDate,
+        "endDate": endDate,
+        "noOfTravelers": noOfTravelers,
+        "classTypeId": classTypeId,
+        "flightTypeId": flightTypeId
       });
       if (response['success']) {
         return right(SearchModel.fromJson(response));

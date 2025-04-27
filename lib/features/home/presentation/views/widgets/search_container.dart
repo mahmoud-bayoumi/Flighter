@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
+import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
 import 'package:flighter/features/home/presentation/views/widgets/class_drop_down_menu.dart';
 import 'package:flighter/features/home/presentation/views/widgets/custom_date_picker_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_text_form_field.dart';
@@ -9,6 +14,7 @@ import 'package:flighter/features/home/presentation/views/widgets/traveler_drop_
 import 'package:flighter/features/home/presentation/views/widgets/trip_type_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
@@ -48,6 +54,9 @@ class _SearchContainerState extends State<SearchContainer> {
                     onTap: () {
                       setState(() {
                         oneWay = true;
+                        BlocProvider.of<SearchCubit>(context)
+                            .endDateController
+                            .text = '';
                       });
                     },
                     oneWay: oneWay,
@@ -74,7 +83,8 @@ class _SearchContainerState extends State<SearchContainer> {
                     text: 'From (Location)',
                     iconData: Icons.flight_takeoff,
                     forFrom: true,
-                    controller: firstController,
+                    controller:
+                        BlocProvider.of<SearchCubit>(context).fromController,
                     countrySuggestions:
                         BlocProvider.of<FromCountriesCubit>(context)
                             .fromCountries,
@@ -86,7 +96,8 @@ class _SearchContainerState extends State<SearchContainer> {
                     text: 'To (Destination)',
                     iconData: Icons.flight_land,
                     forFrom: false,
-                    controller: secondController,
+                    controller:
+                        BlocProvider.of<SearchCubit>(context).toController,
                     countrySuggestions:
                         context.read<ToCountriesCubit>().toModel!.data,
                   ),
@@ -130,15 +141,36 @@ class _SearchContainerState extends State<SearchContainer> {
             SizedBox(
               height: 20.h,
             ),
-            CustomButton(
-              text: 'Search Flight',
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  //Search here
-                
-                  GoRouter.of(context).push(AppRouter.kSearchFlightView);
+            BlocListener<SearchCubit, SearchState>(
+              listener: (context, state) {
+                if (state is SearchSucess) {
+                  EasyLoading.dismiss();
+
+                  if (BlocProvider.of<SearchCubit>(context)
+                      .searchModel
+                      .data!
+                      .isNotEmpty) {
+                    GoRouter.of(context).push(AppRouter.kSearchFlightView);
+                  } else {
+                    noTicketsAvailable(context);
+                  }
+                } else if (state is SearchLoading) {
+                  EasyLoading.show(status: 'loading...');
+                } else if (state is SearchFailure) {
+                  EasyLoading.dismiss();
+
+                  log(state.errMessage);
                 }
               },
+              child: CustomButton(
+                text: 'Search Flight',
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    //Search
+                    await BlocProvider.of<SearchCubit>(context).getSearchData();
+                  }
+                },
+              ),
             ),
           ],
         ),

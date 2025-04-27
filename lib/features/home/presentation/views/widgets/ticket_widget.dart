@@ -1,14 +1,19 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
+import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/features/home/data/models/search_model/datum.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/utils/functions/capitalize_word.dart';
+import '../../../../../core/utils/functions/convert12HoursFormat.dart';
+
 class TicketWidget extends StatelessWidget {
-  const TicketWidget(
-      {super.key, required this.startTime, required this.endTime});
-  final String startTime, endTime;
+  const TicketWidget({super.key, required this.ticketModel});
+
+  final TicketData ticketModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,14 +40,15 @@ class TicketWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          startTime,
+                          convertTo12HourFormat(
+                              ticketModel.departureTime ?? '08:30'),
                           style: Styles.textStyle18.copyWith(
                             fontWeight: FontWeight.bold,
                             color: kPrimaryColor,
                           ),
                         ),
                         Text(
-                          "CAI",
+                          capitalizeFirstLetter(ticketModel.from ?? 'CT1'),
                           style: Styles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(.5),
@@ -54,7 +60,7 @@ class TicketWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.flight, color: Colors.blue),
                         Text(
-                          "45 mins",
+                          "${ticketModel.durationInMinutes} mins",
                           style: Styles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(.5),
@@ -66,14 +72,15 @@ class TicketWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          endTime,
+                          convertTo12HourFormat(
+                              ticketModel.arrivalTime ?? '09:15'),
                           style: Styles.textStyle18.copyWith(
                             fontWeight: FontWeight.bold,
                             color: kPrimaryColor,
                           ),
                         ),
                         Text(
-                          "ALX",
+                          capitalizeFirstLetter(ticketModel.to ?? 'CT2'),
                           style: Styles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(.5),
@@ -96,14 +103,14 @@ class TicketWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "IndiGo",
+                      ticketModel.companyName ?? 'IndiGo',
                       style: Styles.textStyle18.copyWith(
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
                       ),
                     ),
                     Text(
-                      "2,700 EGP",
+                      "${ticketModel.price} EGP",
                       style: Styles.textStyle18.copyWith(
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
