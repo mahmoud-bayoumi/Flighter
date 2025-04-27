@@ -1,5 +1,3 @@
-
-
 sealed class AirlinesState {}
 
 final class AirlinesInitial extends AirlinesState {}

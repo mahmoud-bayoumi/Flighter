@@ -25,7 +25,8 @@ class FlightApiService {
       return {};
     }
   }
-   Future<List<dynamic>> getListOfMap(
+
+  Future<List<dynamic>> getListOfMap(
       {required String endPoint, required String token}) async {
     try {
       final response = await _dio.get(
@@ -44,7 +45,6 @@ class FlightApiService {
       return [];
     }
   }
-
 
   // POST request method
   Future<Map<String, dynamic>> post(

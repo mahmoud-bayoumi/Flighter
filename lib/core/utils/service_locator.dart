@@ -10,6 +10,7 @@ import 'package:flighter/features/auth/data/repos/reset_password_repos/verify_re
 import 'package:flighter/features/home/data/repos/airlines_repo/airlines_repo_impl.dart';
 
 import 'package:flighter/features/home/data/repos/from_countries_repo/from_repo_impl.dart';
+import 'package:flighter/features/home/data/repos/search_repo/search_repo_impl.dart';
 
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
 
@@ -30,7 +31,7 @@ void setupServerLocator() {
 
   getIt.registerSingleton<SignInRepoImpl>(
       SignInRepoImpl(apiService: getIt.get<ApiService>()));
- 
+
   getIt.registerSingleton<SignUpRepoImpl>(
       SignUpRepoImpl(apiService: getIt.get<ApiService>()));
 
@@ -66,8 +67,12 @@ void setupServerLocator() {
   getIt.registerSingleton<ToRepoImpl>(
       ToRepoImpl(apiService: getIt.get<FlightApiService>()));
 
-       getIt.registerSingleton<AirlinesRepoImpl>(
+  getIt.registerSingleton<AirlinesRepoImpl>(
       AirlinesRepoImpl(flightApiService: getIt.get<FlightApiService>()));
   getIt.registerSingleton<FromRepoImpl>(
       FromRepoImpl(apiService: getIt.get<FlightApiService>()));
+
+        getIt.registerSingleton<SearchRepoImpl>(
+      SearchRepoImpl(flightApiService: getIt.get<FlightApiService>()));
+
 }
