@@ -98,11 +98,11 @@ class _SearchContainerState extends State<SearchContainer> {
                   top: MediaQuery.sizeOf(context).height * 0.070,
                   child: GestureDetector(
                     onTap: () {
-                      String temp = firstController.text;
+                      /*         String temp = firstController.text;
                       setState(() {
                         firstController.text = secondController.text;
                         secondController.text = temp;
-                      });
+                      }); */
                     },
                     child: Image.asset(
                       AssetsData.kSwapArrowsImage,

@@ -126,15 +126,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
                 ),
               ),
               SizedBox(height: 10.h),
-              widget.forFrom
-                  ? const ListTile(
-                      leading: Icon(Icons.my_location, color: kPrimaryColor),
-                      title: Text('Current Location',
-                          style: TextStyle(color: kPrimaryColor)),
-                      subtitle: Text('Use current location',
-                          style: TextStyle(color: kPrimaryColor)),
-                    )
-                  : const SizedBox.shrink(),
+
               Text(
                 'Suggested places',
                 style: Styles.textStyle18.copyWith(

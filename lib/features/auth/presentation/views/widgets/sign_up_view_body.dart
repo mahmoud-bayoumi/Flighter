@@ -6,6 +6,7 @@ import 'package:flighter/core/widgets/custom_text_form_field.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
+import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -44,6 +45,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               if (state is SignUpSuccess) {
                 EasyLoading.dismiss();
                 BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+                BlocProvider.of<ToCountriesCubit>(context).getToCountries();
                 GoRouter.of(context).push(AppRouter.kCheckYourEmailView,
                     extra: cubitData.emailController.text);
               } else if (state is SignUpFailure) {
