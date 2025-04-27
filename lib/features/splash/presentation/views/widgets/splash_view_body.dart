@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/flighter_logo.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       () async {
         if (await _secureStorageService.getToken(tokenKey) != null) {
           BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+          BlocProvider.of<ToCountriesCubit>(context).getToCountries();
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else {
           GoRouter.of(context).pushReplacement(AppRouter.kSignInView);

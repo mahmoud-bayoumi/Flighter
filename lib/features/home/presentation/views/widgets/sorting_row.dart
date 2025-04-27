@@ -14,7 +14,9 @@ class SortingRow extends StatefulWidget {
   final Map<String, bool> stringBoolMap;
   const SortingRow({
     super.key,
-    required this.airlines, required this.airlineNames, required this.stringBoolMap,
+    required this.airlines,
+    required this.airlineNames,
+    required this.stringBoolMap,
   });
 
   @override
@@ -44,7 +46,6 @@ class _SortingRowState extends State<SortingRow> {
 
   @override
   Widget build(BuildContext context) {
-   
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
