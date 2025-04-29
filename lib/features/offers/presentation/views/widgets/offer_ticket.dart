@@ -5,7 +5,7 @@ import 'package:flighter/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/functions/capitalize_word.dart';
-import '../../../../../core/utils/functions/convert12HoursFormat.dart';
+import '../../../../../core/utils/functions/convert12_hours_format.dart';
 import '../../../data/models/offer_ticker_data/offer_ticker_data.dart';
 
 class OfferTicketWidget extends StatelessWidget {

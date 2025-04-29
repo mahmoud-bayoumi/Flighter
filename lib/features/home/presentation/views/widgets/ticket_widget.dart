@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/functions/capitalize_word.dart';
-import '../../../../../core/utils/functions/convert12HoursFormat.dart';
+import '../../../../../core/utils/functions/convert12_hours_format.dart';
 
 class TicketWidget extends StatelessWidget {
   const TicketWidget({super.key, required this.ticketModel});

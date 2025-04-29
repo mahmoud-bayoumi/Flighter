@@ -35,6 +35,7 @@ class GetOfferCubit extends Cubit<GetOfferState> {
         emit(GetOfferFailure(errMessage: error.errMessage));
       },
       (data) {
+        offersModel = data;
         emit(GetOfferSuccess());
       },
     );

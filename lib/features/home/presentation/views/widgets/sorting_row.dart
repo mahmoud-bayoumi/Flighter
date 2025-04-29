@@ -125,7 +125,6 @@ class _FiltersModalState extends State<FiltersModal> {
   Map<String, int> airlinesIndeses = {};
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     int index = 1;
     widget.airlines.forEach((key, value) {
