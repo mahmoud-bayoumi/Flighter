@@ -12,9 +12,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/functions/dialogs_type.dart';
 import '../../../../../core/utils/functions/generate_ticket_pdf.dart';
 import '../../../../../core/utils/functions/show_confirmation_dialog.dart';
+import 'row_filght_details_for_bookings.dart';
 
-class FlightDataCard extends StatelessWidget {
-  const FlightDataCard({super.key});
+class FlightDataCardForBookings extends StatelessWidget {
+  const FlightDataCardForBookings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,7 @@ class FlightDataCard extends StatelessWidget {
             Positioned(
               top: 360.h,
               left: 55.w,
-              child: const RowFlightDetailes(),
+              child: const RowFlightDetailesForBookings(),
             ),
             Positioned(
               top: 460.h,

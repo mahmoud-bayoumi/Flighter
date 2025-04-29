@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/failure.dart';

@@ -10,7 +10,11 @@ class EconomySeatsRow extends StatelessWidget {
     required this.seatEReceived,
     required this.seatFReceived,
     required this.seatGReceived,
-    required this.seatHReceived, required this.seatEAvaiable, required this.seatFAvaiable, required this.seatGAvaiable, required this.seatHAvaiable,
+    required this.seatHReceived,
+    required this.seatEAvaiable,
+    required this.seatFAvaiable,
+    required this.seatGAvaiable,
+    required this.seatHAvaiable,
   });
 
   final int seatNo;

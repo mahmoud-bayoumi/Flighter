@@ -1,4 +1,3 @@
-
 import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/economy_seats_row.dart';
 
 import 'package:flutter/material.dart';

@@ -17,6 +17,7 @@ import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_
 import 'package:flighter/features/profile/data/repos/update_profile_repo/update_profile_repo_impl.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/book_ticket/data/repos/get_seats_repo/get_seats_repo_impl.dart';
+import '../../features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo_impl.dart';
 import '../../features/profile/data/repos/change_password_repo/change_password_repo_impl.dart';
 import '../../features/profile/data/repos/delete_profile_photo_repo/delete_profile_photo_repo_impl.dart';
 import '../../features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
@@ -80,4 +81,6 @@ void setupServerLocator() {
 
   getIt.registerSingleton<GetSeatsRepoImpl>(
       GetSeatsRepoImpl(flightApiService: getIt.get<FlightApiService>()));
+  getIt.registerSingleton<TicketSummaryRepoImpl>(
+      TicketSummaryRepoImpl(flightApiService: getIt.get<FlightApiService>()));
 }

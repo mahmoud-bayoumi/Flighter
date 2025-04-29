@@ -1,9 +1,13 @@
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
+import 'package:flighter/core/utils/functions/convert12HoursFormat.dart';
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/row_flight_detailes.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/unabled_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FlightDetailesCard extends StatelessWidget {
@@ -24,22 +28,39 @@ class FlightDetailesCard extends StatelessWidget {
             height: MediaQuery.sizeOf(context).height * .67,
             child: Stack(
               children: [
-                const FromToCountrySecond(from: "CAI", to: "ALX"),
+                FromToCountrySecond(
+                    from: capitalizeFirstThreeLetters(
+                        BlocProvider.of<TicketSummaryCubit>(context)
+                            .ticketSummaryModel
+                            .data!
+                            .from!),
+                    to: capitalizeFirstThreeLetters(
+                        BlocProvider.of<TicketSummaryCubit>(context)
+                            .ticketSummaryModel
+                            .data!
+                            .to!)),
                 Positioned(
                   top: 220.h,
                   left: 25.w,
-                  child: const UnabledTextField(
+                  child: UnabledTextField(
                     textTitle: 'Date',
-                    text: '18/12/2024',
+                    text: BlocProvider.of<TicketSummaryCubit>(context)
+                        .ticketSummaryModel
+                        .data!
+                        .departureDate!,
                     icon: Icons.access_time,
                   ),
                 ),
                 Positioned(
                   top: 220.h,
                   left: 210.w,
-                  child: const UnabledTextField(
+                  child: UnabledTextField(
                     textTitle: 'Time',
-                    text: '9:30 AM',
+                    text: convertTo12HourFormat(
+                        BlocProvider.of<TicketSummaryCubit>(context)
+                            .ticketSummaryModel
+                            .data!
+                            .departureTime!),
                     icon: Icons.access_time,
                   ),
                 ),
@@ -77,9 +98,14 @@ class FlightDetailesCard extends StatelessWidget {
                 Positioned(
                   top: 500.h,
                   left: MediaQuery.sizeOf(context).width * .17,
-                  child: Text(
-                    '230222-BE143',
-                    style: Styles.textStyle45.copyWith(color: Colors.black),
+                  child: Center(
+                    child: Text(
+                      BlocProvider.of<TicketSummaryCubit>(context)
+                          .ticketSummaryModel
+                          .data!
+                          .ticketCode!,
+                      style: Styles.textStyle45.copyWith(color: Colors.black),
+                    ),
                   ),
                 ),
               ],

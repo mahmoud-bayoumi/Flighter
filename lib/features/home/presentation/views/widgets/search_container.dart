@@ -171,7 +171,6 @@ class _SearchContainerState extends State<SearchContainer> {
                   if (_formKey.currentState!.validate()) {
                     //Search
                     await BlocProvider.of<SearchCubit>(context).getSearchData();
-            
                   }
                 },
               ),

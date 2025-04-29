@@ -1,5 +1,8 @@
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/flight_column_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 
 class RowFlightDetailes extends StatelessWidget {
   const RowFlightDetailes({
@@ -8,32 +11,55 @@ class RowFlightDetailes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         FlightColumnText(
           text: 'Flight',
-          ans: "PK 230",
+          ans: BlocProvider.of<TicketSummaryCubit>(context)
+              .ticketSummaryModel
+              .data!
+              .flightNumber!,
         ),
-        SizedBox(
+        const SizedBox(
           width: 30,
         ),
         FlightColumnText(
           text: 'Gate',
-          ans: "22",
+          ans: BlocProvider.of<TicketSummaryCubit>(context)
+              .ticketSummaryModel
+              .data!
+              .gate!,
         ),
-        SizedBox(
+        const SizedBox(
           width: 50,
         ),
         FlightColumnText(
           text: 'Seat',
-          ans: "2B",
+          ans: BlocProvider.of<TicketSummaryCubit>(context)
+                      .ticketSummaryModel
+                      .data!
+                      .selectedSeats
+                      .length >
+                  1
+              ? BlocProvider.of<TicketSummaryCubit>(context)
+                      .ticketSummaryModel
+                      .data!
+                      .selectedSeats[0] +
+                  '..'
+              : BlocProvider.of<TicketSummaryCubit>(context)
+                  .ticketSummaryModel
+                  .data!
+                  .selectedSeats[0],
         ),
-        SizedBox(
+        const SizedBox(
           width: 30,
         ),
         FlightColumnText(
           text: 'Class',
-          ans: "Business",
+          ans: BlocProvider.of<TicketSummaryCubit>(context)
+              .ticketSummaryModel
+              .data!
+              .className!,
         ),
       ],
     );

@@ -1,5 +1,6 @@
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
+import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/choose_seat_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,8 @@ class ChooseSeatView extends StatelessWidget {
         leading: BackButton(
           color: Colors.black,
           onPressed: () {
+            BlocProvider.of<TicketSummaryCubit>(context).ticketCounter = 0;
+            BlocProvider.of<TicketSummaryCubit>(context).selectedSeats = [];
             GoRouter.of(context).pop();
           },
         ),
