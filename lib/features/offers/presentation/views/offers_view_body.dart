@@ -7,7 +7,7 @@ import 'package:flighter/features/offers/presentation/views/widgets/offers_view_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../home/presentation/views/widgets/hot_deals_list_view.dart';
+import 'widgets/hot_deals_list_view.dart';
 
 class OffersViewBody extends StatelessWidget {
   const OffersViewBody({super.key});
