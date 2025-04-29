@@ -56,7 +56,7 @@ class ChooseSeatViewBody extends StatelessWidget {
                     resevedSeats: seatsModel.data!.seats!
                         .where((seat) => seat.isBooked == true)
                         .map<String>((seat) => seat.seatName as String)
-                        .toList()) // <---------------------
+                        .toList())
                 : EconomyListView(
                     avaiableSeats: seatsModel.data!.seats!
                         .where((seat) => seat.isBooked == false)
@@ -78,9 +78,18 @@ class ChooseSeatViewBody extends StatelessWidget {
                   if (BlocProvider.of<TicketSummaryCubit>(context)
                       .selectedSeats
                       .isNotEmpty) {
-                    await BlocProvider.of<TicketSummaryCubit>(context)
-                        .getTicketSummary();
-                    GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                    if (BlocProvider.of<TicketSummaryCubit>(context)
+                            .ticketCounter ==
+                        BlocProvider.of<TicketSummaryCubit>(context)
+                            .noOfTravelers) {
+                      await BlocProvider.of<TicketSummaryCubit>(context)
+                          .getTicketSummary();
+                      GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                    } else {
+                      showSnackBar(context,
+                          message:
+                              'Please select exactly ${BlocProvider.of<TicketSummaryCubit>(context).noOfTravelers} seats before continuing.');
+                    }
                   } else {
                     showSnackBar(context,
                         message: 'Please select the seats you wish to book.');

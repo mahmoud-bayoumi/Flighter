@@ -29,7 +29,6 @@ class _SeatState extends State<Seat> {
   int counter = 0;
   @override
   Widget build(BuildContext context) {
-   
     return widget.isReseved
         ? Container(
             height: 45.w,
@@ -68,7 +67,7 @@ class _SeatState extends State<Seat> {
                       cubit.selectedSeats.remove(widget.seatName);
                     } else {
                       // Optional feedback (when user tries to select more than allowed)
-
+                    
                       showSnackBar(context,
                           message:
                               'You can only select seats equal to the number of travelers.');
