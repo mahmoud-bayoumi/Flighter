@@ -1,7 +1,6 @@
-
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/utils/functions/show_snack_bar.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/book_ticket/data/models/seats_model/seats_model.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/business_list_view.dart';
@@ -12,19 +11,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'selection_status_row.dart';
 
 class ChooseSeatViewBody extends StatelessWidget {
   const ChooseSeatViewBody({super.key, required this.seatsModel});
   final SeatsModel seatsModel;
-  /* = const [
-    '4A',
-    '4B',
-    '4C',
-    '4D',
-    '1A'
-  ]; */
-  //= const ['5G', '5H', '5F', '5E', '1E'];
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -81,8 +74,18 @@ class ChooseSeatViewBody extends StatelessWidget {
               child: CustomButton(
                 text: 'Confirm',
                 height: 70.h,
-                onPressed: () {
-                  GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                onPressed: () async {
+                  if (BlocProvider.of<TicketSummaryCubit>(context)
+                      .selectedSeats
+                      .isNotEmpty) {
+                    await BlocProvider.of<TicketSummaryCubit>(context)
+                        .getTicketSummary();
+                    GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                  } else {
+                    showSnackBar(context,
+                        message: 'Please select the seats you wish to book.');
+                  }
+                  // trigger here
                 },
               ),
             ),

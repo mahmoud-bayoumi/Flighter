@@ -25,7 +25,7 @@ class BookingsViewBody extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 2.w),
-                child: const FlightDataCard(),
+                child: const FlightDataCardForBookings(),
               );
             },
           ),

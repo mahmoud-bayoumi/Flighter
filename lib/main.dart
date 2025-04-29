@@ -2,7 +2,10 @@ import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/core/utils/stripe_keys.dart';
 import 'package:flighter/features/book_ticket/data/repos/get_seats_repo/get_seats_repo_impl.dart';
+import 'package:flighter/features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo.dart';
+import 'package:flighter/features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo_impl.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
+import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'package:flighter/features/home/data/repos/airlines_repo/airlines_repo_impl.dart';
 import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
@@ -61,9 +64,12 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
-          ) , 
-            BlocProvider(
+          ),
+          BlocProvider(
             create: (context) => GetSeatsCubit(getIt.get<GetSeatsRepoImpl>()),
+          ),
+          BlocProvider(
+            create: (context) => TicketSummaryCubit(getIt.get<TicketSummaryRepoImpl>()),
           )
         ],
         child: MaterialApp.router(

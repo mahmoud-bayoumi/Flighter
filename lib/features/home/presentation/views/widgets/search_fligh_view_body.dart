@@ -1,11 +1,10 @@
-
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
 import 'package:flighter/core/widgets/failure_page_widget.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
 import 'package:flighter/features/home/presentation/views/widgets/data_of_flights.dart';
-import 'package:flighter/features/home/presentation/views/widgets/from_to_counter.dart';
+import 'package:flighter/features/home/presentation/views/widgets/from_to_country.dart';
 import 'package:flighter/features/home/presentation/views/widgets/sorting_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/tickets_list_view_builder.dart';
 import 'package:flutter/material.dart';
