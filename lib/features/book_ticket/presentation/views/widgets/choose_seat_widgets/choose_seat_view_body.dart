@@ -2,7 +2,10 @@ import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/business_list_view.dart';
+import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/economy_list_view.dart';
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,8 +45,10 @@ class ChooseSeatViewBody extends StatelessWidget {
             SizedBox(
               height: 30.h,
             ),
-            // EconomyListView(resevedSeats: economyResevedSeats),
-            BusinessListVIew(resevedSeats: businessResevedSeats),
+            BlocProvider.of<SearchCubit>(context).classTypeIdController.text ==
+                    '1'
+                ? BusinessListVIew(resevedSeats: businessResevedSeats)
+                : EconomyListView(resevedSeats: economyResevedSeats),
             SizedBox(
               height: 60.h,
             ),
