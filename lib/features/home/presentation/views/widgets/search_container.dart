@@ -4,6 +4,7 @@ import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
+import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
@@ -150,7 +151,13 @@ class _SearchContainerState extends State<SearchContainer> {
                       .searchModel
                       .data!
                       .isNotEmpty) {
-                    GoRouter.of(context).push(AppRouter.kSearchFlightView);
+                    if (BlocProvider.of<SearchCubit>(context).secondPush) {
+                      BlocProvider.of<SearchCubit>(context).secondPush = false;
+                      GoRouter.of(context)
+                          .pushReplacement(AppRouter.kSearchFlightView);
+                    } else {
+                      GoRouter.of(context).push(AppRouter.kSearchFlightView);
+                    }
                   } else {
                     noTicketsAvailable(context);
                   }

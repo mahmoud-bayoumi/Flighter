@@ -1,4 +1,3 @@
-import 'package:flighter/features/home/data/models/search_model/datum.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flighter/features/home/presentation/views/widgets/ticket_widget.dart';
 import 'package:flutter/material.dart';

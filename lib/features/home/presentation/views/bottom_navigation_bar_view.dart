@@ -1,8 +1,5 @@
 import 'package:flighter/constants.dart';
-import 'package:flighter/core/utils/service_locator.dart';
 import 'package:flighter/features/bookings/presentation/views/bookings_view_body.dart';
-import 'package:flighter/features/home/data/repos/search_repo/search_repo_impl.dart';
-import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flighter/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:flighter/features/offers/presentation/views/offers_view_body.dart';
 import 'package:flighter/features/profile/presentation/views/profile_view.dart';

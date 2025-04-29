@@ -11,7 +11,8 @@ abstract class SearchRepo {
       int noOfTravelers = 1,
       int flightTypeId = 1,
       bool cheapestFilter = false,
-      bool fastestFilter = false});
+      bool fastestFilter = false,
+      List<int> airlines = const []});
   Future<Either<Failure, SearchModel>> getRoundSearchData(
       {required String from,
       required String to,
@@ -20,6 +21,8 @@ abstract class SearchRepo {
       int noOfTravelers = 1,
       required int classTypeId,
       int flightTypeId = 2,
-      bool cheapestFilter= false,
-      bool fastestFilter= false});
+      bool cheapestFilter = false,
+      bool fastestFilter = false,
+      List<int> airlines = const []
+      });
 }
