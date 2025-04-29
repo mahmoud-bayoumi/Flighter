@@ -1,5 +1,3 @@
-
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -36,7 +34,7 @@ class HomeViewBody extends StatelessWidget {
           return const FailurePageWidget();
         } else {
           final userName = getData.profileData?.name ?? 'Guest';
-       
+
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Stack(

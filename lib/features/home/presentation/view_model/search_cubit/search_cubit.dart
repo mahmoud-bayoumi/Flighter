@@ -16,7 +16,7 @@ class SearchCubit extends Cubit<SearchState> {
       TextEditingController();
   final TextEditingController classTypeIdController = TextEditingController();
   final SearchRepo searchRepo;
-  bool secondPush = false ; 
+  bool secondPush = false;
   bool cheapestFilter = false, fastestFilter = false, airlinesFilter = false;
   List<int> airlines = [];
   SearchCubit(this.searchRepo) : super(SearchInitial());

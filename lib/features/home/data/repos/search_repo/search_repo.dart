@@ -23,6 +23,5 @@ abstract class SearchRepo {
       int flightTypeId = 2,
       bool cheapestFilter = false,
       bool fastestFilter = false,
-      List<int> airlines = const []
-      });
+      List<int> airlines = const []});
 }

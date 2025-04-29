@@ -41,7 +41,6 @@ class SearchRepoImpl implements SearchRepo {
         }
         query += airLinesQuery;
       }
-      log('Query : $query');
       var response = await _flightApiService.get(
           endPoint: endPoint + query, token: token!);
       if (response['success']) {
