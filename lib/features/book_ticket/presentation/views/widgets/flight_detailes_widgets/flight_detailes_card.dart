@@ -1,6 +1,6 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
-import 'package:flighter/core/utils/functions/convert12HoursFormat.dart';
+
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
@@ -9,6 +9,8 @@ import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../../core/utils/functions/convert12_hours_format.dart';
 
 class FlightDetailesCard extends StatelessWidget {
   const FlightDetailesCard({super.key});
