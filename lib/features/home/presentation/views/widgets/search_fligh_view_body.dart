@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
 import 'package:flighter/core/widgets/failure_page_widget.dart';

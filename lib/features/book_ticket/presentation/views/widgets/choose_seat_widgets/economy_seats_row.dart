@@ -10,7 +10,7 @@ class EconomySeatsRow extends StatelessWidget {
     required this.seatEReceived,
     required this.seatFReceived,
     required this.seatGReceived,
-    required this.seatHReceived,
+    required this.seatHReceived, required this.seatEAvaiable, required this.seatFAvaiable, required this.seatGAvaiable, required this.seatHAvaiable,
   });
 
   final int seatNo;
@@ -18,6 +18,11 @@ class EconomySeatsRow extends StatelessWidget {
   final bool seatFReceived;
   final bool seatGReceived;
   final bool seatHReceived;
+
+  final bool seatEAvaiable;
+  final bool seatFAvaiable;
+  final bool seatGAvaiable;
+  final bool seatHAvaiable;
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +32,32 @@ class EconomySeatsRow extends StatelessWidget {
         Seat(
           seatName: '$seatNo' 'E',
           isReseved: seatEReceived,
+          isAvaiable: seatEAvaiable,
         ),
         SizedBox(
           width: 35.w,
         ),
-        Seat(seatName: '$seatNo' 'F', isReseved: seatFReceived),
+        Seat(
+          seatName: '$seatNo' 'F',
+          isReseved: seatFReceived,
+          isAvaiable: seatFAvaiable,
+        ),
         SizedBox(
           width: 85.w,
         ),
-        Seat(seatName: '$seatNo' 'G', isReseved: seatGReceived),
+        Seat(
+          seatName: '$seatNo' 'G',
+          isReseved: seatGReceived,
+          isAvaiable: seatGAvaiable,
+        ),
         SizedBox(
           width: 35.w,
         ),
-        Seat(seatName: '$seatNo' 'H', isReseved: seatHReceived),
+        Seat(
+          seatName: '$seatNo' 'H',
+          isReseved: seatHReceived,
+          isAvaiable: seatHAvaiable,
+        ),
       ],
     );
   }

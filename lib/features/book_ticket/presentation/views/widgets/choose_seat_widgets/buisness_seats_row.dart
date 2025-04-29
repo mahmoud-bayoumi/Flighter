@@ -11,6 +11,10 @@ class BusinessRow extends StatelessWidget {
     required this.seatBReceived,
     required this.seatCReceived,
     required this.seatDReceived,
+    required this.seatAAvaiable,
+    required this.seatBAvaiable,
+    required this.seatCAvaiable,
+    required this.seatDAvaiable,
   });
 
   final int seatNo;
@@ -18,6 +22,10 @@ class BusinessRow extends StatelessWidget {
   final bool seatBReceived;
   final bool seatCReceived;
   final bool seatDReceived;
+  final bool seatAAvaiable;
+  final bool seatBAvaiable;
+  final bool seatCAvaiable;
+  final bool seatDAvaiable;
 
   @override
   Widget build(BuildContext context) {
@@ -25,21 +33,31 @@ class BusinessRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Seat(
+          isAvaiable: seatAAvaiable,
           seatName: '$seatNo' 'A',
           isReseved: seatAReceived,
         ),
         SizedBox(
           width: 35.w,
         ),
-        Seat(seatName: '$seatNo' 'B', isReseved: seatBReceived),
+        Seat(
+            isAvaiable: seatBAvaiable,
+            seatName: '$seatNo' 'B',
+            isReseved: seatBReceived),
         SizedBox(
           width: 85.w,
         ),
-        Seat(seatName: '$seatNo' 'C', isReseved: seatCReceived),
+        Seat(
+            isAvaiable: seatCAvaiable,
+            seatName: '$seatNo' 'C',
+            isReseved: seatCReceived),
         SizedBox(
           width: 35.w,
         ),
-        Seat(seatName: '$seatNo' 'D', isReseved: seatDReceived),
+        Seat(
+            isAvaiable: seatDAvaiable,
+            seatName: '$seatNo' 'D',
+            isReseved: seatDReceived),
       ],
     );
   }
