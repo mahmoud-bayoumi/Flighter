@@ -153,8 +153,6 @@ class _SearchContainerState extends State<SearchContainer> {
                       .isNotEmpty) {
                     if (BlocProvider.of<SearchCubit>(context).secondPush) {
                       BlocProvider.of<SearchCubit>(context).secondPush = false;
-                      GoRouter.of(context)
-                          .pushReplacement(AppRouter.kSearchFlightView);
                     } else {
                       GoRouter.of(context).push(AppRouter.kSearchFlightView);
                     }
