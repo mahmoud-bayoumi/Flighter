@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/api_service.dart';
-
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import 'get_profile_photo_repo.dart';
 
 class GetProfilePhotoRepoImpl implements GetProfilePhotoRepo {

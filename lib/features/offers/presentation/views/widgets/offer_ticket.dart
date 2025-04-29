@@ -2,16 +2,16 @@ import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
-import 'package:flighter/features/home/data/models/search_model/datum.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/functions/capitalize_word.dart';
 import '../../../../../core/utils/functions/convert12HoursFormat.dart';
+import '../../../data/models/offer_ticker_data/offer_ticker_data.dart';
 
-class TicketWidget extends StatelessWidget {
-  const TicketWidget({super.key, required this.ticketModel});
+class OfferTicketWidget extends StatelessWidget {
+  const OfferTicketWidget({super.key, required this.ticketModel});
 
-  final TicketData ticketModel;
+  final OfferTicketData ticketModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

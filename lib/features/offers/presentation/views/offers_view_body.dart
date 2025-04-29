@@ -1,8 +1,12 @@
+import 'package:flighter/core/widgets/failure_page_widget.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
+import 'package:flighter/features/offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
+import 'package:flighter/features/offers/presentation/view_model/get_offer_cubit/get_offer_state.dart';
+import 'package:flighter/features/offers/presentation/views/widgets/offers_list_view_builder.dart';
 import 'package:flighter/features/offers/presentation/views/widgets/offers_view_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../home/presentation/views/widgets/hot_deals_list_view.dart';
 
 class OffersViewBody extends StatelessWidget {
@@ -37,13 +41,24 @@ class OffersViewBody extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: EdgeInsets.only(top: 280.h),
-                child: const Text('delete the comments on the list')
-                /*SizedBox(
-                  height: MediaQuery.sizeOf(context).height +
-                      (flightNumber * 200.h),
-                  child: TicketsListViewBuilder()),*/
-                ),
+              padding: EdgeInsets.only(top: 280.h),
+              child: BlocBuilder<GetOfferCubit, GetOfferState>(
+                builder: (context, state) {
+                  if (state is GetOfferSuccess) {
+                    return SizedBox(
+                        height: MediaQuery.sizeOf(context).height +
+                            (flightNumber * 200.h),
+                        child: const OffersListViewBuilder());
+                  } else if (state is GetOfferLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return const FailurePageWidget();
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),

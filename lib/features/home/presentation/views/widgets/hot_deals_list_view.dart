@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../core/utils/assets_data.dart';
 
 class HotDealsListView extends StatelessWidget {
-  final List<String> images = const [
-    AssetsData.kSpecialDiscount,
-    AssetsData.kEasyBooking
-  ];
+  final List<String> images = const [AssetsData.k5off, AssetsData.k10off];
   const HotDealsListView({
     super.key,
   });
@@ -19,7 +15,7 @@ class HotDealsListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return SizedBox(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
