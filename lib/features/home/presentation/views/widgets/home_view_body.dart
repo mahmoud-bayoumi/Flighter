@@ -1,11 +1,10 @@
-import 'dart:developer';
+
 
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/failure_page_widget.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
-import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sign_in_cubit.dart';
 import 'package:flighter/features/home/presentation/views/widgets/hot_deals_list_view.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_container.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';

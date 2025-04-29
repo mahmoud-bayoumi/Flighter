@@ -1,142 +1,109 @@
 import 'dart:developer';
 
 import 'package:flighter/features/home/data/models/airline.dart';
+import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
 import 'package:flighter/features/home/presentation/views/widgets/sort_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/utils/styles.dart';
 
-class SortingRow extends StatefulWidget {
+class SortingRow extends StatelessWidget {
   final List<Airline> airlines;
   final List<String> airlineNames;
   final Map<String, bool> stringBoolMap;
-  const SortingRow({
+  SortingRow({
     super.key,
     required this.airlines,
     required this.airlineNames,
     required this.stringBoolMap,
   });
 
-  @override
-  State<SortingRow> createState() => _SortingRowState();
-}
-
-class _SortingRowState extends State<SortingRow> {
-  bool isBest = false;
-
-  bool isCheapest = false;
-
-  bool isFastest = false;
-
-  bool isDirect = false;
-
   bool isAll = true;
-  bool isAirlines = false;
 
-  void resetBoolean() {
-    isCheapest = false;
-    isBest = false;
-    isFastest = false;
-    isDirect = false;
-    isAll = false;
-    isAirlines = false;
-  }
+  bool isAirlines = false;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: SizedBox(
-        height: 40,
-        child: Row(
-          children: [
-            SortButton(
-              isSelected: isCheapest,
-              text: 'Cheapest',
-              onTap: () {
-                setState(() {
-                  resetBoolean();
-                  isCheapest = true;
-                });
-              },
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-            SortButton(
-              isSelected: isBest,
-              text: 'Best',
-              onTap: () {
-                setState(() {
-                  resetBoolean();
-                  isBest = true;
-                });
-              },
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-            SortButton(
-              isSelected: isFastest,
-              text: 'Fastest',
-              onTap: () {
-                setState(() {
-                  resetBoolean();
-                  isFastest = true;
-                });
-              },
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-            SortButton(
-              isSelected: isDirect,
-              text: 'Direct',
-              onTap: () {
-                setState(() {
-                  resetBoolean();
-                  isDirect = true;
-                });
-              },
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-            SortButton(
-              isSelected: isAirlines,
-              text: 'Airlines',
-              onTap: () {
-                setState(() {
-                  resetBoolean();
-                  isAirlines = true;
-                });
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) { 
+        return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: SizedBox(
+            height: 40,
+            child: Row(
+              children: [
+                SortButton(
+                  isSelected:
+                      BlocProvider.of<SearchCubit>(context).cheapestFilter,
+                  text: 'Cheapest',
+                  onTap: () {
+                    BlocProvider.of<SearchCubit>(context).cheapestFilter =
+                        !BlocProvider.of<SearchCubit>(context).cheapestFilter;
+                     BlocProvider.of<SearchCubit>(context).secondPush = true ; 
+                    BlocProvider.of<SearchCubit>(context).getSearchData();
+                  },
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                SortButton(
+                  isSelected:
+                      BlocProvider.of<SearchCubit>(context).fastestFilter,
+                  text: 'Fastest',
+                  onTap: () {
+                    BlocProvider.of<SearchCubit>(context).fastestFilter =
+                        !BlocProvider.of<SearchCubit>(context).fastestFilter;
+                            BlocProvider.of<SearchCubit>(context).secondPush = true ; 
+                 
+                    BlocProvider.of<SearchCubit>(context).getSearchData();
+                  },
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                SortButton(
+                  isSelected:
+                      BlocProvider.of<SearchCubit>(context).airlinesFilter,
+                  text: 'Airlines',
+                  onTap: () {
+                    BlocProvider.of<SearchCubit>(context).airlinesFilter =
+                        !BlocProvider.of<SearchCubit>(context).airlinesFilter;
 
-                showFiltersModal(context, widget.stringBoolMap);
-                log('Airlines: ${widget.stringBoolMap}');
-              },
+                    showFiltersModal(context, stringBoolMap);
+
+                    log('Airlines: $stringBoolMap');
+                  },
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                SortButton(
+                  isSelected: isAll,
+                  text: 'All Filters',
+                  onTap: () {
+                    isAll = true;
+                  },
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+              ],
             ),
-            SizedBox(
-              width: 10.w,
-            ),
-            SortButton(
-              isSelected: isAll,
-              text: 'All Filters',
-              onTap: () {
-                setState(() {
-                  resetBoolean();
-                  isAll = true;
-                });
-              },
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -163,6 +130,17 @@ class FiltersModal extends StatefulWidget {
 }
 
 class _FiltersModalState extends State<FiltersModal> {
+  Map<String, int> airlinesIndeses = {};
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    int index = 1;
+    widget.airlines.forEach((key, value) {
+      airlinesIndeses[key] = index++; // Assign index to each airline
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -198,7 +176,12 @@ class _FiltersModalState extends State<FiltersModal> {
             )),
         IconButton(
           icon: const Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+                BlocProvider.of<SearchCubit>(context).secondPush = true ; 
+                 
+            BlocProvider.of<SearchCubit>(context).getSearchData();
+          },
           color: kPrimaryColor,
         ),
       ],
@@ -222,8 +205,22 @@ class _FiltersModalState extends State<FiltersModal> {
                   trailing: Checkbox(
                     activeColor: kPrimaryColor,
                     value: airlines[entry.key],
-                    onChanged: (value) =>
-                        setState(() => airlines[entry.key] = value!),
+                    onChanged: (value) => setState(() {
+                      airlines[entry.key] = value!;
+                      if (!BlocProvider.of<SearchCubit>(context)
+                              .airlines
+                              .contains(airlinesIndeses[entry.key]!) &&
+                          airlines[entry.key]!) {
+                        BlocProvider.of<SearchCubit>(context)
+                            .airlines
+                            .add(airlinesIndeses[entry.key]!);
+                      } else if (!airlines[entry.key]!) {
+                        BlocProvider.of<SearchCubit>(context)
+                            .airlines
+                            .remove(airlinesIndeses[entry.key]!);
+                      }
+
+                        }),
                   ),
                 ),
                 const Divider(height: 1),

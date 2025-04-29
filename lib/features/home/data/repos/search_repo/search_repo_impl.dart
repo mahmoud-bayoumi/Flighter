@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
@@ -12,7 +14,7 @@ class SearchRepoImpl implements SearchRepo {
   final FlutterSecureStorage _flutterSecureStorage =
       const FlutterSecureStorage();
   String endPoint = 'search?';
-  List<int> airLines = [];
+
   SearchRepoImpl({required FlightApiService flightApiService})
       : _flightApiService = flightApiService;
 
@@ -25,20 +27,23 @@ class SearchRepoImpl implements SearchRepo {
       required int classTypeId,
       int flightTypeId = 1,
       bool cheapestFilter = false,
-      bool fastestFilter = false}) async {
+      bool fastestFilter = false,
+      List<int> airlines = const []}) async {
     final token = await _flutterSecureStorage.read(key: tokenKey);
     try {
-      endPoint +=
+      String query =
           'FlightTypeId=$flightTypeId&From=$from&To=$to&StartDate=$startDate&NoOfTravelers=$noOfTravelers&ClassTypeId=$classTypeId&FilterCheapest=$cheapestFilter&FilterFastest=$fastestFilter';
-      if (airLines.isNotEmpty) {
+      log(airlines.toString());
+      if (airlines.isNotEmpty) {
         String airLinesQuery = '';
-        for (int i = 0; i < airLines.length; i++) {
-          airLinesQuery += '&AirlineIds=${airLines[i]}';
+        for (int i = 0; i < airlines.length; i++) {
+          airLinesQuery += '&AirlineIds=${airlines[i]}';
         }
-        endPoint += airLinesQuery;
+        query += airLinesQuery;
       }
-      var response =
-          await _flightApiService.get(endPoint: endPoint, token: token!);
+      log('Query : $query');
+      var response = await _flightApiService.get(
+          endPoint: endPoint + query, token: token!);
       if (response['success']) {
         return right(SearchModel.fromJson(response));
       } else {
@@ -59,22 +64,24 @@ class SearchRepoImpl implements SearchRepo {
       required int classTypeId,
       int flightTypeId = 2,
       bool cheapestFilter = false,
-      bool fastestFilter = false}) async {
+      bool fastestFilter = false,
+      List<int> airlines = const []}) async {
     try {
       final token = await _flutterSecureStorage.read(key: tokenKey);
 
-      endPoint =
+      String qurey =
           'FlightTypeId=$flightTypeId&From=$from&To=$to&StartDate=$startDate&EndDate=$endDate&NoOfTravelers=$noOfTravelers&ClassTypeId=$classTypeId&FilterCheapest=$cheapestFilter&FilterFastest=$fastestFilter';
-      if (airLines.isNotEmpty) {
+      if (airlines.isNotEmpty) {
         String airLinesQuery = '';
-        for (int i = 0; i < airLines.length; i++) {
-          airLinesQuery += '&AirlineIds=${airLines[i]}';
+        for (int i = 0; i < airlines.length; i++) {
+          airLinesQuery += '&AirlineIds=${airlines[i]}';
         }
-        endPoint += airLinesQuery;
+        qurey += airLinesQuery;
       }
-      var response =
-          await _flightApiService.get(endPoint: endPoint, token: token!);
+      var response = await _flightApiService.get(
+          endPoint: endPoint + qurey, token: token!);
 
+      log(response.toString());
       if (response['success']) {
         return right(SearchModel.fromJson(response));
       } else {

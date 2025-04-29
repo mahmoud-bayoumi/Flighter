@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
 import 'package:flighter/core/widgets/failure_page_widget.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
@@ -30,17 +32,17 @@ class SearchFligthViewBody extends StatelessWidget {
             const PrimaryContainer(),
             FromToCountry(
               from: capitalizeFirstThreeLetters(
-                      BlocProvider.of<SearchCubit>(context)
+                  BlocProvider.of<SearchCubit>(context)
                           .searchModel
                           .data![0]
-                          .from!) ??
-                  'CT1',
+                          .from ??
+                      'CT1'),
               to: capitalizeFirstThreeLetters(
-                      BlocProvider.of<SearchCubit>(context)
+                  BlocProvider.of<SearchCubit>(context)
                           .searchModel
                           .data![0]
-                          .to!) ??
-                  "CT2",
+                          .to ??
+                      "CT2"),
             ),
             DataOfFlights(
               firstDate: BlocProvider.of<SearchCubit>(context)
@@ -54,8 +56,7 @@ class SearchFligthViewBody extends StatelessWidget {
                       .arrivalDate ??
                   '--/--/--',
               number:
-                  '${BlocProvider.of<SearchCubit>(context).numbersTravelerController.text} Passenger' ??
-                      '1 Passenger',
+                  '${BlocProvider.of<SearchCubit>(context).numbersTravelerController.text} Passenger',
               type: BlocProvider.of<SearchCubit>(context)
                           .classTypeIdController
                           .text ==
@@ -82,7 +83,19 @@ class SearchFligthViewBody extends StatelessWidget {
             ),
             Padding(
                 padding: EdgeInsets.only(top: 430.h),
-                child: const TicketsListViewBuilder()),
+                child: BlocBuilder<SearchCubit, SearchState>(
+                  builder: (context, state) {
+                    if (state is SearchSucess) {
+                      return const TicketsListViewBuilder();
+                    } else if (state is SearchLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return const FailurePageWidget();
+                    }
+                  },
+                )),
           ],
         ),
       ),

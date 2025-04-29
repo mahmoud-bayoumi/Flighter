@@ -1,5 +1,4 @@
 import 'package:flighter/core/widgets/primary_container.dart';
-import 'package:flighter/features/home/presentation/views/widgets/tickets_list_view_builder.dart';
 import 'package:flighter/features/offers/presentation/views/widgets/offers_view_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

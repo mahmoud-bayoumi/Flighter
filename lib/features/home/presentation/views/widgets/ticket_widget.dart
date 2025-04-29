@@ -1,7 +1,6 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
-import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/home/data/models/search_model/datum.dart';
 import 'package:flutter/material.dart';
