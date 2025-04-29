@@ -32,7 +32,7 @@ class _SearchContainerState extends State<SearchContainer> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController firstController = TextEditingController();
   final TextEditingController secondController = TextEditingController();
-  bool oneWay = false;
+  bool oneWay = true;
   @override
   Widget build(BuildContext context) {
     return Form(
