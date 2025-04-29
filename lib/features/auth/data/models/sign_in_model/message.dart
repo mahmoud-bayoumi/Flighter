@@ -2,6 +2,7 @@ class Message {
   dynamic message;
   bool? isAuthenticated;
   String? userName;
+  String? userId;
   String? email;
   List<dynamic>? roles;
   String? token;
@@ -11,6 +12,7 @@ class Message {
     this.message,
     this.isAuthenticated,
     this.userName,
+    this.userId,
     this.email,
     this.roles,
     this.token,
@@ -21,6 +23,7 @@ class Message {
         message: json['message'] as dynamic,
         isAuthenticated: json['isAuthenticated'] as bool?,
         userName: json['userName'] as String?,
+        userId: json['userId'] as String?,
         email: json['email'] as String?,
         roles: json['roles'] as List<dynamic>?,
         token: json['token'] as String?,

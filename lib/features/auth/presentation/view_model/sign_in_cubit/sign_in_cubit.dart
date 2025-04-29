@@ -18,6 +18,7 @@ class SignInCubit extends Cubit<SignInState> {
   final SecureStorageService secureStorageService =
       const SecureStorageService();
   bool isLoading = false;
+  late SignInModel signInModel;
   Future<void> signInUser() async {
     isLoading = true;
 
@@ -40,6 +41,7 @@ class SignInCubit extends Cubit<SignInState> {
       },
       (r) async {
         isLoading = false;
+        signInModel = r;
         await secureStorageService.saveToken(
             tokenKey, r.message!.token!); //default
 
