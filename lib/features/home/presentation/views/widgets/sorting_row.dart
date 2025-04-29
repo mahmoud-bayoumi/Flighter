@@ -1,7 +1,5 @@
 import 'dart:developer';
-
 import 'package:flighter/features/home/data/models/airline.dart';
-import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
 import 'package:flighter/features/home/presentation/views/widgets/sort_container.dart';
@@ -16,21 +14,17 @@ class SortingRow extends StatelessWidget {
   final List<Airline> airlines;
   final List<String> airlineNames;
   final Map<String, bool> stringBoolMap;
-  SortingRow({
+  const SortingRow({
     super.key,
     required this.airlines,
     required this.airlineNames,
     required this.stringBoolMap,
   });
 
-  bool isAll = true;
-
-  bool isAirlines = false;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
-      builder: (context, state) { 
+      builder: (context, state) {
         return SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
@@ -45,7 +39,7 @@ class SortingRow extends StatelessWidget {
                   onTap: () {
                     BlocProvider.of<SearchCubit>(context).cheapestFilter =
                         !BlocProvider.of<SearchCubit>(context).cheapestFilter;
-                     BlocProvider.of<SearchCubit>(context).secondPush = true ; 
+                    BlocProvider.of<SearchCubit>(context).secondPush = true;
                     BlocProvider.of<SearchCubit>(context).getSearchData();
                   },
                 ),
@@ -62,8 +56,8 @@ class SortingRow extends StatelessWidget {
                   onTap: () {
                     BlocProvider.of<SearchCubit>(context).fastestFilter =
                         !BlocProvider.of<SearchCubit>(context).fastestFilter;
-                            BlocProvider.of<SearchCubit>(context).secondPush = true ; 
-                 
+                    BlocProvider.of<SearchCubit>(context).secondPush = true;
+
                     BlocProvider.of<SearchCubit>(context).getSearchData();
                   },
                 ),
@@ -90,11 +84,9 @@ class SortingRow extends StatelessWidget {
                   width: 10.w,
                 ),
                 SortButton(
-                  isSelected: isAll,
+                  isSelected: true,
                   text: 'All Filters',
-                  onTap: () {
-                    isAll = true;
-                  },
+                  onTap: () {},
                 ),
                 SizedBox(
                   width: 10.w,
@@ -178,8 +170,8 @@ class _FiltersModalState extends State<FiltersModal> {
           icon: const Icon(Icons.close),
           onPressed: () {
             Navigator.pop(context);
-                BlocProvider.of<SearchCubit>(context).secondPush = true ; 
-                 
+            BlocProvider.of<SearchCubit>(context).secondPush = true;
+
             BlocProvider.of<SearchCubit>(context).getSearchData();
           },
           color: kPrimaryColor,
@@ -219,8 +211,7 @@ class _FiltersModalState extends State<FiltersModal> {
                             .airlines
                             .remove(airlinesIndeses[entry.key]!);
                       }
-
-                        }),
+                    }),
                   ),
                 ),
                 const Divider(height: 1),
