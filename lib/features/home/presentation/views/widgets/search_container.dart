@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';

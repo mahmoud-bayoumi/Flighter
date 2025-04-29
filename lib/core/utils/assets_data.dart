@@ -15,4 +15,7 @@ abstract class AssetsData {
   static const kMasterCard = 'assets/images/Mastercard.png';
   static const kVisa = 'assets/images/Visa.png';
   static const kPayPal = 'assets/images/Paypal.png';
+  static const k5off = 'assets/images/5p.jpg';
+  static const k10off = 'assets/images/10p.jpg';
+  static const allOffer = 'assets/images/best_offer.webp';
 }

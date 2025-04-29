@@ -10,7 +10,6 @@ import 'package:flighter/features/home/presentation/views/widgets/tickets_list_v
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../view_model/search_cubit/search_cubit.dart';
 
 class SearchFligthViewBody extends StatelessWidget {

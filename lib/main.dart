@@ -11,6 +11,8 @@ import 'package:flighter/features/home/presentation/view_model/airlines_cubit/ai
 import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
+import 'package:flighter/features/offers/data/repos/get_offer_repo/get_offers_repo_impl.dart';
+import 'package:flighter/features/offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo_impl.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
@@ -66,11 +68,19 @@ class MyApp extends StatelessWidget {
             create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
           ),
           BlocProvider(
+
             create: (context) => GetSeatsCubit(getIt.get<GetSeatsRepoImpl>()),
           ),
           BlocProvider(
             create: (context) => TicketSummaryCubit(getIt.get<TicketSummaryRepoImpl>()),
           )
+
+            create: (context) => GetOfferCubit(getIt.get<GetOffersRepoImpl>()),
+          ),
+          BlocProvider(
+            create: (context) => GetSeatsCubit(getIt.get<GetSeatsRepoImpl>()),
+          ),
+
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

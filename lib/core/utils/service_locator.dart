@@ -1,19 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
+import 'package:flighter/core/utils/offers_api_service.dart';
 import 'package:flighter/features/auth/data/repos/reset_password_repos/reset_password_repo/reset_password_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/reset_password_repos/send_reset_pass_code_repo/send_reset_pass_code_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/sign_up_repo/sign_up_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/verify_email_repo/verify_email_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/reset_password_repos/verify_reset_pass_code_repo/verify_reset_pass_code_repo_impl.dart';
-
 import 'package:flighter/features/home/data/repos/airlines_repo/airlines_repo_impl.dart';
-
 import 'package:flighter/features/home/data/repos/from_countries_repo/from_repo_impl.dart';
 import 'package:flighter/features/home/data/repos/search_repo/search_repo_impl.dart';
-
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
-
+import 'package:flighter/features/offers/data/repos/get_offer_repo/get_offers_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/delete_account_repo/delete_account_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/update_profile_repo/update_profile_repo_impl.dart';
@@ -30,7 +28,7 @@ final getIt = GetIt.instance;
 void setupServerLocator() {
   getIt.registerSingleton<ApiService>(ApiService(Dio()));
   getIt.registerSingleton<FlightApiService>(FlightApiService(Dio()));
-
+  getIt.registerSingleton<OffersApiService>(OffersApiService(Dio()));
   getIt.registerSingleton<SignInRepoImpl>(
       SignInRepoImpl(apiService: getIt.get<ApiService>()));
 
@@ -76,6 +74,11 @@ void setupServerLocator() {
 
   getIt.registerSingleton<SearchRepoImpl>(
       SearchRepoImpl(flightApiService: getIt.get<FlightApiService>()));
+
+
+  getIt.registerSingleton<GetOffersRepoImpl>(
+      GetOffersRepoImpl(offerApiService: getIt.get<OffersApiService>()));
+
   getIt.registerSingleton<GetSeatsRepoImpl>(
       GetSeatsRepoImpl(flightApiService: getIt.get<FlightApiService>()));
   getIt.registerSingleton<TicketSummaryRepoImpl>(

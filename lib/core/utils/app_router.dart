@@ -39,6 +39,7 @@ abstract class AppRouter {
   static const String kCheckYourEmailViewForForgetPass =
       '/CheckYourEmailForForgetPass';
   static const String kBookingsNavigation = '/Bookings';
+  static const String kOffersNavigation = '/Offers';
   static const String kAboutUs = '/AboutUs';
   static const String kPrivacyAndPolicy = '/PrivacyAndPolicy';
 
@@ -92,6 +93,12 @@ abstract class AppRouter {
         path: kBookingsNavigation,
         builder: (context, state) => const BottomNavigationBarView(
           intialIndex: 1,
+        ),
+      ),
+      GoRoute(
+        path: kOffersNavigation,
+        builder: (context, state) => const BottomNavigationBarView(
+          intialIndex: 2,
         ),
       ),
       GoRoute(
