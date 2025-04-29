@@ -1,15 +1,18 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
 import 'package:flighter/features/home/data/models/search_model/search_model.dart';
 import 'package:flighter/features/home/data/repos/search_repo/search_repo.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../../../../../constants.dart';
 
 class SearchRepoImpl implements SearchRepo {
   final FlightApiService _flightApiService;
-
-  final String endPoint = 'search';
+  final FlutterSecureStorage _flutterSecureStorage =
+      const FlutterSecureStorage();
+  String endPoint = 'search?';
+  List<int> airLines = [];
   SearchRepoImpl({required FlightApiService flightApiService})
       : _flightApiService = flightApiService;
 
@@ -20,16 +23,22 @@ class SearchRepoImpl implements SearchRepo {
       required String startDate,
       int noOfTravelers = 1,
       required int classTypeId,
-      int flightTypeId = 1}) async {
+      int flightTypeId = 1,
+      bool cheapestFilter = false,
+      bool fastestFilter = false}) async {
+    final token = await _flutterSecureStorage.read(key: tokenKey);
     try {
-      var response = await _flightApiService.post(endPoint: endPoint, data: {
-        "from": from,
-        "to": to,
-        "startDate": startDate,
-        "noOfTravelers": noOfTravelers,
-        "classTypeId": classTypeId,
-        "flightTypeId": flightTypeId
-      });
+      endPoint +=
+          'FlightTypeId=$flightTypeId&From=$from&To=$to&StartDate=$startDate&NoOfTravelers=$noOfTravelers&ClassTypeId=$classTypeId&FilterCheapest=$cheapestFilter&FilterFastest=$fastestFilter';
+      if (airLines.isNotEmpty) {
+        String airLinesQuery = '';
+        for (int i = 0; i < airLines.length; i++) {
+          airLinesQuery += '&AirlineIds=${airLines[i]}';
+        }
+        endPoint += airLinesQuery;
+      }
+      var response =
+          await _flightApiService.get(endPoint: endPoint, token: token!);
       if (response['success']) {
         return right(SearchModel.fromJson(response));
       } else {
@@ -48,17 +57,24 @@ class SearchRepoImpl implements SearchRepo {
       required String endDate,
       int noOfTravelers = 1,
       required int classTypeId,
-      int flightTypeId = 2}) async {
+      int flightTypeId = 2,
+      bool cheapestFilter = false,
+      bool fastestFilter = false}) async {
     try {
-      var response = await _flightApiService.post(endPoint: endPoint, data: {
-        "from": from,
-        "to": to,
-        "startDate": startDate,
-        "endDate": endDate,
-        "noOfTravelers": noOfTravelers,
-        "classTypeId": classTypeId,
-        "flightTypeId": flightTypeId
-      });
+      final token = await _flutterSecureStorage.read(key: tokenKey);
+
+      endPoint =
+          'FlightTypeId=$flightTypeId&From=$from&To=$to&StartDate=$startDate&EndDate=$endDate&NoOfTravelers=$noOfTravelers&ClassTypeId=$classTypeId&FilterCheapest=$cheapestFilter&FilterFastest=$fastestFilter';
+      if (airLines.isNotEmpty) {
+        String airLinesQuery = '';
+        for (int i = 0; i < airLines.length; i++) {
+          airLinesQuery += '&AirlineIds=${airLines[i]}';
+        }
+        endPoint += airLinesQuery;
+      }
+      var response =
+          await _flightApiService.get(endPoint: endPoint, token: token!);
+
       if (response['success']) {
         return right(SearchModel.fromJson(response));
       } else {

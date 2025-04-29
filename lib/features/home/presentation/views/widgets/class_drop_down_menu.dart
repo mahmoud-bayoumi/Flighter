@@ -14,7 +14,7 @@ class ClassDropDownMenu extends StatefulWidget {
 }
 
 class _ClassDropDownMenuState extends State<ClassDropDownMenu> {
-  static const list = ['Economy', 'Business'];
+  static const list = ['Business', 'Economy'];
   String dropdownValue = list.first;
 
   @override
