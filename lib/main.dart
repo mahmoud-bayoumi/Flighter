@@ -68,19 +68,18 @@ class MyApp extends StatelessWidget {
             create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
           ),
           BlocProvider(
-
             create: (context) => GetSeatsCubit(getIt.get<GetSeatsRepoImpl>()),
           ),
           BlocProvider(
-            create: (context) => TicketSummaryCubit(getIt.get<TicketSummaryRepoImpl>()),
-          )
-
+            create: (context) =>
+                TicketSummaryCubit(getIt.get<TicketSummaryRepoImpl>()),
+          ),
+          BlocProvider(
             create: (context) => GetOfferCubit(getIt.get<GetOffersRepoImpl>()),
           ),
           BlocProvider(
             create: (context) => GetSeatsCubit(getIt.get<GetSeatsRepoImpl>()),
           ),
-
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),
