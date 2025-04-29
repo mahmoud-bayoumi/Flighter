@@ -2,8 +2,10 @@ import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/styles.dart';
+import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
 import 'package:flighter/features/home/data/models/search_model/datum.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/functions/capitalize_word.dart';
 import '../../../../../core/utils/functions/convert12HoursFormat.dart';
@@ -15,7 +17,10 @@ class TicketWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        BlocProvider.of<GetSeatsCubit>(context).ticketId =
+            ticketModel.ticketId ?? 11;
+        await BlocProvider.of<GetSeatsCubit>(context).getSeats();
         GoRouter.of(context).push(AppRouter.kChooseSeat);
       },
       child: Card(
