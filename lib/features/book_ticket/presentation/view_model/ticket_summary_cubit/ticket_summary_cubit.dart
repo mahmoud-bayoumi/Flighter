@@ -9,8 +9,8 @@ import 'ticket_summary_state.dart';
 class TicketSummaryCubit extends Cubit<TicketSummaryState> {
   final TicketSummaryRepo ticketSummaryRepo;
   late int ticketId;
-  int ticketCounter= 0;
-  late int noOfTravelers ;  
+  int ticketCounter = 0;
+  late int noOfTravelers;
   List<String> selectedSeats = [];
   late TicketSummaryModel ticketSummaryModel;
   TicketSummaryCubit(this.ticketSummaryRepo) : super(TicketSummaryInitial());

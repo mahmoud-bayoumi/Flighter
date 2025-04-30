@@ -6,6 +6,7 @@ import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_
 import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'package:flighter/features/home/data/models/search_model/datum.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
+import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,14 @@ class TicketWidget extends StatelessWidget {
             ticketModel.ticketId ?? 11;
         BlocProvider.of<TicketSummaryCubit>(context).ticketId =
             ticketModel.ticketId ?? 11;
+        BlocProvider.of<PaymentCubit>(context).ticketId = ticketModel.ticketId!;
 
+        BlocProvider.of<PaymentCubit>(context).amountToPay =
+            int.parse(ticketModel.price!) ?? 1500;
+        BlocProvider.of<PaymentCubit>(context).noOfTravelers = int.parse(
+            BlocProvider.of<SearchCubit>(context)
+                .numbersTravelerController
+                .text);
         BlocProvider.of<TicketSummaryCubit>(context).noOfTravelers = int.parse(
             BlocProvider.of<SearchCubit>(context)
                 .numbersTravelerController

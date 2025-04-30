@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/functions/show_snack_bar.dart';
@@ -11,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../payment/presentation/view_model/payment_cubit/payment_cubit.dart';
+import '../../../view_model/get_seats_cubit/get_seats_cubit.dart';
 import '../../../view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'selection_status_row.dart';
 
@@ -84,6 +88,34 @@ class ChooseSeatViewBody extends StatelessWidget {
                             .noOfTravelers) {
                       await BlocProvider.of<TicketSummaryCubit>(context)
                           .getTicketSummary();
+                      for (int i = 0;
+                          i <
+                              BlocProvider.of<GetSeatsCubit>(context)
+                                  .seatsModel
+                                  .data!
+                                  .seats!
+                                  .length;
+                          i++) {
+                        if (BlocProvider.of<TicketSummaryCubit>(context)
+                            .selectedSeats
+                            .contains(BlocProvider.of<GetSeatsCubit>(context)
+                                .seatsModel
+                                .data!
+                                .seats![i]
+                                .seatName)) {
+                          BlocProvider.of<PaymentCubit>(context).seatsId.add(
+                              BlocProvider.of<GetSeatsCubit>(context)
+                                  .seatsModel
+                                  .data!
+                                  .seats![i]
+                                  .seatId
+                                  .toString());
+                        }
+                      }
+                      
+                      log(BlocProvider.of<PaymentCubit>(context)
+                          .seatsId
+                          .toString());
                       GoRouter.of(context).push(AppRouter.kFlightDetailes);
                     } else {
                       showSnackBar(context,

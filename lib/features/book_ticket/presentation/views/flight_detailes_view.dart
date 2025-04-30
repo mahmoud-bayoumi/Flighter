@@ -18,6 +18,7 @@ class FlightDetailesView extends StatelessWidget {
         backgroundColor: kPrimaryColor,
       ),
       body: const FlightDetailesViewBody(),
+      
     );
   }
 }

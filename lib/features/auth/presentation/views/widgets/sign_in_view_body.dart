@@ -23,6 +23,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/assets_data.dart';
+import '../../../../payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 
 class SignInViewBody extends StatefulWidget {
   const SignInViewBody({super.key});
@@ -57,6 +58,11 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
                 //   log('SignIn Succes');
+                  BlocProvider.of<PaymentCubit>(context).userId =
+                  BlocProvider.of<SignInCubit>(context)
+                      .signInModel
+                      .message!
+                      .userId!;
                 var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
                 getProfilePhotoCubit.getProfilePhoto();
 
@@ -70,7 +76,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
 
                 // upload offers data
                 BlocProvider.of<GetOfferCubit>(context).getOffers();
-                
+
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is SignInFailure) {
                 EasyLoading.dismiss();

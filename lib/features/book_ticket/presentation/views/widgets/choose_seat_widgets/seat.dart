@@ -1,6 +1,7 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
+import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,6 +49,8 @@ class _SeatState extends State<Seat> {
                 onTap: () {
                   setState(() {
                     final cubit = BlocProvider.of<TicketSummaryCubit>(context);
+                    
+                 
                     final hasReachedLimit =
                         cubit.ticketCounter >= cubit.noOfTravelers;
 
@@ -67,7 +70,7 @@ class _SeatState extends State<Seat> {
                       cubit.selectedSeats.remove(widget.seatName);
                     } else {
                       // Optional feedback (when user tries to select more than allowed)
-                    
+
                       showSnackBar(context,
                           message:
                               'You can only select seats equal to the number of travelers.');

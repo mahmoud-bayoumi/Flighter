@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
 import 'package:flighter/core/utils/offers_api_service.dart';
+import 'package:flighter/core/utils/pay_api_service.dart';
 import 'package:flighter/features/auth/data/repos/reset_password_repos/reset_password_repo/reset_password_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/reset_password_repos/send_reset_pass_code_repo/send_reset_pass_code_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo_impl.dart';
@@ -18,6 +19,7 @@ import 'package:flighter/features/profile/data/repos/update_profile_repo/update_
 import 'package:get_it/get_it.dart';
 import '../../features/book_ticket/data/repos/get_seats_repo/get_seats_repo_impl.dart';
 import '../../features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo_impl.dart';
+import '../../features/payment/data/repos/pay_now_repo_impl.dart';
 import '../../features/profile/data/repos/change_password_repo/change_password_repo_impl.dart';
 import '../../features/profile/data/repos/delete_profile_photo_repo/delete_profile_photo_repo_impl.dart';
 import '../../features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
@@ -29,6 +31,7 @@ void setupServerLocator() {
   getIt.registerSingleton<ApiService>(ApiService(Dio()));
   getIt.registerSingleton<FlightApiService>(FlightApiService(Dio()));
   getIt.registerSingleton<OffersApiService>(OffersApiService(Dio()));
+  getIt.registerSingleton<PayApiService>(PayApiService(Dio()));
   getIt.registerSingleton<SignInRepoImpl>(
       SignInRepoImpl(apiService: getIt.get<ApiService>()));
 
@@ -75,7 +78,6 @@ void setupServerLocator() {
   getIt.registerSingleton<SearchRepoImpl>(
       SearchRepoImpl(flightApiService: getIt.get<FlightApiService>()));
 
-
   getIt.registerSingleton<GetOffersRepoImpl>(
       GetOffersRepoImpl(offerApiService: getIt.get<OffersApiService>()));
 
@@ -83,4 +85,6 @@ void setupServerLocator() {
       GetSeatsRepoImpl(flightApiService: getIt.get<FlightApiService>()));
   getIt.registerSingleton<TicketSummaryRepoImpl>(
       TicketSummaryRepoImpl(flightApiService: getIt.get<FlightApiService>()));
+  getIt.registerSingleton<PayNowRepoImpl>(
+      PayNowRepoImpl(payApiService: getIt.get<PayApiService>()));
 }
