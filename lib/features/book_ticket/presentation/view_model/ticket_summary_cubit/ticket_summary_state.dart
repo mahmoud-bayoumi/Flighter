@@ -1,4 +1,3 @@
-
 sealed class TicketSummaryState {}
 
 final class TicketSummaryInitial extends TicketSummaryState {}

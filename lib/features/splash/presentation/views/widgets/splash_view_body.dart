@@ -12,6 +12,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/secure_storage.dart';
 import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import '../../../../offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
+import '../../../../payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -101,6 +102,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
           BlocProvider.of<ToCountriesCubit>(context).getToCountries();
           BlocProvider.of<AirlinesCubit>(context).getAirlines();
           BlocProvider.of<GetOfferCubit>(context).getOffers();
+          BlocProvider.of<PaymentCubit>(context).userId =
+              (await _secureStorageService.getToken(userIdKey))!;
+
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else {
           GoRouter.of(context).pushReplacement(AppRouter.kSignInView);

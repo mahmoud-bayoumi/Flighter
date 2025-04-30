@@ -5,3 +5,7 @@ const kGreyColor = Color(0xff6F6F6F);
 const kReservedSeatColor = Color(0xff7C7270);
 const kUnSelectedSeatColor = Color(0xffF4EFEF);
 const tokenKey = 'auth-token';
+const userIdKey = 'userId';
+const payChannelKey = 'pay_channel_key';
+const payChannelName = 'pay_channel_name';
+const notificationPayId = 101;

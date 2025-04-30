@@ -48,6 +48,8 @@ class _SeatState extends State<Seat> {
                 onTap: () {
                   setState(() {
                     final cubit = BlocProvider.of<TicketSummaryCubit>(context);
+                    
+                 
                     final hasReachedLimit =
                         cubit.ticketCounter >= cubit.noOfTravelers;
 
@@ -67,7 +69,7 @@ class _SeatState extends State<Seat> {
                       cubit.selectedSeats.remove(widget.seatName);
                     } else {
                       // Optional feedback (when user tries to select more than allowed)
-                    
+
                       showSnackBar(context,
                           message:
                               'You can only select seats equal to the number of travelers.');

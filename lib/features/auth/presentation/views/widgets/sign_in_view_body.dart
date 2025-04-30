@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
@@ -23,6 +24,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/assets_data.dart';
+import '../../../../payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 
 class SignInViewBody extends StatefulWidget {
   const SignInViewBody({super.key});
@@ -57,6 +59,19 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
                 //   log('SignIn Succes');
+                AwesomeNotifications()
+                    .isNotificationAllowed()
+                    .then((isAllowed) {
+                  if (!isAllowed) {
+                    AwesomeNotifications()
+                        .requestPermissionToSendNotifications();
+                  }
+                });
+                BlocProvider.of<PaymentCubit>(context).userId =
+                    BlocProvider.of<SignInCubit>(context)
+                        .signInModel
+                        .message!
+                        .userId!;
                 var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
                 getProfilePhotoCubit.getProfilePhoto();
 
@@ -70,7 +85,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
 
                 // upload offers data
                 BlocProvider.of<GetOfferCubit>(context).getOffers();
-                
+
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is SignInFailure) {
                 EasyLoading.dismiss();

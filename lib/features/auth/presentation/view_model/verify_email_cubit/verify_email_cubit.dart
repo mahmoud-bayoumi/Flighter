@@ -13,6 +13,7 @@ part 'verify_email_state.dart';
 class VerifyEmailCubit extends Cubit<VerifyEmailState> {
   VerifyEmailCubit(this.verifyRepo) : super(VerifyEmailInitial());
   final VerifyEmailRepoImpl verifyRepo;
+  late VerifyModel verifyModel ; 
   final formKey = GlobalKey<FormState>();
   late final String email;
   final TextEditingController code1 = TextEditingController();
@@ -34,6 +35,7 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
         emit(VerifyEmailFailure(errMsg: l.errMessage));
       },
       (r) async {
+        verifyModel = r ; 
         await secureStorageService.saveToken(tokenKey, r.message!.token!);
         emit(VerifyEmailSuccess());
       },

@@ -1,9 +1,13 @@
+
+
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/core/widgets/custom_small_button.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/flight_detailes_card.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
+import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/app_router.dart';
@@ -42,11 +46,27 @@ class FlightDetailesViewBody extends StatelessWidget {
           left: 210.w,
           child: CustomSmallButton(
             onPressed: () async {
-              bool paid = await PaymentManager.makePayment(2700, "USD");
+              // check seats
+
+              bool paid = await PaymentManager.makePayment(
+                  BlocProvider.of<PaymentCubit>(context).noOfTravelers *
+                      BlocProvider.of<PaymentCubit>(context).amountToPay,
+                  "EGP");
+
               if (paid) {
+                BlocProvider.of<PaymentCubit>(context).paymentIntentId =
+                    PaymentManager.paymentIntentId;
+                BlocProvider.of<PaymentCubit>(context).isPayNow = true;
+                BlocProvider.of<PaymentCubit>(context).netAmount =
+                    PaymentManager.netAmount.toString();
+
+                BlocProvider.of<PaymentCubit>(context).pay();
                 successPaymentDialog(
                     context, 'Your ticket has been added to your bookings.');
               } else {
+                BlocProvider.of<PaymentCubit>(context).isPayNow = false;
+                BlocProvider.of<PaymentCubit>(context).paymentIntentId = '0';
+                BlocProvider.of<PaymentCubit>(context).netAmount = '';
                 errorPaymentDialog(context, 'Payment Not Completed');
               }
             },
@@ -58,3 +78,5 @@ class FlightDetailesViewBody extends StatelessWidget {
     );
   }
 }
+
+// check if available for later

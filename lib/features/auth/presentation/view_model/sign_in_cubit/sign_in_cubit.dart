@@ -44,6 +44,8 @@ class SignInCubit extends Cubit<SignInState> {
         signInModel = r;
         await secureStorageService.saveToken(
             tokenKey, r.message!.token!); //default
+        await secureStorageService.saveToken(
+            userIdKey, r.message!.userId!); //default
 
         emit(SignInSuccess());
       },

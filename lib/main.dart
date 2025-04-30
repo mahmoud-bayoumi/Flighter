@@ -1,8 +1,9 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/core/utils/stripe_keys.dart';
 import 'package:flighter/features/book_ticket/data/repos/get_seats_repo/get_seats_repo_impl.dart';
-import 'package:flighter/features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo.dart';
 import 'package:flighter/features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo_impl.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
@@ -13,6 +14,8 @@ import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 import 'package:flighter/features/offers/data/repos/get_offer_repo/get_offers_repo_impl.dart';
 import 'package:flighter/features/offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
+import 'package:flighter/features/payment/data/repos/pay_now_repo_impl.dart';
+import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo_impl.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
@@ -30,6 +33,20 @@ import 'features/home/presentation/view_model/search_cubit/search_cubit.dart';
 void main() {
   setupServerLocator();
   Stripe.publishableKey = StripeKeys.publishableKey;
+  AwesomeNotifications().initialize(
+      'resource://drawable/ic_stat_logo',
+      [
+        NotificationChannel(
+            channelKey: payChannelKey,
+            channelName: payChannelName,
+            channelDescription: 'Notification For Payment',
+            playSound: true,
+            channelShowBadge: true,
+            defaultColor: Colors.blue,
+            ledColor: Colors.white,
+            importance: NotificationImportance.Max)
+      ],
+      debug: true);
   runApp(const MyApp());
 }
 
@@ -80,6 +97,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => GetSeatsCubit(getIt.get<GetSeatsRepoImpl>()),
           ),
+          BlocProvider(
+              create: (context) => PaymentCubit(getIt.get<PayNowRepoImpl>()))
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

@@ -1,4 +1,3 @@
-
 sealed class GetOfferState {}
 
 final class GetOfferInitial extends GetOfferState {}

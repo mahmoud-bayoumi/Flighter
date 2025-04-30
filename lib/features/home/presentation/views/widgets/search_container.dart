@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../../constants.dart';
 import '../../view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 
 class SearchContainer extends StatefulWidget {
@@ -107,6 +109,24 @@ class _SearchContainerState extends State<SearchContainer> {
                   top: MediaQuery.sizeOf(context).height * 0.070,
                   child: GestureDetector(
                     onTap: () {
+                      // Notification For Pay . //<----------------------------------------
+                      AwesomeNotifications().createNotification(
+                          content: NotificationContent(
+                            icon: 'resource://drawable/ic_stat_logo',
+                            backgroundColor: kPrimaryColor,
+                            largeIcon: 'asset://assets/images/logo.png',
+                            id: notificationPayId,
+                            channelKey: payChannelKey,
+                            notificationLayout: NotificationLayout.BigText,
+                            body:
+                                'You have unpaid flight bookings. Please complete your payment to confirm your reservations.',
+                            wakeUpScreen: true,
+                            fullScreenIntent: true,
+                          ),
+                          schedule: NotificationCalendar.fromDate(
+                              date: DateTime.now()
+                                  .add(const Duration(seconds: 1))));
+
                       /*         String temp = firstController.text;
                       setState(() {
                         firstController.text = secondController.text;
