@@ -5,6 +5,7 @@ class Message {
   String? email;
   List<dynamic>? roles;
   String? token;
+    String? userId;
   DateTime? refreshTokenExpiration;
 
   Message({
@@ -14,6 +15,7 @@ class Message {
     this.email,
     this.roles,
     this.token,
+    this.userId,
     this.refreshTokenExpiration,
   });
 
@@ -24,6 +26,7 @@ class Message {
         email: json['email'] as String?,
         roles: json['roles'] as List<dynamic>?,
         token: json['token'] as String?,
+        userId: json['userId'] as String?,
         refreshTokenExpiration: json['refreshTokenExpiration'] == null
             ? null
             : DateTime.parse(json['refreshTokenExpiration'] as String),

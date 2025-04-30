@@ -28,7 +28,7 @@ class TicketWidget extends StatelessWidget {
         BlocProvider.of<PaymentCubit>(context).ticketId = ticketModel.ticketId!;
 
         BlocProvider.of<PaymentCubit>(context).amountToPay =
-            int.parse(ticketModel.price!) ?? 1500;
+            int.parse(ticketModel.price!);
         BlocProvider.of<PaymentCubit>(context).noOfTravelers = int.parse(
             BlocProvider.of<SearchCubit>(context)
                 .numbersTravelerController

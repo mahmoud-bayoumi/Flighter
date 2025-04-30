@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
@@ -58,11 +59,19 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
                 //   log('SignIn Succes');
-                  BlocProvider.of<PaymentCubit>(context).userId =
-                  BlocProvider.of<SignInCubit>(context)
-                      .signInModel
-                      .message!
-                      .userId!;
+                AwesomeNotifications()
+                    .isNotificationAllowed()
+                    .then((isAllowed) {
+                  if (!isAllowed) {
+                    AwesomeNotifications()
+                        .requestPermissionToSendNotifications();
+                  }
+                });
+                BlocProvider.of<PaymentCubit>(context).userId =
+                    BlocProvider.of<SignInCubit>(context)
+                        .signInModel
+                        .message!
+                        .userId!;
                 var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
                 getProfilePhotoCubit.getProfilePhoto();
 

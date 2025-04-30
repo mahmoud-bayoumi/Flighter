@@ -1,3 +1,5 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/core/utils/stripe_keys.dart';
@@ -31,6 +33,20 @@ import 'features/home/presentation/view_model/search_cubit/search_cubit.dart';
 void main() {
   setupServerLocator();
   Stripe.publishableKey = StripeKeys.publishableKey;
+  AwesomeNotifications().initialize(
+      'resource://drawable/ic_stat_logo',
+      [
+        NotificationChannel(
+            channelKey: payChannelKey,
+            channelName: payChannelName,
+            channelDescription: 'Notification For Payment',
+            playSound: true,
+            channelShowBadge: true,
+            defaultColor: Colors.blue,
+            ledColor: Colors.white,
+            importance: NotificationImportance.Max)
+      ],
+      debug: true);
   runApp(const MyApp());
 }
 

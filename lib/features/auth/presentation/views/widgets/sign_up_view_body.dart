@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
@@ -6,7 +7,6 @@ import 'package:flighter/core/widgets/custom_text_form_field.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
-import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,7 +16,6 @@ import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_cub
 import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_state.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/no_internet_connect.dart';
-import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 
 class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});
@@ -44,8 +43,17 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             listener: (context, state) {
               if (state is SignUpSuccess) {
                 EasyLoading.dismiss();
-                BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
-                BlocProvider.of<ToCountriesCubit>(context).getToCountries();
+                AwesomeNotifications()
+                    .isNotificationAllowed()
+                    .then((isAllowed) {
+                  if (!isAllowed) {
+                    AwesomeNotifications()
+                        .requestPermissionToSendNotifications();
+                  }
+                });
+
+          
+
                 GoRouter.of(context).push(AppRouter.kCheckYourEmailView,
                     extra: cubitData.emailController.text);
               } else if (state is SignUpFailure) {

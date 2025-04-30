@@ -1,7 +1,6 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
-import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
