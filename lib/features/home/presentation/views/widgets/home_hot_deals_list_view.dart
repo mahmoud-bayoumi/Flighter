@@ -8,12 +8,12 @@ import '../../../../../core/utils/assets_data.dart';
 
 class HomeHotDealsListView extends StatelessWidget {
   final List<String> images = const [
-    AssetsData.k10Off,
-    AssetsData.k20Off,
-    AssetsData.k30Off,
-    AssetsData.k40Off,
-    AssetsData.k50Off,
-    AssetsData.allOffer,
+    AssetsData.k10off,
+    AssetsData.k20off,
+    AssetsData.k30off,
+    AssetsData.k40off,
+    AssetsData.k50off,
+    AssetsData.kAllOffers
   ];
   const HomeHotDealsListView({
     super.key,
@@ -26,8 +26,9 @@ class HomeHotDealsListView extends StatelessWidget {
       itemCount: images.length,
       itemBuilder: (context, index) {
         return SizedBox(
+          width: MediaQuery.sizeOf(context).width * .3,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 15.h),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: GestureDetector(
@@ -43,6 +44,7 @@ class HomeHotDealsListView extends StatelessWidget {
                   GoRouter.of(context).push(AppRouter.kOffersNavigation);
                 },
                 child: Image.asset(
+                  fit: BoxFit.cover,
                   images[index],
                 ),
               ),
