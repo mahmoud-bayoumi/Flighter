@@ -12,6 +12,7 @@ class OfferTicketWidget extends StatelessWidget {
   const OfferTicketWidget({super.key, required this.ticketModel});
 
   final OfferTicketData ticketModel;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -102,6 +103,13 @@ class OfferTicketWidget extends StatelessWidget {
                   children: [
                     Text(
                       ticketModel.companyName ?? 'IndiGo',
+                      style: Styles.textStyle18.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: kPrimaryColor,
+                      ),
+                    ),
+                    Text(
+                      '${ticketModel.offerPercentage}% OFF',
                       style: Styles.textStyle18.copyWith(
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
