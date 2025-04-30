@@ -7,6 +7,7 @@ import 'package:flighter/features/offers/presentation/views/widgets/offers_view_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/utils/styles.dart';
 import 'widgets/hot_deals_list_view.dart';
 
 class OffersViewBody extends StatelessWidget {
@@ -41,17 +42,35 @@ class OffersViewBody extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 280.h),
+              padding:
+                  EdgeInsets.only(top: MediaQuery.sizeOf(context).height * .25),
               child: BlocBuilder<GetOfferCubit, GetOfferState>(
                 builder: (context, state) {
                   if (state is GetOfferSuccess) {
+                    if (BlocProvider.of<GetOfferCubit>(context)
+                        .offersModel
+                        .data!
+                        .isEmpty) {
+                      return SizedBox(
+                          height: MediaQuery.sizeOf(context).height / 2,
+                          child: Center(
+                            child: Text(
+                              'No available tickets with ${BlocProvider.of<GetOfferCubit>(context).percentage}% offer.',
+                              style: Styles.textStyle22,
+                            ),
+                          ));
+                    }
                     return SizedBox(
                         height: MediaQuery.sizeOf(context).height +
                             (flightNumber * 200.h),
                         child: const OffersListViewBuilder());
                   } else if (state is GetOfferLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.sizeOf(context).height * .3),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   } else {
                     return const FailurePageWidget();

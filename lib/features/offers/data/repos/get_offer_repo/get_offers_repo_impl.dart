@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/core/utils/offers_api_service.dart';
 import 'package:flighter/features/offers/data/models/offer_ticker_data/offers_model.dart';
@@ -44,9 +47,15 @@ class GetOffersRepoImpl implements GetOfferRepo {
       if (response['success']) {
         return right(OfferModel.fromJson(response));
       } else {
+        log(response.toString());
+        if (response["message"] ==
+            "No available tickets found with $precentage% offer.") {
+          log('X');
+          return right(OfferModel.fromJson(response));
+        }
         return left(Failure(response['message']));
       }
-    } catch (e) {
+    } on DioException catch (e) {
       return left(Failure(e.toString()));
     }
   }

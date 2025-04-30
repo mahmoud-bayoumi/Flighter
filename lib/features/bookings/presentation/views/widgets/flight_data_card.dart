@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
-import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/row_flight_detailes.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/unabled_text_field.dart';
 import 'package:flighter/features/bookings/presentation/views/widgets/cancel_ticket_text.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
