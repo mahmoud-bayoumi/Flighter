@@ -33,6 +33,8 @@ class HotDealsListView extends StatelessWidget {
                   if (index == images.length - 1) {
                     BlocProvider.of<GetOfferCubit>(context).getOffers();
                   } else {
+                    BlocProvider.of<GetOfferCubit>(context).percentage =
+                        (index + 1) * 10;
                     BlocProvider.of<GetOfferCubit>(context)
                         .getOffersWithPercentage(percentage: (index + 1) * 10);
                   }

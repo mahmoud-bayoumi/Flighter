@@ -8,7 +8,7 @@ class GetOfferCubit extends Cubit<GetOfferState> {
   GetOfferCubit(this.getOfferRepo) : super(GetOfferInitial());
   late OfferModel offersModel;
   final GetOfferRepo getOfferRepo;
-
+  int percentage = 10;
   Future<void> getOffers() async {
     emit(GetOfferLoading());
     final response = await getOfferRepo.getOffers();

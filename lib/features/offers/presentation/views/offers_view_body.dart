@@ -55,7 +55,7 @@ class OffersViewBody extends StatelessWidget {
                           height: MediaQuery.sizeOf(context).height / 2,
                           child: Center(
                             child: Text(
-                              'No available tickets with this offer.',
+                              'No available tickets with ${BlocProvider.of<GetOfferCubit>(context).percentage}% offer.',
                               style: Styles.textStyle22,
                             ),
                           ));
