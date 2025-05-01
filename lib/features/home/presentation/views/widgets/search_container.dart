@@ -18,6 +18,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../constants.dart';
+import '../../../../../core/utils/functions/capitalize_fist_letter.dart';
 import '../../view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 
 class SearchContainer extends StatefulWidget {
@@ -86,9 +87,9 @@ class _SearchContainerState extends State<SearchContainer> {
                     forFrom: true,
                     controller:
                         BlocProvider.of<SearchCubit>(context).fromController,
-                    countrySuggestions:
+                    countrySuggestions: capitalizeFirstLetterOfEach(
                         BlocProvider.of<FromCountriesCubit>(context)
-                            .fromCountries,
+                            .fromCountries ),
                   ),
                   SizedBox(
                     height: 22.h,
@@ -99,8 +100,10 @@ class _SearchContainerState extends State<SearchContainer> {
                     forFrom: false,
                     controller:
                         BlocProvider.of<SearchCubit>(context).toController,
-                    countrySuggestions:
-                        context.read<ToCountriesCubit>().toModel!.data,
+                    countrySuggestions: capitalizeFirstLetterOfEach(context
+                        .read<ToCountriesCubit>()
+                        .toModel!
+                        .data),
                   ),
                 ],
               ),

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flighter/features/payment/data/models/pay_now_model.dart';
-import 'package:flighter/features/payment/data/repos/pay_now_repo.dart';
+import 'package:flighter/features/payment/data/repos/pay_now_repo/pay_now_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'payment_state.dart';
@@ -43,6 +43,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       (r) {
         payNowModel = r;
         log('PayCubit Success');
+        seatsId = [];
         emit(PaymentSuccess());
       },
     );

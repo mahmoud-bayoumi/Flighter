@@ -5,7 +5,7 @@ class Message {
   String? email;
   List<dynamic>? roles;
   String? token;
-    String? userId;
+  String? userId;
   DateTime? refreshTokenExpiration;
 
   Message({

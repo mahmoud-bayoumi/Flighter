@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/features/bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 import 'package:flighter/features/splash/presentation/views/widgets/animated_description.dart';
@@ -104,6 +105,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
           BlocProvider.of<GetOfferCubit>(context).getOffers();
           BlocProvider.of<PaymentCubit>(context).userId =
               (await _secureStorageService.getToken(userIdKey))!;
+          BlocProvider.of<GetBookingsCubit>(context).userId =
+              (await _secureStorageService.getToken(userIdKey))!;
+          BlocProvider.of<GetBookingsCubit>(context).getBookings();
 
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else {

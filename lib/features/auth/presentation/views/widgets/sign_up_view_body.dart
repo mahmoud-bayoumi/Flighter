@@ -52,8 +52,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   }
                 });
 
-          
-
                 GoRouter.of(context).push(AppRouter.kCheckYourEmailView,
                     extra: cubitData.emailController.text);
               } else if (state is SignUpFailure) {

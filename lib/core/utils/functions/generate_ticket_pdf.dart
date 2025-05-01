@@ -20,16 +20,26 @@ Future<void> generateTicketPDF(
     required String seatClass,
     required String baggageAllowance,
     required String seatNumber,
-    required String totalCost}) async {
+    required String totalCost , 
+    required String imageP}) async {
   final pdf = pw.Document();
   final img = await rootBundle.load(AssetsData.kLogo);
   final imageBytes = img.buffer.asUint8List();
   final image = pw.MemoryImage(imageBytes);
+
+
+Future<pw.MemoryImage> loadPdfImageFromAsset(String imagePath) async {
+  final byteData = await rootBundle.load(imagePath);
+  final imageBytes = byteData.buffer.asUint8List();
+  return pw.MemoryImage(imageBytes);
+}
+final pw.MemoryImage mImage = await loadPdfImageFromAsset(imageP);
+/*
   final egyImg = await rootBundle.load('assets/images/egyAir.png');
   final egyImageBytes = egyImg.buffer.asUint8List();
   final egyImage =
       pw.MemoryImage(egyImageBytes); // assets/images/flyEmeraites.png
-  pdf.addPage(
+ */ pdf.addPage(
     pw.Page(
       build: (pw.Context context) {
         return pw.Container(
@@ -39,7 +49,7 @@ Future<void> generateTicketPDF(
               pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Image(egyImage,
+                    pw.Image(mImage,
                         width: 220.w, height: 70.h, fit: pw.BoxFit.cover),
                     pw.Image(image, width: 120.w, height: 120.h),
                   ]),

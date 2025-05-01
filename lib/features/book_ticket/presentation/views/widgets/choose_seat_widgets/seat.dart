@@ -48,8 +48,7 @@ class _SeatState extends State<Seat> {
                 onTap: () {
                   setState(() {
                     final cubit = BlocProvider.of<TicketSummaryCubit>(context);
-                    
-                 
+
                     final hasReachedLimit =
                         cubit.ticketCounter >= cubit.noOfTravelers;
 

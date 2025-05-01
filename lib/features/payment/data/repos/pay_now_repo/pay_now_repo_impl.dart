@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/features/payment/data/models/pay_now_model.dart';
-import 'package:flighter/features/payment/data/repos/pay_now_repo.dart';
+import 'package:flighter/features/payment/data/repos/pay_now_repo/pay_now_repo.dart';
 
-import '../../../../core/utils/pay_api_service.dart';
+import '../../../../../core/utils/pay_api_service.dart';
 
 class PayNowRepoImpl implements PayRepo {
   final PayApiService payApiService;
