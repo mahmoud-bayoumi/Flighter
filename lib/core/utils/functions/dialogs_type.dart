@@ -280,3 +280,28 @@ AwesomeDialog noTicketsAvailable(BuildContext context) {
     ),
   )..show();
 }
+
+AwesomeDialog seatsAreBookedAlready(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Unavaiable Booking',
+    desc: 'One or more seats already booked! Please try again.',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: Colors.red,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+        // GoRouter.of(context).pop();
+      },
+    ),
+  )..show();
+}

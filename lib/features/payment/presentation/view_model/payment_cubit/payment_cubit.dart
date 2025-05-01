@@ -43,6 +43,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       (r) {
         payNowModel = r;
         log('PayCubit Success');
+        seatsId = [];
         emit(PaymentSuccess());
       },
     );

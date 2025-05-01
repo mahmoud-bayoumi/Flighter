@@ -103,16 +103,25 @@ class ChooseSeatViewBody extends StatelessWidget {
                                 .data!
                                 .seats![i]
                                 .seatName)) {
-                          BlocProvider.of<PaymentCubit>(context).seatsId.add(
-                              BlocProvider.of<GetSeatsCubit>(context)
+                          if (!BlocProvider.of<PaymentCubit>(context)
+                              .seatsId
+                              .contains(BlocProvider.of<GetSeatsCubit>(context)
                                   .seatsModel
                                   .data!
                                   .seats![i]
                                   .seatId
-                                  .toString());
+                                  .toString())) {
+                            BlocProvider.of<PaymentCubit>(context).seatsId.add(
+                                BlocProvider.of<GetSeatsCubit>(context)
+                                    .seatsModel
+                                    .data!
+                                    .seats![i]
+                                    .seatId
+                                    .toString());
+                          }
                         }
                       }
-                      
+
                       log(BlocProvider.of<PaymentCubit>(context)
                           .seatsId
                           .toString());
