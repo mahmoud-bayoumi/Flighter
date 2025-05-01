@@ -98,12 +98,6 @@ class ProfileViewBody extends StatelessWidget {
                             },
                           ),
                           TextProfileButton(
-                            buttonText: 'Add a payment method',
-                            onTap: () {
-                              GoRouter.of(context).push(AppRouter.kAddPayment);
-                            },
-                          ),
-                          TextProfileButton(
                             buttonText: 'Delete Account',
                             onTap: () {
                               GoRouter.of(context)

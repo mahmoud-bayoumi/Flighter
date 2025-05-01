@@ -1,5 +1,6 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/features/bookings/presentation/views/bookings_view_body.dart';
+import 'package:flighter/features/flighter_assistant_bot/views/bot_view.dart';
 import 'package:flighter/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:flighter/features/offers/presentation/views/offers_view_body.dart';
 import 'package:flighter/features/profile/presentation/views/profile_view.dart';
@@ -35,6 +36,19 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: kPrimaryColor,
+          child: const Icon(
+            Icons.smart_toy_rounded,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return const BotView();
+              },
+            ));
+          }),
       body: IndexedStack(
         index: currentIndex,
         children: screens,

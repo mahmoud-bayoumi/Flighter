@@ -263,7 +263,7 @@ AwesomeDialog noTicketsAvailable(BuildContext context) {
     dialogType: DialogType.noHeader,
     animType: AnimType.scale,
     title: 'Warning',
-    desc: 'No Tickets Available',
+    desc: 'No Available Tickets',
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: Colors.red,
     titleTextStyle: Styles.textStyle24,
