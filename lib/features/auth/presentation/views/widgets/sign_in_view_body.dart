@@ -24,6 +24,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/assets_data.dart';
+import '../../../../bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
 import '../../../../payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 
 class SignInViewBody extends StatefulWidget {
@@ -67,7 +68,13 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                         .requestPermissionToSendNotifications();
                   }
                 });
+
                 BlocProvider.of<PaymentCubit>(context).userId =
+                    BlocProvider.of<SignInCubit>(context)
+                        .signInModel
+                        .message!
+                        .userId!;
+                BlocProvider.of<GetBookingsCubit>(context).userId =
                     BlocProvider.of<SignInCubit>(context)
                         .signInModel
                         .message!
@@ -78,6 +85,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                 BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
 
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
+                BlocProvider.of<GetBookingsCubit>(context).getBookings();
 
                 // upload data to countries if success
                 var getToCountriesCubit = context.read<ToCountriesCubit>();

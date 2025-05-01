@@ -32,7 +32,29 @@ class FlightDetailesViewBody extends StatelessWidget {
           top: 730.h,
           left: 25.w,
           child: CustomSmallButton(
-            onPressed: () {
+            onPressed: () async {
+              BlocProvider.of<GetSeatsCubit>(context).getSeats();
+              if (BlocProvider.of<GetSeatsCubit>(context)
+                  .seatsModel
+                  .data!
+                  .seats!
+                  .where((seat) => seat.isBooked == true)
+                  .map<int>((seat) => seat.seatId as int)
+                  .toList()
+                  .any(BlocProvider.of<PaymentCubit>(context)
+                      .seatsId
+                      .contains)) {
+                BlocProvider.of<PaymentCubit>(context).seatsId = [];
+                seatsAreBookedAlready(context);
+              } else {
+                BlocProvider.of<PaymentCubit>(context).isPayNow = false;
+                BlocProvider.of<PaymentCubit>(context).paymentIntentId = '0';
+                BlocProvider.of<PaymentCubit>(context).netAmount = '0';
+                BlocProvider.of<PaymentCubit>(context).pay();
+              }
+              successPaymentDialog(
+                  context, 'Your ticket has been added to your bookings.');
+
               GoRouter.of(context)
                   .pushReplacement(AppRouter.kBookingsNavigation);
             },
@@ -45,7 +67,7 @@ class FlightDetailesViewBody extends StatelessWidget {
           left: 210.w,
           child: CustomSmallButton(
             onPressed: () async {
-               BlocProvider.of<GetSeatsCubit>(context).getSeats();
+              BlocProvider.of<GetSeatsCubit>(context).getSeats();
               if (BlocProvider.of<GetSeatsCubit>(context)
                   .seatsModel
                   .data!
@@ -56,7 +78,6 @@ class FlightDetailesViewBody extends StatelessWidget {
                   .any(BlocProvider.of<PaymentCubit>(context)
                       .seatsId
                       .contains)) {
-            
                 BlocProvider.of<PaymentCubit>(context).seatsId = [];
                 seatsAreBookedAlready(context);
               } else {
@@ -64,7 +85,6 @@ class FlightDetailesViewBody extends StatelessWidget {
                     BlocProvider.of<PaymentCubit>(context).noOfTravelers *
                         BlocProvider.of<PaymentCubit>(context).amountToPay,
                     "EGP");
-
                 if (paid) {
                   BlocProvider.of<PaymentCubit>(context).paymentIntentId =
                       PaymentManager.paymentIntentId;
@@ -72,7 +92,6 @@ class FlightDetailesViewBody extends StatelessWidget {
                   BlocProvider.of<PaymentCubit>(context).netAmount =
                       PaymentManager.netAmount.toString();
                   BlocProvider.of<PaymentCubit>(context).pay();
-
                   successPaymentDialog(
                       context, 'Your ticket has been added to your bookings.');
                 } else {

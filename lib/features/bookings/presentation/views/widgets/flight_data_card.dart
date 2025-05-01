@@ -1,20 +1,31 @@
 import 'dart:developer';
 
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/functions/capitalize_word.dart';
+import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
+import 'package:flighter/core/utils/functions/convert12_hours_format.dart';
+import 'package:flighter/core/utils/functions/get_date_only.dart';
+import 'package:flighter/core/utils/functions/is_more_than_five_days.dart';
+import 'package:flighter/core/utils/functions/is_within_two_days.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/unabled_text_field.dart';
 import 'package:flighter/features/bookings/presentation/views/widgets/cancel_ticket_text.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
+import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/utils/assets_data.dart';
 import '../../../../../core/utils/functions/dialogs_type.dart';
 import '../../../../../core/utils/functions/generate_ticket_pdf.dart';
 import '../../../../../core/utils/functions/show_confirmation_dialog.dart';
+import '../../../data/models/bookings_model/datum.dart';
 import 'row_filght_details_for_bookings.dart';
 
 class FlightDataCardForBookings extends StatelessWidget {
-  const FlightDataCardForBookings({super.key});
+  final BookingData bookingData;
+  const FlightDataCardForBookings({super.key, required this.bookingData});
 
   @override
   Widget build(BuildContext context) {
@@ -34,21 +45,29 @@ class FlightDataCardForBookings extends StatelessWidget {
                 left: MediaQuery.sizeOf(context).width * 0.829,
                 child: IconButton(
                     onPressed: () async {
-                      const String bookingDate = 'Saturday, December 18, 2024';
-                      const String guestName = 'Jon Smith';
-                      const String from = 'Cairo';
-                      const String to = 'Alexanderia';
-                      const String airline = 'Cario Airlines';
-                      const String flightNumber = '230222-BE143';
-                      const String gate = '22';
-                      const String departureDate = '18 Dec 08:30 AM';
-                      const String arrivalDate = '18 Dec 09:30 AM';
-                      const String duration = '00:45';
-                      const String bookingStatus = 'Confirmed';
-                      const String seatClass = 'Buisness Class';
-                      const String baggageAllowance = '8 KG';
-                      const String seatNumber = '2B';
-                      const String totalCost = '2500 EGP';
+                      String bookingDate =
+                          getDateOnly(bookingData.bookingDate.toString());
+                      String guestName =
+                          BlocProvider.of<GetProfileDataCubit>(context)
+                              .profileData!
+                              .name!;
+                      String from = capitalizeFirstLetter(bookingData.from!);
+                      String to = capitalizeFirstLetter(bookingData.to!);
+                      String airline = bookingData.companyName!;
+                      String flightNumber = bookingData.flightNumber!;
+                      String gate = bookingData.gate!;
+                      String departureDate =
+                          '${getDateOnly(bookingData.bookingDate.toString())}, ${convertTo12HourFormat(bookingData.departureTime!)}';
+                      String arrivalDate =
+                          '${bookingData.arrivalDate}, ${convertTo12HourFormat(bookingData.arrivalTime!)}';
+                      String duration =
+                          '${bookingData.durationInMinutes!} min.';
+                      String bookingStatus = bookingData.paymentStatus!;
+                      String seatClass = bookingData.className!;
+                      String baggageAllowance =
+                          '${bookingData.baggageAllowance} KG';
+                      String seatNumber = bookingData.selectedSeats!.join(", ");
+                      String totalCost = bookingData.amount!;
                       await generateTicketPDF(
                           bookingDate: bookingDate,
                           guestName: guestName,
@@ -64,29 +83,39 @@ class FlightDataCardForBookings extends StatelessWidget {
                           seatClass: seatClass,
                           baggageAllowance: baggageAllowance,
                           seatNumber: seatNumber,
-                          totalCost: totalCost);
+                          totalCost: totalCost,
+                          imageP: bookingData.companyName! == 'Emirates'
+                              ? AssetsData.kEmirates
+                              : bookingData.companyName! == 'Qatar Airways'
+                                  ? AssetsData.kQatar
+                                  : bookingData.companyName! == 'Egypt Air'
+                                      ? AssetsData.kEgypt
+                                      : AssetsData.kKuwait);
                     },
                     icon: const Icon(
                       Icons.download,
                       color: kPrimaryColor,
                       size: 30,
                     ))),
-            const FromToCountrySecond(from: "CAI", to: "ALX"),
+            FromToCountrySecond(
+                from: capitalizeFirstThreeLetters(bookingData.from!),
+                to: capitalizeFirstThreeLetters(bookingData.to!)),
             Positioned(
               top: 220.h,
               left: 25.w,
-              child: const UnabledTextField(
+              child: UnabledTextField(
                 textTitle: 'Date',
-                text: '18/12/2024',
+                text: bookingData.departureDate.toString(),
                 icon: Icons.access_time,
               ),
             ),
             Positioned(
               top: 220.h,
               left: 210.w,
-              child: const UnabledTextField(
+              child: UnabledTextField(
                 textTitle: 'Time',
-                text: '9:30 AM',
+                text:
+                    convertTo12HourFormat(bookingData.departureTime.toString()),
                 icon: Icons.access_time,
               ),
             ),
@@ -116,7 +145,9 @@ class FlightDataCardForBookings extends StatelessWidget {
             Positioned(
               top: 360.h,
               left: 55.w,
-              child: const RowFlightDetailesForBookings(),
+              child: RowFlightDetailesForBookings(
+                bookingData: bookingData,
+              ),
             ),
             Positioned(
               top: 460.h,
@@ -135,38 +166,41 @@ class FlightDataCardForBookings extends StatelessWidget {
               top: 500.h,
               left: 75.w,
               child: Text(
-                '230222-BE143',
+                capitalizeFirstLetter(bookingData.ticketCode!),
                 style: Styles.textStyle45.copyWith(color: Colors.black),
               ),
             ),
-            Positioned(
-              top: 580.h,
-              left: 75.w,
-              child: CancelTicketText(
-                authDesc: 'Cancel ticket if possible?',
-                authButtonName: 'Click Here',
-                canCancel: true,
-                onPressed: () async {
-                  showConfirmationDialog(
-                    context,
-                    () async {
-                      bool refunded = await PaymentManager.refundPayment(
-                          PaymentManager.paymentIntentId,
-                          amount: PaymentManager.netAmount);
-                      if (refunded) {
-                        refundDoneDialog(context);
-                        log('Refundedddddddddddddddddddddddddddddddddddddddddddddd Done');
-                      } else {
-                        // After Refund the ticket will be deleted.
-                        log('Refundedddddddddddddddddddddddddddddddddddddddddddddd XXXXX');
-                      }
-                    },
-                  );
-
-                  //   GoRouter.of(context).push(AppRouter.kCancelYourTicket); <-----------------------
-                },
-              ),
-            ),
+            isWithin2Days(bookingData.bookingDate!) &&
+                    isMoreThan5DaysPassed(
+                        getDateOnly(bookingData.bookingDate!.toString()))
+                ? Positioned(
+                    top: 580.h,
+                    left: 75.w,
+                    child: CancelTicketText(
+                      authDesc: 'Cancel ticket if you want?',
+                      authButtonName: 'Click Here',
+                      canCancel: true,
+                      onPressed: () async {
+                        showConfirmationDialog(
+                          context,
+                          () async {
+                            // refund endPoint
+                            bool refunded = await PaymentManager.refundPayment(
+                                PaymentManager.paymentIntentId,
+                                amount: PaymentManager.netAmount);
+                            if (refunded) {
+                              refundDoneDialog(context);
+                              log('Refundedddddddddddddddddddddddddddddddddddddddddddddd Done');
+                            } else {
+                              // After Refund the ticket will be deleted.
+                              log('Refundedddddddddddddddddddddddddddddddddddddddddddddd XXXXX');
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ],
         ),
       ),

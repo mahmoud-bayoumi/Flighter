@@ -8,6 +8,7 @@ import 'package:flighter/features/auth/data/repos/sign_in_repo/sign_in_repo_impl
 import 'package:flighter/features/auth/data/repos/sign_up_repo/sign_up_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/verify_email_repo/verify_email_repo_impl.dart';
 import 'package:flighter/features/auth/data/repos/reset_password_repos/verify_reset_pass_code_repo/verify_reset_pass_code_repo_impl.dart';
+import 'package:flighter/features/bookings/data/repos/bookings_repo/bookings_repo_impl.dart';
 import 'package:flighter/features/home/data/repos/airlines_repo/airlines_repo_impl.dart';
 import 'package:flighter/features/home/data/repos/from_countries_repo/from_repo_impl.dart';
 import 'package:flighter/features/home/data/repos/search_repo/search_repo_impl.dart';
@@ -19,7 +20,7 @@ import 'package:flighter/features/profile/data/repos/update_profile_repo/update_
 import 'package:get_it/get_it.dart';
 import '../../features/book_ticket/data/repos/get_seats_repo/get_seats_repo_impl.dart';
 import '../../features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo_impl.dart';
-import '../../features/payment/data/repos/pay_now_repo_impl.dart';
+import '../../features/payment/data/repos/pay_now_repo/pay_now_repo_impl.dart';
 import '../../features/profile/data/repos/change_password_repo/change_password_repo_impl.dart';
 import '../../features/profile/data/repos/delete_profile_photo_repo/delete_profile_photo_repo_impl.dart';
 import '../../features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
@@ -87,4 +88,6 @@ void setupServerLocator() {
       TicketSummaryRepoImpl(flightApiService: getIt.get<FlightApiService>()));
   getIt.registerSingleton<PayNowRepoImpl>(
       PayNowRepoImpl(payApiService: getIt.get<PayApiService>()));
+  getIt.registerSingleton<BookingsRepoImpl>(
+      BookingsRepoImpl(flightApiService: getIt.get<FlightApiService>()));
 }

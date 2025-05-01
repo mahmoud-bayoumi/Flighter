@@ -1,7 +1,6 @@
 abstract class AssetsData {
   static const kLogo = 'assets/images/logo.png';
-  static const kFaceLogo = 'assets/images/face.png';
-  static const kGoogleLogo = 'assets/images/google.png';
+
   static const kReversedLogo = 'assets/images/reversed_logo.png';
   static const kSpecialDiscount = 'assets/images/special_discount.png';
   static const kEasyBooking = 'assets/images/easy_booking.png';
@@ -28,4 +27,9 @@ abstract class AssetsData {
 
   static const kAllOff = 'assets/images/all2.jpg';
   static const kAllOffers = 'assets/images/all3.jpg';
+
+  static const kEgypt = 'assets/images/egyAir.png';
+  static const kQatar = 'assets/images/qatar_airway.png';
+  static const kEmirates = 'assets/images/emarits_logo.png';
+  static const kKuwait = 'assets/images/Kuwait_Airways.png';
 }

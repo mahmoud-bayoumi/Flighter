@@ -18,6 +18,7 @@ import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_cub
 import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_state.dart';
 import '../../../../../core/utils/functions/show_snack_bar.dart';
 import '../../../../../core/widgets/no_internet_connect.dart';
+import '../../../../bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
 import '../../../../home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import '../../../../home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
@@ -57,6 +58,12 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                 log('SignIn Succes');
                 BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
                 BlocProvider.of<ToCountriesCubit>(context).getToCountries();
+                  BlocProvider.of<GetBookingsCubit>(context).userId =
+                       BlocProvider.of<VerifyEmailCubit>(context)
+                        .verifyModel
+                        .message!
+                        .userId!;
+                BlocProvider.of<GetBookingsCubit>(context).getBookings();
                 BlocProvider.of<PaymentCubit>(context).userId =
                     BlocProvider.of<VerifyEmailCubit>(context)
                         .verifyModel
@@ -64,6 +71,7 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                         .userId!;
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
                 BlocProvider.of<GetOfferCubit>(context).getOffers();
+           
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is VerifyEmailFailure) {
                 EasyLoading.dismiss();

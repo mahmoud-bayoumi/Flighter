@@ -15,9 +15,7 @@ abstract class PaymentManager {
       await Stripe.instance.presentPaymentSheet();
       // Store PaymentIntentId , amount here in DB
       paymentIntentId = paymentData['id'];
-      double fee = ((0.029 * paymentData['amount']) + 0.30);
-
-      netAmount = paymentData['amount'] - (50 + fee.toInt());
+      netAmount = paymentData['amount'];
       return true;
     } catch (error) {
       log(error.toString());
@@ -56,9 +54,12 @@ abstract class PaymentManager {
   static Future<bool> refundPayment(String paymentIntentId,
       {required int amount}) async {
     try {
+      double fee = ((0.029 * amount) + 0.30);
+
+      netAmount = amount - (50 + fee.toInt());
       Map<String, dynamic> data = {
         'payment_intent': paymentIntentId,
-        'amount': amount.toString()
+        'amount': netAmount.toString()
       };
 
       var response = await _dio.post(
