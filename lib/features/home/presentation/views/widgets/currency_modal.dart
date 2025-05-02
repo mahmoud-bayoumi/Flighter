@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../constants.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
 import '../../view_model/search_cubit/search_cubit.dart';
 
 class CurrencyModal extends StatefulWidget {
@@ -127,6 +128,7 @@ Future<void> showCurrencyModal(
 
   if (result != null) {
     currency = result;
+    await BlocProvider.of<GetOfferCubit>(context).getOffers();
     await BlocProvider.of<SearchCubit>(context).getSearchData();
   }
 }
