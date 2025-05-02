@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:flighter/features/profile/data/repos/update_profile_repo/update_profile_repo_impl.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +27,10 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
     data.fold(
       (failure) {
-         emit(UpdateProfileFailure(errMsh: failure.errMessage));
+        emit(UpdateProfileFailure(errMsh: failure.errMessage));
       },
       (r) {
-         emit(UpdateProfileSuccess());
+        emit(UpdateProfileSuccess());
       },
     );
   }

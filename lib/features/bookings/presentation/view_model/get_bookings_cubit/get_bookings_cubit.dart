@@ -8,17 +8,18 @@ class GetBookingsCubit extends Cubit<GetBookingsState> {
   late String userId;
   final BookingsRepo bookingsRepo;
   late BookingsModel bookingsModel;
-  bool haveBookings = true; 
+  bool haveBookings = true;
   GetBookingsCubit(this.bookingsRepo) : super(GetBookingsInitial());
   Future<void> getBookings() async {
     emit(GetBookingsLoading());
     var respone = await bookingsRepo.getBookingsTickets(userId: userId);
     respone.fold((error) {
-      haveBookings = false ; 
+      haveBookings = false;
       emit(GetBookingsFailure(errMessage: error.errMessage));
     }, (data) {
       bookingsModel = data;
-      haveBookings = true ; 
+      bookingsModel.data = data.data!.reversed.toList();
+      haveBookings = true;
       emit(GetBookingsSuccess());
     });
   }

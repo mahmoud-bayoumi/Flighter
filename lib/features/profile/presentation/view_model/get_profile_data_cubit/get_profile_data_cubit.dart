@@ -1,4 +1,3 @@
-
 import 'package:flighter/features/profile/data/models/get_profile_data_model.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +20,7 @@ class GetProfileDataCubit extends Cubit<GetProfileDataState> {
       },
       (response) {
         profileData = response;
-         emit(GetProfileDataSuccess());
+        emit(GetProfileDataSuccess());
       },
     );
   }

@@ -60,7 +60,6 @@ class DeleteAccountViewBody extends StatelessWidget {
                       : CustomButton(
                           text: 'Delete Account',
                           onPressed: () {
-                            
                             dataCubit.vaildateUserInput();
                           },
                           height: 73,

@@ -36,7 +36,6 @@ class DeleteAccountRepoImpl implements DeleteAccountRepo {
       log(e.response!.data.toString());
       return left(Failure(e.response!.data['message']));
     } catch (e) {
-      
       log(e.toString());
       return left(Failure(e.toString()));
     }

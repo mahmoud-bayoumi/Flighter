@@ -55,9 +55,6 @@ class FlightDetailesViewBody extends StatelessWidget {
               }
               successPaymentDialog(
                   context, 'Your ticket has been added to your bookings.');
-
-              GoRouter.of(context)
-                  .pushReplacement(AppRouter.kBookingsNavigation);
             },
             text: 'Pay Later',
             blue: false,
@@ -100,6 +97,8 @@ class FlightDetailesViewBody extends StatelessWidget {
                   BlocProvider.of<PaymentCubit>(context).isPayNow = false;
                   BlocProvider.of<PaymentCubit>(context).paymentIntentId = '0';
                   BlocProvider.of<PaymentCubit>(context).netAmount = '';
+                  BlocProvider.of<GetBookingsCubit>(context).getBookings();
+
                   errorPaymentDialog(context, 'Payment Not Completed');
                 }
               }

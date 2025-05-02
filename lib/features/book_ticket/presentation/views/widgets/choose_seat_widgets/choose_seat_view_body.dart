@@ -79,7 +79,8 @@ class ChooseSeatViewBody extends StatelessWidget {
                 text: 'Confirm',
                 height: 70.h,
                 onPressed: () async {
-                  if ( BlocProvider.of<TicketSummaryCubit>(context).isFromOffer) {
+                  if (BlocProvider.of<TicketSummaryCubit>(context)
+                      .isFromOffer) {
                     if (BlocProvider.of<TicketSummaryCubit>(context)
                         .selectedSeats
                         .isNotEmpty) {
@@ -132,7 +133,6 @@ class ChooseSeatViewBody extends StatelessWidget {
                             }
                           }
                         }
-                     
 
                         log(BlocProvider.of<PaymentCubit>(context)
                             .seatsId

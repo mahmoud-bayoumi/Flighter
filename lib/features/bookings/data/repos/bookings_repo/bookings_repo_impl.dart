@@ -27,7 +27,6 @@ class BookingsRepoImpl implements BookingsRepo {
       if (response['success']) {
         return right(BookingsModel.fromJson(response));
       } else {
-        
         return left(Failure.formJson(response['message']));
       }
     } catch (e) {

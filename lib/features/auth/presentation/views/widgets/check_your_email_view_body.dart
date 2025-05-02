@@ -58,8 +58,8 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                 log('SignIn Succes');
                 BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
                 BlocProvider.of<ToCountriesCubit>(context).getToCountries();
-                  BlocProvider.of<GetBookingsCubit>(context).userId =
-                       BlocProvider.of<VerifyEmailCubit>(context)
+                BlocProvider.of<GetBookingsCubit>(context).userId =
+                    BlocProvider.of<VerifyEmailCubit>(context)
                         .verifyModel
                         .message!
                         .userId!;
@@ -71,7 +71,7 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                         .userId!;
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
                 BlocProvider.of<GetOfferCubit>(context).getOffers();
-           
+
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is VerifyEmailFailure) {
                 EasyLoading.dismiss();

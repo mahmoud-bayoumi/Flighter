@@ -19,35 +19,35 @@ class BookingData {
   String? ticketCode;
   String? baggageAllowance;
   DateTime? bookingDate;
-  int amount ;
+  int amount;
   String? paymentStatus;
   int? bookingid;
-
-  BookingData({
-    this.guestname,
-    this.companyName,
-    this.from,
-    this.to,
-    this.departureDate,
-    this.departureTime,
-    this.arrivalDate,
-    this.arrivalTime,
-    this.returnDepartureDate,
-    this.returnDepartureTime,
-    this.returnArrivalDate,
-    this.returnArrivalTime,
-    this.durationInMinutes,
-    this.className,
-    this.flightNumber,
-    this.gate,
-    this.selectedSeats,
-    this.ticketCode,
-    this.baggageAllowance,
-    this.bookingDate,
-    this.amount = 0,
-    this.paymentStatus,
-    this.bookingid,
-  });
+  int? ticketid;
+  BookingData(
+      {this.guestname,
+      this.companyName,
+      this.from,
+      this.to,
+      this.departureDate,
+      this.departureTime,
+      this.arrivalDate,
+      this.arrivalTime,
+      this.returnDepartureDate,
+      this.returnDepartureTime,
+      this.returnArrivalDate,
+      this.returnArrivalTime,
+      this.durationInMinutes,
+      this.className,
+      this.flightNumber,
+      this.gate,
+      this.selectedSeats,
+      this.ticketCode,
+      this.baggageAllowance,
+      this.bookingDate,
+      this.amount = 0,
+      this.paymentStatus,
+      this.bookingid,
+      this.ticketid});
 
   factory BookingData.fromJson(Map<String, dynamic> json) => BookingData(
         guestname: json['guestname'] as String?,
@@ -75,6 +75,7 @@ class BookingData {
         amount: json['amount'] as int,
         paymentStatus: json['paymentStatus'] as String?,
         bookingid: json['bookingid'] as int?,
+        ticketid: json['ticketid'] as int?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -101,5 +102,6 @@ class BookingData {
         'amount': amount,
         'paymentStatus': paymentStatus,
         'bookingid': bookingid,
+        'ticketid': ticketid
       };
 }

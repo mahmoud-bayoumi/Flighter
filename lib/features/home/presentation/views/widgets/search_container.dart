@@ -89,7 +89,7 @@ class _SearchContainerState extends State<SearchContainer> {
                         BlocProvider.of<SearchCubit>(context).fromController,
                     countrySuggestions: capitalizeFirstLetterOfEach(
                         BlocProvider.of<FromCountriesCubit>(context)
-                            .fromCountries ),
+                            .fromCountries),
                   ),
                   SizedBox(
                     height: 22.h,
@@ -100,10 +100,8 @@ class _SearchContainerState extends State<SearchContainer> {
                     forFrom: false,
                     controller:
                         BlocProvider.of<SearchCubit>(context).toController,
-                    countrySuggestions: capitalizeFirstLetterOfEach(context
-                        .read<ToCountriesCubit>()
-                        .toModel!
-                        .data),
+                    countrySuggestions: capitalizeFirstLetterOfEach(
+                        context.read<ToCountriesCubit>().toModel!.data),
                   ),
                 ],
               ),
