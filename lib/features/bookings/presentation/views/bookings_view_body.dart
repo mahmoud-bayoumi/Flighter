@@ -29,6 +29,7 @@ class BookingsViewBody extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.only(top: 100.h),
                 child: ListView.builder(
+                  reverse: true,
                   physics: const BouncingScrollPhysics(),
                   itemCount: BlocProvider.of<GetBookingsCubit>(context)
                       .bookingsModel

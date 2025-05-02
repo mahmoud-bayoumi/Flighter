@@ -79,63 +79,135 @@ class ChooseSeatViewBody extends StatelessWidget {
                 text: 'Confirm',
                 height: 70.h,
                 onPressed: () async {
-                  if (BlocProvider.of<TicketSummaryCubit>(context)
-                      .selectedSeats
-                      .isNotEmpty) {
+                  if ( BlocProvider.of<TicketSummaryCubit>(context).isFromOffer) {
                     if (BlocProvider.of<TicketSummaryCubit>(context)
-                            .ticketCounter ==
+                        .selectedSeats
+                        .isNotEmpty) {
+                      if (BlocProvider.of<TicketSummaryCubit>(context)
+                              .ticketCounter <=
+                          seatsModel.data!.seats!
+                              .where((seat) => seat.isBooked == false)
+                              .map<String>((seat) => seat.seatName as String)
+                              .toList()
+                              .length) {
                         BlocProvider.of<TicketSummaryCubit>(context)
-                            .noOfTravelers) {
-                      await BlocProvider.of<TicketSummaryCubit>(context)
-                          .getTicketSummary();
-                      for (int i = 0;
-                          i <
-                              BlocProvider.of<GetSeatsCubit>(context)
-                                  .seatsModel
-                                  .data!
-                                  .seats!
-                                  .length;
-                          i++) {
-                        if (BlocProvider.of<TicketSummaryCubit>(context)
-                            .selectedSeats
-                            .contains(BlocProvider.of<GetSeatsCubit>(context)
-                                .seatsModel
-                                .data!
-                                .seats![i]
-                                .seatName)) {
-                          if (!BlocProvider.of<PaymentCubit>(context)
-                              .seatsId
+                                .noOfTravelers =
+                            BlocProvider.of<TicketSummaryCubit>(context)
+                                .selectedSeats
+                                .length;
+                        await BlocProvider.of<TicketSummaryCubit>(context)
+                            .getTicketSummary();
+                        for (int i = 0;
+                            i <
+                                BlocProvider.of<GetSeatsCubit>(context)
+                                    .seatsModel
+                                    .data!
+                                    .seats!
+                                    .length;
+                            i++) {
+                          if (BlocProvider.of<TicketSummaryCubit>(context)
+                              .selectedSeats
                               .contains(BlocProvider.of<GetSeatsCubit>(context)
                                   .seatsModel
                                   .data!
                                   .seats![i]
-                                  .seatId
-                                  .toString())) {
-                            BlocProvider.of<PaymentCubit>(context).seatsId.add(
+                                  .seatName)) {
+                            if (!BlocProvider.of<PaymentCubit>(context)
+                                .seatsId
+                                .contains(
+                                    BlocProvider.of<GetSeatsCubit>(context)
+                                        .seatsModel
+                                        .data!
+                                        .seats![i]
+                                        .seatId
+                                        .toString())) {
+                              BlocProvider.of<PaymentCubit>(context)
+                                  .seatsId
+                                  .add(BlocProvider.of<GetSeatsCubit>(context)
+                                      .seatsModel
+                                      .data!
+                                      .seats![i]
+                                      .seatId
+                                      .toString());
+                            }
+                          }
+                        }
+                     
+
+                        log(BlocProvider.of<PaymentCubit>(context)
+                            .seatsId
+                            .toString());
+                        GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                      } else {
+                        showSnackBar(context,
+                            message:
+                                'Please select at least one seats and you can select up to the number of all available seats before continuing.');
+                      }
+                    } else {
+                      showSnackBar(context,
+                          message: 'Please select the seats you wish to book.');
+                    }
+                  } else {
+                    if (BlocProvider.of<TicketSummaryCubit>(context)
+                        .selectedSeats
+                        .isNotEmpty) {
+                      if (BlocProvider.of<TicketSummaryCubit>(context)
+                              .ticketCounter ==
+                          BlocProvider.of<TicketSummaryCubit>(context)
+                              .noOfTravelers) {
+                        await BlocProvider.of<TicketSummaryCubit>(context)
+                            .getTicketSummary();
+                        for (int i = 0;
+                            i <
                                 BlocProvider.of<GetSeatsCubit>(context)
                                     .seatsModel
                                     .data!
-                                    .seats![i]
-                                    .seatId
-                                    .toString());
+                                    .seats!
+                                    .length;
+                            i++) {
+                          if (BlocProvider.of<TicketSummaryCubit>(context)
+                              .selectedSeats
+                              .contains(BlocProvider.of<GetSeatsCubit>(context)
+                                  .seatsModel
+                                  .data!
+                                  .seats![i]
+                                  .seatName)) {
+                            if (!BlocProvider.of<PaymentCubit>(context)
+                                .seatsId
+                                .contains(
+                                    BlocProvider.of<GetSeatsCubit>(context)
+                                        .seatsModel
+                                        .data!
+                                        .seats![i]
+                                        .seatId
+                                        .toString())) {
+                              BlocProvider.of<PaymentCubit>(context)
+                                  .seatsId
+                                  .add(BlocProvider.of<GetSeatsCubit>(context)
+                                      .seatsModel
+                                      .data!
+                                      .seats![i]
+                                      .seatId
+                                      .toString());
+                            }
                           }
                         }
-                      }
 
-                      log(BlocProvider.of<PaymentCubit>(context)
-                          .seatsId
-                          .toString());
-                      GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                        log(BlocProvider.of<PaymentCubit>(context)
+                            .seatsId
+                            .toString());
+                        GoRouter.of(context).push(AppRouter.kFlightDetailes);
+                      } else {
+                        showSnackBar(context,
+                            message:
+                                'Please select exactly ${BlocProvider.of<TicketSummaryCubit>(context).noOfTravelers} seats before continuing.');
+                      }
                     } else {
                       showSnackBar(context,
-                          message:
-                              'Please select exactly ${BlocProvider.of<TicketSummaryCubit>(context).noOfTravelers} seats before continuing.');
+                          message: 'Please select the seats you wish to book.');
                     }
-                  } else {
-                    showSnackBar(context,
-                        message: 'Please select the seats you wish to book.');
+                    // trigger here
                   }
-                  // trigger here
                 },
               ),
             ),

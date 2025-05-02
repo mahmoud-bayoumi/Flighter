@@ -20,7 +20,7 @@ class GetSeatsCubit extends Cubit<GetSeatsState> {
         emit(GetSeatsFailure(errMessage: l.errMessage));
       },
       (r) {
-        seatsModel = r;
+        seatsModel = r; 
         log(seatsModel.data.toString());
         emit(GetSeatsSuccess());
       },

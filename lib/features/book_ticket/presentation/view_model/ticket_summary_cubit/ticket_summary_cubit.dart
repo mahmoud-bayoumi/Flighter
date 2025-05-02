@@ -10,7 +10,8 @@ class TicketSummaryCubit extends Cubit<TicketSummaryState> {
   final TicketSummaryRepo ticketSummaryRepo;
   late int ticketId;
   int ticketCounter = 0;
-  late int noOfTravelers;
+  late int noOfTravelers =1 ;
+  bool isFromOffer = false ;
   List<String> selectedSeats = [];
   late TicketSummaryModel ticketSummaryModel;
   TicketSummaryCubit(this.ticketSummaryRepo) : super(TicketSummaryInitial());

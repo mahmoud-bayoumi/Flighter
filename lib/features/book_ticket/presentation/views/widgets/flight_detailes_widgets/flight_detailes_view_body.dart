@@ -3,6 +3,7 @@ import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/core/widgets/custom_small_button.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/flight_detailes_card.dart';
+import 'package:flighter/features/bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +93,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                   BlocProvider.of<PaymentCubit>(context).netAmount =
                       PaymentManager.netAmount.toString();
                   BlocProvider.of<PaymentCubit>(context).pay();
+                  BlocProvider.of<GetBookingsCubit>(context).getBookings();
                   successPaymentDialog(
                       context, 'Your ticket has been added to your bookings.');
                 } else {

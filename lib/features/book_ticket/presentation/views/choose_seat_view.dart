@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ChooseSeatView extends StatelessWidget {
+
   const ChooseSeatView({super.key});
 
   @override
@@ -16,6 +17,7 @@ class ChooseSeatView extends StatelessWidget {
         leading: BackButton(
           color: Colors.black,
           onPressed: () {
+          
             BlocProvider.of<TicketSummaryCubit>(context).ticketCounter = 0;
             BlocProvider.of<TicketSummaryCubit>(context).selectedSeats = [];
             GoRouter.of(context).pop();
