@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,15 +11,12 @@ class DeleteProfilePhotoCubit extends Cubit<DeleteProfilePhotoState> {
       : super(DeleteProfilePhotoInitial());
   Future<void> deleteProfilePhoto() async {
     emit(DeleteProfilePhotoLoading());
-    log('Delete Photo Loading');
     var response = await deleteProfilePhotoRepo.deleteProfilePhoto();
     return response.fold(
       (failure) {
-        log('Delete Photo Failure');
         emit(DeleteProfilePhotoFailure(errMessage: failure.errMessage));
       },
       (r) {
-        log('Delete Photo Success');
         emit(DeleteProfilePhotoSuccess());
       },
     );

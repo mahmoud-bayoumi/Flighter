@@ -4,6 +4,7 @@ import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/unabled_text_field.dart';
 import 'package:flighter/features/bookings/data/models/bookings_model/datum.dart';
+import 'package:flighter/features/bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
 import 'package:flighter/features/bookings/presentation/views/widgets/cancel_ticket_text.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flutter/material.dart';
@@ -111,52 +112,51 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
                     top: 580.h,
                     left: 75.w,
                     child: CancelTicketText(
-                      authDesc: 'This Ticket is Not Paid!',
+                      authDesc: 'This Ticket Is Not Paid!',
                       authButtonName: 'Pay Now',
                       canCancel: true,
                       onPressed: () async {
-                        showConfirmationDialog(
-                          context,
-                          () async {
+                        /*       BlocProvider.of<PaymentCubit>(context).ticketId =
+                            bookingData.ticketId; */
+                        BlocProvider.of<PaymentCubit>(context).noOfTravelers =
+                            bookingData.selectedSeats!.length;
+                        BlocProvider.of<PaymentCubit>(context).amountToPay =
+                            bookingData.amount;
+                        BlocProvider.of<PaymentCubit>(context).seatsId =
+                            List<String>.from(bookingData.selectedSeats ?? []);
+
+                        bool paid = await PaymentManager.makePayment(
                             BlocProvider.of<PaymentCubit>(context)
                                     .noOfTravelers =
-                                bookingData.selectedSeats!.length;
-                                    BlocProvider.of<PaymentCubit>(context)
-                                    .amountToPay   ;// amount * no Of Travelers;
-                            bool paid = await PaymentManager.makePayment(
-                                BlocProvider.of<PaymentCubit>(context)
-                                        .noOfTravelers *
+                                bookingData.selectedSeats!.length *
                                     BlocProvider.of<PaymentCubit>(context)
                                         .amountToPay,
-                                "EGP");
-                            if (paid) {
-                              BlocProvider.of<PaymentCubit>(context)
-                                      .paymentIntentId =
-                                  PaymentManager.paymentIntentId;
-                              BlocProvider.of<PaymentCubit>(context).isPayNow =
-                                  true;
-                              BlocProvider.of<PaymentCubit>(context).netAmount =
-                                  PaymentManager.netAmount.toString();
-                              BlocProvider.of<PaymentCubit>(context).pay();
-                              successPaymentDialog(context,
-                                  'Your ticket has been added to your bookings.');
-                            } else {
-                              BlocProvider.of<PaymentCubit>(context).isPayNow =
-                                  false;
-                              BlocProvider.of<PaymentCubit>(context)
-                                  .paymentIntentId = '0';
-                              BlocProvider.of<PaymentCubit>(context).netAmount =
-                                  '';
-                              errorPaymentDialog(
-                                  context, 'Payment Not Completed');
-                            }
-                          },
-                        );
-
-                        //   GoRouter.of(context).push(AppRouter.kCancelYourTicket); <-----------------------
+                            "EGP"); // currency
+                        if (paid) {
+                          BlocProvider.of<PaymentCubit>(context)
+                              .paymentIntentId = PaymentManager.paymentIntentId;
+                          BlocProvider.of<PaymentCubit>(context).isPayNow =
+                              true;
+                          BlocProvider.of<PaymentCubit>(context).netAmount =
+                              PaymentManager.netAmount.toString();
+                          BlocProvider.of<PaymentCubit>(context).pay();
+                          BlocProvider.of<GetBookingsCubit>(context).getBookings();
+                          successPaymentDialog(context,
+                              'Payment Done Successfully.');
+                        } else {
+                          BlocProvider.of<PaymentCubit>(context).isPayNow =
+                              false;
+                          BlocProvider.of<PaymentCubit>(context)
+                              .paymentIntentId = '0';
+                          BlocProvider.of<PaymentCubit>(context).netAmount = '';
+                          errorPaymentDialog(context, 'Payment Not Completed');
+                        }
                       },
-                    ),
-                  )
+                    )
+
+                    //   GoRouter.of(context).push(AppRouter.kCancelYourTicket); <-----------------------
+
+                    )
                 : const SizedBox.shrink(),
           ],
         ),

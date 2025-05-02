@@ -67,7 +67,7 @@ class FlightDataCardForBookings extends StatelessWidget {
                       String baggageAllowance =
                           '${bookingData.baggageAllowance} KG';
                       String seatNumber = bookingData.selectedSeats!.join(", ");
-                      String totalCost = bookingData.amount!;
+                      String totalCost = bookingData.amount.toString();
                       await generateTicketPDF(
                           bookingDate: bookingDate,
                           guestName: guestName,

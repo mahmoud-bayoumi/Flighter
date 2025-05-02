@@ -19,7 +19,7 @@ class BookingData {
   String? ticketCode;
   String? baggageAllowance;
   DateTime? bookingDate;
-  String? amount;
+  int amount ;
   String? paymentStatus;
   int? bookingid;
 
@@ -44,7 +44,7 @@ class BookingData {
     this.ticketCode,
     this.baggageAllowance,
     this.bookingDate,
-    this.amount,
+    this.amount = 0,
     this.paymentStatus,
     this.bookingid,
   });
@@ -72,7 +72,7 @@ class BookingData {
         bookingDate: json['bookingDate'] == null
             ? null
             : DateTime.parse(json['bookingDate'] as String),
-        amount: json['amount'] as String?,
+        amount: json['amount'] as int,
         paymentStatus: json['paymentStatus'] as String?,
         bookingid: json['bookingid'] as int?,
       );

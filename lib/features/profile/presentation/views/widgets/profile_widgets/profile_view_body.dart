@@ -10,8 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/app_router.dart';
+import '../../../../../../core/utils/functions/dialogs_type.dart';
 import '../../../../../../core/utils/secure_storage.dart';
 import '../../../../../../core/widgets/primary_container.dart';
+import '../../../../../bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
 import '../../../view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'logout_button.dart';
 import 'profile_text_title.dart';
@@ -100,8 +102,13 @@ class ProfileViewBody extends StatelessWidget {
                           TextProfileButton(
                             buttonText: 'Delete Account',
                             onTap: () {
-                              GoRouter.of(context)
-                                  .push(AppRouter.kDeleteAccount);
+                              if (!BlocProvider.of<GetBookingsCubit>(context)
+                                  .haveBookings) {
+                                GoRouter.of(context)
+                                    .push(AppRouter.kDeleteAccount);
+                              } else {
+                                deleteNotAvaiableDialog(context);
+                              }
                             },
                           ),
                           const ProfileDivider(),

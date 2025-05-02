@@ -305,3 +305,27 @@ AwesomeDialog seatsAreBookedAlready(BuildContext context) {
     ),
   )..show();
 }
+AwesomeDialog deleteNotAvaiableDialog(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Unavaiable Action',
+    desc: 'You can\'t delete your account because you have bookings ticket!',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: Colors.red,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context);
+        // GoRouter.of(context).pop();
+      },
+    ),
+  )..show();
+}
+

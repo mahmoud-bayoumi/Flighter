@@ -24,7 +24,10 @@ class DeleteAccountRepoImpl implements DeleteAccountRepo {
             "password": password,
           },
           token: token);
+      log(response.toString());
+
       if (response['message'] == 'Password is incorrect.') {
+        log(response.toString());
         return left(Failure(response['message']));
       }
       log(response.toString());
@@ -33,6 +36,7 @@ class DeleteAccountRepoImpl implements DeleteAccountRepo {
       log(e.response!.data.toString());
       return left(Failure(e.response!.data['message']));
     } catch (e) {
+      
       log(e.toString());
       return left(Failure(e.toString()));
     }

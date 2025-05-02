@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
@@ -21,15 +20,12 @@ class DeleteAccountViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is DeleteAccountSuccess) {
           EasyLoading.dismiss();
-          log('DeleteAccount Success');
           storage.delete(key: tokenKey);
           deleteDoneDialog(context);
         } else if (state is DeleteAccountLoading) {
-          log('DeleteAccount Loading');
           EasyLoading.show(status: 'Loading...');
         } else if (state is DeleteAccountFailure) {
           EasyLoading.dismiss();
-          log('DeleteAccount Failure');
           errorDialog(context, state.errMsg);
         }
       },
@@ -64,6 +60,7 @@ class DeleteAccountViewBody extends StatelessWidget {
                       : CustomButton(
                           text: 'Delete Account',
                           onPressed: () {
+                            
                             dataCubit.vaildateUserInput();
                           },
                           height: 73,
