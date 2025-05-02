@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flighter/features/offers/data/repos/get_offer_repo/get_offer_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/offer_ticker_data/offers_model.dart';
@@ -14,13 +13,10 @@ class GetOfferCubit extends Cubit<GetOfferState> {
     final response = await getOfferRepo.getOffers();
     response.fold(
       (error) {
-        log('error in get offers');
         emit(GetOfferFailure(errMessage: error.errMessage));
       },
       (data) {
         offersModel = data;
-        log(offersModel.data![0].companyName!);
-        log("data offer got successful");
         emit(GetOfferSuccess());
       },
     );

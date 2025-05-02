@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo.dart';
@@ -15,18 +14,15 @@ class GetProfilePhotoCubit extends Cubit<GetProfilePhotoState> {
 
   Future<void> getProfilePhoto() async {
     emit(GetProfilePhotoLoading());
-    log('ProfilePhoto Loading');
     var response = await getProfilePhotoRepo.getUserProfilePhoto();
 //    log('Response type: ${response.runtimeType}');
     return response.fold(
       (l) {
         imageBits = null;
         hasImage = false;
-        log('ProfilePhoto Failure');
         emit(GetProfilePhotoFailure(errMessage: l.errMessage));
       },
       (r) {
-        log('ProfilePhoto Success');
         imageBits = r;
         hasImage = true;
         emit(GetProfilePhotoSuccess());
@@ -38,7 +34,6 @@ class GetProfilePhotoCubit extends Cubit<GetProfilePhotoState> {
     hasImage = false;
     imageBits = null; // Clear the in-memory image data
     // emit(GetProfilePhotoInitial());  // Optionally, emit an initial state
-    log('Profile photo cleared from memory');
   }
 
   @override

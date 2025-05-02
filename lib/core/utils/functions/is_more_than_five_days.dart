@@ -1,6 +1,16 @@
-bool isMoreThan5DaysPassed(String dateString) {
-  final date = DateTime.parse(dateString); // Expects format "yyyy-MM-dd"
+
+bool isMoreThan5DaysFromNow(String dateString) {
+  final inputDate = DateTime.parse(dateString);
   final now = DateTime.now();
-  final difference = now.difference(date).inDays;
+
+  // Strip time to compare only the date part
+  final inputDateOnly = DateTime(inputDate.year, inputDate.month, inputDate.day);
+  final todayOnly = DateTime(now.year, now.month, now.day);
+
+  if (inputDateOnly.isBefore(todayOnly)) {
+    return false; // The date is in the past
+  }
+
+  final difference = inputDateOnly.difference(todayOnly).inDays;
   return difference > 5;
 }

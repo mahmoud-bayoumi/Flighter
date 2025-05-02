@@ -24,7 +24,10 @@ class DeleteAccountRepoImpl implements DeleteAccountRepo {
             "password": password,
           },
           token: token);
+      log(response.toString());
+
       if (response['message'] == 'Password is incorrect.') {
+        log(response.toString());
         return left(Failure(response['message']));
       }
       log(response.toString());

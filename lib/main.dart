@@ -16,8 +16,12 @@ import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 import 'package:flighter/features/offers/data/repos/get_offer_repo/get_offers_repo_impl.dart';
 import 'package:flighter/features/offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
+import 'package:flighter/features/payment/data/repos/pay_later_history/pay_later_repo_impl.dart';
 import 'package:flighter/features/payment/data/repos/pay_now_repo/pay_now_repo_impl.dart';
+import 'package:flighter/features/payment/data/repos/refund_repo/refund_repo_impl.dart';
+import 'package:flighter/features/payment/presentation/view_model/pay_later_booking_cubit/pay_later_booking_cubit.dart';
 import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
+import 'package:flighter/features/payment/presentation/view_model/refund_cubit/refund_cubit.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_data/get_profile_data_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/get_profile_photo_repo/get_profile_photo_repo_impl.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
@@ -39,8 +43,8 @@ void main() {
       'resource://drawable/ic_stat_logo',
       [
         NotificationChannel(
-            channelKey: payChannelKey,
-            channelName: payChannelName,
+            channelKey: notChannelKey,
+            channelName: notChannelName,
             channelDescription: 'Notification For Payment',
             playSound: true,
             channelShowBadge: true,
@@ -104,6 +108,11 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   GetBookingsCubit(getIt.get<BookingsRepoImpl>())),
+          BlocProvider(
+              create: (context) =>
+                  PayLaterBookingCubit(getIt.get<PayLaterRepoImpl>())),
+          BlocProvider(
+              create: (context) => RefundCubit(getIt.get<RefundRepoImpl>()))
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

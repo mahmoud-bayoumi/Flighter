@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:flighter/constants.dart';
@@ -12,6 +14,7 @@ import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/unabled_text_field.dart';
 import 'package:flighter/features/bookings/presentation/views/widgets/cancel_ticket_text.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
+import 'package:flighter/features/payment/presentation/view_model/refund_cubit/refund_cubit.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +70,9 @@ class FlightDataCardForBookings extends StatelessWidget {
                       String baggageAllowance =
                           '${bookingData.baggageAllowance} KG';
                       String seatNumber = bookingData.selectedSeats!.join(", ");
-                      String totalCost = bookingData.amount!;
+                      String totalCost = currency == 'EGP'
+                          ? '${bookingData.amount / 100} EGP'
+                          : '${(bookingData.amount / 100) / egyptianToDollar} USD';
                       await generateTicketPDF(
                           bookingDate: bookingDate,
                           guestName: guestName,
@@ -171,7 +176,7 @@ class FlightDataCardForBookings extends StatelessWidget {
               ),
             ),
             isWithin2Days(bookingData.bookingDate!) &&
-                    isMoreThan5DaysPassed(
+                    isMoreThan5DaysFromNow(
                         getDateOnly(bookingData.bookingDate!.toString()))
                 ? Positioned(
                     top: 580.h,
@@ -184,7 +189,27 @@ class FlightDataCardForBookings extends StatelessWidget {
                         showConfirmationDialog(
                           context,
                           () async {
-                            // refund endPoint
+                            BlocProvider.of<RefundCubit>(context).bookingId =
+                                bookingData.bookingid!;
+                            await BlocProvider.of<RefundCubit>(context)
+                                .refundTicket();
+                            PaymentManager.paymentIntentId =
+                                BlocProvider.of<RefundCubit>(context)
+                                    .refundModel
+                                    .data!
+                                    .paymentintentId!;
+                            PaymentManager.netAmount = currency == 'EGP'
+                                ? int.parse(
+                                    BlocProvider.of<RefundCubit>(context)
+                                        .refundModel
+                                        .data!
+                                        .amount!)
+                                : int.parse(
+                                        BlocProvider.of<RefundCubit>(context)
+                                            .refundModel
+                                            .data!
+                                            .amount!) *
+                                    egyptianToDollar;
                             bool refunded = await PaymentManager.refundPayment(
                                 PaymentManager.paymentIntentId,
                                 amount: PaymentManager.netAmount);

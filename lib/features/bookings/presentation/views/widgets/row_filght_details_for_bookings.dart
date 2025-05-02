@@ -29,9 +29,11 @@ class RowFlightDetailesForBookings extends StatelessWidget {
         ),
         FlightColumnText(
           text: 'Seat',
-          ans: bookingData.selectedSeats!.length > 1
-              ? '${bookingData.selectedSeats![0]}..'
-              : bookingData.selectedSeats![0],
+          ans: bookingData.selectedSeats!.isEmpty
+              ? '1A'
+              : bookingData.selectedSeats!.length > 1
+                  ? '${bookingData.selectedSeats![0]}..'
+                  : bookingData.selectedSeats![0],
         ),
         const SizedBox(
           width: 30,

@@ -50,7 +50,9 @@ class _SeatState extends State<Seat> {
                     final cubit = BlocProvider.of<TicketSummaryCubit>(context);
 
                     final hasReachedLimit =
-                        cubit.ticketCounter >= cubit.noOfTravelers;
+                        BlocProvider.of<TicketSummaryCubit>(context).isFromOffer
+                            ? false
+                            : cubit.ticketCounter >= cubit.noOfTravelers;
 
                     if (!isSelected && !hasReachedLimit) {
                       // Select the seat

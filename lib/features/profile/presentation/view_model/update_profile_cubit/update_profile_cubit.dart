@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:flighter/features/profile/data/repos/update_profile_repo/update_profile_repo_impl.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,6 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
   Future<void> updateProfile() async {
     emit(UpdateProfileLoading());
-    log('Loading update profile');
     var data = await _updateProfileRepoImpl.updateProfile(
       profilePhoto: imageFile,
       name: name.text.trim(),
@@ -29,11 +27,9 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
     data.fold(
       (failure) {
-        log('failure to update profile');
         emit(UpdateProfileFailure(errMsh: failure.errMessage));
       },
       (r) {
-        log('Success to update profile');
         emit(UpdateProfileSuccess());
       },
     );

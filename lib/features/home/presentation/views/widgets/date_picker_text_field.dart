@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flighter/constants.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/functions/custom_outline_input_border.dart';
