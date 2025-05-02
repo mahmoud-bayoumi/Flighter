@@ -35,9 +35,11 @@ import 'core/utils/service_locator.dart';
 import 'features/home/data/repos/from_countries_repo/from_repo_impl.dart';
 import 'features/home/data/repos/search_repo/search_repo_impl.dart';
 import 'features/home/presentation/view_model/search_cubit/search_cubit.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 
 void main() {
   setupServerLocator();
+  tz.initializeTimeZones();
   Stripe.publishableKey = StripeKeys.publishableKey;
   AwesomeNotifications().initialize(
       'resource://drawable/ic_stat_logo',

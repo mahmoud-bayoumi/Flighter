@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
@@ -77,7 +76,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                 var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
                 getProfilePhotoCubit.getProfilePhoto();
 
-                BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+               await BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
 
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
                 BlocProvider.of<GetBookingsCubit>(context).getBookings();
