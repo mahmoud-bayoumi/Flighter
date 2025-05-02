@@ -26,23 +26,38 @@ class _CurrencyModalState extends State<CurrencyModal> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          left: 16,
-          right: 16,
-          top: 16,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            const SizedBox(height: 24),
-            _buildCurrencyOptions(),
-            const SizedBox(height: 24),
-          ],
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, _currentCurrency); // Save on swipe-down/back
+        return false;
+      },
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          Navigator.pop(context, _currentCurrency); // Save on outside tap
+        },
+        child: GestureDetector(
+          onTap: () {}, // Absorb inner tap gestures
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+                left: 16,
+                right: 16,
+                top: 16,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeader(),
+                  const SizedBox(height: 24),
+                  _buildCurrencyOptions(),
+                  const SizedBox(height: 24),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -62,8 +77,7 @@ class _CurrencyModalState extends State<CurrencyModal> {
         IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-            Navigator.pop(
-                context, _currentCurrency); // Return selected value on close
+            Navigator.pop(context, _currentCurrency); // Save on close button
           },
           color: kPrimaryColor,
         ),
@@ -103,12 +117,12 @@ Future<void> showCurrencyModal(
     BuildContext context, String selectedCurrency) async {
   final result = await showModalBottomSheet<String>(
     context: context,
-    builder: (context) => CurrencyModal(selectedCurrency: selectedCurrency),
     isScrollControlled: true,
     backgroundColor: Colors.white,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
+    builder: (context) => CurrencyModal(selectedCurrency: selectedCurrency),
   );
 
   if (result != null) {

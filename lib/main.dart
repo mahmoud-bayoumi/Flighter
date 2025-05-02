@@ -43,8 +43,8 @@ void main() {
       'resource://drawable/ic_stat_logo',
       [
         NotificationChannel(
-            channelKey: payChannelKey,
-            channelName: payChannelName,
+            channelKey: notChannelKey,
+            channelName: notChannelName,
             channelDescription: 'Notification For Payment',
             playSound: true,
             channelShowBadge: true,
@@ -112,8 +112,7 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   PayLaterBookingCubit(getIt.get<PayLaterRepoImpl>())),
           BlocProvider(
-              create: (context) =>
-                  RefundCubit(getIt.get<RefundRepoImpl>()))
+              create: (context) => RefundCubit(getIt.get<RefundRepoImpl>()))
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

@@ -198,11 +198,18 @@ class FlightDataCardForBookings extends StatelessWidget {
                                     .refundModel
                                     .data!
                                     .paymentintentId!;
-                            PaymentManager.netAmount = int.parse(
-                                BlocProvider.of<RefundCubit>(context)
-                                    .refundModel
-                                    .data!
-                                    .amount!);
+                            PaymentManager.netAmount = currency == 'EGP'
+                                ? int.parse(
+                                    BlocProvider.of<RefundCubit>(context)
+                                        .refundModel
+                                        .data!
+                                        .amount!)
+                                : int.parse(
+                                        BlocProvider.of<RefundCubit>(context)
+                                            .refundModel
+                                            .data!
+                                            .amount!) *
+                                    egyptianToDollar;
                             bool refunded = await PaymentManager.refundPayment(
                                 PaymentManager.paymentIntentId,
                                 amount: PaymentManager.netAmount);

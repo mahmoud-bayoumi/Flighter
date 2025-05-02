@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/features/bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
@@ -35,6 +36,32 @@ class _SplashViewBodyState extends State<SplashViewBody>
     super.initState();
     initSlidingAnimation();
     navigateToAuthView();
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: notificationId, // Unique ID
+        channelKey: notChannelKey,
+        notificationLayout: NotificationLayout.BigText,
+        icon: 'resource://drawable/ic_stat_logo',
+        largeIcon: 'asset://assets/images/logo.png',
+        backgroundColor: kPrimaryColor,
+        title: 'Offers!',
+        body: 'Check out our exclusive flight deals this weekend!',
+        wakeUpScreen: true,
+      ),
+      schedule: NotificationCalendar(
+        weekday: DateTime.saturday,
+        hour: 10,
+        minute: 0,
+        second: 0,
+        millisecond: 0,
+        repeats: true,
+      ),
+    );
   }
 
   @override

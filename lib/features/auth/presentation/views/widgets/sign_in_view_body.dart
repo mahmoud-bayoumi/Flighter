@@ -62,14 +62,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
                 //   log('SignIn Succes');
-                AwesomeNotifications()
-                    .isNotificationAllowed()
-                    .then((isAllowed) {
-                  if (!isAllowed) {
-                    AwesomeNotifications()
-                        .requestPermissionToSendNotifications();
-                  }
-                });
+             
 
                 BlocProvider.of<PaymentCubit>(context).userId =
                     BlocProvider.of<SignInCubit>(context)

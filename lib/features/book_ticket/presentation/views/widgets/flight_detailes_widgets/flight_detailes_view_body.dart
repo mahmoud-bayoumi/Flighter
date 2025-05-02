@@ -65,8 +65,8 @@ class FlightDetailesViewBody extends StatelessWidget {
                         'Your ticket has been added to your bookings.');
                     AwesomeNotifications().createNotification(
                       content: NotificationContent(
-                        id: notificationPayId,
-                        channelKey: payChannelKey,
+                        id: notificationId,
+                        channelKey: notChannelKey,
                         notificationLayout: NotificationLayout.BigText,
                         icon: 'resource://drawable/ic_stat_logo',
                         largeIcon: 'asset://assets/images/logo.png',
@@ -135,7 +135,10 @@ class FlightDetailesViewBody extends StatelessWidget {
                       PaymentManager.paymentIntentId;
                   BlocProvider.of<PaymentCubit>(context).isPayNow = true;
                   BlocProvider.of<PaymentCubit>(context).netAmount =
-                      PaymentManager.netAmount.toString();
+                      currency == 'EGP'
+                          ? PaymentManager.netAmount.toString()
+                          : (PaymentManager.netAmount * egyptianToDollar)
+                              .toString();
                   await BlocProvider.of<PaymentCubit>(context).pay();
                   BlocProvider.of<GetBookingsCubit>(context).getBookings();
                   successPaymentDialog(
