@@ -127,7 +127,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       const Duration(seconds: 2),
       () async {
         if (await _secureStorageService.getToken(tokenKey) != null) {
-          BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+          await BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
           BlocProvider.of<ToCountriesCubit>(context).getToCountries();
           BlocProvider.of<AirlinesCubit>(context).getAirlines();
           BlocProvider.of<GetOfferCubit>(context).getOffers();

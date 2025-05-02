@@ -9,5 +9,5 @@ const userIdKey = 'userId';
 const notChannelKey = 'notification_channel_key';
 const notChannelName = 'notification_channel_name';
 const notificationId = 101;
-var currency = '';
+var currency = 'EGP';
 var egyptianToDollar = (50.77).ceil();
