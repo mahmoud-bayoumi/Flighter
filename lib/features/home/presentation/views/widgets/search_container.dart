@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
@@ -8,6 +7,7 @@ import 'package:flighter/features/home/presentation/view_model/from_countries_cu
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
 import 'package:flighter/features/home/presentation/views/widgets/class_drop_down_menu.dart';
+import 'package:flighter/features/home/presentation/views/widgets/currency_modal.dart';
 import 'package:flighter/features/home/presentation/views/widgets/custom_date_picker_row.dart';
 import 'package:flighter/features/home/presentation/views/widgets/search_text_form_field.dart';
 import 'package:flighter/features/home/presentation/views/widgets/traveler_drop_down_menu.dart';
@@ -17,7 +17,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../constants.dart';
 import '../../../../../core/utils/functions/capitalize_fist_letter.dart';
 import '../../view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 
@@ -110,24 +109,6 @@ class _SearchContainerState extends State<SearchContainer> {
                   top: MediaQuery.sizeOf(context).height * 0.070,
                   child: GestureDetector(
                     onTap: () {
-                      // Notification For Pay . //<----------------------------------------
-                      AwesomeNotifications().createNotification(
-                          content: NotificationContent(
-                            icon: 'resource://drawable/ic_stat_logo',
-                            backgroundColor: kPrimaryColor,
-                            largeIcon: 'asset://assets/images/logo.png',
-                            id: notificationPayId,
-                            channelKey: payChannelKey,
-                            notificationLayout: NotificationLayout.BigText,
-                            body:
-                                'You have unpaid flight bookings. Please complete your payment to confirm your reservations.',
-                            wakeUpScreen: true,
-                            fullScreenIntent: true,
-                          ),
-                          schedule: NotificationCalendar.fromDate(
-                              date: DateTime.now()
-                                  .add(const Duration(seconds: 1))));
-
                       /*         String temp = firstController.text;
                       setState(() {
                         firstController.text = secondController.text;
@@ -190,8 +171,8 @@ class _SearchContainerState extends State<SearchContainer> {
                 text: 'Search Flight',
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    //Search
-                    await BlocProvider.of<SearchCubit>(context).getSearchData();
+                    showCurrencyModal(context, 'EGP'); // trigger search after selection of currnecy
+
                   }
                 },
               ),

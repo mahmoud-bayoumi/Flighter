@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/core/widgets/custom_small_button.dart';
@@ -11,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../constants.dart';
 import '../../../../../../core/utils/functions/is_more_than_five_days.dart';
 
 class FlightDetailesViewBody extends StatelessWidget {
@@ -37,7 +41,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                 left: 25.w,
                 child: CustomSmallButton(
                   onPressed: () async {
-                    BlocProvider.of<GetSeatsCubit>(context).getSeats();
+                    await BlocProvider.of<GetSeatsCubit>(context).getSeats();
                     if (BlocProvider.of<GetSeatsCubit>(context)
                         .seatsModel
                         .data!
@@ -55,10 +59,35 @@ class FlightDetailesViewBody extends StatelessWidget {
                       BlocProvider.of<PaymentCubit>(context).paymentIntentId =
                           '0';
                       BlocProvider.of<PaymentCubit>(context).netAmount = '0';
-                      BlocProvider.of<PaymentCubit>(context).pay();
+                      await BlocProvider.of<PaymentCubit>(context).pay();
                     }
                     successPaymentDialog(context,
                         'Your ticket has been added to your bookings.');
+                    AwesomeNotifications().createNotification(
+                      content: NotificationContent(
+                        id: notificationPayId,
+                        channelKey: payChannelKey,
+                        notificationLayout: NotificationLayout.BigText,
+                        icon: 'resource://drawable/ic_stat_logo',
+                        largeIcon: 'asset://assets/images/logo.png',
+                        backgroundColor: kPrimaryColor,
+                        body:
+                            'You have unpaid flight bookings. Please complete your payment to confirm your reservations.',
+                        wakeUpScreen: true,
+                        fullScreenIntent: true,
+                      ),
+                      schedule: NotificationCalendar(
+                        year: DateTime.now().add(const Duration(days: 2)).year,
+                        month:
+                            DateTime.now().add(const Duration(days: 2)).month,
+                        day: DateTime.now().add(const Duration(days: 2)).day,
+                        hour: 9, // or whatever time you want
+                        minute: 0,
+                        second: 0,
+                        millisecond: 0,
+                        repeats: true,
+                      ),
+                    );
                   },
                   text: 'Pay Later',
                   blue: false,
@@ -74,7 +103,7 @@ class FlightDetailesViewBody extends StatelessWidget {
               : 210.w,
           child: CustomSmallButton(
             onPressed: () async {
-              BlocProvider.of<GetSeatsCubit>(context).getSeats();
+              await BlocProvider.of<GetSeatsCubit>(context).getSeats();
               if (BlocProvider.of<GetSeatsCubit>(context)
                   .seatsModel
                   .data!
@@ -88,17 +117,26 @@ class FlightDetailesViewBody extends StatelessWidget {
                 BlocProvider.of<PaymentCubit>(context).seatsId = [];
                 seatsAreBookedAlready(context);
               } else {
+                if (currency == 'EGP') {
+                  BlocProvider.of<PaymentCubit>(context).amountToPay =
+                      BlocProvider.of<PaymentCubit>(context).amountToPay;
+                } else {
+                  BlocProvider.of<PaymentCubit>(context).amountToPay =
+                      BlocProvider.of<PaymentCubit>(context).amountToPay ~/
+                          egyptianToDollar;
+                }
+
                 bool paid = await PaymentManager.makePayment(
                     BlocProvider.of<PaymentCubit>(context).noOfTravelers *
                         BlocProvider.of<PaymentCubit>(context).amountToPay,
-                    "EGP");
+                    currency == 'EGP' ? "EGP" : "USD");
                 if (paid) {
                   BlocProvider.of<PaymentCubit>(context).paymentIntentId =
                       PaymentManager.paymentIntentId;
                   BlocProvider.of<PaymentCubit>(context).isPayNow = true;
                   BlocProvider.of<PaymentCubit>(context).netAmount =
                       PaymentManager.netAmount.toString();
-                  BlocProvider.of<PaymentCubit>(context).pay();
+                  await BlocProvider.of<PaymentCubit>(context).pay();
                   BlocProvider.of<GetBookingsCubit>(context).getBookings();
                   successPaymentDialog(
                       context, 'Your ticket has been added to your bookings.');

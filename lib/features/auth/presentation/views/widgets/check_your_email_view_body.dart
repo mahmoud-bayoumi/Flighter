@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:flighter/constants.dart';
@@ -52,25 +54,27 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
           var cubitData = context.read<VerifyEmailCubit>();
           cubitData.email = widget.email;
           return BlocConsumer<VerifyEmailCubit, VerifyEmailState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is VerifyEmailSuccess) {
                 EasyLoading.dismiss();
                 log('SignIn Succes');
-                BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
-                BlocProvider.of<ToCountriesCubit>(context).getToCountries();
+                await BlocProvider.of<FromCountriesCubit>(context)
+                    .getFromCountries();
+                 BlocProvider.of<ToCountriesCubit>(context)
+                    .getToCountries();
                 BlocProvider.of<GetBookingsCubit>(context).userId =
                     BlocProvider.of<VerifyEmailCubit>(context)
                         .verifyModel
                         .message!
                         .userId!;
-                BlocProvider.of<GetBookingsCubit>(context).getBookings();
+                 BlocProvider.of<GetBookingsCubit>(context).getBookings();
                 BlocProvider.of<PaymentCubit>(context).userId =
                     BlocProvider.of<VerifyEmailCubit>(context)
                         .verifyModel
                         .message!
                         .userId!;
-                BlocProvider.of<AirlinesCubit>(context).getAirlines();
-                BlocProvider.of<GetOfferCubit>(context).getOffers();
+                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
+                 BlocProvider.of<GetOfferCubit>(context).getOffers();
 
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is VerifyEmailFailure) {

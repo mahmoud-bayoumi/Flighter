@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:flighter/constants.dart';
@@ -68,7 +70,9 @@ class FlightDataCardForBookings extends StatelessWidget {
                       String baggageAllowance =
                           '${bookingData.baggageAllowance} KG';
                       String seatNumber = bookingData.selectedSeats!.join(", ");
-                      String totalCost = (bookingData.amount / 100).toString();
+                      String totalCost = currency == 'EGP'
+                          ? '${bookingData.amount / 100} EGP'
+                          : '${(bookingData.amount / 100) / egyptianToDollar} USD';
                       await generateTicketPDF(
                           bookingDate: bookingDate,
                           guestName: guestName,

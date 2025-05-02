@@ -9,3 +9,5 @@ const userIdKey = 'userId';
 const payChannelKey = 'pay_channel_key';
 const payChannelName = 'pay_channel_name';
 const notificationPayId = 101;
+var currency = '';
+var egyptianToDollar = (50.77).ceil();

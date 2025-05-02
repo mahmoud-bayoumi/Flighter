@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
@@ -130,7 +132,9 @@ class TicketWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "${ticketModel.price} EGP",
+                      currency == 'EGP'
+                          ? "${ticketModel.price} EGP"
+                          : "${int.parse(ticketModel.price!) ~/ egyptianToDollar} USD",
                       style: Styles.textStyle18.copyWith(
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,

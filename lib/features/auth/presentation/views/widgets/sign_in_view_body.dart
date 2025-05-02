@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
@@ -56,7 +58,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
           );
         } else {
           return BlocConsumer<SignInCubit, SignInState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
                 //   log('SignIn Succes');
@@ -95,6 +97,19 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                 BlocProvider.of<GetOfferCubit>(context).getOffers();
 
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
+                /*    AwesomeNotifications().createNotification(
+                  content: NotificationContent(
+                    icon: 'resource://drawable/ic_stat_logo',
+                    backgroundColor: kPrimaryColor,
+                    largeIcon: 'asset://assets/images/logo.png',
+                    id: notificationPayId,
+                    channelKey: payChannelKey,
+                    notificationLayout: NotificationLayout.BigText,
+                    body: 'Welcome To Flighter!!!.',
+                    wakeUpScreen: true,
+                    fullScreenIntent: true,
+                  ), 
+                );*/
               } else if (state is SignInFailure) {
                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);

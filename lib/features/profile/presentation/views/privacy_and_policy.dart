@@ -128,7 +128,23 @@ class PrivacyAndPolicy extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Text(
-                '6. Updates to This Policy',
+                '6. Your Notes ',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'You can pay later if the flight is more than 5 days away. Refunds are allowed within 2 days of payment, if the flight is still over 5 days away.',
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                '7. Updates to This Policy',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

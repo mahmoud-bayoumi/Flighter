@@ -38,9 +38,10 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   @override
+  @override
   void dispose() {
-    super.dispose();
-    animationController.dispose();
+    animationController.dispose(); // Dispose the controller FIRST
+    super.dispose(); // Then call the superclass method
   }
 
   @override

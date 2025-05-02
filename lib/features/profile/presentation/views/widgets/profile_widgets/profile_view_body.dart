@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/functions/show_snack_bar.dart';
 import 'package:flighter/core/widgets/failure_page_widget.dart';
 import 'package:flighter/features/profile/presentation/view_model/get_profile_photo_cubit/get_profile_photo_cubit.dart';
 import 'package:flighter/features/profile/presentation/views/widgets/profile_widgets/profile_divider.dart';
@@ -14,6 +15,7 @@ import '../../../../../../core/utils/functions/dialogs_type.dart';
 import '../../../../../../core/utils/secure_storage.dart';
 import '../../../../../../core/widgets/primary_container.dart';
 import '../../../../../bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
+import '../../../../../offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
 import '../../../view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'logout_button.dart';
 import 'profile_text_title.dart';
@@ -93,10 +95,25 @@ class ProfileViewBody extends StatelessWidget {
                             },
                           ),
                           TextProfileButton(
-                            buttonText: 'Change password',
+                            buttonText: 'Change Password',
                             onTap: () {
                               GoRouter.of(context)
                                   .push(AppRouter.kChangePassword);
+                            },
+                          ),
+                          TextProfileButton(
+                            buttonText: 'Change Currency',
+                            onTap: () {
+                              if (currency == 'EGP') {
+                                currency = 'USD';
+                              } else {
+                                currency = 'EGP';
+                              }
+                              showSnackBar(context,
+                                  message:
+                                      'Your currency changed successfully to $currency');
+                              BlocProvider.of<GetOfferCubit>(context)
+                                  .getOffers();
                             },
                           ),
                           TextProfileButton(

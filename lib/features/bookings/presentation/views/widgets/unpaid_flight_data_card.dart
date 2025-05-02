@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/is_within_five_days.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -144,9 +146,18 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
             seat.seatId.toString()) // Use .toString() if you want List<String>
         .toList();
     BlocProvider.of<PaymentCubit>(context).seatsId = selectedSeatIds;
+    if (currency == 'EGP') {
+      BlocProvider.of<PaymentCubit>(context).amountToPay =
+          BlocProvider.of<PaymentCubit>(context).amountToPay;
+    } else {
+      BlocProvider.of<PaymentCubit>(context).amountToPay =
+          (BlocProvider.of<PaymentCubit>(context).amountToPay /
+              egyptianToDollar) as int;
+    }
 
     bool paid = await PaymentManager.makePayment(
-        BlocProvider.of<PaymentCubit>(context).amountToPay, "EGP"); // currency
+        BlocProvider.of<PaymentCubit>(context).amountToPay,
+        currency == 'EGP' ? "EGP" : 'USD'); // currency
     if (paid) {
       BlocProvider.of<PaymentCubit>(context).paymentIntentId =
           PaymentManager.paymentIntentId;

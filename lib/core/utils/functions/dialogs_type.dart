@@ -205,8 +205,8 @@ AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
     padding: const EdgeInsets.all(10),
     btnOk: CustomButton(
       text: 'Continue',
-      onPressed: () {
-        BlocProvider.of<GetBookingsCubit>(context).getBookings();
+      onPressed: ()  {
+         BlocProvider.of<GetBookingsCubit>(context).getBookings();
         Navigator.pop(context);
         GoRouter.of(context).pushReplacement(AppRouter.kBookingsNavigation);
       },
@@ -286,7 +286,7 @@ AwesomeDialog refundDoneDialog(BuildContext context) {
     ),
   )..show();
 }
- 
+
 AwesomeDialog noTicketsAvailable(BuildContext context) {
   return AwesomeDialog(
     context: context,
