@@ -13,7 +13,6 @@ import 'package:flighter/features/home/presentation/views/widgets/custom_date_pi
 import 'package:flighter/features/home/presentation/views/widgets/search_text_form_field.dart';
 import 'package:flighter/features/home/presentation/views/widgets/traveler_drop_down_menu.dart';
 import 'package:flighter/features/home/presentation/views/widgets/trip_type_button.dart';
-import 'package:flighter/features/offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -175,8 +174,7 @@ class _SearchContainerState extends State<SearchContainer> {
                   if (_formKey.currentState!.validate()) {
                     showCurrencyModal(context,
                         currency); // trigger search after selection of currnecy
-                    BlocProvider.of<GetOfferCubit>(context).getOffers();
-                  }
+                   }
                 },
               ),
             ),
