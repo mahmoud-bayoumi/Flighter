@@ -4,13 +4,14 @@ import 'package:flighter/core/widgets/custom_small_button.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/flight_detailes_card.dart';
 import 'package:flighter/features/bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
+import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../../../core/utils/app_router.dart';
+
+import '../../../../../../core/utils/functions/is_more_than_five_days.dart';
 
 class FlightDetailesViewBody extends StatelessWidget {
   const FlightDetailesViewBody({super.key});
@@ -29,40 +30,48 @@ class FlightDetailesViewBody extends StatelessWidget {
           top: MediaQuery.sizeOf(context).height * .06,
           child: const FlightDetailesCard(),
         ),
+        isMoreThan5DaysFromNow(
+                BlocProvider.of<SearchCubit>(context).startDateController.text)
+            ? Positioned(
+                top: 730.h,
+                left: 25.w,
+                child: CustomSmallButton(
+                  onPressed: () async {
+                    BlocProvider.of<GetSeatsCubit>(context).getSeats();
+                    if (BlocProvider.of<GetSeatsCubit>(context)
+                        .seatsModel
+                        .data!
+                        .seats!
+                        .where((seat) => seat.isBooked == true)
+                        .map<int>((seat) => seat.seatId as int)
+                        .toList()
+                        .any(BlocProvider.of<PaymentCubit>(context)
+                            .seatsId
+                            .contains)) {
+                      BlocProvider.of<PaymentCubit>(context).seatsId = [];
+                      seatsAreBookedAlready(context);
+                    } else {
+                      BlocProvider.of<PaymentCubit>(context).isPayNow = false;
+                      BlocProvider.of<PaymentCubit>(context).paymentIntentId =
+                          '0';
+                      BlocProvider.of<PaymentCubit>(context).netAmount = '0';
+                      BlocProvider.of<PaymentCubit>(context).pay();
+                    }
+                    successPaymentDialog(context,
+                        'Your ticket has been added to your bookings.');
+                  },
+                  text: 'Pay Later',
+                  blue: false,
+                ),
+              )
+            : const SizedBox.shrink(),
         Positioned(
           top: 730.h,
-          left: 25.w,
-          child: CustomSmallButton(
-            onPressed: () async {
-              BlocProvider.of<GetSeatsCubit>(context).getSeats();
-              if (BlocProvider.of<GetSeatsCubit>(context)
-                  .seatsModel
-                  .data!
-                  .seats!
-                  .where((seat) => seat.isBooked == true)
-                  .map<int>((seat) => seat.seatId as int)
-                  .toList()
-                  .any(BlocProvider.of<PaymentCubit>(context)
-                      .seatsId
-                      .contains)) {
-                BlocProvider.of<PaymentCubit>(context).seatsId = [];
-                seatsAreBookedAlready(context);
-              } else {
-                BlocProvider.of<PaymentCubit>(context).isPayNow = false;
-                BlocProvider.of<PaymentCubit>(context).paymentIntentId = '0';
-                BlocProvider.of<PaymentCubit>(context).netAmount = '0';
-                BlocProvider.of<PaymentCubit>(context).pay();
-              }
-              successPaymentDialog(
-                  context, 'Your ticket has been added to your bookings.');
-            },
-            text: 'Pay Later',
-            blue: false,
-          ),
-        ),
-        Positioned(
-          top: 730.h,
-          left: 210.w,
+          left: !isMoreThan5DaysFromNow(BlocProvider.of<SearchCubit>(context)
+                  .startDateController
+                  .text)
+              ? MediaQuery.sizeOf(context).width / 3
+              : 210.w,
           child: CustomSmallButton(
             onPressed: () async {
               BlocProvider.of<GetSeatsCubit>(context).getSeats();

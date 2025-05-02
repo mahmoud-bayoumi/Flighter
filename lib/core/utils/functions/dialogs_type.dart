@@ -267,7 +267,8 @@ AwesomeDialog refundDoneDialog(BuildContext context) {
     dialogType: DialogType.noHeader,
     animType: AnimType.scale,
     title: 'Refund Success',
-    desc: 'Your ticket refunded successfully.',
+    desc:
+        'Your refund has been processed successfully. The amount will be returned to your original payment method.',
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: kPrimaryColor,
     titleTextStyle: Styles.textStyle24,
@@ -278,12 +279,14 @@ AwesomeDialog refundDoneDialog(BuildContext context) {
     btnOk: CustomButton(
       text: 'Ok',
       onPressed: () {
-        GoRouter.of(context).pushReplacement('/');
+        BlocProvider.of<GetBookingsCubit>(context).getBookings();
+        Navigator.pop(context);
+        GoRouter.of(context).pushReplacement(AppRouter.kBookingsNavigation);
       },
     ),
   )..show();
 }
-
+ 
 AwesomeDialog noTicketsAvailable(BuildContext context) {
   return AwesomeDialog(
     context: context,

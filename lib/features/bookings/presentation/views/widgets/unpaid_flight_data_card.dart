@@ -119,8 +119,7 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
                       onPressed: () async {
                         await unpaidFlightDataLogic(context);
                       },
-                    )
-                    )
+                    ))
                 : const SizedBox.shrink(),
           ],
         ),
@@ -147,8 +146,7 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
     BlocProvider.of<PaymentCubit>(context).seatsId = selectedSeatIds;
 
     bool paid = await PaymentManager.makePayment(
-        BlocProvider.of<PaymentCubit>(context).amountToPay ,
-        "EGP"); // currency
+        BlocProvider.of<PaymentCubit>(context).amountToPay, "EGP"); // currency
     if (paid) {
       BlocProvider.of<PaymentCubit>(context).paymentIntentId =
           PaymentManager.paymentIntentId;

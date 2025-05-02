@@ -26,8 +26,7 @@ class PayLaterRepoImpl implements PayLaterRepo {
       if (response['success']) {
         return right(PayLaterModel.fromJson(response));
       } else {
-        if (response["message"] ==
-            "This Booking doesn't exist.") {
+        if (response["message"] == "This Booking doesn't exist.") {
           return right(PayLaterModel.fromJson(response));
         }
         return left(Failure(response['message']));
