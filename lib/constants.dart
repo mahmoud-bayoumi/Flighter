@@ -9,5 +9,6 @@ const userIdKey = 'userId';
 const notChannelKey = 'notification_channel_key';
 const notChannelName = 'notification_channel_name';
 const notificationId = 101;
+const flighterAssistantApiKey = 'AIzaSyB4cFz-KY-ay6_fBVO1sVtrMD1FRADNK6g';
 var currency = 'EGP';
 var egyptianToDollar = (50.77).ceil();
