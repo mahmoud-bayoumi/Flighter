@@ -1,16 +1,48 @@
-# flighter
+📘 README.md
 
-A new Flutter project.
+✈️ Flighter - Flight Booking App
 
-## Getting Started
+Flighter is a modern Flutter mobile app that simplifies flight booking with an intuitive UI, real-time flight data, and flexible payment options.
 
-This project is a starting point for a Flutter application.
+📱 Features
 
-A few resources to get you started if this is your first Flutter project:
+🔎 Search for flights (one-way or round-trip)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🪑 Select preferred seats and class (Economy/Business)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+💵 Choose payment type: Pay Now or Pay Later
+
+📄 Generate and download ticket PDFs
+
+🛎️ View real-time offers and hot deals
+
+🤖 Chatbot assistance for support and help
+
+🧑‍💻 Developer Setup
+
+git clone https://github.com/yourusername/flighter.git
+cd flighter
+flutter pub get
+flutter run
+
+📦 Dependencies
+
+Includes flutter_bloc, dio, flutter_stripe, pdf, awesome_dialog, go_router, and more. See pubspec.yaml for the full list.
+
+📂 Folder Structure
+
+lib/ – Main logic and UI
+
+assets/images/ – Image assets
+
+assets/fonts/ – Fonts (Poppins)
+
+pubspec.yaml – Project metadata and dependencies
+
+🤝 Contributing
+
+We welcome contributions! See CONTRIBUTING.md for setup and guidelines.
+
+📄 License
+
+This project is licensed under the MIT License.
