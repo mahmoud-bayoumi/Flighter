@@ -29,6 +29,8 @@ class OfferTicketWidget extends StatelessWidget {
         BlocProvider.of<TicketSummaryCubit>(context).isFromOffer = true;
         BlocProvider.of<TicketSummaryCubit>(context).ticketId =
             ticketModel.ticketId!;
+        BlocProvider.of<TicketSummaryCubit>(context).depatureDate =
+            ticketModel.departureDate;
         BlocProvider.of<PaymentCubit>(context).amountToPay =
             int.parse(ticketModel.price!);
         BlocProvider.of<PaymentCubit>(context).ticketId = ticketModel.ticketId!;

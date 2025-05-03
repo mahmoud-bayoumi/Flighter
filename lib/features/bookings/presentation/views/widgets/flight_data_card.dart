@@ -53,7 +53,8 @@ class FlightDataCardForBookings extends StatelessWidget {
                       String guestName =
                           BlocProvider.of<GetProfileDataCubit>(context)
                               .profileData!
-                              .name!;
+                              .name!
+                              .split(' ')[0];
                       String from = capitalizeFirstLetter(bookingData.from!);
                       String to = capitalizeFirstLetter(bookingData.to!);
                       String airline = bookingData.companyName!;
@@ -67,6 +68,11 @@ class FlightDataCardForBookings extends StatelessWidget {
                           '${bookingData.durationInMinutes!} min.';
                       String bookingStatus = bookingData.paymentStatus!;
                       String seatClass = bookingData.className!;
+                      String ticketType =
+                          bookingData.returnDepartureDate == null
+                              ? 'Direct'
+                              : 'Round';
+                      String ticketCode = bookingData.ticketCode!;
                       String baggageAllowance =
                           '${bookingData.baggageAllowance} KG';
                       String seatNumber = bookingData.selectedSeats!.join(", ");
@@ -88,6 +94,11 @@ class FlightDataCardForBookings extends StatelessWidget {
                           seatClass: seatClass,
                           baggageAllowance: baggageAllowance,
                           seatNumber: seatNumber,
+                          ticketCode: ticketCode,
+                          ticketType: ticketType,
+                          returnDepartureDate: ticketType == 'Round'
+                              ? bookingData.returnDepartureDate
+                              : null,
                           totalCost: totalCost,
                           imageP: bookingData.companyName! == 'Emirates'
                               ? AssetsData.kEmirates
