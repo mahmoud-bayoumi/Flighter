@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class FlightDetailesView extends StatelessWidget {
   const FlightDetailesView({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -24,8 +24,6 @@ class SearchCubit extends Cubit<SearchState> {
     emit(SearchLoading());
     Either<Failure, SearchModel> response;
     if (endDateController.text.isEmpty) {
-      startDateController.text = '2025-04-21';
-
       response = await searchRepo.getOneWaySearchData(
           from: fromController.text,
           to: toController.text,
@@ -36,8 +34,6 @@ class SearchCubit extends Cubit<SearchState> {
           fastestFilter: fastestFilter,
           airlines: airlines);
     } else {
-      startDateController.text = '2025-04-21';
-      endDateController.text = '2025-04-21';
       response = await searchRepo.getRoundSearchData(
           from: fromController.text,
           to: toController.text,

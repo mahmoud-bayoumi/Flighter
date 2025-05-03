@@ -16,6 +16,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   String netAmount = '', paymentIntentId = '0';
   int noOfTravelers = 1;
   int amountToPay = 0;
+  bool clickedForPay = false; 
   PaymentCubit(this.payRepo) : super(PaymentInitial());
 
   Future<void> pay() async {

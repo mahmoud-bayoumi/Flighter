@@ -12,6 +12,7 @@ class TicketSummaryCubit extends Cubit<TicketSummaryState> {
   int ticketCounter = 0;
   late int noOfTravelers = 1;
   bool isFromOffer = false;
+  String? depatureDate; 
   List<String> selectedSeats = [];
   late TicketSummaryModel ticketSummaryModel;
   TicketSummaryCubit(this.ticketSummaryRepo) : super(TicketSummaryInitial());
