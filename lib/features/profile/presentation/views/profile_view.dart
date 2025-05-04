@@ -5,17 +5,35 @@ import 'package:flighter/features/profile/presentation/views/widgets/profile_wid
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
+import '../../../../core/utils/base_cubit/connectivity_cubit/connectivity_state.dart';
+import '../../../../core/widgets/no_internet_connect.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) =>
-            DeleteProfilePhotoCubit(getIt.get<DeleteProfilePhotoRepoImpl>()),
-        child: const ProfileViewBody(),
-      ),
+    return BlocBuilder<ConnectivityCubit, ConnectivityState>(
+      builder: (context, state) {
+        if (state is ConnectivityFailure) {
+          return const Center(
+            child: NoInternetConnectionView(),
+          );
+        } else if (state is ConnectivityLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return Scaffold(
+            body: BlocProvider(
+              create: (context) => DeleteProfilePhotoCubit(
+                  getIt.get<DeleteProfilePhotoRepoImpl>()),
+              child: const ProfileViewBody(),
+            ),
+          );
+        }
+      },
     );
   }
 }
