@@ -24,6 +24,7 @@ class SearchCubit extends Cubit<SearchState> {
     emit(SearchLoading());
     Either<Failure, SearchModel> response;
     if (endDateController.text.isEmpty) {
+
       response = await searchRepo.getOneWaySearchData(
           from: fromController.text,
           to: toController.text,
