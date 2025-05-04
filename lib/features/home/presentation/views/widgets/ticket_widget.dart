@@ -82,7 +82,7 @@ class TicketWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.flight, color: Colors.blue),
                         Text(
-                          "${ticketModel.durationInMinutes} mins",
+                          "${ticketModel.durationInMinutes == 0 ? 50 :60} mins",
                           style: Styles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(.5),

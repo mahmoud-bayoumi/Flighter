@@ -174,6 +174,8 @@ class _SearchContainerState extends State<SearchContainer> {
                   if (_formKey.currentState!.validate()) {
                     // trigger search after selection of currnecy
                     await showCurrencyModal(context, currency);
+
+                    await BlocProvider.of<SearchCubit>(context).getSearchData();
                   }
                 },
               ),

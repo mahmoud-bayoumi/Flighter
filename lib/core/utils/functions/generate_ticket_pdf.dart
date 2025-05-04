@@ -130,9 +130,9 @@ Future<void> generateTicketPDF(
               pw.Align(
                   child: pw.Column(children: [
                     pw.Text('Thanks for booking using Flighter!',
-                        style: pw.TextStyle(fontSize: 16.sp)),
+                        style: pw.TextStyle(fontSize: 14.sp)),
                     pw.Text('We hope you have a pleasant journey.',
-                        style: pw.TextStyle(fontSize: 12.sp)),
+                        style: pw.TextStyle(fontSize: 8.sp)),
                   ]),
                   alignment: pw.Alignment.topRight),
             ],

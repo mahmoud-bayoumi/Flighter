@@ -359,3 +359,28 @@ AwesomeDialog deleteNotAvaiableDialog(BuildContext context) {
     ),
   )..show();
 }
+
+
+AwesomeDialog refundNotAllowed(BuildContext context) {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.noHeader,
+    animType: AnimType.scale,
+    title: 'Unavaiable Action',
+    desc: "Refund not allowed. Booking was made more than 2 days ago.",
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: Colors.red,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(
+      color: kGreyColor,
+    ),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context);
+        // GoRouter.of(context).pop();
+      },
+    ),
+  )..show();
+}

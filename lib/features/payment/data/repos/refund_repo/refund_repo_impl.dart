@@ -23,7 +23,10 @@ import 'refund_repo.dart';
       });
       if (response['success']) {
         return right(RefundModel.fromJson(response));
-      } else {
+      }else if(response["message"] ==  "Refund not allowed. Booking was made more than 2 days ago." ){
+        return right(RefundModel.fromJson(response));
+      }
+       else {
         return left(Failure(response['message']));
       }
     } catch (e) {

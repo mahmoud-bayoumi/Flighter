@@ -99,7 +99,7 @@ class FlightDetailesCard extends StatelessWidget {
                 ),
                 Positioned(
                   top: 500.h,
-                  left: MediaQuery.sizeOf(context).width * .17,
+                  left: MediaQuery.sizeOf(context).width * .20,
                   child: Center(
                     child: Text(
                       BlocProvider.of<TicketSummaryCubit>(context)
