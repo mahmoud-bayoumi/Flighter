@@ -13,6 +13,7 @@ import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flighter/features/payment/presentation/view_model/pay_later_booking_cubit/pay_later_booking_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/functions/captilaize_the_first_three_letters.dart';
 import '../../../../../core/utils/functions/convert12_hours_format.dart';
@@ -119,7 +120,14 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
                       authButtonName: 'Pay Now',
                       canCancel: true,
                       onPressed: () async {
-                        await unpaidFlightDataLogic(context);
+                        if (!BlocProvider.of<PaymentCubit>(context)
+                            .clickedForPay) {
+                          BlocProvider.of<PaymentCubit>(context).clickedForPay =
+                              true;
+                          EasyLoading.show(status: 'loading...');
+
+                          await unpaidFlightDataLogic(context);
+                        }
                       },
                     ))
                 : const SizedBox.shrink(),
@@ -154,6 +162,7 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
           (BlocProvider.of<PaymentCubit>(context).amountToPay /
               egyptianToDollar) as int;
     }
+    EasyLoading.dismiss();
 
     bool paid = await PaymentManager.makePayment(
         BlocProvider.of<PaymentCubit>(context).amountToPay,
@@ -171,12 +180,14 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
           bookingData.amount.toString();
       BlocProvider.of<PayLaterBookingCubit>(context).paymentIntentId =
           PaymentManager.paymentIntentId;
+      BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
       BlocProvider.of<PayLaterBookingCubit>(context).payLaterBooking();
       BlocProvider.of<GetBookingsCubit>(context).getBookings();
     } else {
       BlocProvider.of<PaymentCubit>(context).isPayNow = false;
       BlocProvider.of<PaymentCubit>(context).paymentIntentId = '0';
       BlocProvider.of<PaymentCubit>(context).netAmount = '';
+      BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
       errorPaymentDialog(context, 'Payment Not Completed');
     }
   }

@@ -13,6 +13,7 @@ import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flighter/features/payment/presentation/view_model/payment_cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../constants.dart';
@@ -65,6 +66,11 @@ class FlightDetailesViewBody extends StatelessWidget {
                           '0';
                       BlocProvider.of<PaymentCubit>(context).netAmount = '0';
                       await BlocProvider.of<PaymentCubit>(context).pay();
+
+                      BlocProvider.of<TicketSummaryCubit>(context)
+                          .ticketCounter = 0;
+                      BlocProvider.of<TicketSummaryCubit>(context)
+                          .selectedSeats = [];
                     }
                     successPaymentDialog(context,
                         'Your ticket has been added to your bookings.');
@@ -114,9 +120,11 @@ class FlightDetailesViewBody extends StatelessWidget {
             onPressed: () async {
               if (!BlocProvider.of<PaymentCubit>(context).clickedForPay) {
                 BlocProvider.of<PaymentCubit>(context).clickedForPay = true;
+                EasyLoading.show(status: 'loading...');
+
                 await flightDeatilsViewBodyLogic(context);
-              } else {
-                BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
+                BlocProvider.of<TicketSummaryCubit>(context).ticketCounter = 0;
+                BlocProvider.of<TicketSummaryCubit>(context).selectedSeats = [];
               }
             },
             text: 'Pay Now',
@@ -148,7 +156,7 @@ class FlightDetailesViewBody extends StatelessWidget {
             BlocProvider.of<PaymentCubit>(context).amountToPay ~/
                 egyptianToDollar;
       }
-
+      EasyLoading.dismiss();
       bool paid = await PaymentManager.makePayment(
           BlocProvider.of<PaymentCubit>(context).noOfTravelers *
               BlocProvider.of<PaymentCubit>(context).amountToPay,
@@ -162,6 +170,7 @@ class FlightDetailesViewBody extends StatelessWidget {
             : (PaymentManager.netAmount * egyptianToDollar).toString();
         await BlocProvider.of<PaymentCubit>(context).pay();
         BlocProvider.of<GetBookingsCubit>(context).getBookings();
+        BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
         successPaymentDialog(
             context, 'Your ticket has been added to your bookings.');
       } else {
@@ -169,6 +178,7 @@ class FlightDetailesViewBody extends StatelessWidget {
         BlocProvider.of<PaymentCubit>(context).paymentIntentId = '0';
         BlocProvider.of<PaymentCubit>(context).netAmount = '';
         BlocProvider.of<GetBookingsCubit>(context).getBookings();
+        BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
         errorPaymentDialog(context, 'Payment Not Completed');
       }
     }

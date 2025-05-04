@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/capitalize_word.dart';
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
@@ -108,11 +107,15 @@ class FlightDataCardForBookings extends StatelessWidget {
                                       ? AssetsData.kEgypt
                                       : AssetsData.kKuwait);
                     },
-                    icon: const Icon(
-                      Icons.download,
-                      color: kPrimaryColor,
-                      size: 30,
-                    ))),
+                    icon: !(isWithin2Days(bookingData.bookingDate!) &&
+                            isMoreThan5DaysFromNow(getDateOnly(
+                                bookingData.departureDate!.toString())))
+                        ? const Icon(
+                            Icons.download,
+                            color: kPrimaryColor,
+                            size: 30,
+                          )
+                        : const SizedBox.shrink())),
             FromToCountrySecond(
                 from: capitalizeFirstThreeLetters(bookingData.from!),
                 to: capitalizeFirstThreeLetters(bookingData.to!)),
@@ -204,32 +207,40 @@ class FlightDataCardForBookings extends StatelessWidget {
                                 bookingData.bookingid!;
                             await BlocProvider.of<RefundCubit>(context)
                                 .refundTicket();
-                            PaymentManager.paymentIntentId =
-                                BlocProvider.of<RefundCubit>(context)
+                            if (BlocProvider.of<RefundCubit>(context)
                                     .refundModel
-                                    .data!
-                                    .paymentintentId!;
-                            PaymentManager.netAmount = currency == 'EGP'
-                                ? int.parse(
-                                    BlocProvider.of<RefundCubit>(context)
-                                        .refundModel
-                                        .data!
-                                        .amount!)
-                                : int.parse(
-                                        BlocProvider.of<RefundCubit>(context)
-                                            .refundModel
-                                            .data!
-                                            .amount!) *
-                                    egyptianToDollar;
-                            bool refunded = await PaymentManager.refundPayment(
-                                PaymentManager.paymentIntentId,
-                                amount: PaymentManager.netAmount);
-                            if (refunded) {
-                              refundDoneDialog(context);
-                              log('Refundedddddddddddddddddddddddddddddddddddddddddddddd Done');
+                                    .message ==
+                                "Refund not allowed. Booking was made more than 2 days ago.") {
+                              refundNotAllowed(context);
                             } else {
-                              // After Refund the ticket will be deleted.
-                              log('Refundedddddddddddddddddddddddddddddddddddddddddddddd XXXXX');
+                              PaymentManager.paymentIntentId =
+                                  BlocProvider.of<RefundCubit>(context)
+                                      .refundModel
+                                      .data!
+                                      .paymentintentId!;
+                              PaymentManager.netAmount = currency == 'EGP'
+                                  ? int.parse(
+                                      BlocProvider.of<RefundCubit>(context)
+                                          .refundModel
+                                          .data!
+                                          .amount!)
+                                  : int.parse(
+                                          BlocProvider.of<RefundCubit>(context)
+                                              .refundModel
+                                              .data!
+                                              .amount!) *
+                                      egyptianToDollar;
+                              bool refunded =
+                                  await PaymentManager.refundPayment(
+                                      PaymentManager.paymentIntentId,
+                                      amount: PaymentManager.netAmount);
+                              if (refunded) {
+                                refundDoneDialog(context);
+                                log('Refundedddddddddddddddddddddddddddddddddddddddddddddd Done');
+                              } else {
+                                // After Refund the ticket will be deleted.
+                                log('Refundedddddddddddddddddddddddddddddddddddddddddddddd XXXXX');
+                              }
                             }
                           },
                         );
