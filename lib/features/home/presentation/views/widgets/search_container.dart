@@ -172,9 +172,9 @@ class _SearchContainerState extends State<SearchContainer> {
                 text: 'Search Flight',
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    showCurrencyModal(context,
-                        currency); // trigger search after selection of currnecy
-                   }
+                    // trigger search after selection of currnecy
+                    await showCurrencyModal(context, currency);
+                  }
                 },
               ),
             ),
