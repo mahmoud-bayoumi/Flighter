@@ -61,7 +61,6 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
                 //   log('SignIn Succes');
-             
 
                 BlocProvider.of<PaymentCubit>(context).userId =
                     BlocProvider.of<SignInCubit>(context)
@@ -76,14 +75,14 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                 var getProfilePhotoCubit = context.read<GetProfilePhotoCubit>();
                 getProfilePhotoCubit.getProfilePhoto();
 
-               await BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
-
+                await BlocProvider.of<FromCountriesCubit>(context)
+                    .getFromCountries();
+                var getToCountriesCubit = context.read<ToCountriesCubit>();
+                getToCountriesCubit.getToCountries();
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
                 BlocProvider.of<GetBookingsCubit>(context).getBookings();
 
                 // upload data to countries if success
-                var getToCountriesCubit = context.read<ToCountriesCubit>();
-                getToCountriesCubit.getToCountries();
 
                 // upload offers data
                 BlocProvider.of<GetOfferCubit>(context).getOffers();

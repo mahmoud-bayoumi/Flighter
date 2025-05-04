@@ -84,7 +84,7 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
             ),
             Positioned(
               top: 360.h,
-              left: 55.w,
+              left: MediaQuery.sizeOf(context).width / 12,
               child: RowFlightDetailesForBookings(
                 bookingData: bookingData,
               ),
@@ -104,7 +104,7 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
             ),
             Positioned(
               top: 500.h,
-              left: 75.w,
+              left: MediaQuery.sizeOf(context).width / 3.7,
               child: Text(
                 bookingData.ticketCode!,
                 style: Styles.textStyle45.copyWith(color: Colors.black),

@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
@@ -109,7 +108,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                       : BlocProvider.of<SearchCubit>(context)
                           .startDateController
                           .text)
-              ? MediaQuery.sizeOf(context).width / 3
+              ? MediaQuery.sizeOf(context).width / 3.2
               : 210.w,
           child: CustomSmallButton(
             onPressed: () async {
