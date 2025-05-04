@@ -49,11 +49,7 @@ class FlightDataCardForBookings extends StatelessWidget {
                     onPressed: () async {
                       String bookingDate =
                           getDateOnly(bookingData.bookingDate.toString());
-                      String guestName =
-                          BlocProvider.of<GetProfileDataCubit>(context)
-                              .profileData!
-                              .name!
-                              .split(' ')[0];
+                      String guestName = bookingData.guestname!;
                       String from = capitalizeFirstLetter(bookingData.from!);
                       String to = capitalizeFirstLetter(bookingData.to!);
                       String airline = bookingData.companyName!;
