@@ -188,7 +188,7 @@ class FlightDataCardForBookings extends StatelessWidget {
             ),
             isWithin2Days(bookingData.bookingDate!) &&
                     isMoreThan5DaysFromNow(
-                        getDateOnly(bookingData.bookingDate!.toString()))
+                        getDateOnly(bookingData.departureDate!.toString()))
                 ? Positioned(
                     top: 580.h,
                     left: 75.w,
