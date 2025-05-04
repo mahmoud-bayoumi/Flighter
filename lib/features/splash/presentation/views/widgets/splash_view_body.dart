@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import '../../../../../core/utils/secure_storage.dart';
 import '../../../../home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import '../../../../offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
@@ -36,6 +37,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     super.initState();
     initSlidingAnimation();
     navigateToAuthView();
+    BlocProvider.of<ConnectivityCubit>(context).checkConnectivity();
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
       if (!isAllowed) {
         AwesomeNotifications().requestPermissionToSendNotifications();
