@@ -65,6 +65,8 @@ class FlightDetailesViewBody extends StatelessWidget {
                       BlocProvider.of<PaymentCubit>(context).paymentIntentId =
                           '0';
                       BlocProvider.of<PaymentCubit>(context).netAmount = '0';
+                      EasyLoading.show(status: 'loading...');
+
                       await BlocProvider.of<PaymentCubit>(context).pay();
 
                       BlocProvider.of<TicketSummaryCubit>(context)
