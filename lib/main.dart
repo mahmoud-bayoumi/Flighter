@@ -37,11 +37,13 @@ import 'features/home/data/repos/search_repo/search_repo_impl.dart';
 import 'features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 
-void main() {
+void main() async {
   setupServerLocator();
+  WidgetsFlutterBinding.ensureInitialized();
   tz.initializeTimeZones();
+
   Stripe.publishableKey = StripeKeys.publishableKey;
-  AwesomeNotifications().initialize(
+  await AwesomeNotifications().initialize(
       'resource://drawable/ic_stat_logo',
       [
         NotificationChannel(

@@ -7,7 +7,7 @@ class ConnectivityCubit extends Cubit<ConnectivityState> {
   ConnectivityCubit() : super(ConnectivityInitial());
 
   void checkConnectivity() {
-    emit(ConnectivityLoading());
+    emit(ConnectivityInitial());
 
     InternetConnection().onStatusChange.listen(
       (event) {

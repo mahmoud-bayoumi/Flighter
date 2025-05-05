@@ -33,10 +33,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        } else if (state is ConnectivityLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
         } else {
           var cubitData = context.read<SignUpCubit>();
           return BlocConsumer<SignUpCubit, SignUpState>(

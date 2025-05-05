@@ -29,11 +29,7 @@ class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        } else if (state is ConnectivityLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
+        }  else {
           var cubitData = context.read<ResetPasswordCubit>();
           return BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
             listener: (context, state) async {

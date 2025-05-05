@@ -46,11 +46,7 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        } else if (state is ConnectivityLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
+        }  else {
           var cubitData = context.read<VerifyEmailCubit>();
           cubitData.email = widget.email;
           return BlocConsumer<VerifyEmailCubit, VerifyEmailState>(

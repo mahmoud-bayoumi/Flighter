@@ -20,10 +20,6 @@ class ProfileView extends StatelessWidget {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        } else if (state is ConnectivityLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
         } else {
           return Scaffold(
             body: BlocProvider(

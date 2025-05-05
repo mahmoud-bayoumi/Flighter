@@ -21,11 +21,7 @@ class ChooseSeatView extends StatelessWidget {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        } else if (state is ConnectivityLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
+        }  else {
           return Scaffold(
               appBar: AppBar(
                 leading: BackButton(
