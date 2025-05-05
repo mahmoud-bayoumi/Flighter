@@ -40,22 +40,12 @@ class _SignInViewBodyState extends State<SignInViewBody> {
   void initState() {
     super.initState();
     BlocProvider.of<ConnectivityCubit>(context).checkConnectivity();
+    
   }
 
   @override
   Widget build(BuildContext context) {
     var cubitData = context.read<SignInCubit>();
-    return BlocBuilder<ConnectivityCubit, ConnectivityState>(
-      builder: (context, state) {
-        if (state is ConnectivityFailure) {
-          return const Center(
-            child: NoInternetConnectionView(),
-          );
-        } else if (state is ConnectivityLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
           return BlocConsumer<SignInCubit, SignInState>(
             listener: (context, state) async {
               if (state is SignInSuccess) {
@@ -192,7 +182,6 @@ class _SignInViewBodyState extends State<SignInViewBody> {
             },
           );
         }
-      },
-    );
+
   }
-}
+

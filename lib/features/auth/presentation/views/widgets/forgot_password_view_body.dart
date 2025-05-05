@@ -30,11 +30,7 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        } else if (state is ConnectivityLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
+        }  else {
           var cubitData = context.read<SendResetPasswordCodeCubit>();
           return BlocConsumer<SendResetPasswordCodeCubit,
               SendResetPasswordCodeCubitState>(

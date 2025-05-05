@@ -59,10 +59,6 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
             return const Center(
               child: NoInternetConnectionView(),
             );
-          } else if (state is ConnectivityLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
           } else {
             return ClipRRect(
               borderRadius: const BorderRadius.only(

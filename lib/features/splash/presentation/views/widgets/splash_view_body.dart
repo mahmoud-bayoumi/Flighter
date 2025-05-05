@@ -42,7 +42,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       if (!isAllowed) {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
-    });
+    }); /*
     AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: notificationId, // Unique ID
@@ -63,7 +63,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         millisecond: 0,
         repeats: true,
       ),
-    );
+    ); */
   }
 
   @override
