@@ -32,14 +32,17 @@ class PayNowRepoImpl implements PayRepo {
       if (response['success']) {
         log(response['message']);
         return right(PayNowModel.fromJson(response));
-      } else {
+      }
+      /* else {
         if (response["message"] ==
             "One or more seats already booked! Please try again.") {
           log(response['message']);
           return right(PayNowModel.fromJson(response));
-        }
+        } 
+        
+      }*/
+      
         return left(Failure(response['message']));
-      }
     } catch (e) {
       return left(Failure(e.toString()));
     }

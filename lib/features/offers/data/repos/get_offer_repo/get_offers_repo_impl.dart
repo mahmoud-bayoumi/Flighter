@@ -26,6 +26,8 @@ class GetOffersRepoImpl implements GetOfferRepo {
           await _offerApiService.get(endPoint: endPoint, token: token!);
       if (response['success']) {
         return right(OfferModel.fromJson(response));
+      } else if (response['message'] == "No available offers found.") {
+        return right(OfferModel.fromJson(response));
       } else {
         return left(Failure(response['message']));
       }

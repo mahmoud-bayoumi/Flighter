@@ -9,6 +9,8 @@ abstract class PaymentManager {
   static int netAmount = 0;
   static Future<bool> makePayment(int amount, String currency) async {
     try {
+      
+       
       Map<String, dynamic> paymentData =
           await _getClientSecret((amount * 100).toString(), currency);
       await _initializePaymentSheet(paymentData['client_secret']);
@@ -16,6 +18,7 @@ abstract class PaymentManager {
       // Store PaymentIntentId , amount here in DB
       paymentIntentId = paymentData['id'];
       netAmount = paymentData['amount'];
+      
       return true;
     } catch (error) {
       log(error.toString());
