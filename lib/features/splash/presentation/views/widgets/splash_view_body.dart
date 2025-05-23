@@ -42,28 +42,29 @@ class _SplashViewBodyState extends State<SplashViewBody>
       if (!isAllowed) {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
-    }); /*
+    });
     AwesomeNotifications().createNotification(
       content: NotificationContent(
-        id: notificationId, // Unique ID
+        id: notificationId,
         channelKey: notChannelKey,
-        notificationLayout: NotificationLayout.BigText,
+        title: 'Flighter Travel Deals!',
+        body: 'Check out exclusive flight offers available this day!',
         icon: 'resource://drawable/ic_stat_logo',
         largeIcon: 'asset://assets/images/logo.png',
         backgroundColor: kPrimaryColor,
-        title: 'Offers!',
-        body: 'Check out our exclusive flight deals this weekend!',
+        notificationLayout: NotificationLayout.BigText,
         wakeUpScreen: true,
+        fullScreenIntent: true,
       ),
       schedule: NotificationCalendar(
-        weekday: DateTime.saturday,
+        weekday: DateTime.tuesday, // Tuesday trigger
         hour: 10,
         minute: 0,
         second: 0,
         millisecond: 0,
         repeats: true,
       ),
-    ); */
+    );
   }
 
   @override
@@ -128,15 +129,15 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () async {
-        if (await _secureStorageService.getToken(tokenKey) != null) {
+        if (await _secureStorageService.getWithKey(tokenKey) != null) {
           await BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
           BlocProvider.of<ToCountriesCubit>(context).getToCountries();
           BlocProvider.of<AirlinesCubit>(context).getAirlines();
           BlocProvider.of<GetOfferCubit>(context).getOffers();
           BlocProvider.of<PaymentCubit>(context).userId =
-              (await _secureStorageService.getToken(userIdKey))!;
+              (await _secureStorageService.getWithKey(userIdKey))!;
           BlocProvider.of<GetBookingsCubit>(context).userId =
-              (await _secureStorageService.getToken(userIdKey))!;
+              (await _secureStorageService.getWithKey(userIdKey))!;
           BlocProvider.of<GetBookingsCubit>(context).getBookings();
 
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);

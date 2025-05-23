@@ -135,7 +135,7 @@ class TicketWidget extends StatelessWidget {
                       currency == 'EGP'
                           ? "${ticketModel.price} EGP"
                           : "${int.parse(ticketModel.price!) ~/ egyptianToDollar} USD",
-                      style: Styles.textStyle18.copyWith(
+                    style: Styles.textStyle18.copyWith(
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
                       ),

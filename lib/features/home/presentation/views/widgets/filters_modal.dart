@@ -58,7 +58,7 @@ class _FiltersModalState extends State<FiltersModal> {
               color: kPrimaryColor,
             )),
         IconButton(
-          icon: const Icon(Icons.close),
+          icon: const Icon(Icons.check),
           onPressed: () {
             Navigator.pop(context);
             BlocProvider.of<SearchCubit>(context).secondPush = true;
@@ -112,9 +112,11 @@ class _FiltersModalState extends State<FiltersModal> {
     );
   }
 }
+
 void showFiltersModal(BuildContext context, Map<String, bool> airlines) {
   showModalBottomSheet(
       context: context,
+      isDismissible: false,
       builder: (context) => FiltersModal(
             airlines: airlines,
           ),

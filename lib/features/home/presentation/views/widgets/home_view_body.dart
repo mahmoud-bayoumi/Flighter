@@ -11,9 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/functions/capitalize_word.dart';
+import '../../view_model/airlines_cubit/airlines_cubit.dart';
+import '../../view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
+import '../../view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
+
+  Future<void> _refreshData(BuildContext context) async {
+    await BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+    await BlocProvider.of<ToCountriesCubit>(context).getToCountries();
+    await BlocProvider.of<AirlinesCubit>(context).getAirlines();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,73 +44,76 @@ class HomeViewBody extends StatelessWidget {
         } else {
           final userName = getData.profileData?.name ?? 'Guest';
 
-          return SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height,
-                ),
-                const PrimaryContainer(),
-                Padding(
-                  padding: EdgeInsets.only(top: 45.h, left: 10.w),
-                  child: SizedBox(
-                    width: MediaQuery.sizeOf(context).width * 0.5,
-                    child: Text(
-                      overflow: TextOverflow.ellipsis,
-                      'Hello, ${capitalizeFirstLetter(userName.split(' ')[0])}',
-                      style: Styles.textStyle24.copyWith(color: Colors.white),
-                    ),
+          return RefreshIndicator(
+            onRefresh: () => _refreshData(context),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height,
                   ),
-                ),
-                Positioned(
-                  left: MediaQuery.sizeOf(context).width * 0.69,
-                  child: SizedBox(
-                    height: 270.h,
-                    child: AspectRatio(
-                      aspectRatio: 3 / 4,
-                      child: Image.asset(
-                        AssetsData.kReversedLogo,
+                  const PrimaryContainer(),
+                  Padding(
+                    padding: EdgeInsets.only(top: 45.h, left: 10.w),
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.5,
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        'Hello, ${capitalizeFirstLetter(userName.split(' ')[0])}',
+                        style: Styles.textStyle24.copyWith(color: Colors.white),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: MediaQuery.sizeOf(context).height * .2,
-                  left: MediaQuery.sizeOf(context).height * .035,
-                  child: Text(
-                    'Book Your Flight',
-                    style: Styles.textStyle45,
-                  ),
-                ),
-                Positioned(
-                  top: MediaQuery.sizeOf(context).height * .3,
-                  left: MediaQuery.sizeOf(context).width * .02,
-                  right: MediaQuery.sizeOf(context).width * .02,
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 1,
-                    height: MediaQuery.sizeOf(context).height,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                  Positioned(
+                    left: MediaQuery.sizeOf(context).width * 0.69,
+                    child: SizedBox(
+                      height: 270.h,
+                      child: AspectRatio(
+                        aspectRatio: 3 / 4,
+                        child: Image.asset(
+                          AssetsData.kReversedLogo,
+                        ),
+                      ),
                     ),
-                    child: const SearchContainer(),
                   ),
-                ),
-                Positioned(
-                  top: MediaQuery.sizeOf(context).height * .86,
-                  left: MediaQuery.sizeOf(context).width * .04,
-                  child: Text(
-                    'Hot Deals',
-                    style: Styles.textStyle35.copyWith(color: kPrimaryColor),
+                  Positioned(
+                    top: MediaQuery.sizeOf(context).height * .2,
+                    left: MediaQuery.sizeOf(context).height * .035,
+                    child: Text(
+                      'Book Your Flight',
+                      style: Styles.textStyle45,
+                    ),
                   ),
-                ),
-                Positioned.fill(
-                  top: MediaQuery.sizeOf(context).height * 0.92,
-                  left: MediaQuery.sizeOf(context).width * .02,
-                  child: const HomeHotDealsListView(),
-                ),
-              ],
+                  Positioned(
+                    top: MediaQuery.sizeOf(context).height * .3,
+                    left: MediaQuery.sizeOf(context).width * .02,
+                    right: MediaQuery.sizeOf(context).width * .02,
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1,
+                      height: MediaQuery.sizeOf(context).height,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: const SearchContainer(),
+                    ),
+                  ),
+                  Positioned(
+                    top: MediaQuery.sizeOf(context).height * .86,
+                    left: MediaQuery.sizeOf(context).width * .04,
+                    child: Text(
+                      'Hot Deals',
+                      style: Styles.textStyle35.copyWith(color: kPrimaryColor),
+                    ),
+                  ),
+                  Positioned.fill(
+                    top: MediaQuery.sizeOf(context).height * 0.92,
+                    left: MediaQuery.sizeOf(context).width * .02,
+                    child: const HomeHotDealsListView(),
+                  ),
+                ],
+              ),
             ),
           );
         }

@@ -1,6 +1,7 @@
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
+import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_state.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_seat_widgets/choose_seat_view_body.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class ChooseSeatView extends StatelessWidget {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        }  else {
+        } else {
           return Scaffold(
               appBar: AppBar(
                 leading: BackButton(
@@ -40,8 +41,13 @@ class ChooseSeatView extends StatelessWidget {
                   style: Styles.textStyle24,
                 ),
               ),
-              body: ChooseSeatViewBody(
-                seatsModel: BlocProvider.of<GetSeatsCubit>(context).seatsModel,
+              body: BlocBuilder<GetSeatsCubit, GetSeatsState>(
+                builder: (context, state) {
+                  return ChooseSeatViewBody(
+                    seatsModel:
+                        BlocProvider.of<GetSeatsCubit>(context).seatsModel,
+                  );
+                },
               ));
         }
       },

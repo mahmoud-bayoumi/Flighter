@@ -13,6 +13,11 @@ import '../../../../core/utils/styles.dart';
 class BookingsViewBody extends StatelessWidget {
   const BookingsViewBody({super.key});
 
+  Future<void> _onRefresh(BuildContext context) async {
+    // Trigger the Cubit's fetch method to reload bookings
+    await BlocProvider.of<GetBookingsCubit>(context).getBookings();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -23,54 +28,47 @@ class BookingsViewBody extends StatelessWidget {
           top: MediaQuery.sizeOf(context).height * 0.05,
           child: const BookingListTile(),
         ),
-        BlocBuilder<GetBookingsCubit, GetBookingsState>(
-          builder: (context, state) {
-            if (state is GetBookingsSuccess) {
-              return Padding(
-                padding: EdgeInsets.only(top: 100.h),
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: BlocProvider.of<GetBookingsCubit>(context)
-                      .bookingsModel
-                      .data!
-                      .length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15.h, horizontal: 2.w),
-                      child: BlocProvider.of<GetBookingsCubit>(context)
-                                  .bookingsModel
-                                  .data![index]
-                                  .paymentStatus ==
-                              'Paid'
-                          ? FlightDataCardForBookings(
-                              bookingData:
-                                  BlocProvider.of<GetBookingsCubit>(context)
-                                      .bookingsModel
-                                      .data![index],
-                            )
-                          : UnPaidFlightDataCardForBookings(
-                              bookingData:
-                                  BlocProvider.of<GetBookingsCubit>(context)
-                                      .bookingsModel
-                                      .data![index]),
-                    );
-                  },
-                ),
-              );
-            } else if (state is GetBookingsLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return Center(
-                child: Text(
-                  'No Bookings Yet',
-                  style: Styles.textStyle22,
-                ),
-              );
-            }
-          },
+        Padding(
+          padding: EdgeInsets.only(top: 100.h),
+          child: BlocBuilder<GetBookingsCubit, GetBookingsState>(
+            builder: (context, state) {
+              if (state is GetBookingsSuccess) {
+                return RefreshIndicator(
+                  onRefresh: () => _onRefresh(context),
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: BlocProvider.of<GetBookingsCubit>(context)
+                        .bookingsModel
+                        .data!
+                        .length,
+                    itemBuilder: (context, index) {
+                      final booking = BlocProvider.of<GetBookingsCubit>(context)
+                          .bookingsModel
+                          .data![index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15.h, horizontal: 2.w),
+                        child: booking.paymentStatus == 'Pending' ||
+                                booking.paymentStatus == 'Paid'
+                            ? FlightDataCardForBookings(bookingData: booking)
+                            : UnPaidFlightDataCardForBookings(
+                                bookingData: booking),
+                      );
+                    },
+                  ),
+                );
+              } else if (state is GetBookingsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return Center(
+                  child: Text(
+                    'No Bookings Yet',
+                    style: Styles.textStyle22,
+                  ),
+                );
+              }
+            },
+          ),
         ),
       ],
     );

@@ -8,6 +8,5 @@ abstract class PayRepo {
       required int ticketId,
       required List<String> seatsId,
       bool isPayNow = true,
-      String paymentIntentId = '0',
-      String amount = ''});
+     });
 }

@@ -16,24 +16,18 @@ class PaymentCubit extends Cubit<PaymentState> {
   String netAmount = '', paymentIntentId = '0';
   int noOfTravelers = 1;
   int amountToPay = 0;
-  bool clickedForPay = false; 
+  bool clickedForPay = false;
   PaymentCubit(this.payRepo) : super(PaymentInitial());
 
   Future<void> pay() async {
     emit(PaymentLoading());
-    log(userId);
-    log(ticketId.toString());
-    log(seatsId.toString());
-    log(isPayNow.toString());
-    log(netAmount);
-    log(paymentIntentId);
+
     var response = await payRepo.payNow(
-        userId: userId,
-        ticketId: ticketId,
-        seatsId: seatsId,
-        isPayNow: isPayNow,
-        amount: netAmount,
-        paymentIntentId: paymentIntentId);
+      userId: userId,
+      ticketId: ticketId,
+      seatsId: seatsId,
+      isPayNow: isPayNow,
+      );
 
     response.fold(
       (l) {

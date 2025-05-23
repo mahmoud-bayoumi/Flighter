@@ -14,7 +14,6 @@ import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_
 import 'package:flighter/features/bookings/presentation/views/widgets/cancel_ticket_text.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flighter/features/payment/presentation/view_model/refund_cubit/refund_cubit.dart';
-import 'package:flighter/features/profile/presentation/view_model/get_profile_data_cubit/get_profile_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,7 +68,7 @@ class FlightDataCardForBookings extends StatelessWidget {
                               : 'Round';
                       String ticketCode = bookingData.ticketCode!;
                       String baggageAllowance =
-                          '${bookingData.baggageAllowance} KG';
+                          '${bookingData.baggageAllowance} ';
                       String seatNumber = bookingData.selectedSeats!.join(", ");
                       String totalCost = currency == 'EGP'
                           ? '${bookingData.amount / 100} EGP'
@@ -214,17 +213,30 @@ class FlightDataCardForBookings extends StatelessWidget {
                                       .refundModel
                                       .data!
                                       .paymentintentId!;
-                              PaymentManager.netAmount = currency == 'EGP'
-                                  ? int.parse(
-                                      BlocProvider.of<RefundCubit>(context)
+                              PaymentManager
+                                  .netAmount = BlocProvider.of<RefundCubit>(context)
+                                      .refundModel
+                                      .data!
+                                      .amount!
+                                      .contains('E')
+                                  ? int.parse(BlocProvider.of<RefundCubit>(context)
+                                      .refundModel
+                                      .data!
+                                      .amount!
+                                      .substring(
+                                          0,
+                                          BlocProvider.of<RefundCubit>(context)
+                                                  .refundModel
+                                                  .data!
+                                                  .amount!
+                                                  .length -
+                                              1))
+                                  : int.parse(BlocProvider.of<RefundCubit>(context)
                                           .refundModel
                                           .data!
-                                          .amount!)
-                                  : int.parse(
-                                          BlocProvider.of<RefundCubit>(context)
-                                              .refundModel
-                                              .data!
-                                              .amount!) *
+                                          .amount!
+                                          .substring(0,
+                                              BlocProvider.of<RefundCubit>(context).refundModel.data!.amount!.length - 1)) *
                                       egyptianToDollar;
                               bool refunded =
                                   await PaymentManager.refundPayment(

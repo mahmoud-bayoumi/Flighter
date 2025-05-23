@@ -9,7 +9,7 @@ import 'pay_later_repo.dart';
 
 class PayLaterRepoImpl implements PayLaterRepo {
   final PayApiService payApiService;
-  final String endPoint = 'paylater-history';
+  final String endPoint = 'pay-history';
 
   PayLaterRepoImpl({required this.payApiService});
   @override
@@ -25,12 +25,9 @@ class PayLaterRepoImpl implements PayLaterRepo {
       });
       if (response['success']) {
         return right(PayLaterModel.fromJson(response));
-      } else {
-        if (response["message"] == "This Booking doesn't exist.") {
-          return right(PayLaterModel.fromJson(response));
-        }
+      } 
         return left(Failure(response['message']));
-      }
+      
     } catch (e) {
       return left(Failure(e.toString()));
     }

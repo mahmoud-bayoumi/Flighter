@@ -81,27 +81,35 @@ class _SearchContainerState extends State<SearchContainer> {
             Stack(children: [
               Column(
                 children: [
-                  SearchTextFormField(
-                    text: 'From (Location)',
-                    iconData: Icons.flight_takeoff,
-                    forFrom: true,
-                    controller:
-                        BlocProvider.of<SearchCubit>(context).fromController,
-                    countrySuggestions: capitalizeFirstLetterOfEach(
-                        BlocProvider.of<FromCountriesCubit>(context)
-                            .fromCountries),
+                  BlocBuilder<FromCountriesCubit, FromCountriesCubitState>(
+                    builder: (context, state) {
+                      return SearchTextFormField(
+                        text: 'From (Location)',
+                        iconData: Icons.flight_takeoff,
+                        forFrom: true,
+                        controller: BlocProvider.of<SearchCubit>(context)
+                            .fromController,
+                        countrySuggestions: capitalizeFirstLetterOfEach(
+                            BlocProvider.of<FromCountriesCubit>(context)
+                                .fromCountries),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 22.h,
                   ),
-                  SearchTextFormField(
-                    text: 'To (Destination)',
-                    iconData: Icons.flight_land,
-                    forFrom: false,
-                    controller:
-                        BlocProvider.of<SearchCubit>(context).toController,
-                    countrySuggestions: capitalizeFirstLetterOfEach(
-                        context.read<ToCountriesCubit>().toModel!.data),
+                  BlocBuilder<ToCountriesCubit, ToCountriesCubitDartState>(
+                    builder: (context, state) {
+                      return SearchTextFormField(
+                        text: 'To (Destination)',
+                        iconData: Icons.flight_land,
+                        forFrom: false,
+                        controller:
+                            BlocProvider.of<SearchCubit>(context).toController,
+                        countrySuggestions: capitalizeFirstLetterOfEach(
+                            context.read<ToCountriesCubit>().toModel!.data),
+                      );
+                    },
                   ),
                 ],
               ),

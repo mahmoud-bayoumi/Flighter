@@ -18,7 +18,7 @@ class SecureStorageService {
   }
 
   // Read a token securely
-  Future<String?> getToken(String key) async {
+  Future<String?> getWithKey(String key) async {
     try {
       String? token = await _storage.read(key: key);
       return token;

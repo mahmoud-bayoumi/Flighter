@@ -3,12 +3,10 @@
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
-import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_state.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/core/widgets/custom_text_form_field.dart';
-import 'package:flighter/core/widgets/no_internet_connect.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sign_in_cubit.dart';
 import 'package:flighter/features/auth/presentation/view_model/sign_in_cubit/sign_in_state.dart';
 import 'package:flighter/features/auth/presentation/views/widgets/auth_text_button.dart';
@@ -67,30 +65,16 @@ class _SignInViewBodyState extends State<SignInViewBody> {
 
                 await BlocProvider.of<FromCountriesCubit>(context)
                     .getFromCountries();
+                    
+                // upload data to countries if success
                 var getToCountriesCubit = context.read<ToCountriesCubit>();
                 getToCountriesCubit.getToCountries();
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
                 BlocProvider.of<GetBookingsCubit>(context).getBookings();
 
-                // upload data to countries if success
-
                 // upload offers data
                 BlocProvider.of<GetOfferCubit>(context).getOffers();
-
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
-                /*    AwesomeNotifications().createNotification(
-                  content: NotificationContent(
-                    icon: 'resource://drawable/ic_stat_logo',
-                    backgroundColor: kPrimaryColor,
-                    largeIcon: 'asset://assets/images/logo.png',
-                    id: notificationPayId,
-                    channelKey: payChannelKey,
-                    notificationLayout: NotificationLayout.BigText,
-                    body: 'Welcome To Flighter!!!.',
-                    wakeUpScreen: true,
-                    fullScreenIntent: true,
-                  ), 
-                );*/
               } else if (state is SignInFailure) {
                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
