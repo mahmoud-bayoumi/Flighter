@@ -177,7 +177,10 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
           bookingData.bookingid!;
 
       BlocProvider.of<PayLaterBookingCubit>(context).amount =
-          BlocProvider.of<PaymentCubit>(context).amountToPay.toString();
+       currency == 'EGP'
+                ? '${BlocProvider.of<PaymentCubit>(context).amountToPay}E'
+                : '${BlocProvider.of<PaymentCubit>(context).amountToPay}U';
+     //     BlocProvider.of<PaymentCubit>(context).amountToPay.toString();
 
       BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
       BlocProvider.of<PayLaterBookingCubit>(context).payLaterBooking();

@@ -13,9 +13,7 @@ class PayLaterBookingCubit extends Cubit<PayLaterBookingState> {
   PayLaterBookingCubit(this.payLaterRepo) : super(PayLaterBookingInitial());
   Future<void> payLaterBooking() async {
     emit(PayLaterBookingLoading());
-    log(bookingId.toString());
-    log(paymentIntentId.toString());
-    log(amount.toString());
+
 
     var response = await payLaterRepo.payBookgingLater(
         bookingId: bookingId, paymentIntentId: paymentIntentId, amount: amount);
