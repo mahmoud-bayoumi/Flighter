@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/capitalize_word.dart';
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
@@ -244,10 +243,9 @@ class FlightDataCardForBookings extends StatelessWidget {
                                       amount: PaymentManager.netAmount);
                               if (refunded) {
                                 refundDoneDialog(context);
-                                log('Refundedddddddddddddddddddddddddddddddddddddddddddddd Done');
-                              } else {
+                               } else {
                                 // After Refund the ticket will be deleted.
-                                log('Refundedddddddddddddddddddddddddddddddddddddddddddddd XXXXX');
+
                               }
                             }
                           },

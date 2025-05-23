@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
@@ -83,16 +83,29 @@ class _SearchContainerState extends State<SearchContainer> {
                 children: [
                   BlocBuilder<FromCountriesCubit, FromCountriesCubitState>(
                     builder: (context, state) {
-                      return SearchTextFormField(
-                        text: 'From (Location)',
-                        iconData: Icons.flight_takeoff,
-                        forFrom: true,
-                        controller: BlocProvider.of<SearchCubit>(context)
-                            .fromController,
-                        countrySuggestions: capitalizeFirstLetterOfEach(
-                            BlocProvider.of<FromCountriesCubit>(context)
-                                .fromCountries),
-                      );
+                      if (state is FromCountriesCubitSuccess) {
+                        return SearchTextFormField(
+                          text: 'From (Location)',
+                          iconData: Icons.flight_takeoff,
+                          forFrom: true,
+                          controller: BlocProvider.of<SearchCubit>(context)
+                              .fromController,
+                          countrySuggestions: capitalizeFirstLetterOfEach(
+                              BlocProvider.of<FromCountriesCubit>(context)
+                                  .fromCountries),
+                        );
+                      } else {
+                        return SearchTextFormField(
+                          text: 'From (Location)',
+                          iconData: Icons.flight_takeoff,
+                          forFrom: true,
+                          controller: BlocProvider.of<SearchCubit>(context)
+                              .fromController,
+                          countrySuggestions: capitalizeFirstLetterOfEach(
+                              BlocProvider.of<FromCountriesCubit>(context)
+                                  .fromCountries),
+                        );
+                      }
                     },
                   ),
                   SizedBox(
@@ -100,6 +113,19 @@ class _SearchContainerState extends State<SearchContainer> {
                   ),
                   BlocBuilder<ToCountriesCubit, ToCountriesCubitDartState>(
                     builder: (context, state) {
+                      if (state is ToCountriestSuccess) {
+                        return SearchTextFormField(
+                          text: 'To (Destination)',
+                          iconData: Icons.flight_land,
+                          forFrom: false,
+                          controller: BlocProvider.of<SearchCubit>(context)
+                              .toController,
+                          countrySuggestions: capitalizeFirstLetterOfEach(
+                              BlocProvider.of<ToCountriesCubit>(context)
+                                  .toModel!
+                                  .data),
+                        );
+                      }
                       return SearchTextFormField(
                         text: 'To (Destination)',
                         iconData: Icons.flight_land,
@@ -172,8 +198,6 @@ class _SearchContainerState extends State<SearchContainer> {
                   EasyLoading.show(status: 'loading...');
                 } else if (state is SearchFailure) {
                   EasyLoading.dismiss();
-
-                  log(state.errMessage);
                 }
               },
               child: CustomButton(

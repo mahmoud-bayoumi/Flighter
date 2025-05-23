@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -27,17 +27,17 @@ class SignUpRepoImpl implements SignUpRepo {
       });
 
       if (response['message'] == "Invalid or expired verification request.") {
-        log('DioException: ${response['message']}');
+    
         return left(Failure(response['message']));
       }
       // Handle generic message error
       if (response['message'] == "Email is already registered!") {
-        log('DioException: ${response['message']}');
+     
         return left(Failure(response['message']));
       }
       if (response['message'] ==
           "Password is not strong enough: Passwords must be at least 6 characters.") {
-        log('DioException: ${response['message']}');
+  
         return left(Failure(response['message']));
       }
 
@@ -45,13 +45,13 @@ class SignUpRepoImpl implements SignUpRepo {
       if (response['errors'] != null) {
         // Handle invalid email error
         if (response['errors']['Email']?[0] == "Invalid Email") {
-          log('DioException: ${response['errors']['Email'][0]}');
+       
           return left(Failure(response['errors']['Email'][0]));
         }
         // Handle confirm password mismatch error
         if (response['errors']['ConfirmPassword']?[0] ==
             "Passwords do not match. Please try again") {
-          log('DioException: ${response['errors']['ConfirmPassword'][0]}');
+        
           return left(Failure(response['errors']['ConfirmPassword'][0]));
         }
       }
@@ -63,10 +63,10 @@ class SignUpRepoImpl implements SignUpRepo {
       final errorData = e.response?.data;
       final errorMessage =
           errorData?['errors']?['Email']?[0] ?? 'An unknown error occurred.';
-      log('DioException: $errorMessage');
+   
       return left(Failure(errorMessage));
     } catch (e) {
-      log('General exception: ${e.toString()}');
+
       return left(Failure('An unexpected error occurred.'));
     }
   }

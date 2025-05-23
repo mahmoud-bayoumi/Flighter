@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flighter/features/home/data/models/to_model.dart';
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
@@ -18,13 +17,11 @@ class ToCountriesCubit extends Cubit<ToCountriesCubitDartState> {
 
     data.fold(
       (error) {
-        log(error.errMessage);
-        emit(ToCountriesFailure(errorMessage: error.errMessage));
+          emit(ToCountriesFailure(errorMessage: error.errMessage));
       },
       (response) {
         toModel = response;
-        log(response.data.toString());
-        emit(ToCountriestSuccess());
+         emit(ToCountriestSuccess());
       },
     );
   }

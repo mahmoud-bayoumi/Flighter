@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -55,16 +55,13 @@ class _CheckYourEmailBodyForForgetPassState
             listener: (context, state) {
               if (state is VerifyResetPassCodeSuccess) {
                 EasyLoading.dismiss();
-                log('Verify Success');
-                GoRouter.of(context)
+                  GoRouter.of(context)
                     .push(AppRouter.kSetNewPasswordView, extra: widget.email);
               } else if (state is VerifyResetPassCodeFailure) {
-                log('Verify Failure');
-                EasyLoading.dismiss();
+                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
               } else if (state is VerifyResetPassCodeLoading) {
-                log('Verify Loading');
-                EasyLoading.show(status: 'loading...');
+                  EasyLoading.show(status: 'loading...');
               }
             },
             builder: (context, state) {

@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
@@ -159,9 +158,7 @@ class FlightDetailesViewBody extends StatelessWidget {
       await BlocProvider.of<GetSeatsCubit>(context).getSeats();
       seatsAreBookedAlready(context);
     } else {
-      log(BlocProvider.of<PaymentCubit>(context).noOfTravelers.toString());
-      log(BlocProvider.of<PaymentCubit>(context).amountToPay.toString());
-      bool paid = await PaymentManager.makePayment(
+       bool paid = await PaymentManager.makePayment(
           BlocProvider.of<PaymentCubit>(context).noOfTravelers *
               BlocProvider.of<PaymentCubit>(context).amountToPay,
           currency == 'EGP' ? "EGP" : "USD");

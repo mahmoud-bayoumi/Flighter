@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,18 +18,18 @@ class VerifyResetPassCodeCubit extends Cubit<VerifyResetPassCodeState> {
 
   Future<void> verifyResetPassCode() async {
     emit(VerifyResetPassCodeLoading());
-    log('Verify loading');
+
     var response = await verifyResetPassCodeRepo.verifyResetPassCode(
         email: email.trim(),
         code: '${code1.text}${code2.text}${code3.text}${code4.text}');
 
     response.fold(
       (failure) {
-        log('Verify failure');
+
         emit(VerifyResetPassCodeFailure(errMessage: failure.errMessage));
       },
       (verifyModel) {
-        log('Verify success');
+
         emit(VerifyResetPassCodeSuccess());
       },
     );

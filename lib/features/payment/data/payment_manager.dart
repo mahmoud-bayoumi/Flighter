@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/stripe_keys.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -21,8 +20,7 @@ abstract class PaymentManager {
       
       return true;
     } catch (error) {
-      log(error.toString());
-      return false;
+         return false;
     }
   }
 

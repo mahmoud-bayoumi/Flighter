@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -21,10 +20,10 @@ class SendResetPassCodeRepoImpl implements SendResetPasswordCodeRepo {
           await apiService.post(endPoint: endPoint, data: {'email': email});
       return right(SendResetPasswordModel.fromJson(response));
     } on DioException catch (e) {
-      log('In Dio Exception : $e');
+    
       return left(Failure.formJson(e));
     } catch (e) {
-      log('General Exception : $e');
+  
       return left(Failure(e.toString()));
     }
   }

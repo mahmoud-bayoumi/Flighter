@@ -23,8 +23,7 @@ class SignInCubit extends Cubit<SignInState> {
     isLoading = true;
 
     emit(SignInLoading());
-    //log('Email : ${emailController.text}');
-    // log('Pass : ${passwordController.text}');
+
     Either<Failure, SignInModel> response;
     try {
       response = await signInRepo.signIn(

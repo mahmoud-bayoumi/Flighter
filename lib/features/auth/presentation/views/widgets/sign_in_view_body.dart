@@ -48,8 +48,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
             listener: (context, state) async {
               if (state is SignInSuccess) {
                 EasyLoading.dismiss();
-                //   log('SignIn Succes');
-
+        
                 BlocProvider.of<PaymentCubit>(context).userId =
                     BlocProvider.of<SignInCubit>(context)
                         .signInModel
@@ -78,8 +77,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               } else if (state is SignInFailure) {
                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
-                //   log('SignIn Failure');
-              } else if (state is SignInLoading) {
+                 } else if (state is SignInLoading) {
                 EasyLoading.instance
                   ..indicatorType = EasyLoadingIndicatorType.fadingCircle
                   ..loadingStyle = EasyLoadingStyle.dark
@@ -88,8 +86,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   ..dismissOnTap =
                       false; // Optional: Prevents dismissing the loader on tap
                 EasyLoading.show(status: 'loading...');
-                //      log('SignIn Loading');
-              }
+                 }
             },
             builder: (context, state) {
               return SingleChildScrollView(

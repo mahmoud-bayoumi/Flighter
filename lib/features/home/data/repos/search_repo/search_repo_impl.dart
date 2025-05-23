@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
@@ -33,8 +32,7 @@ class SearchRepoImpl implements SearchRepo {
     try {
       String query =
           'FlightTypeId=$flightTypeId&From=$from&To=$to&StartDate=$startDate&NoOfTravelers=$noOfTravelers&ClassTypeId=$classTypeId&FilterCheapest=$cheapestFilter&FilterFastest=$fastestFilter';
-      log(airlines.toString());
-      if (airlines.isNotEmpty) {
+       if (airlines.isNotEmpty) {
         String airLinesQuery = '';
         for (int i = 0; i < airlines.length; i++) {
           airLinesQuery += '&AirlineIds=${airlines[i]}';
@@ -80,8 +78,7 @@ class SearchRepoImpl implements SearchRepo {
       var response = await _flightApiService.get(
           endPoint: endPoint + qurey, token: token!);
 
-      log(response.toString());
-      if (response['success']) {
+       if (response['success']) {
         return right(SearchModel.fromJson(response));
       } else {
         return left(Failure(response['message']));

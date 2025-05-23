@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -35,15 +35,12 @@ class _SetNewPasswordBodyState extends State<SetNewPasswordBody> {
             listener: (context, state) async {
               if (state is ResetPasswordLoading) {
                 EasyLoading.show(status: 'loading...');
-                log('sendReset lodaing');
-              } else if (state is ResetPasswordFailure) {
+                } else if (state is ResetPasswordFailure) {
                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
-                log('SendReset Failure');
-              } else if (state is ResetPasswordSuccess) {
+               } else if (state is ResetPasswordSuccess) {
                 EasyLoading.dismiss();
-                log('SendReset Success');
-                successDialog(context, true);
+                  successDialog(context, true);
               }
             },
             builder: (context, state) {

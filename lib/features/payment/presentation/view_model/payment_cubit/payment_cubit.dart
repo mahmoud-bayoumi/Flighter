@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:flighter/features/payment/data/models/pay_now_model.dart';
 import 'package:flighter/features/payment/data/repos/pay_now_repo/pay_now_repo.dart';
@@ -31,13 +31,12 @@ class PaymentCubit extends Cubit<PaymentState> {
 
     response.fold(
       (l) {
-        log('PayCubit Failure');
-        log(l.errMessage);
+     
         emit(PaymentFailure(errMessage: l.errMessage));
       },
       (r) {
         payNowModel = r;
-        log('PayCubit Success');
+    
         seatsId = [];
         emit(PaymentSuccess());
       },

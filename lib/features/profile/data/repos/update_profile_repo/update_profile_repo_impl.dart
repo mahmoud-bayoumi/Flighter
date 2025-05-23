@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -60,7 +59,7 @@ class UpdateProfileRepoImpl implements UpdateProfileRepo {
         token: token,
         data: formData,
       );
-      log('response is $response');
+   
       // Check for errors in the response
       if (response['errors'] != null) {
         final errorMessages = response['errors']
@@ -72,17 +71,15 @@ class UpdateProfileRepoImpl implements UpdateProfileRepo {
       }
 
       if (response['message'] != null) {
-        log('response is ${response['message']}');
-        return right(ProfileModel.fromJosn(response));
+         return right(ProfileModel.fromJosn(response));
       }
 
       return right(ProfileModel.fromJosn(response));
     } on DioException catch (e) {
-      log('Dio Exception is ${e.response?.data.toString()}');
-      return left(
+       return left(
           Failure.formJson(e.response?.data['message'] ?? 'Unknown error'));
     } catch (e) {
-      log('General Exception is ${e.toString()}');
+    
       return left(Failure('General Exception: ${e.toString()}'));
     }
   }

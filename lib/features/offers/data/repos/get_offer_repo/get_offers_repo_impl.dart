@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -49,11 +48,9 @@ class GetOffersRepoImpl implements GetOfferRepo {
       if (response['success']) {
         return right(OfferModel.fromJson(response));
       } else {
-        log(response.toString());
-        if (response["message"] ==
+          if (response["message"] ==
             "No available tickets found with $precentage% offer.") {
-          log('X');
-          return right(OfferModel.fromJson(response));
+             return right(OfferModel.fromJson(response));
         }
         return left(Failure(response['message']));
       }

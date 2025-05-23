@@ -15,7 +15,7 @@ class GetProfilePhotoCubit extends Cubit<GetProfilePhotoState> {
   Future<void> getProfilePhoto() async {
     emit(GetProfilePhotoLoading());
     var response = await getProfilePhotoRepo.getUserProfilePhoto();
-//    log('Response type: ${response.runtimeType}');
+
     return response.fold(
       (l) {
         imageBits = null;

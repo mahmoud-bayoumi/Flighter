@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
@@ -29,13 +28,11 @@ class PayNowRepoImpl implements PayRepo {
       
       });
       if (response['success']) {
-        log(response['message']);
-        return right(PayNowModel.fromJson(response));
+    return right(PayNowModel.fromJson(response));
       } else {
         if (response["message"] ==
             "One or more selected seats are already booked") {
-          log(response['message']);
-          return right(PayNowModel.fromJson(response));
+              return right(PayNowModel.fromJson(response));
         }
       }
 
