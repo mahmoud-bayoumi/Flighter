@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/custom_outline_input_border.dart';
 
@@ -94,8 +93,7 @@ class EditProfileViewBody extends StatelessWidget {
                       child: CustomButton(
                         text: 'Save Changes',
                         onPressed: () async {
-                          log('name:${updateCubit.name.text} , date:${updateCubit.dateOfBirth.text} , country:${updateCubit.country.text} , image:${updateCubit.imageFile.toString()}');
-                          updateCubit.updateProfile();
+                           updateCubit.updateProfile();
 
                           context
                               .read<GetProfilePhotoCubit>()

@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/api_service.dart';
@@ -22,7 +22,7 @@ class VerifyEmailRepoImpl implements VerifyEmailRepo {
           "verificationCode": code,
         },
       );
-      log(response.toString());
+ 
       if (response['message'] == 'Incorrect verification code.') {
         return left(Failure('Incorrect verification code.'));
       }
@@ -42,10 +42,10 @@ class VerifyEmailRepoImpl implements VerifyEmailRepo {
       }
       final errorMessage =
           e.response?.data['message'] ?? 'An unknown error occurred.';
-      log('DioException: $errorMessage');
+   
       return left(Failure(errorMessage));
     } catch (e) {
-      log('General exception: ${e.toString()}');
+    
       return left(Failure('An unexpected error occurred.Try again later!'));
     }
   }

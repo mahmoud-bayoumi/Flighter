@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
@@ -27,8 +26,7 @@ class AirlinesRepoImpl implements AirlinesRepo {
         for (var airline in response) {
           airlines.add(Airline.fromJson(airline));
         }
-        log(airlines.toString());
-        return right(airlines);
+          return right(airlines);
       }
     } catch (e) {
       return left(Failure(e.toString()));

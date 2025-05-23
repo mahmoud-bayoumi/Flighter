@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/password_text_form_field.dart';
@@ -27,13 +26,12 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
         if (state is ChangePasswordFailure) {
           EasyLoading.dismiss();
           errorDialog(context, state.errMessage);
-          log('ChangePassword Failure');
-        } else if (state is ChangePasswordLoading) {
-          log('ChangePassword Loading');
+          } else if (state is ChangePasswordLoading) {
+   
           EasyLoading.show(status: 'Loading...');
         } else if (state is ChangePasswordSuccess) {
           EasyLoading.dismiss();
-          log('ChangePassword Success');
+  
           successDialog(context, false);
         }
       },

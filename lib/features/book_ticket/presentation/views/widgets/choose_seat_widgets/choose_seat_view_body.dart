@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
@@ -13,7 +12,6 @@ import 'package:flighter/features/book_ticket/presentation/views/widgets/choose_
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -144,10 +142,7 @@ class ChooseSeatViewBody extends StatelessWidget {
                                   }
                                 }
                               }
-                              log(BlocProvider.of<PaymentCubit>(context)
-                                  .seatsId
-                                  .toString());
-
+                    
                               GoRouter.of(context)
                                   .push(AppRouter.kFlightDetailes);
                             } else {
@@ -211,9 +206,7 @@ class ChooseSeatViewBody extends StatelessWidget {
                                 }
                               }
 
-                              log(BlocProvider.of<PaymentCubit>(context)
-                                  .seatsId
-                                  .toString());
+                         
                               GoRouter.of(context)
                                   .push(AppRouter.kFlightDetailes);
                             } else {

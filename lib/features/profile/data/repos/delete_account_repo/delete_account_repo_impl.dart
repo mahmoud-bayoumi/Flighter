@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/constants.dart';
@@ -24,19 +24,19 @@ class DeleteAccountRepoImpl implements DeleteAccountRepo {
             "password": password,
           },
           token: token);
-      log(response.toString());
+   
 
       if (response['message'] == 'Password is incorrect.') {
-        log(response.toString());
+        
         return left(Failure(response['message']));
       }
-      log(response.toString());
+
       return right('delete done');
     } on DioException catch (e) {
-      log(e.response!.data.toString());
+      
       return left(Failure(e.response!.data['message']));
     } catch (e) {
-      log(e.toString());
+
       return left(Failure(e.toString()));
     }
   }

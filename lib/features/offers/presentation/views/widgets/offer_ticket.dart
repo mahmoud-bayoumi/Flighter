@@ -76,7 +76,7 @@ class OfferTicketWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.flight, color: Colors.blue),
                         Text(
-                          "${ticketModel.durationInMinutes == 0 ? 50 : 60} mins",
+                          "${ticketModel.durationInMinutes} mins",
                           style: Styles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(.5),

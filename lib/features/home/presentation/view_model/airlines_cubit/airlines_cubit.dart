@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flighter/features/home/data/repos/airlines_repo/airlines_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +15,7 @@ class AirlinesCubit extends Cubit<AirlinesState> {
     var response = await airlinesRepo.getAirlines();
     response.fold(
       (l) {
-        log(l.errMessage);
-        emit(AirlinesFailure(errMessage: l.errMessage));
+           emit(AirlinesFailure(errMessage: l.errMessage));
       },
       (r) {
         airlines = r;

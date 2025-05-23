@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
+
 
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
@@ -53,7 +53,6 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
             listener: (context, state) async {
               if (state is VerifyEmailSuccess) {
                 EasyLoading.dismiss();
-                log('SignIn Succes');
                 await BlocProvider.of<FromCountriesCubit>(context)
                     .getFromCountries();
                  BlocProvider.of<ToCountriesCubit>(context)

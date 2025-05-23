@@ -82,7 +82,7 @@ class TicketWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.flight, color: Colors.blue),
                         Text(
-                          "${ticketModel.durationInMinutes == 0 ? 50 :60} mins",
+                          "${ticketModel.durationInMinutes} mins",
                           style: Styles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black.withOpacity(.5),
@@ -135,7 +135,7 @@ class TicketWidget extends StatelessWidget {
                       currency == 'EGP'
                           ? "${ticketModel.price} EGP"
                           : "${int.parse(ticketModel.price!) ~/ egyptianToDollar} USD",
-                      style: Styles.textStyle18.copyWith(
+                    style: Styles.textStyle18.copyWith(
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor,
                       ),

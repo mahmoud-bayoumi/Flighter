@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
@@ -18,28 +17,26 @@ class PayNowRepoImpl implements PayRepo {
       required int ticketId,
       required List<String> seatsId,
       bool isPayNow = true,
-      String paymentIntentId = '0',
-      String amount = ''}) async {
+   
+   }) async {
     try {
       var response = await payApiService.post(endPoint: endPoint, data: {
         "userId": userId,
         "ticketId": ticketId,
         "seatsId": seatsId,
         "payNow": isPayNow,
-        "paymentIntentId": paymentIntentId,
-        "amount": amount
+      
       });
       if (response['success']) {
-        log(response['message']);
-        return right(PayNowModel.fromJson(response));
+    return right(PayNowModel.fromJson(response));
       } else {
         if (response["message"] ==
-            "One or more seats already booked! Please try again.") {
-          log(response['message']);
-          return right(PayNowModel.fromJson(response));
+            "One or more selected seats are already booked") {
+              return right(PayNowModel.fromJson(response));
         }
-        return left(Failure(response['message']));
       }
+
+      return left(Failure(response['message']));
     } catch (e) {
       return left(Failure(e.toString()));
     }

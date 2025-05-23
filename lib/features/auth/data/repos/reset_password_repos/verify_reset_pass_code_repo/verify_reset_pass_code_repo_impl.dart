@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/api_service.dart';
@@ -23,7 +22,7 @@ class VerifyResetPassCodeRepoImpl implements VerifyResetPassCodeRepo {
 
       return right(VerifyResetPassCodeModel.fromJson(response));
     } on DioException catch (e) {
-      log('Dio Excep : ${e.response!.data}');
+   
       return left(Failure.formJson(e));
     } catch (e) {
       return left(Failure(e.toString()));

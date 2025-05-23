@@ -41,7 +41,7 @@ class HomeHotDealsListView extends StatelessWidget {
                     BlocProvider.of<GetOfferCubit>(context)
                         .getOffersWithPercentage(percentage: (index + 1) * 10);
                   }
-                  GoRouter.of(context).push(AppRouter.kOffersNavigation);
+                  context.go(AppRouter.kOffersNavigation);
                 },
                 child: Image.asset(
                   fit: BoxFit.cover,

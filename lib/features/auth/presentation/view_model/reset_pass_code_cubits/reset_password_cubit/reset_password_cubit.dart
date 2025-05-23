@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,18 +16,17 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   ResetPasswordCubit(this.resetPasswordRepo) : super(ResetPasswordInitial());
   Future<void> resetPassword() async {
     emit(ResetPasswordLoading());
-    log('Reset Loading');
     var response = await resetPasswordRepo.resetPassword(
         email: emailController.text,
         newPassword: newPasswordController.text,
         confirmNewPassword: confirmNewPasswordController.text);
     return response.fold(
       (failure) {
-        log('Reset Failure');
+
         emit(ResetPasswordFailure(errMessage: failure.errMessage));
       },
       (resetPassModel) {
-        log('Reset Success');
+      
         emit(ResetPasswordSuccess());
       },
     );

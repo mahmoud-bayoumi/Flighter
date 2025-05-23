@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class OffersApiService {
@@ -18,10 +17,10 @@ class OffersApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("Request Error: $e");
+
       return e.response?.data ?? {};
     } catch (e) {
-      log("General Error in post: $e");
+
       return {};
     }
   }
@@ -38,10 +37,10 @@ class OffersApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("Request Error: $e");
+
       return e.response?.data ?? [];
     } catch (e) {
-      log("General Error in post: $e");
+
       return [];
     }
   }
@@ -57,10 +56,10 @@ class OffersApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("Request Error: $e");
+
       return e.response?.data ?? {};
     } catch (e) {
-      log("General Error in post: $e");
+
       return {};
     }
   }
@@ -79,10 +78,10 @@ class OffersApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("In Put Request Error: $e");
+
       return e.response?.data ?? {};
     } catch (e) {
-      log("In Put General Error in post: $e");
+
       return {};
     }
   }
@@ -106,10 +105,10 @@ class OffersApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("DELETE Request Error: $e");
+
       return e.response?.data ?? {};
     } catch (e) {
-      log("General Error in DELETE: $e");
+
       return {};
     }
   }

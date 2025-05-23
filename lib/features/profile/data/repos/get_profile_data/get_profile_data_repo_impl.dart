@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -22,15 +21,15 @@ class GetProfileDataRepoImpl implements GetProfileDataRepo {
 
       var response = await _apiService.get(endPoint: endPoint, token: token!);
 
-      log('response is ${response.toString()}');
+
 
       return right(ProfileDataModel.fromJson(response));
     } on DioException catch (e) {
-      log('Dio Exception response is ${e.response!.data.toString()}');
+
 
       return left(Failure(e.response!.data));
     } catch (e) {
-      log('General Exception response is ${e.toString()}');
+
 
       return left(Failure(e.toString()));
     }

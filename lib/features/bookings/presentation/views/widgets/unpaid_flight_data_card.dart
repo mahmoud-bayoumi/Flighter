@@ -170,18 +170,18 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
     if (paid) {
       BlocProvider.of<PaymentCubit>(context).paymentIntentId =
           PaymentManager.paymentIntentId;
-      BlocProvider.of<PaymentCubit>(context).isPayNow = true;
-      BlocProvider.of<PaymentCubit>(context).netAmount =
-          PaymentManager.netAmount.toString();
-      BlocProvider.of<PaymentCubit>(context).pay();
-      BlocProvider.of<PayLaterBookingCubit>(context).bookingId =
-          bookingData.bookingid!;
-      BlocProvider.of<PayLaterBookingCubit>(context).amount =
-          bookingData.amount.toString();
+
       BlocProvider.of<PayLaterBookingCubit>(context).paymentIntentId =
           PaymentManager.paymentIntentId;
+      BlocProvider.of<PayLaterBookingCubit>(context).bookingId =
+          bookingData.bookingid!;
+
+      BlocProvider.of<PayLaterBookingCubit>(context).amount =
+          BlocProvider.of<PaymentCubit>(context).amountToPay.toString();
+
       BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
       BlocProvider.of<PayLaterBookingCubit>(context).payLaterBooking();
+
       BlocProvider.of<GetBookingsCubit>(context).getBookings();
     } else {
       BlocProvider.of<PaymentCubit>(context).isPayNow = false;

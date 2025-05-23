@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -35,10 +34,10 @@ class ResetPasswordRepoImpl implements ResetPasswordRepo {
 
       return right(ChangePasswordModel.fromJson(response));
     } on DioException catch (e) {
-      log('Dio Excep : ${e.response!.data}');
+
       return left(Failure.formJson(e));
     } catch (e) {
-      log('General Excep : $e');
+    
       return left(Failure(e.toString()));
     }
   }

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flighter/features/book_ticket/data/models/ticket_summary_model/ticket_summary_model/ticket_summary_model.dart';
 import 'package:flighter/features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo.dart';
@@ -24,10 +23,10 @@ class TicketSummaryCubit extends Cubit<TicketSummaryState> {
         ticketId: ticketId, selectedSeats: selectedSeats);
 
     response.fold((error) {
-      log(error.errMessage);
+
       emit(TicketSummaryFailure(errMessage: error.errMessage));
     }, (data) {
-      log(data.data.toString());
+
       ticketSummaryModel = data;
       emit(TicketSummarySuccess());
     });

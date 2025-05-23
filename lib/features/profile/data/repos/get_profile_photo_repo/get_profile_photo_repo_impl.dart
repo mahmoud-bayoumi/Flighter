@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -20,12 +19,11 @@ class GetProfilePhotoRepoImpl implements GetProfilePhotoRepo {
       final token = await _secureStorage.read(key: tokenKey);
       var response = await apiService.getRequestForImage(
           endPoint: endPoint, token: token ?? '');
-      // log('Response in get profile photo : $response');
-
+    
       // If the response is a List<int> (could be image or error message), attempt to decode
       if (response is List<int>) {
         String decodedResponse = String.fromCharCodes(response);
-        //   log('Decoded response: $decodedResponse');
+   
 
         try {
           // Try to decode the response as JSON
@@ -49,10 +47,10 @@ class GetProfilePhotoRepoImpl implements GetProfilePhotoRepo {
       // If none of the above conditions match, return a generic error
       return left(Failure('Unexpected response format'));
     } on DioException catch (e) {
-      log('Dio Exception : ${e.response!.data}');
+     
       return left(Failure(e.response!.data));
     } catch (e) {
-      log('General Exception : $e');
+  
       return left(Failure(e.toString()));
     }
   }

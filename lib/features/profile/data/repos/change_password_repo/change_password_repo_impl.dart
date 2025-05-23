@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -53,14 +52,14 @@ class ChangePasswordRepoImpl implements ChangePasswordRepo {
         return left(Failure.formJson(response['message']));
       }
 
-      log('RESPONSE ${response.toString()} ');
+    
       return right(ChangePasswordModel.fromJson(response));
     } on DioException catch (e) {
-      log('In Dio Exception : ${e.response!.data['message']}');
+    
       return left(Failure.formJson(e.response?.data['message'] ?? e.message));
       //     return left(Failure.formJson(e));
     } catch (e) {
-      log('General Exception : $e');
+    
       return left(Failure(e.toString()));
     }
   }

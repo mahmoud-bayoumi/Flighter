@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -28,10 +27,10 @@ class DeleteProfilePhotoRepoImpl implements DeleteProfilePhotoRepo {
       }
       return right(response['message']);
     } on DioException catch (e) {
-      log('Dio Exception : ${e.response!.data['message']}');
+   
       return left(Failure.formJson(e.response!.data['message']));
     } catch (e) {
-      log('General Exception : ${e.toString()}');
+
       return left(Failure(e.toString()));
     }
   }

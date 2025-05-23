@@ -31,6 +31,7 @@ class HotDealsListView extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (index == images.length - 1) {
+                    BlocProvider.of<GetOfferCubit>(context).percentage = 0;
                     BlocProvider.of<GetOfferCubit>(context).getOffers();
                   } else {
                     BlocProvider.of<GetOfferCubit>(context).percentage =

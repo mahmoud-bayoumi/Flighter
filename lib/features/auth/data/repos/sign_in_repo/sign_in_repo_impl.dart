@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/api_service.dart';
@@ -18,15 +18,15 @@ class SignInRepoImpl implements SignInRepo {
           endPoint: 'login', data: {'email': email, 'password': password});
 
       if (data['message'] == "Email or Password is incorrect!") {
-        log('DioException: ${data['message']}');
+   
         return left(Failure(data['message']));
       }
-      log(data.toString());
+    
       return right(SignInModel.fromJson(data));
     } on DioException catch (e) {
       return left(Failure(e.response!.data['message']));
     } catch (e) {
-      log('General exception: $e');
+    
       return left(Failure('Server Error'));
     }
   }

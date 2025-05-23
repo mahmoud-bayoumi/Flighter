@@ -19,10 +19,10 @@ class ApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("Request Error: $e");
+
       return e.response?.data ?? {};
     } catch (e) {
-      log("General Error in post: $e");
+
       return {};
     }
   }
