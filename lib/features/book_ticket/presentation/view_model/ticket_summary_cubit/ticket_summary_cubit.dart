@@ -11,6 +11,7 @@ class TicketSummaryCubit extends Cubit<TicketSummaryState> {
   int ticketCounter = 0;
   late int noOfTravelers = 1;
   bool isFromOffer = false;
+  String offerClassType = '';
   bool confirmIsClicked = false;
   String? depatureDate;
   List<String> selectedSeats = [];
