@@ -36,4 +36,6 @@ class GetOfferCubit extends Cubit<GetOfferState> {
       },
     );
   }
+
+ 
 }

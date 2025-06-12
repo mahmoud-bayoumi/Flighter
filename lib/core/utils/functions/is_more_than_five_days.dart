@@ -1,8 +1,9 @@
-bool isMoreThan5DaysFromNow(String dateString) {
-  final inputDate = DateTime.parse(dateString);
-  final now = DateTime.now();
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/model/time_model.dart';
 
-  // Strip time to compare only the date part
+
+bool isMoreThan5DaysFromNow(String dateString , TimeModel now) {
+  final inputDate = DateTime.parse(dateString);
+   // Strip time to compare only the date part
   final inputDateOnly =
       DateTime(inputDate.year, inputDate.month, inputDate.day);
   final todayOnly = DateTime(now.year, now.month, now.day);

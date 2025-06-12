@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
@@ -18,6 +17,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../constants.dart';
+import '../../../../../../core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import '../../../../../../core/utils/functions/is_more_than_five_days.dart';
 import '../../../../../payment/presentation/view_model/pay_later_booking_cubit/pay_later_booking_cubit.dart';
 
@@ -39,12 +39,17 @@ class FlightDetailesViewBody extends StatelessWidget {
           child: const FlightDetailesCard(),
         ),
         ((BlocProvider.of<TicketSummaryCubit>(context).isFromOffer
-                ? isMoreThan5DaysFromNow(
-                    BlocProvider.of<TicketSummaryCubit>(context).depatureDate ?? '')
-                : isMoreThan5DaysFromNow(
-                    BlocProvider.of<SearchCubit>(context)
-                        .startDateController
-                        .text)) == true)
+                    ? isMoreThan5DaysFromNow(
+                        BlocProvider.of<TicketSummaryCubit>(context)
+                                .depatureDate ??
+                            '',
+                        BlocProvider.of<GetTimeCubit>(context).timeModel!)
+                    : isMoreThan5DaysFromNow(
+                        BlocProvider.of<SearchCubit>(context)
+                            .startDateController
+                            .text,
+                        BlocProvider.of<GetTimeCubit>(context).timeModel!)) ==
+                true)
             ? Positioned(
                 top: 730.h,
                 left: 25.w,
@@ -114,7 +119,8 @@ class FlightDetailesViewBody extends StatelessWidget {
                               .depatureDate!
                           : BlocProvider.of<SearchCubit>(context)
                               .startDateController
-                              .text) ==
+                              .text,
+                      BlocProvider.of<GetTimeCubit>(context).timeModel!) ==
                   false)
               ? MediaQuery.sizeOf(context).width / 3.2
               : 210.w,
@@ -158,7 +164,7 @@ class FlightDetailesViewBody extends StatelessWidget {
       await BlocProvider.of<GetSeatsCubit>(context).getSeats();
       seatsAreBookedAlready(context);
     } else {
-       bool paid = await PaymentManager.makePayment(
+      bool paid = await PaymentManager.makePayment(
           BlocProvider.of<PaymentCubit>(context).noOfTravelers *
               BlocProvider.of<PaymentCubit>(context).amountToPay,
           currency == 'EGP' ? "EGP" : "USD");

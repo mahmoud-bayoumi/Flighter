@@ -25,9 +25,8 @@ class PayLaterRepoImpl implements PayLaterRepo {
       });
       if (response['success']) {
         return right(PayLaterModel.fromJson(response));
-      } 
-        return left(Failure(response['message']));
-      
+      }
+      return left(Failure(response['message']));
     } catch (e) {
       return left(Failure(e.toString()));
     }

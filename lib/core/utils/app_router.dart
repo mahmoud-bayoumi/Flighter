@@ -9,14 +9,19 @@ import 'package:flighter/features/cancel_your_ticket/presentation/views/cancel_y
 import 'package:flighter/features/home/presentation/views/bottom_navigation_bar_view.dart';
 import 'package:flighter/features/book_ticket/presentation/views/choose_seat_view.dart';
 import 'package:flighter/features/home/presentation/views/search_flight_view.dart';
+import 'package:flighter/features/integration/eventk_integration/presentation/views/events_view.dart';
+import 'package:flighter/features/integration/hotel_integration/hotels_view.dart';
 import 'package:flighter/features/payment/presentation/views/boarding_pass_view.dart';
 import 'package:flighter/features/profile/presentation/views/about_us_view.dart';
 import 'package:flighter/features/profile/presentation/views/change_password.dart';
 import 'package:flighter/features/profile/presentation/views/delete_account_view.dart';
 import 'package:flighter/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flighter/features/splash/presentation/views/splash_view.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/integration/eventk_integration/data/models/event_model/event_model.dart';
+import '../../features/integration/eventk_integration/presentation/views/events_details_view.dart';
 import '../../features/profile/presentation/views/privacy_and_policy.dart';
 
 abstract class AppRouter {
@@ -44,6 +49,11 @@ abstract class AppRouter {
   static const String kPrivacyAndPolicy = '/PrivacyAndPolicy';
 
   static const String kDeleteAccount = '/DeleteAccount';
+
+  static const String kEvents = '/Events';
+  static const String kEventDeatils = '/EventDetails';
+  static const String kHotels = '/Hotels';
+  static const String kRefersh = '/refresh';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -141,6 +151,27 @@ abstract class AppRouter {
       GoRoute(
         path: kDeleteAccount,
         builder: (context, state) => const DeleteAccountView(),
+      ),
+      GoRoute(
+        path: kEvents,
+        builder: (context, state) => const EventsView(),
+      ),
+      GoRoute(
+        path: kEventDeatils,
+        builder: (context, state) {
+          final eventData = state.extra as EventModel;
+          return EventDetailsView(event: eventData);
+        },
+      ),
+      GoRoute(
+        path: kHotels,
+        builder: (context, state) => HotelsListView(
+          toCountry: state.extra as String,
+        ),
+      ),
+      GoRoute(
+        path: kRefersh,
+        builder: (context, state) => const SizedBox.shrink(),
       ),
     ],
   );

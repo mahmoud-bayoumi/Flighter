@@ -1,6 +1,10 @@
 sealed class GetOfferState {}
 
-final class GetOfferInitial extends GetOfferState {}
+class GetOfferInitial extends GetOfferState {
+  final String? forceId;
+  GetOfferInitial({this.forceId});
+}
+
 
 final class GetOfferSuccess extends GetOfferState {}
 

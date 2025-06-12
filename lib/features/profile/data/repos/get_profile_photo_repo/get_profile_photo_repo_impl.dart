@@ -19,11 +19,10 @@ class GetProfilePhotoRepoImpl implements GetProfilePhotoRepo {
       final token = await _secureStorage.read(key: tokenKey);
       var response = await apiService.getRequestForImage(
           endPoint: endPoint, token: token ?? '');
-    
+
       // If the response is a List<int> (could be image or error message), attempt to decode
       if (response is List<int>) {
         String decodedResponse = String.fromCharCodes(response);
-   
 
         try {
           // Try to decode the response as JSON
@@ -47,10 +46,8 @@ class GetProfilePhotoRepoImpl implements GetProfilePhotoRepo {
       // If none of the above conditions match, return a generic error
       return left(Failure('Unexpected response format'));
     } on DioException catch (e) {
-     
       return left(Failure(e.response!.data));
     } catch (e) {
-  
       return left(Failure(e.toString()));
     }
   }

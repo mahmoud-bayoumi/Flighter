@@ -2,6 +2,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/repo/time_repo.dart';
 import 'package:flighter/core/utils/stripe_keys.dart';
 import 'package:flighter/features/book_ticket/data/repos/get_seats_repo/get_seats_repo_impl.dart';
 import 'package:flighter/features/book_ticket/data/repos/ticket_summary_repo/ticket_summary_repo_impl.dart';
@@ -14,6 +15,9 @@ import 'package:flighter/features/home/presentation/view_model/airlines_cubit/ai
 import 'package:flighter/features/home/presentation/view_model/from_countries_cubit/from_countries_cubit_cubit.dart';
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
+import 'package:flighter/features/integration/eventk_integration/data/repos/get_events_repo_impl.dart';
+import 'package:flighter/features/integration/eventk_integration/presentation/view_model/get_event_data_cubit/get_event_data_cubit.dart';
+import 'package:flighter/features/integration/eventk_integration/presentation/view_model/get_events_cubit/get_events_cubit.dart';
 import 'package:flighter/features/offers/data/repos/get_offer_repo/get_offers_repo_impl.dart';
 import 'package:flighter/features/offers/presentation/view_model/get_offer_cubit/get_offer_cubit.dart';
 import 'package:flighter/features/payment/data/repos/pay_later_history/pay_later_repo_impl.dart';
@@ -31,6 +35,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import 'core/utils/service_locator.dart';
 import 'features/home/data/repos/from_countries_repo/from_repo_impl.dart';
 import 'features/home/data/repos/search_repo/search_repo_impl.dart';
@@ -116,7 +121,16 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   PayLaterBookingCubit(getIt.get<PayLaterRepoImpl>())),
           BlocProvider(
-              create: (context) => RefundCubit(getIt.get<RefundRepoImpl>()))
+              create: (context) => RefundCubit(getIt.get<RefundRepoImpl>())),
+          BlocProvider(
+              create: (context) =>
+                  GetEventsCubit(getIt.get<GetEventsRepoImpl>())),
+          BlocProvider(
+              create: (context) =>
+                  GetEventDataCubit(getIt.get<GetEventsRepoImpl>())),
+                    BlocProvider(
+              create: (context) =>
+                  GetTimeCubit(getIt.get<TimeRepo>())),
         ],
         child: MaterialApp.router(
           builder: EasyLoading.init(),

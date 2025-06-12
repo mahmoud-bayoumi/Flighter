@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-
 void successDialog(BuildContext context, bool navgToSplash) {
   showDialog(
     context: context,
@@ -322,14 +321,13 @@ AwesomeDialog seatsAreBookedAlready(BuildContext context) {
     buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
     btnOkColor: Colors.red,
     titleTextStyle: Styles.textStyle24,
-  descTextStyle: Styles.textStyle16.copyWith(
+    descTextStyle: Styles.textStyle16.copyWith(
       color: kGreyColor,
     ),
     padding: const EdgeInsets.all(10),
     btnOk: CustomButton(
       text: 'Continue',
-      onPressed: ()  {
-       
+      onPressed: () {
         Navigator.pop(context);
         Navigator.pop(context);
         // GoRouter.of(context).pop();

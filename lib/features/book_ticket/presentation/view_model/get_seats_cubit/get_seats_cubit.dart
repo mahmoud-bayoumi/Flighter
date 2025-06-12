@@ -1,4 +1,3 @@
-
 import 'package:flighter/features/book_ticket/data/models/seats_model/seats_model.dart';
 import 'package:flighter/features/book_ticket/data/repos/get_seats_repo/get_seats_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +14,6 @@ class GetSeatsCubit extends Cubit<GetSeatsState> {
     var response = await getSeatsRepo.getSeats(ticketId: ticketId);
     response.fold(
       (l) {
-
         emit(GetSeatsFailure(errMessage: l.errMessage));
       },
       (r) {

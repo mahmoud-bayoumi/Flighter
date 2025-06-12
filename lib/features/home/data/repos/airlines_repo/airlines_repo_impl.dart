@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
 import 'package:flighter/features/home/data/models/airline.dart';
@@ -26,7 +25,7 @@ class AirlinesRepoImpl implements AirlinesRepo {
         for (var airline in response) {
           airlines.add(Airline.fromJson(airline));
         }
-          return right(airlines);
+        return right(airlines);
       }
     } catch (e) {
       return left(Failure(e.toString()));

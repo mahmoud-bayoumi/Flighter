@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
@@ -29,7 +28,6 @@ class BookingsRepoImpl implements BookingsRepo {
         return left(Failure.formJson(response['message']));
       }
     } catch (e) {
-
       return left(Failure(e.toString()));
     }
   }

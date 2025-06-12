@@ -26,12 +26,11 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
         if (state is ChangePasswordFailure) {
           EasyLoading.dismiss();
           errorDialog(context, state.errMessage);
-          } else if (state is ChangePasswordLoading) {
-   
+        } else if (state is ChangePasswordLoading) {
           EasyLoading.show(status: 'Loading...');
         } else if (state is ChangePasswordSuccess) {
           EasyLoading.dismiss();
-  
+
           successDialog(context, false);
         }
       },

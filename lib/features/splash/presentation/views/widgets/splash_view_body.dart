@@ -2,6 +2,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import 'package:flighter/features/bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/airlines_cubit/airlines_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/to_counties_cubit/to_countries_cubit_dart_cubit.dart';
@@ -131,6 +132,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
       () async {
         if (await _secureStorageService.getWithKey(tokenKey) != null) {
           await BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
+          await BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
+
           BlocProvider.of<ToCountriesCubit>(context).getToCountries();
           BlocProvider.of<AirlinesCubit>(context).getAirlines();
           BlocProvider.of<GetOfferCubit>(context).getOffers();

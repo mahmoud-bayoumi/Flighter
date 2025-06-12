@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:flighter/features/payment/data/models/pay_later_model.dart';
 import 'package:flighter/features/payment/data/repos/pay_later_history/pay_later_repo.dart';
@@ -14,13 +14,11 @@ class PayLaterBookingCubit extends Cubit<PayLaterBookingState> {
   Future<void> payLaterBooking() async {
     emit(PayLaterBookingLoading());
 
-
     var response = await payLaterRepo.payBookgingLater(
         bookingId: bookingId, paymentIntentId: paymentIntentId, amount: amount);
     response.fold((error) {
       emit(PayLaterBookingFailure(errMessage: error.errMessage));
     }, (r) {
-      log('pay DOBNDDDDDDDDDDDDDDDDDDDDDDDD');
       payLaterModel = r;
       emit(PayLaterBookingSuccess());
     });

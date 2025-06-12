@@ -22,7 +22,6 @@ class VerifyResetPassCodeRepoImpl implements VerifyResetPassCodeRepo {
 
       return right(VerifyResetPassCodeModel.fromJson(response));
     } on DioException catch (e) {
-   
       return left(Failure.formJson(e));
     } catch (e) {
       return left(Failure(e.toString()));

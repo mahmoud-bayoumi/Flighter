@@ -1,4 +1,3 @@
-
 import 'package:flighter/features/home/data/models/airline.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_cubit.dart';
 import 'package:flighter/features/home/presentation/view_model/search_cubit/search_state.dart';
@@ -74,7 +73,7 @@ class SortingRow extends StatelessWidget {
                         !BlocProvider.of<SearchCubit>(context).airlinesFilter;
 
                     showFiltersModal(context, stringBoolMap);
-        },
+                  },
                 ),
                 SizedBox(
                   width: 10.w,

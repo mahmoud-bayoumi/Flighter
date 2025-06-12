@@ -19,7 +19,7 @@ class BotViewBody extends StatefulWidget {
 class _BotViewBodyState extends State<BotViewBody> {
   final TextEditingController _userMessage = TextEditingController();
 
-  static const apiKey =flighterAssistantApiKey; 
+  static const apiKey = flighterAssistantApiKey;
 
   final model =
       GenerativeModel(model: 'gemini-1.5-flash-latest', apiKey: apiKey);
@@ -134,8 +134,7 @@ This action is permanent, so please be sure before proceeding.
 
         botResponse = response.text ?? "Sorry, I couldn't find an answer.";
       } catch (e) {
-        botResponse =
-            "Sorry, I couldn't answer right now.\nTry again later!!";
+        botResponse = "Sorry, I couldn't answer right now.\nTry again later!!";
       }
     }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/features/bookings/presentation/views/bookings_view_body.dart';
 import 'package:flighter/features/flighter_assistant_bot/views/bot_view.dart';
@@ -73,6 +75,7 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
                 color: kPrimaryColor,
                 child: BottomNavigationBar(
                   onTap: (value) {
+                    log(value.toString());
                     setState(() {
                       currentIndex = value;
                     });

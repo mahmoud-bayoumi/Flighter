@@ -1,5 +1,3 @@
-
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/api_service.dart';
@@ -27,17 +25,14 @@ class SignUpRepoImpl implements SignUpRepo {
       });
 
       if (response['message'] == "Invalid or expired verification request.") {
-    
         return left(Failure(response['message']));
       }
       // Handle generic message error
       if (response['message'] == "Email is already registered!") {
-     
         return left(Failure(response['message']));
       }
       if (response['message'] ==
           "Password is not strong enough: Passwords must be at least 6 characters.") {
-  
         return left(Failure(response['message']));
       }
 
@@ -45,13 +40,11 @@ class SignUpRepoImpl implements SignUpRepo {
       if (response['errors'] != null) {
         // Handle invalid email error
         if (response['errors']['Email']?[0] == "Invalid Email") {
-       
           return left(Failure(response['errors']['Email'][0]));
         }
         // Handle confirm password mismatch error
         if (response['errors']['ConfirmPassword']?[0] ==
             "Passwords do not match. Please try again") {
-        
           return left(Failure(response['errors']['ConfirmPassword'][0]));
         }
       }
@@ -63,10 +56,9 @@ class SignUpRepoImpl implements SignUpRepo {
       final errorData = e.response?.data;
       final errorMessage =
           errorData?['errors']?['Email']?[0] ?? 'An unknown error occurred.';
-   
+
       return left(Failure(errorMessage));
     } catch (e) {
-
       return left(Failure('An unexpected error occurred.'));
     }
   }

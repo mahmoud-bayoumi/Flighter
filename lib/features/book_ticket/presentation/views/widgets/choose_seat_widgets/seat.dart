@@ -1,5 +1,3 @@
-
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/ticket_summary_cubit/ticket_summary_cubit.dart';
@@ -70,7 +68,7 @@ class _SeatState extends State<Seat> {
                       textColor = Colors.black;
                       cubit.ticketCounter--;
                       cubit.selectedSeats.remove(widget.seatName);
-                     } else {
+                    } else {
                       // Optional feedback (when user tries to select more than allowed)
 
                       showSnackBar(context,

@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:flighter/core/utils/failure.dart';
 import 'package:flighter/features/payment/data/models/pay_now_model.dart';
@@ -12,27 +11,25 @@ class PayNowRepoImpl implements PayRepo {
 
   PayNowRepoImpl({required this.payApiService});
   @override
-  Future<Either<Failure, PayNowModel>> payNow(
-      {required String userId,
-      required int ticketId,
-      required List<String> seatsId,
-      bool isPayNow = true,
-   
-   }) async {
+  Future<Either<Failure, PayNowModel>> payNow({
+    required String userId,
+    required int ticketId,
+    required List<String> seatsId,
+    bool isPayNow = true,
+  }) async {
     try {
       var response = await payApiService.post(endPoint: endPoint, data: {
         "userId": userId,
         "ticketId": ticketId,
         "seatsId": seatsId,
         "payNow": isPayNow,
-      
       });
       if (response['success']) {
-    return right(PayNowModel.fromJson(response));
+        return right(PayNowModel.fromJson(response));
       } else {
         if (response["message"] ==
             "One or more selected seats are already booked") {
-              return right(PayNowModel.fromJson(response));
+          return right(PayNowModel.fromJson(response));
         }
       }
 

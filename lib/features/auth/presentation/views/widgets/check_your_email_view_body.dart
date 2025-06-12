@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
@@ -18,6 +16,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_cubit.dart';
 import '../../../../../core/utils/base_cubit/connectivity_cubit/connectivity_state.dart';
+import '../../../../../core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import '../../../../../core/utils/functions/show_snack_bar.dart';
 import '../../../../../core/widgets/no_internet_connect.dart';
 import '../../../../bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
@@ -46,7 +45,7 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        }  else {
+        } else {
           var cubitData = context.read<VerifyEmailCubit>();
           cubitData.email = widget.email;
           return BlocConsumer<VerifyEmailCubit, VerifyEmailState>(
@@ -55,21 +54,21 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                 EasyLoading.dismiss();
                 await BlocProvider.of<FromCountriesCubit>(context)
                     .getFromCountries();
-                 BlocProvider.of<ToCountriesCubit>(context)
-                    .getToCountries();
+                BlocProvider.of<ToCountriesCubit>(context).getToCountries();
                 BlocProvider.of<GetBookingsCubit>(context).userId =
                     BlocProvider.of<VerifyEmailCubit>(context)
                         .verifyModel
                         .message!
                         .userId!;
-                 BlocProvider.of<GetBookingsCubit>(context).getBookings();
+                BlocProvider.of<GetBookingsCubit>(context).getBookings();
                 BlocProvider.of<PaymentCubit>(context).userId =
                     BlocProvider.of<VerifyEmailCubit>(context)
                         .verifyModel
                         .message!
                         .userId!;
-                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
-                 BlocProvider.of<GetOfferCubit>(context).getOffers();
+                BlocProvider.of<AirlinesCubit>(context).getAirlines();
+                BlocProvider.of<GetOfferCubit>(context).getOffers();
+              await  BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
 
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is VerifyEmailFailure) {
