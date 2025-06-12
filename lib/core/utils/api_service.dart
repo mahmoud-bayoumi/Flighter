@@ -19,10 +19,8 @@ class ApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }

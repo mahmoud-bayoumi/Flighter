@@ -21,6 +21,7 @@ class HomeHotDealsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       itemCount: images.length,
@@ -32,7 +33,7 @@ class HomeHotDealsListView extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: GestureDetector(
-                onTap: () {
+                onTap: () async {
                   if (index == images.length - 1) {
                     BlocProvider.of<GetOfferCubit>(context).getOffers();
                   } else {
@@ -41,10 +42,13 @@ class HomeHotDealsListView extends StatelessWidget {
                     BlocProvider.of<GetOfferCubit>(context)
                         .getOffersWithPercentage(percentage: (index + 1) * 10);
                   }
+                  // Force re-navigation even if already on the route
+                  context.go('/refresh');
+                  await Future.delayed(const Duration(milliseconds: 50));
                   context.go(AppRouter.kOffersNavigation);
                 },
                 child: Image.asset(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   images[index],
                 ),
               ),

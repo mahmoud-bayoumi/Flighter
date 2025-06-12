@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 class FlightApiService {
@@ -18,10 +17,8 @@ class FlightApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }
@@ -55,9 +52,8 @@ class FlightApiService {
       );
       return response.data;
     } on DioException catch (e) {
-       return e.response?.data ?? {};
+      return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }
@@ -78,7 +74,6 @@ class FlightApiService {
     } on DioException catch (e) {
       return e.response?.data ?? {};
     } catch (e) {
-     
       return {};
     }
   }
@@ -102,10 +97,8 @@ class FlightApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }

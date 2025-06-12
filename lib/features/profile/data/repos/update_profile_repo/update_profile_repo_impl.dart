@@ -59,7 +59,7 @@ class UpdateProfileRepoImpl implements UpdateProfileRepo {
         token: token,
         data: formData,
       );
-   
+
       // Check for errors in the response
       if (response['errors'] != null) {
         final errorMessages = response['errors']
@@ -71,15 +71,14 @@ class UpdateProfileRepoImpl implements UpdateProfileRepo {
       }
 
       if (response['message'] != null) {
-         return right(ProfileModel.fromJosn(response));
+        return right(ProfileModel.fromJosn(response));
       }
 
       return right(ProfileModel.fromJosn(response));
     } on DioException catch (e) {
-       return left(
+      return left(
           Failure.formJson(e.response?.data['message'] ?? 'Unknown error'));
     } catch (e) {
-    
       return left(Failure('General Exception: ${e.toString()}'));
     }
   }

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import 'package:flighter/core/utils/functions/is_within_five_days.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/view_model/get_seats_cubit/get_seats_cubit.dart';
@@ -111,7 +112,7 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
                 style: Styles.textStyle45.copyWith(color: Colors.black),
               ),
             ),
-            isWithinFiveDays(bookingData.bookingDate!)
+            isWithinFiveDays(bookingData.bookingDate! , BlocProvider.of<GetTimeCubit>(context).timeModel!)
                 ? Positioned(
                     top: 580.h,
                     left: 75.w,
@@ -176,11 +177,10 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
       BlocProvider.of<PayLaterBookingCubit>(context).bookingId =
           bookingData.bookingid!;
 
-      BlocProvider.of<PayLaterBookingCubit>(context).amount =
-       currency == 'EGP'
-                ? '${BlocProvider.of<PaymentCubit>(context).amountToPay}E'
-                : '${BlocProvider.of<PaymentCubit>(context).amountToPay}U';
-     //     BlocProvider.of<PaymentCubit>(context).amountToPay.toString();
+      BlocProvider.of<PayLaterBookingCubit>(context).amount = currency == 'EGP'
+          ? '${BlocProvider.of<PaymentCubit>(context).amountToPay}E'
+          : '${BlocProvider.of<PaymentCubit>(context).amountToPay}U';
+      //     BlocProvider.of<PaymentCubit>(context).amountToPay.toString();
 
       BlocProvider.of<PaymentCubit>(context).clickedForPay = false;
       BlocProvider.of<PayLaterBookingCubit>(context).payLaterBooking();

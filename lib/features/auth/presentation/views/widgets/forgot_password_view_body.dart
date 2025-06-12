@@ -1,4 +1,3 @@
-
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
@@ -30,7 +29,7 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        }  else {
+        } else {
           var cubitData = context.read<SendResetPasswordCodeCubit>();
           return BlocConsumer<SendResetPasswordCodeCubit,
               SendResetPasswordCodeCubitState>(
@@ -40,9 +39,9 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
               } else if (state is SendResetPasswordCodeCubitFailure) {
                 EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
-               } else if (state is SendResetPasswordCodeCubitSent) {
+              } else if (state is SendResetPasswordCodeCubitSent) {
                 EasyLoading.dismiss();
-                   GoRouter.of(context).push(
+                GoRouter.of(context).push(
                     AppRouter.kCheckYourEmailViewForForgetPass,
                     extra: cubitData.emailController.text);
               }

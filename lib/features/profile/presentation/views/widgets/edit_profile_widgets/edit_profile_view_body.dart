@@ -93,7 +93,7 @@ class EditProfileViewBody extends StatelessWidget {
                       child: CustomButton(
                         text: 'Save Changes',
                         onPressed: () async {
-                           updateCubit.updateProfile();
+                          updateCubit.updateProfile();
 
                           context
                               .read<GetProfilePhotoCubit>()

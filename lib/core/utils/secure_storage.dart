@@ -1,4 +1,3 @@
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
@@ -10,7 +9,7 @@ class SecureStorageService {
   Future<void> saveToken(String key, String token) async {
     try {
       await _storage.write(key: key, value: token);
-    // ignore: empty_catches
+      // ignore: empty_catches
     } catch (e) {}
   }
 

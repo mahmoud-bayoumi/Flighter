@@ -17,10 +17,8 @@ class PayApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }
@@ -37,10 +35,8 @@ class PayApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? [];
     } catch (e) {
-
       return [];
     }
   }
@@ -56,10 +52,8 @@ class PayApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }
@@ -78,10 +72,8 @@ class PayApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }
@@ -105,10 +97,8 @@ class PayApiService {
       );
       return response.data;
     } on DioException catch (e) {
-
       return e.response?.data ?? {};
     } catch (e) {
-
       return {};
     }
   }

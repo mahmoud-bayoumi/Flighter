@@ -25,11 +25,9 @@ class VerifyResetPassCodeCubit extends Cubit<VerifyResetPassCodeState> {
 
     response.fold(
       (failure) {
-
         emit(VerifyResetPassCodeFailure(errMessage: failure.errMessage));
       },
       (verifyModel) {
-
         emit(VerifyResetPassCodeSuccess());
       },
     );

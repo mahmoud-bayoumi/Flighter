@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/functions/show_snack_bar.dart';
@@ -52,26 +51,49 @@ class ChooseSeatViewBody extends StatelessWidget {
             SizedBox(
               height: 30.h,
             ),
-            BlocProvider.of<SearchCubit>(context).classTypeIdController.text ==
-                    '1'
-                ? BusinessListVIew(
-                    avaiableSeats: seatsModel.data!.seats!
-                        .where((seat) => seat.isBooked == false)
-                        .map<String>((seat) => seat.seatName as String)
-                        .toList(),
-                    resevedSeats: seatsModel.data!.seats!
-                        .where((seat) => seat.isBooked == true)
-                        .map<String>((seat) => seat.seatName as String)
-                        .toList())
-                : EconomyListView(
-                    avaiableSeats: seatsModel.data!.seats!
-                        .where((seat) => seat.isBooked == false)
-                        .map<String>((seat) => seat.seatName as String)
-                        .toList(),
-                    resevedSeats: seatsModel.data!.seats!
-                        .where((seat) => seat.isBooked == true)
-                        .map<String>((seat) => seat.seatName as String)
-                        .toList()),
+            BlocProvider.of<TicketSummaryCubit>(context).isFromOffer
+                ? BlocProvider.of<TicketSummaryCubit>(context).offerClassType ==
+                        'Business'
+                    ? BusinessListVIew(
+                        avaiableSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == false)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList(),
+                        resevedSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == true)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList())
+                    : EconomyListView(
+                        avaiableSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == false)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList(),
+                        resevedSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == true)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList())
+                : BlocProvider.of<SearchCubit>(context)
+                            .classTypeIdController
+                            .text ==
+                        '1'
+                    ? BusinessListVIew(
+                        avaiableSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == false)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList(),
+                        resevedSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == true)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList())
+                    : EconomyListView(
+                        avaiableSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == false)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList(),
+                        resevedSeats: seatsModel.data!.seats!
+                            .where((seat) => seat.isBooked == true)
+                            .map<String>((seat) => seat.seatName as String)
+                            .toList()),
             SizedBox(
               height: 60.h,
             ),
@@ -142,7 +164,7 @@ class ChooseSeatViewBody extends StatelessWidget {
                                   }
                                 }
                               }
-                    
+
                               GoRouter.of(context)
                                   .push(AppRouter.kFlightDetailes);
                             } else {
@@ -206,7 +228,6 @@ class ChooseSeatViewBody extends StatelessWidget {
                                 }
                               }
 
-                         
                               GoRouter.of(context)
                                   .push(AppRouter.kFlightDetailes);
                             } else {

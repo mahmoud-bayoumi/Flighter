@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/failure.dart';
@@ -48,9 +47,9 @@ class GetOffersRepoImpl implements GetOfferRepo {
       if (response['success']) {
         return right(OfferModel.fromJson(response));
       } else {
-          if (response["message"] ==
+        if (response["message"] ==
             "No available tickets found with $precentage% offer.") {
-             return right(OfferModel.fromJson(response));
+          return right(OfferModel.fromJson(response));
         }
         return left(Failure(response['message']));
       }

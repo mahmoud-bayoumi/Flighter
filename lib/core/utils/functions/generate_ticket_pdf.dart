@@ -75,7 +75,7 @@ Future<void> generateTicketPDF(
   String userId = (await const SecureStorageService().getWithKey(userIdKey))!;
 
   final qrDataString =
-      jsonEncode(base64Encode(utf8.encode(userId + ticketCode + guestName)));
+      jsonEncode(base64Encode(utf8.encode('$userId,$ticketCode,$guestName')));
 
   final qrImageData = await generateQrCodeImage(qrDataString);
 

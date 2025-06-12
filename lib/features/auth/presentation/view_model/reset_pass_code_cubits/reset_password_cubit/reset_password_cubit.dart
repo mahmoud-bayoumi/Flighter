@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,11 +21,9 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         confirmNewPassword: confirmNewPasswordController.text);
     return response.fold(
       (failure) {
-
         emit(ResetPasswordFailure(errMessage: failure.errMessage));
       },
       (resetPassModel) {
-      
         emit(ResetPasswordSuccess());
       },
     );

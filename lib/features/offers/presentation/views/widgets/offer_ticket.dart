@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';
@@ -29,6 +31,8 @@ class OfferTicketWidget extends StatelessWidget {
         BlocProvider.of<TicketSummaryCubit>(context).isFromOffer = true;
         BlocProvider.of<TicketSummaryCubit>(context).ticketId =
             ticketModel.ticketId!;
+        BlocProvider.of<TicketSummaryCubit>(context).offerClassType =
+            ticketModel.classType!;
         BlocProvider.of<TicketSummaryCubit>(context).depatureDate =
             ticketModel.departureDate;
         BlocProvider.of<PaymentCubit>(context).amountToPay =

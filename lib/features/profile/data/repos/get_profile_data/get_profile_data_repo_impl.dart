@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/constants.dart';
@@ -21,16 +20,10 @@ class GetProfileDataRepoImpl implements GetProfileDataRepo {
 
       var response = await _apiService.get(endPoint: endPoint, token: token!);
 
-
-
       return right(ProfileDataModel.fromJson(response));
     } on DioException catch (e) {
-
-
       return left(Failure(e.response!.data));
     } catch (e) {
-
-
       return left(Failure(e.toString()));
     }
   }

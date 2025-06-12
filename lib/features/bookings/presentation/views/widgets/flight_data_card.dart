@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flighter/constants.dart';
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import 'package:flighter/core/utils/functions/capitalize_word.dart';
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
 import 'package:flighter/core/utils/functions/convert12_hours_format.dart';
@@ -11,11 +12,15 @@ import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/from_to_country_second.dart';
 import 'package:flighter/features/book_ticket/presentation/views/widgets/flight_detailes_widgets/unabled_text_field.dart';
 import 'package:flighter/features/bookings/presentation/views/widgets/cancel_ticket_text.dart';
+import 'package:flighter/features/integration/eventk_integration/presentation/view_model/get_events_cubit/get_events_cubit.dart';
+import 'package:flighter/features/integration/eventk_integration/presentation/view_model/get_events_cubit/get_events_state.dart';
 import 'package:flighter/features/payment/data/payment_manager.dart';
 import 'package:flighter/features/payment/presentation/view_model/refund_cubit/refund_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/assets_data.dart';
 import '../../../../../core/utils/functions/dialogs_type.dart';
 import '../../../../../core/utils/functions/generate_ticket_pdf.dart';
@@ -101,9 +106,16 @@ class FlightDataCardForBookings extends StatelessWidget {
                                       ? AssetsData.kEgypt
                                       : AssetsData.kKuwait);
                     },
-                    icon: !(isWithin2Days(bookingData.bookingDate!) &&
-                            isMoreThan5DaysFromNow(getDateOnly(
-                                bookingData.departureDate!.toString())))
+                    icon: !(isWithin2Days(
+                                bookingData.bookingDate!,
+                                BlocProvider.of<GetTimeCubit>(context)
+                                    .timeModel!) &&
+                            isMoreThan5DaysFromNow(
+                                getDateOnly(
+                                  bookingData.departureDate!.toString(),
+                                ),
+                                BlocProvider.of<GetTimeCubit>(context)
+                                    .timeModel!))
                         ? const Icon(
                             Icons.download,
                             color: kPrimaryColor,
@@ -183,9 +195,11 @@ class FlightDataCardForBookings extends StatelessWidget {
                 style: Styles.textStyle45.copyWith(color: Colors.black),
               ),
             ),
-            isWithin2Days(bookingData.bookingDate!) &&
+            isWithin2Days(bookingData.bookingDate!,
+                        BlocProvider.of<GetTimeCubit>(context).timeModel!) &&
                     isMoreThan5DaysFromNow(
-                        getDateOnly(bookingData.departureDate!.toString()))
+                        getDateOnly(bookingData.departureDate!.toString()),
+                        BlocProvider.of<GetTimeCubit>(context).timeModel!)
                 ? Positioned(
                     top: 580.h,
                     left: 75.w,
@@ -243,9 +257,8 @@ class FlightDataCardForBookings extends StatelessWidget {
                                       amount: PaymentManager.netAmount);
                               if (refunded) {
                                 refundDoneDialog(context);
-                               } else {
+                              } else {
                                 // After Refund the ticket will be deleted.
-
                               }
                             }
                           },
@@ -253,7 +266,93 @@ class FlightDataCardForBookings extends StatelessWidget {
                       },
                     ),
                   )
-                : const SizedBox.shrink(),
+                : Positioned(
+                    top: 580.h,
+                    left: bookingData.to == 'Egypt'
+                        ? 15.w
+                        : MediaQuery.sizeOf(context).width / 7.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Recommended :  ',
+                          style:
+                              Styles.textStyle16.copyWith(color: kPrimaryColor),
+                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: kPrimaryColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            onPressed: () {
+                              GoRouter.of(context).push(AppRouter.kHotels ,extra: bookingData.to!);
+                            },
+                            child: Text(
+                              'Hotels',
+                              style: Styles.textStyle16
+                                  .copyWith(color: Colors.white),
+                            )),
+                        SizedBox(
+                          width: 25.w,
+                        ),
+                        bookingData.to == 'Egypt'
+                            ? BlocBuilder<GetEventsCubit, GetEventsState>(
+                                builder: (context, state) {
+                                  if (state is GetEventsLoading) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  } else if (state is GetEventsFailure) {
+                                    return Text(
+                                      'Error',
+                                      style: Styles.textStyle16
+                                          .copyWith(color: Colors.red),
+                                    );
+                                  }
+                                  return ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: kPrimaryColor,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10))),
+                                      onPressed: () async {
+                                        BlocProvider.of<GetEventsCubit>(context)
+                                            .toCountry = bookingData.to!;
+                                        await BlocProvider.of<GetEventsCubit>(
+                                                context)
+                                            .getEvents();
+                                        GoRouter.of(context)
+                                            .push(AppRouter.kEvents);
+                                      },
+                                      child: Text(
+                                        'Events',
+                                        style: Styles.textStyle16
+                                            .copyWith(color: Colors.white),
+                                      ));
+                                },
+                              )
+                            : const SizedBox.shrink(),
+                        /*       GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              'Explore Hotels ',
+                              style: Styles.textStyle16
+                                  .copyWith(color: kPrimaryColor),
+                            )),
+                        SizedBox(
+                          width: 35.w,
+                        ),
+                        bookingData.to == 'Egypt'
+                            ? GestureDetector(
+                                onTap: () {},
+                                child: Text(
+                                  'Explore Events in Egypt',
+                                  style: Styles.textStyle16
+                                      .copyWith(color: kPrimaryColor),
+                                ))
+                            : const SizedBox.shrink(), */
+                      ],
+                    )),
           ],
         ),
       ),

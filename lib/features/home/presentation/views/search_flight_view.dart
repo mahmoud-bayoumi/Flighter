@@ -17,7 +17,7 @@ class SearchFlightView extends StatelessWidget {
           return const Center(
             child: NoInternetConnectionView(),
           );
-        }else {
+        } else {
           return Scaffold(
             appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.white),

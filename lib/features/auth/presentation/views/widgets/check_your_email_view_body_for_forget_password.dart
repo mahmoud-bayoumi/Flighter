@@ -1,4 +1,3 @@
-
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -48,20 +47,20 @@ class _CheckYourEmailBodyForForgetPassState
           return const Center(
             child: NoInternetConnectionView(),
           );
-        }  else {
+        } else {
           var cubitData = context.read<VerifyResetPassCodeCubit>();
           return BlocConsumer<VerifyResetPassCodeCubit,
               VerifyResetPassCodeState>(
             listener: (context, state) {
               if (state is VerifyResetPassCodeSuccess) {
                 EasyLoading.dismiss();
-                  GoRouter.of(context)
+                GoRouter.of(context)
                     .push(AppRouter.kSetNewPasswordView, extra: widget.email);
               } else if (state is VerifyResetPassCodeFailure) {
-                 EasyLoading.dismiss();
+                EasyLoading.dismiss();
                 errorDialog(context, state.errMessage);
               } else if (state is VerifyResetPassCodeLoading) {
-                  EasyLoading.show(status: 'loading...');
+                EasyLoading.show(status: 'loading...');
               }
             },
             builder: (context, state) {

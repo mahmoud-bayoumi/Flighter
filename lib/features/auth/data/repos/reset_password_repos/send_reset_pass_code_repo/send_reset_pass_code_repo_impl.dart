@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/core/utils/api_service.dart';
@@ -20,10 +19,8 @@ class SendResetPassCodeRepoImpl implements SendResetPasswordCodeRepo {
           await apiService.post(endPoint: endPoint, data: {'email': email});
       return right(SendResetPasswordModel.fromJson(response));
     } on DioException catch (e) {
-    
       return left(Failure.formJson(e));
     } catch (e) {
-  
       return left(Failure(e.toString()));
     }
   }

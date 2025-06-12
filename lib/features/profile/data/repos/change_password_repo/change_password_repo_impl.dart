@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flighter/constants.dart';
@@ -52,14 +51,11 @@ class ChangePasswordRepoImpl implements ChangePasswordRepo {
         return left(Failure.formJson(response['message']));
       }
 
-    
       return right(ChangePasswordModel.fromJson(response));
     } on DioException catch (e) {
-    
       return left(Failure.formJson(e.response?.data['message'] ?? e.message));
       //     return left(Failure.formJson(e));
     } catch (e) {
-    
       return left(Failure(e.toString()));
     }
   }

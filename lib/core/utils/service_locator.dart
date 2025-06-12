@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/repo/time_repo.dart';
+import 'package:flighter/core/utils/eventk_api_service.dart';
 import 'package:flighter/core/utils/flight_api_service.dart';
 import 'package:flighter/core/utils/offers_api_service.dart';
 import 'package:flighter/core/utils/pay_api_service.dart';
@@ -13,6 +15,7 @@ import 'package:flighter/features/home/data/repos/airlines_repo/airlines_repo_im
 import 'package:flighter/features/home/data/repos/from_countries_repo/from_repo_impl.dart';
 import 'package:flighter/features/home/data/repos/search_repo/search_repo_impl.dart';
 import 'package:flighter/features/home/data/repos/to_countries_repo/to_repo_impl.dart';
+import 'package:flighter/features/integration/eventk_integration/data/repos/get_events_repo_impl.dart';
 import 'package:flighter/features/offers/data/repos/get_offer_repo/get_offers_repo_impl.dart';
 import 'package:flighter/features/payment/data/repos/pay_later_history/pay_later_repo_impl.dart';
 import 'package:flighter/features/profile/data/repos/delete_account_repo/delete_account_repo_impl.dart';
@@ -35,6 +38,7 @@ void setupServerLocator() {
   getIt.registerSingleton<FlightApiService>(FlightApiService(Dio()));
   getIt.registerSingleton<OffersApiService>(OffersApiService(Dio()));
   getIt.registerSingleton<PayApiService>(PayApiService(Dio()));
+  getIt.registerSingleton<EventkApiService>(EventkApiService(Dio()));
   getIt.registerSingleton<SignInRepoImpl>(
       SignInRepoImpl(apiService: getIt.get<ApiService>()));
 
@@ -95,6 +99,11 @@ void setupServerLocator() {
 
   getIt.registerSingleton<PayLaterRepoImpl>(
       PayLaterRepoImpl(payApiService: getIt.get<PayApiService>()));
-        getIt.registerSingleton<RefundRepoImpl>(
+  getIt.registerSingleton<RefundRepoImpl>(
       RefundRepoImpl(payApiService: getIt.get<PayApiService>()));
+
+  getIt.registerSingleton<GetEventsRepoImpl>(
+      GetEventsRepoImpl(getIt.get<EventkApiService>()));
+
+  getIt.registerSingleton<TimeRepo>(TimeRepo(Dio()));
 }
