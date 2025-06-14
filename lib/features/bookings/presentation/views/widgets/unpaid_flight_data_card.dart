@@ -112,7 +112,8 @@ class UnPaidFlightDataCardForBookings extends StatelessWidget {
                 style: Styles.textStyle45.copyWith(color: Colors.black),
               ),
             ),
-            isWithinFiveDays(bookingData.bookingDate! , BlocProvider.of<GetTimeCubit>(context).timeModel!)
+            isWithinFiveDays(bookingData.bookingDate!,
+                    BlocProvider.of<GetTimeCubit>(context).timeModel)
                 ? Positioned(
                     top: 580.h,
                     left: 75.w,

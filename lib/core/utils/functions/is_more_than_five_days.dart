@@ -6,8 +6,7 @@ bool isMoreThan5DaysFromNow(String dateString , TimeModel now) {
    // Strip time to compare only the date part
   final inputDateOnly =
       DateTime(inputDate.year, inputDate.month, inputDate.day);
-  final todayOnly = DateTime(now.year, now.month, now.day);
-
+  final todayOnly = DateTime(now.year!, now.month!, now.day!);
   if (inputDateOnly.isBefore(todayOnly)) {
     return false; // The date is in the past
   }

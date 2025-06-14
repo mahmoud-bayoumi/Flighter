@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/features/integration/eventk_integration/data/models/event_model/about_category.dart';
 import 'package:flutter/material.dart';

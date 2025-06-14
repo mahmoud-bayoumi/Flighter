@@ -1,4 +1,4 @@
-import 'package:flighter/features/integration/eventk_integration/presentation/views/widgets/event_deatils_view_%20body.dart';
+import 'package:flighter/features/integration/eventk_integration/presentation/views/widgets/event_deatils_view_body.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/event_model/event_model.dart';

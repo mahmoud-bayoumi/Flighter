@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
 import 'package:flighter/core/utils/assets_data.dart';

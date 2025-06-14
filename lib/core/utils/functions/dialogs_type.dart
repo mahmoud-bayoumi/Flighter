@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flighter/constants.dart';
 import 'package:flighter/core/utils/app_router.dart';
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import 'package:flighter/core/utils/styles.dart';
 import 'package:flighter/core/widgets/custom_button.dart';
 import 'package:flighter/features/bookings/presentation/view_model/get_bookings_cubit/get_bookings_cubit.dart';
@@ -205,7 +209,34 @@ AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
     padding: const EdgeInsets.all(10),
     btnOk: CustomButton(
       text: 'Continue',
-      onPressed: () {
+      onPressed: () async {
+        final now = BlocProvider.of<GetTimeCubit>(context).timeModel;
+        final todayOnly = DateTime(now.year!, now.month!, now.day!);
+
+        await AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: notificationId,
+            channelKey: notChannelKey,
+            notificationLayout: NotificationLayout.BigText,
+            icon: 'resource://drawable/ic_stat_logo',
+            largeIcon: 'asset://assets/images/logo.png',
+            backgroundColor: kPrimaryColor,
+            body:
+                'You have unpaid flight bookings. Please complete your payment to confirm your reservations.',
+            wakeUpScreen: true,
+            fullScreenIntent: true,
+          ),
+          schedule: NotificationCalendar(
+            year: todayOnly.add(const Duration(days: 2)).year,
+            month: todayOnly.add(const Duration(days: 2)).month,
+            day: todayOnly.add(const Duration(days: 2)).day,
+            hour: 9, // or whatever time you want
+            minute: 0,
+            second: 0,
+            millisecond: 0,
+            repeats: true,
+          ),
+        );
         BlocProvider.of<GetBookingsCubit>(context).getBookings();
         Navigator.pop(context);
         context.go(AppRouter.kBookingsNavigation);
