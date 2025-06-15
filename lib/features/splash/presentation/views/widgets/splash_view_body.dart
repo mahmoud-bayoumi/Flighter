@@ -60,9 +60,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
         fullScreenIntent: true,
       ),
       schedule: NotificationCalendar(
-        weekday: DateTime.tuesday, // Tuesday trigger
-        hour: 10,
-        minute: 0,
+        weekday: DateTime.tuesday, // Tuesday trigger at 12:15 PM
+        hour: 12,
+        minute: 15,
         second: 0,
         millisecond: 0,
         repeats: true,

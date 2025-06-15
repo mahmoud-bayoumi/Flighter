@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 class ApiService {
@@ -44,10 +44,8 @@ class ApiService {
         return 'No profile photo available.';
       }
     } on DioException catch (e) {
-      log("Request Error: $e");
       return e.response?.data ?? 'UnExpected Error';
     } catch (e) {
-      log("General Error in post: $e");
       return 'UnExpected Error';
     }
   }
@@ -63,10 +61,8 @@ class ApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("Request Error: $e");
-      return e.response?.data ?? {};
+       return e.response?.data ?? {};
     } catch (e) {
-      log("General Error in post: $e");
       return {};
     }
   }
@@ -85,10 +81,8 @@ class ApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("In Put Request Error: $e");
       return e.response?.data ?? {};
     } catch (e) {
-      log("In Put General Error in post: $e");
       return {};
     }
   }
@@ -112,10 +106,8 @@ class ApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("DELETE Request Error: $e");
       return e.response?.data ?? {};
     } catch (e) {
-      log("General Error in DELETE: $e");
       return {};
     }
   }
@@ -134,10 +126,8 @@ class ApiService {
       );
       return response.data;
     } on DioException catch (e) {
-      log("In Put Request Error: $e");
       return e.response?.data ?? {};
     } catch (e) {
-      log("In Put General Error in post: $e");
       return {};
     }
   }

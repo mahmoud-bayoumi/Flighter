@@ -191,7 +191,27 @@ AwesomeDialog errorPaymentDialog(BuildContext context, String errMessage) {
       },
     ),
   )..show();
+}Future<void> paymentWarningDialog(BuildContext context) async {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.warning,
+    animType: AnimType.scale,
+    title: 'Important Notice',
+    desc: 'You have 2 minutes to enter your payment details after clicking Pay Now.',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: Colors.red,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(color: kGreyColor),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context); // closes dialog and completes the Future
+      },
+    ),
+  ).show(); // this returns a Future, so you can await it
 }
+
 
 AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
   return AwesomeDialog(
@@ -212,8 +232,45 @@ AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
       onPressed: () async {
         final now = BlocProvider.of<GetTimeCubit>(context).timeModel;
         final todayOnly = DateTime(now.year!, now.month!, now.day!);
-
+        final currentDateTime = DateTime(
+          now.year!,
+          now.month!,
+          now.day!,
+          now.hour!,
+          now.minute!,
+          now.seconds!,
+          now.milliSeconds!,
+        );
+        final scheduledTime = currentDateTime.add(const Duration(seconds: 60));
+        final timeZone =
+            await AwesomeNotifications().getLocalTimeZoneIdentifier();
         await AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: notificationId,
+            channelKey: notChannelKey,
+            notificationLayout: NotificationLayout.BigText,
+            icon: 'resource://drawable/ic_stat_logo',
+            largeIcon: 'asset://assets/images/logo.png',
+            backgroundColor: kPrimaryColor,
+            body:
+                'You have unpaid flight bookings. Please complete your payment to confirm your reservations.',
+            wakeUpScreen: true,
+            fullScreenIntent: true,
+          ),
+          schedule: NotificationCalendar(
+            year: scheduledTime.year,
+            month: scheduledTime.month,
+            day: scheduledTime.day,
+            hour: scheduledTime.hour,
+            minute: scheduledTime.minute,
+            second: scheduledTime.second,
+            millisecond: scheduledTime.millisecond,
+            timeZone: timeZone,
+            repeats: false,
+            preciseAlarm: true,
+          ),
+        );
+        /*   await AwesomeNotifications().createNotification(
           content: NotificationContent(
             id: notificationId,
             channelKey: notChannelKey,
@@ -236,7 +293,7 @@ AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
             millisecond: 0,
             repeats: true,
           ),
-        );
+        ); */
         BlocProvider.of<GetBookingsCubit>(context).getBookings();
         Navigator.pop(context);
         context.go(AppRouter.kBookingsNavigation);

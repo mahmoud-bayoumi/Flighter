@@ -72,7 +72,7 @@ class _SignInViewBodyState extends State<SignInViewBody> {
 
           // upload offers data
           BlocProvider.of<GetOfferCubit>(context).getOffers();
-          await BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
+           BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
 
           GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
         } else if (state is SignInFailure) {
