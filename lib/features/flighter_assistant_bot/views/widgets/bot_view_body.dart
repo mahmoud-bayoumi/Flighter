@@ -38,116 +38,122 @@ class _BotViewBodyState extends State<BotViewBody> {
     );
   }
 
-  Future<void> sendMessage() async {
-    final message = _userMessage.text.trim();
-    if (message.isEmpty) return;
+Future<void> sendMessage() async {
+  final message = _userMessage.text.trim();
+  if (message.isEmpty) return;
 
-    _userMessage.clear();
+  _userMessage.clear();
+  setState(() {
+    _messages.add(ChatMessageModel(
+      isUser: true,
+      message: message,
+      date: DateTime.now(),
+    ));
+  });
 
-    setState(() {
-      _messages.add(
-        ChatMessageModel(isUser: true, message: message, date: DateTime.now()),
-      );
-    });
+  final lowerMsg = message.toLowerCase();
+  final offersModel =
+      BlocProvider.of<GetOfferCubit>(context).offersModel; // <-- here
 
-    final lowerMsg = message.toLowerCase();
-    String botResponse;
+  // 🔍 Any wording that implies “suggest an offer”
+  final suggestRegex = RegExp(
+    r'\b(suggest|recommend|propose|best|cheap|deal|discount|offer|promotion)\b',
+    caseSensitive: false,
+  );
 
-    // Case 1: App usage explanation
-    if (RegExp(
-            r'\b(use|usage|how to use|how do i|how can i use the application)\b')
-        .hasMatch(lowerMsg)) {
-      botResponse = """
-Here's how to use the Flighter app:
+  String botResponse;
 
-1. Search Flights: Enter the origin and destination countries, your start date, and optionally an end date for round trips. Select the number of travelers and choose Economy or Business class.
+  /* ────────── Case 1: How to use the app ────────── */
+  if (RegExp(
+          r'\b(use|usage|how to use|how do i|how can i use (the )?(application|app))\b')
+      .hasMatch(lowerMsg)) {
+    botResponse = """
+Here’s a quick guide to using Flighter:
 
-2. Select a Ticket: Pick the most suitable flight from the available offers.
-
-3. Choose Your Seat: Select your preferred seat.
-
-4. Payment Options: You can either pay immediately or choose to pay later (within 5 days).
-
-5. Get Your Ticket: Once payment is complete, you’ll be able to download a PDF ticket.
-
-6. Refund Policy: You can request a refund within 2 days of booking only if the flight is more than 5 days away.
-
-Flighter gives you flexible payment and a seamless booking experience.
+1. **Search Flights:** Choose origin, destination, dates, travellers and class.  
+2. **Pick a Ticket:** Select the flight that suits your schedule and budget.  
+3. **Choose Seats:** Tap the seat you like.  
+4. **Pay Now or Later:** Pay immediately *or* within 5 days.  
+5. **Download Ticket:** Your PDF ticket is ready once payment completes.  
+6. **Refunds:** Cancel within 2 days of booking *if* the flight is ≥ 5 days away.
 """;
 
-      // Case 2: Offers inquiry
-    } else if (lowerMsg.contains("offer")) {
-      if (BlocProvider.of<GetOfferCubit>(context)
-          .offersModel
-          .data!
-          .isNotEmpty) {
-        botResponse = "Here are the current offers:\n";
-        for (var ticket
-            in BlocProvider.of<GetOfferCubit>(context).offersModel.data!) {
-          botResponse +=
-              "- ${ticket.companyName} from ${ticket.from} to ${ticket.to} on ${ticket.departureDate} at ${ticket.departureTime}, price: \$${ticket.price}, offer: ${ticket.offerPercentage ?? '0'}% off.\n";
-        }
-      } else {
-        botResponse = "There are currently no offers available.";
+  /* ────────── Case 2: Offer Inquiry *or* Suggestion ────────── */
+  } else if (lowerMsg.contains('offer') || suggestRegex.hasMatch(lowerMsg)) {
+    if (offersModel.data?.isNotEmpty ?? false) {
+      // Sort by price ascending
+      final sorted = [...offersModel.data!]
+        ..sort((a, b) => (double.tryParse(a.price ?? '0') ?? 0)
+            .compareTo(double.tryParse(b.price ?? '0') ?? 0));
+
+      // Take top 3 cheapest
+      final top = sorted.take(3);
+
+      botResponse = "Here are our best‑value tickets right now:\n";
+      for (var t in top) {
+        botResponse +=
+            "• **${t.companyName}** | ${t.from} → ${t.to} on ${t.departureDate} at ${t.departureTime} | "
+            "EGP ${t.price}${t.offerPercentage != null ? ' (‑${t.offerPercentage}% off)' : ''}\n";
       }
-
-      // Case 3: Refund policy explanation
-    } else if (lowerMsg.contains("refund") || lowerMsg.contains("cancel")) {
-      botResponse = """
-Refund is available only within 2 days after payment, and only if your flight date is more than 5 days from the payment date.
-
-To request a refund:
-1. Go to the Bookings page.
-2. If you're eligible, you'll see a Cancel Ticket button with a Click Here option.
-3. Tap Click Here to proceed with cancellation. The refund amount will be returned to the same account for security.
-""";
-
-      // Case 4: Profile management
-    } else if (lowerMsg.contains("profile") ||
-        lowerMsg.contains("edit profile") ||
-        lowerMsg.contains("change password")) {
-      botResponse = """
-You can manage your profile in the following ways:
-
-- To edit your profile: Go to Profile, then select Edit Profile.
-- To change your password: Go to Profile, then choose Change Password.
-""";
-
-      // Case 5: Delete account
-    } else if (lowerMsg.contains("delete account")) {
-      botResponse = """
-To delete your Flighter account:
-
-1. Go to Profile.
-2. Select Delete Account.
-3. Enter your password to confirm deletion.
-
-This action is permanent, so please be sure before proceeding.
-""";
-
-      // Default: Use Gemini
+      botResponse +=
+          "\nNeed something else? Just tell me your preferred route or date!";
     } else {
-      final content = [Content.text(message)];
-      final GenerateContentResponse response;
-      try {
-        response = await model.generateContent(content);
-
-        botResponse = response.text ?? "Sorry, I couldn't find an answer.";
-      } catch (e) {
-        botResponse = "Sorry, I couldn't answer right now.\nTry again later!!";
-      }
+      botResponse = "There are currently no offers available.";
     }
 
-    setState(() {
-      _messages.add(
-        ChatMessageModel(
-          isUser: false,
-          message: botResponse,
-          date: DateTime.now(),
-        ),
-      );
-    });
+  /* ────────── Case 3: Refund / Cancel ────────── */
+  } else if (lowerMsg.contains('refund') || lowerMsg.contains('cancel')) {
+    botResponse = """
+You can request a refund **within 2 days** of payment *and* if the flight date is more than 5 days away.
+
+**How to cancel:**
+1. Open **Bookings**.  
+2. Tap **Cancel Ticket** next to the eligible flight.  
+3. Confirm with your password – we’ll refund to the original payment method.
+""";
+
+  /* ────────── Case 4: Profile management ────────── */
+  } else if (lowerMsg.contains('profile') ||
+      lowerMsg.contains('edit profile') ||
+      lowerMsg.contains('change password')) {
+    botResponse = """
+**Profile actions**
+
+• **Edit Profile:** Profile → *Edit Profile*  
+• **Change Password:** Profile → *Change Password*
+""";
+
+  /* ────────── Case 5: Delete account ────────── */
+  } else if (lowerMsg.contains('delete account')) {
+    botResponse = """
+**Delete your account**
+
+1. Go to **Profile** → *Delete Account*.  
+2. Enter your password to confirm.  
+
+⚠️  *This is permanent – all data will be removed.*
+""";
+
+  /* ────────── Default: Ask Gemini ────────── */
+  } else {
+    try {
+      final response =
+          await model.generateContent([Content.text(message)]);
+      botResponse = response.text ?? "Sorry, I couldn’t find an answer.";
+    } catch (_) {
+      botResponse = "Sorry, I couldn’t answer right now. Try again later!";
+    }
   }
+
+  setState(() {
+    _messages.add(ChatMessageModel(
+      isUser: false,
+      message: botResponse,
+      date: DateTime.now(),
+    ));
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {

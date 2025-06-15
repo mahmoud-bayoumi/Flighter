@@ -36,6 +36,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
+
     initSlidingAnimation();
     navigateToAuthView();
     BlocProvider.of<ConnectivityCubit>(context).checkConnectivity();
@@ -68,7 +70,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
   }
 
-  @override
   @override
   void dispose() {
     animationController.dispose(); // Dispose the controller FIRST
@@ -132,7 +133,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
       () async {
         if (await _secureStorageService.getWithKey(tokenKey) != null) {
           await BlocProvider.of<FromCountriesCubit>(context).getFromCountries();
-          await BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
 
           BlocProvider.of<ToCountriesCubit>(context).getToCountries();
           BlocProvider.of<AirlinesCubit>(context).getAirlines();

@@ -6,6 +6,7 @@ import 'package:flighter/core/utils/functions/capitalize_word.dart';
 import 'package:flighter/core/utils/functions/captilaize_the_first_three_letters.dart';
 import 'package:flighter/core/utils/functions/convert12_hours_format.dart';
 import 'package:flighter/core/utils/functions/get_date_only.dart';
+import 'package:flighter/core/utils/functions/is_egypt_governament.dart';
 import 'package:flighter/core/utils/functions/is_more_than_five_days.dart';
 import 'package:flighter/core/utils/functions/is_within_two_days.dart';
 import 'package:flighter/core/utils/styles.dart';
@@ -109,13 +110,13 @@ class FlightDataCardForBookings extends StatelessWidget {
                     icon: !(isWithin2Days(
                                 bookingData.bookingDate!,
                                 BlocProvider.of<GetTimeCubit>(context)
-                                    .timeModel!) &&
+                                    .timeModel) &&
                             isMoreThan5DaysFromNow(
                                 getDateOnly(
                                   bookingData.departureDate!.toString(),
                                 ),
                                 BlocProvider.of<GetTimeCubit>(context)
-                                    .timeModel!))
+                                    .timeModel))
                         ? const Icon(
                             Icons.download,
                             color: kPrimaryColor,
@@ -196,10 +197,10 @@ class FlightDataCardForBookings extends StatelessWidget {
               ),
             ),
             isWithin2Days(bookingData.bookingDate!,
-                        BlocProvider.of<GetTimeCubit>(context).timeModel!) &&
+                        BlocProvider.of<GetTimeCubit>(context).timeModel) &&
                     isMoreThan5DaysFromNow(
                         getDateOnly(bookingData.departureDate!.toString()),
-                        BlocProvider.of<GetTimeCubit>(context).timeModel!)
+                        BlocProvider.of<GetTimeCubit>(context).timeModel)
                 ? Positioned(
                     top: 580.h,
                     left: 75.w,
@@ -268,7 +269,7 @@ class FlightDataCardForBookings extends StatelessWidget {
                   )
                 : Positioned(
                     top: 580.h,
-                    left: bookingData.to == 'Egypt'
+                    left: isEgyptGovernorate(bookingData.to!)
                         ? 15.w
                         : MediaQuery.sizeOf(context).width / 7.9,
                     child: Row(
@@ -285,7 +286,8 @@ class FlightDataCardForBookings extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10))),
                             onPressed: () {
-                              GoRouter.of(context).push(AppRouter.kHotels ,extra: bookingData.to!);
+                              GoRouter.of(context).push(AppRouter.kHotels,
+                                  extra: bookingData.to!);
                             },
                             child: Text(
                               'Hotels',
@@ -295,7 +297,7 @@ class FlightDataCardForBookings extends StatelessWidget {
                         SizedBox(
                           width: 25.w,
                         ),
-                        bookingData.to == 'Egypt'
+                        isEgyptGovernorate(bookingData.to!)
                             ? BlocBuilder<GetEventsCubit, GetEventsState>(
                                 builder: (context, state) {
                                   if (state is GetEventsLoading) {

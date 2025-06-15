@@ -12,6 +12,7 @@ class GetBookingsCubit extends Cubit<GetBookingsState> {
   GetBookingsCubit(this.bookingsRepo) : super(GetBookingsInitial());
   Future<void> getBookings() async {
     emit(GetBookingsLoading());
+   
     var respone = await bookingsRepo.getBookingsTickets(userId: userId);
     respone.fold((error) {
       haveBookings = false;

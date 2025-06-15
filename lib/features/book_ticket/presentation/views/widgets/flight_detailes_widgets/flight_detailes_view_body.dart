@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flighter/core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_state.dart';
 import 'package:flighter/core/utils/functions/dialogs_type.dart';
 import 'package:flighter/core/widgets/primary_container.dart';
 import 'package:flighter/core/widgets/custom_small_button.dart';
@@ -19,6 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../constants.dart';
 import '../../../../../../core/utils/base_cubit/date_time_cubit/get_date_time_cubit/get_date_time_cubit.dart';
 import '../../../../../../core/utils/functions/is_more_than_five_days.dart';
+import '../../../../../../core/utils/styles.dart';
 import '../../../../../payment/presentation/view_model/pay_later_booking_cubit/pay_later_booking_cubit.dart';
 
 class FlightDetailesViewBody extends StatelessWidget {
@@ -43,101 +44,174 @@ class FlightDetailesViewBody extends StatelessWidget {
                         BlocProvider.of<TicketSummaryCubit>(context)
                                 .depatureDate ??
                             '',
-                        BlocProvider.of<GetTimeCubit>(context).timeModel!)
+                        BlocProvider.of<GetTimeCubit>(context).timeModel)
                     : isMoreThan5DaysFromNow(
                         BlocProvider.of<SearchCubit>(context)
                             .startDateController
                             .text,
-                        BlocProvider.of<GetTimeCubit>(context).timeModel!)) ==
+                        BlocProvider.of<GetTimeCubit>(context).timeModel)) ==
                 true)
-            ? Positioned(
+            ? BlocBuilder<GetTimeCubit, GetTimeState>(
+                builder: (context, state) {
+                  if(state is GetTimeFailure) {
+                    return Center(
+                      child: Text(
+                        'Network Error',
+                        style: Styles.textStyle22,
+                      ),
+                    );
+                  } else if (state is GetTimeSuccess) {
+                                   return Positioned(
+                    top: 730.h,
+                    left: 25.w,
+                    child: CustomSmallButton(
+                      onPressed: () async {
+                        BlocProvider.of<PaymentCubit>(context).isPayNow = false;
+                        BlocProvider.of<PaymentCubit>(context).paymentIntentId =
+                            '0';
+                        BlocProvider.of<PaymentCubit>(context).netAmount = '0';
+                        EasyLoading.show(status: 'loading...');
+                        await BlocProvider.of<PaymentCubit>(context).pay();
+                        if (BlocProvider.of<PaymentCubit>(context)
+                                .payNowModel
+                                .message ==
+                            'One or more selected seats are already booked') {
+                          BlocProvider.of<PaymentCubit>(context).seatsId = [];
+                          BlocProvider.of<PaymentCubit>(context).noOfTravelers =
+                              0;
+                          await BlocProvider.of<GetSeatsCubit>(context)
+                              .getSeats();
+                          seatsAreBookedAlready(context);
+                        } else {
+                          BlocProvider.of<TicketSummaryCubit>(context)
+                              .ticketCounter = 0;
+                          BlocProvider.of<TicketSummaryCubit>(context)
+                              .selectedSeats = [];
+                          EasyLoading.dismiss();
+
+                          successPaymentDialog(context,
+                              'Your ticket has been added to your bookings.');
+                        }
+                      },
+                      text: 'Pay Later',
+                      blue: false,
+                    ),
+                  );
+                  }
+                  return Positioned(
+                    top: 730.h,
+                    left: 25.w,
+                    child: CustomSmallButton(
+                      onPressed: () async {
+                        BlocProvider.of<PaymentCubit>(context).isPayNow = false;
+                        BlocProvider.of<PaymentCubit>(context).paymentIntentId =
+                            '0';
+                        BlocProvider.of<PaymentCubit>(context).netAmount = '0';
+                        EasyLoading.show(status: 'loading...');
+                        await BlocProvider.of<PaymentCubit>(context).pay();
+                        if (BlocProvider.of<PaymentCubit>(context)
+                                .payNowModel
+                                .message ==
+                            'One or more selected seats are already booked') {
+                          BlocProvider.of<PaymentCubit>(context).seatsId = [];
+                          BlocProvider.of<PaymentCubit>(context).noOfTravelers =
+                              0;
+                          await BlocProvider.of<GetSeatsCubit>(context)
+                              .getSeats();
+                          seatsAreBookedAlready(context);
+                        } else {
+                          BlocProvider.of<TicketSummaryCubit>(context)
+                              .ticketCounter = 0;
+                          BlocProvider.of<TicketSummaryCubit>(context)
+                              .selectedSeats = [];
+                          EasyLoading.dismiss();
+
+                          successPaymentDialog(context,
+                              'Your ticket has been added to your bookings.');
+                        }
+                      },
+                      text: 'Pay Later',
+                      blue: false,
+                    ),
+                  );
+                },
+              )
+            : const SizedBox.shrink(),
+        BlocBuilder<GetTimeCubit, GetTimeState>(
+          builder: (context, state) {
+            if (state is GetTimeFailure) {
+              return Center(
+                child: Text(
+                  'Network Error',
+                  style: Styles.textStyle22,
+                ),
+              );
+            } else if (state is GetTimeSuccess) {
+              return Positioned(
                 top: 730.h,
-                left: 25.w,
+                left: (isMoreThan5DaysFromNow(
+                            BlocProvider.of<TicketSummaryCubit>(context)
+                                    .isFromOffer
+                                ? BlocProvider.of<TicketSummaryCubit>(context)
+                                    .depatureDate!
+                                : BlocProvider.of<SearchCubit>(context)
+                                    .startDateController
+                                    .text,
+                            BlocProvider.of<GetTimeCubit>(context).timeModel) ==
+                        false)
+                    ? MediaQuery.sizeOf(context).width / 3.2
+                    : 210.w,
                 child: CustomSmallButton(
                   onPressed: () async {
-                    BlocProvider.of<PaymentCubit>(context).isPayNow = false;
-                    BlocProvider.of<PaymentCubit>(context).paymentIntentId =
-                        '0';
-                    BlocProvider.of<PaymentCubit>(context).netAmount = '0';
-                    EasyLoading.show(status: 'loading...');
-                    await BlocProvider.of<PaymentCubit>(context).pay();
-                    if (BlocProvider.of<PaymentCubit>(context)
-                            .payNowModel
-                            .message ==
-                        'One or more selected seats are already booked') {
-                      BlocProvider.of<PaymentCubit>(context).seatsId = [];
-                      BlocProvider.of<PaymentCubit>(context).noOfTravelers = 0;
-                      await BlocProvider.of<GetSeatsCubit>(context).getSeats();
-                      seatsAreBookedAlready(context);
-                    } else {
+                    if (!BlocProvider.of<PaymentCubit>(context).clickedForPay) {
+                      BlocProvider.of<PaymentCubit>(context).clickedForPay =
+                          true;
+                      EasyLoading.show(status: 'loading...');
+
+                      await flightDeatilsViewBodyLogic(context);
                       BlocProvider.of<TicketSummaryCubit>(context)
                           .ticketCounter = 0;
                       BlocProvider.of<TicketSummaryCubit>(context)
                           .selectedSeats = [];
-                      EasyLoading.dismiss();
-
-                      successPaymentDialog(context,
-                          'Your ticket has been added to your bookings.');
-                      AwesomeNotifications().createNotification(
-                        content: NotificationContent(
-                          id: notificationId,
-                          channelKey: notChannelKey,
-                          notificationLayout: NotificationLayout.BigText,
-                          icon: 'resource://drawable/ic_stat_logo',
-                          largeIcon: 'asset://assets/images/logo.png',
-                          backgroundColor: kPrimaryColor,
-                          body:
-                              'You have unpaid flight bookings. Please complete your payment to confirm your reservations.',
-                          wakeUpScreen: true,
-                          fullScreenIntent: true,
-                        ),
-                        schedule: NotificationCalendar(
-                          year:
-                              DateTime.now().add(const Duration(days: 2)).year,
-                          month:
-                              DateTime.now().add(const Duration(days: 2)).month,
-                          day: DateTime.now().add(const Duration(days: 2)).day,
-                          hour: 9, // or whatever time you want
-                          minute: 0,
-                          second: 0,
-                          millisecond: 0,
-                          repeats: true,
-                        ),
-                      );
                     }
                   },
-                  text: 'Pay Later',
-                  blue: false,
+                  text: 'Pay Now',
+                  blue: true,
                 ),
-              )
-            : const SizedBox.shrink(),
-        Positioned(
-          top: 730.h,
-          left: (isMoreThan5DaysFromNow(
-                      BlocProvider.of<TicketSummaryCubit>(context).isFromOffer
-                          ? BlocProvider.of<TicketSummaryCubit>(context)
-                              .depatureDate!
-                          : BlocProvider.of<SearchCubit>(context)
-                              .startDateController
-                              .text,
-                      BlocProvider.of<GetTimeCubit>(context).timeModel!) ==
-                  false)
-              ? MediaQuery.sizeOf(context).width / 3.2
-              : 210.w,
-          child: CustomSmallButton(
-            onPressed: () async {
-              if (!BlocProvider.of<PaymentCubit>(context).clickedForPay) {
-                BlocProvider.of<PaymentCubit>(context).clickedForPay = true;
-                EasyLoading.show(status: 'loading...');
+              );
+            }
+            return Positioned(
+              top: 730.h,
+              left: (isMoreThan5DaysFromNow(
+                          BlocProvider.of<TicketSummaryCubit>(context)
+                                  .isFromOffer
+                              ? BlocProvider.of<TicketSummaryCubit>(context)
+                                  .depatureDate!
+                              : BlocProvider.of<SearchCubit>(context)
+                                  .startDateController
+                                  .text,
+                          BlocProvider.of<GetTimeCubit>(context).timeModel) ==
+                      false)
+                  ? MediaQuery.sizeOf(context).width / 3.2
+                  : 210.w,
+              child: CustomSmallButton(
+                onPressed: () async {
+                  if (!BlocProvider.of<PaymentCubit>(context).clickedForPay) {
+                    BlocProvider.of<PaymentCubit>(context).clickedForPay = true;
+                    EasyLoading.show(status: 'loading...');
 
-                await flightDeatilsViewBodyLogic(context);
-                BlocProvider.of<TicketSummaryCubit>(context).ticketCounter = 0;
-                BlocProvider.of<TicketSummaryCubit>(context).selectedSeats = [];
-              }
-            },
-            text: 'Pay Now',
-            blue: true,
-          ),
+                    await flightDeatilsViewBodyLogic(context);
+                    BlocProvider.of<TicketSummaryCubit>(context).ticketCounter =
+                        0;
+                    BlocProvider.of<TicketSummaryCubit>(context).selectedSeats =
+                        [];
+                  }
+                },
+                text: 'Pay Now',
+                blue: true,
+              ),
+            );
+          },
         ),
       ],
     );
