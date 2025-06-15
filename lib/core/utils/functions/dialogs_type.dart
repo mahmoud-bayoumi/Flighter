@@ -191,7 +191,28 @@ AwesomeDialog errorPaymentDialog(BuildContext context, String errMessage) {
       },
     ),
   )..show();
+}Future<void> paymentWarningDialog(BuildContext context) async {
+  return AwesomeDialog(
+    context: context,
+    dialogType: DialogType.warning,
+    animType: AnimType.scale,
+    title: 'Important Notice',
+    desc: 'You have 2 minutes to enter your payment details after clicking Pay Now.',
+    buttonsTextStyle: Styles.textStyle20.copyWith(color: Colors.white),
+    btnOkColor: Colors.red,
+    titleTextStyle: Styles.textStyle24,
+    descTextStyle: Styles.textStyle16.copyWith(color: kGreyColor),
+    padding: const EdgeInsets.all(10),
+    btnOk: CustomButton(
+      text: 'Continue',
+      onPressed: () {
+        Navigator.pop(context); // closes dialog and completes the Future
+      },
+    ),
+  ).show(); // this returns a Future, so you can await it
 }
+
+
 AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
   return AwesomeDialog(
     context: context,

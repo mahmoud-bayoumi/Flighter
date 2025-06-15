@@ -53,7 +53,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                 true)
             ? BlocBuilder<GetTimeCubit, GetTimeState>(
                 builder: (context, state) {
-                  if(state is GetTimeFailure) {
+                  if (state is GetTimeFailure) {
                     return Center(
                       child: Text(
                         'Network Error',
@@ -61,7 +61,46 @@ class FlightDetailesViewBody extends StatelessWidget {
                       ),
                     );
                   } else if (state is GetTimeSuccess) {
-                                   return Positioned(
+                    return Positioned(
+                      top: 730.h,
+                      left: 25.w,
+                      child: CustomSmallButton(
+                        onPressed: () async {
+                          BlocProvider.of<PaymentCubit>(context).isPayNow =
+                              false;
+                          BlocProvider.of<PaymentCubit>(context)
+                              .paymentIntentId = '0';
+                          BlocProvider.of<PaymentCubit>(context).netAmount =
+                              '0';
+                          EasyLoading.show(status: 'loading...');
+                          await BlocProvider.of<PaymentCubit>(context).pay();
+                          if (BlocProvider.of<PaymentCubit>(context)
+                                  .payNowModel
+                                  .message ==
+                              'One or more selected seats are already booked') {
+                            BlocProvider.of<PaymentCubit>(context).seatsId = [];
+                            BlocProvider.of<PaymentCubit>(context)
+                                .noOfTravelers = 0;
+                            await BlocProvider.of<GetSeatsCubit>(context)
+                                .getSeats();
+                            seatsAreBookedAlready(context);
+                          } else {
+                            BlocProvider.of<TicketSummaryCubit>(context)
+                                .ticketCounter = 0;
+                            BlocProvider.of<TicketSummaryCubit>(context)
+                                .selectedSeats = [];
+                            EasyLoading.dismiss();
+
+                            successPaymentDialog(context,
+                                'Your ticket has been added to your bookings.');
+                          }
+                        },
+                        text: 'Pay Later',
+                        blue: false,
+                      ),
+                    );
+                  }
+                  return Positioned(
                     top: 730.h,
                     left: 25.w,
                     child: CustomSmallButton(
@@ -70,6 +109,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                         BlocProvider.of<PaymentCubit>(context).paymentIntentId =
                             '0';
                         BlocProvider.of<PaymentCubit>(context).netAmount = '0';
+
                         EasyLoading.show(status: 'loading...');
                         await BlocProvider.of<PaymentCubit>(context).pay();
                         if (BlocProvider.of<PaymentCubit>(context)
@@ -89,43 +129,6 @@ class FlightDetailesViewBody extends StatelessWidget {
                               .selectedSeats = [];
                           EasyLoading.dismiss();
 
-                          successPaymentDialog(context,
-                              'Your ticket has been added to your bookings.');
-                        }
-                      },
-                      text: 'Pay Later',
-                      blue: false,
-                    ),
-                  );
-                  }
-                  return Positioned(
-                    top: 730.h,
-                    left: 25.w,
-                    child: CustomSmallButton(
-                      onPressed: () async {
-                        BlocProvider.of<PaymentCubit>(context).isPayNow = false;
-                        BlocProvider.of<PaymentCubit>(context).paymentIntentId =
-                            '0';
-                        BlocProvider.of<PaymentCubit>(context).netAmount = '0';
-                        EasyLoading.show(status: 'loading...');
-                        await BlocProvider.of<PaymentCubit>(context).pay();
-                        if (BlocProvider.of<PaymentCubit>(context)
-                                .payNowModel
-                                .message ==
-                            'One or more selected seats are already booked') {
-                          BlocProvider.of<PaymentCubit>(context).seatsId = [];
-                          BlocProvider.of<PaymentCubit>(context).noOfTravelers =
-                              0;
-                          await BlocProvider.of<GetSeatsCubit>(context)
-                              .getSeats();
-                          seatsAreBookedAlready(context);
-                        } else {
-                          BlocProvider.of<TicketSummaryCubit>(context)
-                              .ticketCounter = 0;
-                          BlocProvider.of<TicketSummaryCubit>(context)
-                              .selectedSeats = [];
-                          EasyLoading.dismiss();
-                            
                           successPaymentDialog(context,
                               'Your ticket has been added to your bookings.');
                         }
@@ -166,6 +169,8 @@ class FlightDetailesViewBody extends StatelessWidget {
                     if (!BlocProvider.of<PaymentCubit>(context).clickedForPay) {
                       BlocProvider.of<PaymentCubit>(context).clickedForPay =
                           true;
+                      await paymentWarningDialog(context);
+
                       EasyLoading.show(status: 'loading...');
 
                       await flightDeatilsViewBodyLogic(context);
@@ -199,6 +204,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                   if (!BlocProvider.of<PaymentCubit>(context).clickedForPay) {
                     BlocProvider.of<PaymentCubit>(context).clickedForPay = true;
                     EasyLoading.show(status: 'loading...');
+                    await paymentWarningDialog(context);
 
                     await flightDeatilsViewBodyLogic(context);
                     BlocProvider.of<TicketSummaryCubit>(context).ticketCounter =
@@ -230,6 +236,7 @@ class FlightDetailesViewBody extends StatelessWidget {
     }
     EasyLoading.dismiss();
     BlocProvider.of<PaymentCubit>(context).isPayNow = true;
+
     await BlocProvider.of<PaymentCubit>(context).pay();
     if (BlocProvider.of<PaymentCubit>(context).payNowModel.message ==
         'One or more selected seats are already booked') {

@@ -167,7 +167,7 @@ class ChooseSeatViewBody extends StatelessWidget {
 
                               GoRouter.of(context)
                                   .push(AppRouter.kFlightDetailes);
-                            } else {
+                             } else {
                               showSnackBar(context,
                                   message:
                                       'Please select at least one seats and you can select up to the number of all available seats before continuing.');
