@@ -179,7 +179,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                       BlocProvider.of<TicketSummaryCubit>(context)
                           .selectedSeats = [];
                     }
-                  },
+                  }, 
                   text: 'Pay Now',
                   blue: true,
                 ),
