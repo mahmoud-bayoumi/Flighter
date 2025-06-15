@@ -125,7 +125,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                           BlocProvider.of<TicketSummaryCubit>(context)
                               .selectedSeats = [];
                           EasyLoading.dismiss();
-
+                            
                           successPaymentDialog(context,
                               'Your ticket has been added to your bookings.');
                         }

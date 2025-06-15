@@ -43,8 +43,8 @@ class ChooseSeatViewBody extends StatelessWidget {
                   selectionText: 'Reserved',
                 ),
                 SelectionStatusRow(
-                  selectionColor: Colors.black,
-                  selectionText: 'Unavaiable',
+                  selectionColor: kUnavailableColor,
+                  selectionText: 'Unavailable',
                 ),
               ],
             ),
