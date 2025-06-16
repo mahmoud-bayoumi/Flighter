@@ -118,7 +118,7 @@ Future<void> generateTicketPDF(
               pw.SizedBox(height: 7.h),
               pw.Text('To  :  $to', style: pw.TextStyle(fontSize: 18.sp)),
               pw.SizedBox(height: 7.h),
-              pw.Text('Ai..001rline  :  $airline',
+              pw.Text('Airline  :  $airline',
                   style: pw.TextStyle(fontSize: 18.sp)),
               pw.SizedBox(height: 7.h),
               pw.Text('Flight Number  :  $flightNumber',
