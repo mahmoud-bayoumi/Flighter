@@ -4,6 +4,7 @@ const kPrimaryColor = Color(0xff41A2E8);
 const kGreyColor = Color(0xff6F6F6F);
 const kReservedSeatColor = Color(0xff7C7270);
 const kUnSelectedSeatColor = Color(0xffF4EFEF);
+const kUnavaialbeColor = Color(0xffE84141); // A noticeable red
 const tokenKey = 'auth-token';
 const userIdKey = 'userId';
 const notChannelKey = 'flighterChannel';
