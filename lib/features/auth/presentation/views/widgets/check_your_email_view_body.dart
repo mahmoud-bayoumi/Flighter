@@ -68,7 +68,7 @@ class _CheckYourEmailBodyState extends State<CheckYourEmailBody> {
                         .userId!;
                 BlocProvider.of<AirlinesCubit>(context).getAirlines();
                 BlocProvider.of<GetOfferCubit>(context).getOffers();
-              await  BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
+                BlocProvider.of<GetTimeCubit>(context).fetchUtcTime();
 
                 GoRouter.of(context).pushReplacement(AppRouter.kNavigation);
               } else if (state is VerifyEmailFailure) {

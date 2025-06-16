@@ -97,7 +97,7 @@ class _SeatState extends State<Seat> {
                 width: 40.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
-                  color: Colors.black,
+                  color: kUnavailableColor,
                 ),
                 child: Center(
                   child: Text(

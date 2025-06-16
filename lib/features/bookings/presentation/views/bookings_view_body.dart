@@ -42,48 +42,48 @@ class BookingsViewBody extends StatelessWidget {
                   ),
                 );
               } else if (state is GetTimeSuccess) {
-              return BlocBuilder<GetBookingsCubit, GetBookingsState>(
-                builder: (context, state) {
-                  if (state is GetBookingsSuccess) {
-                    return RefreshIndicator(
-                      onRefresh: () => _onRefresh(context),
-                      child: ListView.builder(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: BlocProvider.of<GetBookingsCubit>(context)
-                            .bookingsModel
-                            .data!
-                            .length,
-                        itemBuilder: (context, index) {
-                          final booking =
-                              BlocProvider.of<GetBookingsCubit>(context)
-                                  .bookingsModel
-                                  .data![index];
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 15.h, horizontal: 2.w),
-                            child: booking.paymentStatus == 'Pending' ||
-                                    booking.paymentStatus == 'Paid'
-                                ? FlightDataCardForBookings(
-                                    bookingData: booking)
-                                : UnPaidFlightDataCardForBookings(
-                                    bookingData: booking),
-                          );
-                        },
-                      ),
-                    );
-                  } else if (state is GetBookingsLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return Center(
-                      child: Text(
-                        'No Bookings Yet',
-                        style: Styles.textStyle22,
-                      ),
-                    );
-                  }
-                },
-              );
-       
+                return BlocBuilder<GetBookingsCubit, GetBookingsState>(
+                  builder: (context, state) {
+                    if (state is GetBookingsSuccess) {
+                      return RefreshIndicator(
+                        onRefresh: () => _onRefresh(context),
+                        child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: BlocProvider.of<GetBookingsCubit>(context)
+                              .bookingsModel
+                              .data!
+                              .length,
+                          itemBuilder: (context, index) {
+                            final booking =
+                                BlocProvider.of<GetBookingsCubit>(context)
+                                    .bookingsModel
+                                    .data![index];
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15.h, horizontal: 2.w),
+                              child: booking.paymentStatus == 'Paid'
+                                  ? FlightDataCardForBookings(
+                                      bookingData: booking)
+                                  : booking.paymentStatus == 'Pending'
+                                      ? const SizedBox.shrink()
+                                      : UnPaidFlightDataCardForBookings(
+                                          bookingData: booking),
+                            );
+                          },
+                        ),
+                      );
+                    } else if (state is GetBookingsLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return Center(
+                        child: Text(
+                          'No Bookings Yet',
+                          style: Styles.textStyle22,
+                        ),
+                      );
+                    }
+                  },
+                );
               }
               return BlocBuilder<GetBookingsCubit, GetBookingsState>(
                 builder: (context, state) {
