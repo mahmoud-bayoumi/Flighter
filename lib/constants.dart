@@ -10,6 +10,6 @@ const userIdKey = 'userId';
 const notChannelKey = 'flighterChannel';
 const notChannelName = 'flighterChannelName';
 const notificationId = 101;
-const flighterAssistantApiKey = 'AIzaSyB4cFz-KY-ay6_fBVO1sVtrMD1FRADNK6g';
+const flighterAssistantApiKey = 'AIzaSyBKuhTU9j3BVtBqHhSxI7AF1tA1KXgld6c';
 var currency = 'EGP';
 var egyptianToDollar = (50).ceil();
