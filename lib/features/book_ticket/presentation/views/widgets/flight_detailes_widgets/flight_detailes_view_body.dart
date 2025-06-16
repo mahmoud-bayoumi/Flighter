@@ -179,7 +179,7 @@ class FlightDetailesViewBody extends StatelessWidget {
                       BlocProvider.of<TicketSummaryCubit>(context)
                           .selectedSeats = [];
                     }
-                  }, 
+                  },
                   text: 'Pay Now',
                   blue: true,
                 ),
@@ -230,6 +230,8 @@ class FlightDetailesViewBody extends StatelessWidget {
       BlocProvider.of<PaymentCubit>(context).amountToPay =
           BlocProvider.of<PaymentCubit>(context).amountToPay;
     } else {
+      BlocProvider.of<PaymentCubit>(context).amountToPayEGP =
+          BlocProvider.of<PaymentCubit>(context).amountToPay;
       BlocProvider.of<PaymentCubit>(context).amountToPay =
           BlocProvider.of<PaymentCubit>(context).amountToPay ~/
               egyptianToDollar;
@@ -249,7 +251,12 @@ class FlightDetailesViewBody extends StatelessWidget {
           BlocProvider.of<PaymentCubit>(context).noOfTravelers *
               BlocProvider.of<PaymentCubit>(context).amountToPay,
           currency == 'EGP' ? "EGP" : "USD");
+
       if (paid) {
+        if (currency == 'USD') {
+          BlocProvider.of<PaymentCubit>(context).amountToPay =
+              BlocProvider.of<PaymentCubit>(context).amountToPayEGP;
+        }
         BlocProvider.of<PaymentCubit>(context).paymentIntentId =
             PaymentManager.paymentIntentId;
 

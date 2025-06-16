@@ -35,14 +35,16 @@ class EventDetailsViewBody extends StatelessWidget {
   }
 
   Future<void> _showDirectDialog(BuildContext context) async {
-    final url = Uri.parse('http://eventk.runasp.net/eventk-app');
+    final url = Uri.parse(
+      'https://drive.google.com/drive/folders/1Wy6raV5lGkkuF07faTzLX8JSJ1Lly6Jv?usp=sharing',
+    );
 
     return showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Redirect to Eventk'),
+        title: const Text('Redirect to Download'),
         content: Text(
-          'To complete the process of event booking and download the Eventk application, you will be redirected to the following link:\n\n$url',
+          'You are about to be redirected to download the Eventk app from Google Drive:\n\n$url',
         ),
         actions: [
           TextButton(

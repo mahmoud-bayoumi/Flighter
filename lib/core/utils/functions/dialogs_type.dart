@@ -231,7 +231,7 @@ AwesomeDialog successPaymentDialog(BuildContext context, String errMessage) {
       text: 'Continue',
       onPressed: () async {
         final now = BlocProvider.of<GetTimeCubit>(context).timeModel;
-        final todayOnly = DateTime(now.year!, now.month!, now.day!);
+      //  final todayOnly = DateTime(now.year!, now.month!, now.day!);
         final currentDateTime = DateTime(
           now.year!,
           now.month!,

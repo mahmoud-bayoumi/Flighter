@@ -12,4 +12,4 @@ const notChannelName = 'flighterChannelName';
 const notificationId = 101;
 const flighterAssistantApiKey = 'AIzaSyB4cFz-KY-ay6_fBVO1sVtrMD1FRADNK6g';
 var currency = 'EGP';
-var egyptianToDollar = (50.77).ceil();
+var egyptianToDollar = (50).ceil();

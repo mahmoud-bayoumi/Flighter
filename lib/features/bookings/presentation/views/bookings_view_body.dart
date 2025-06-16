@@ -31,7 +31,7 @@ class BookingsViewBody extends StatelessWidget {
           child: const BookingListTile(),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 80.h),
+          padding: EdgeInsets.only(top: 100.h),
           child: BlocBuilder<GetTimeCubit, GetTimeState>(
             builder: (context, state) {
               if (state is GetTimeFailure) {
