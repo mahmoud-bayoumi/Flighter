@@ -31,6 +31,8 @@ Includes `flutter_bloc`, `dio`, `flutter_stripe`, `pdf`, `awesome_dialog`, `go_r
 * `assets/fonts/` – Fonts (Poppins)
 * `pubspec.yaml` – Project metadata and dependencies
 
+---
+
 ## 🔗 Related Project – Flighter Scanner  
 
 **Flighter Scanner** is part of the Flighter ecosystem, built to scan and validate airline QR codes for flight bookings.  
