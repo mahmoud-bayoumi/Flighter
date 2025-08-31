@@ -35,20 +35,22 @@ Includes `flutter_bloc`, `dio`, `flutter_stripe`, `pdf`, `awesome_dialog`, `go_r
 
 ## 🔗 Related Project – Flighter Scanner  
 
-**Flighter Scanner** is part of the Flighter ecosystem, built to scan and validate airline QR codes for flight bookings.  
+Flighter Scanner is part of the Flighter ecosystem, built to scan and validate airline QR codes for flight bookings.  
 While **Flighter** handles booking and ticket generation, the **Scanner App** ensures real-time ticket validation at check-in.  
+
+📌 Check it out here: [Flighter Scanner Repository](https://github.com/mahmoud-bayoumi/airline_qr_scanner.git)  
 
 ---
 
 ## 📱 Flighter Scanner Features  
 
-- 🔍 **QR Code Scanning** – Scan airline QR codes using your device’s camera  
-- 👤 **User Validation** – Verify passenger identity and booking validity  
-- 🎫 **Flight Ticket Data** – Display complete booking details  
-- 📊 **Real-time Processing** – Instant validation and ticket lookup  
-- 🔦 **Camera Controls** – Flash and camera management  
-- 📱 **Cross-platform** – Android & iOS support  
-- 🎨 **Modern UI** – Clean Material Design interface  
+* 🔍 QR Code Scanning – Scan airline QR codes using your device’s camera  
+* 👤 User Validation – Verify passenger identity and booking validity  
+* 🎫 Flight Ticket Data – Display complete booking details  
+* 📊 Real-time Processing – Instant validation and ticket lookup  
+* 🔦 Camera Controls – Flash and camera management  
+* 📱 Cross-platform – Android & iOS support  
+* 🎨 Modern UI – Clean Material Design interface  
 
 ---
 
